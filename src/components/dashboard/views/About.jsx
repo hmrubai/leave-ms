@@ -3,19 +3,18 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import Card from "../../common/Card";
 import Loader from "../../common/Loader";
-import Table from "../../common/Table";
+// import Table from "../../common/Table";
 import TextEditor from "../../common/TextEditor";
 import Select from "react-select";
 import AsyncSelect from "react-select/async";
 function About() {
   const [cVal, setcval] = useState(null);
 
-
   const submitHandeler = (e) => {
     e.preventDefault();
     const arr = [];
     cVal.map((item) => {
-      arr.push(item.value);
+      return arr.push(item.value);
     });
     console.log(arr);
   };
@@ -39,8 +38,6 @@ function About() {
     });
   };
 
-  
-
   return (
     <>
       <Loader />
@@ -55,7 +52,7 @@ function About() {
         </Link>
       </div>
       <Card />
-      <Table />
+      {/* <Table /> */}
       <TextEditor />
 
       <form action="" onSubmit={submitHandeler}>
@@ -74,14 +71,13 @@ function About() {
           ]}
           className="basic-multi-select"
           classNamePrefix="select"
-    
         />
-     
+
         <AsyncSelect
           isMulti
           cacheOptions
-          getOptionLabel={e => e.color}
-          getOptionValue={e=>e.value}
+          getOptionLabel={(e) => e.color}
+          getOptionValue={(e) => e.value}
           defaultOptions={[
             { value: "green", label: "Green", color: "#36B37E" },
             { value: "forest", label: "Forest", color: "#00875A" },
@@ -95,7 +91,7 @@ function About() {
           onChange={(e) => setcval(e)}
           // loadOptions={promiseOptions}
         />
-           <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" />
       </form>
     </>
   );

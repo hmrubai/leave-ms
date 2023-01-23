@@ -1,7 +1,8 @@
 import { privateRoute } from "./privateRoute";
-import Layout from "../components/dashboardLayout/Layout";
+
 import { user } from "./utils";
 import { Navigate } from "react-router-dom";
+import Layout from '../../src/components/layout/dashboardLayout/Layout';
 
 const ProtectRoute = ({ r, children }) => {
   if (user.token === "" || user.role === "") {
@@ -25,7 +26,7 @@ export const getRoute = () => {
 
   privateRoute.map((r) => {
     r.element = <ProtectRoute r={r}>{r.element}</ProtectRoute>;
-    filterRoute.push(r);
+    return filterRoute.push(r);
   });
   return {
     path: "/dashboard",

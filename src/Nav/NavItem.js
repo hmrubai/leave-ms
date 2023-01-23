@@ -1,5 +1,7 @@
 export const navItem = [
   {
+    //UID Mustbe Uges String 
+
     UID:"super_admin",
     title: "Super Admin",
     role: "admin",
