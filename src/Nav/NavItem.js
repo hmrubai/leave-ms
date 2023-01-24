@@ -1,8 +1,15 @@
 export const navItem = [
   {
-    //UID Mustbe Uges String 
+    title: "Employee List",
+    link: "employee-list",
+    role: "admin",
+    icon: "fas fa-th-list",
+  },
 
-    UID:"super_admin",
+  {
+    //UID Mustbe Uges String
+
+    UID: "super-admin",
     title: "Super Admin",
     role: "admin",
     icon: "fas fa-user-shield",
@@ -20,7 +27,6 @@ export const navItem = [
         role: "admin",
         icon: "fas fa-arrow-right",
       },
-      
     ],
   },
 

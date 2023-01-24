@@ -6,6 +6,9 @@ import Worker from '../components/dashboard/views/Worker'
 import Seller from '../components/dashboard/views/Seller'
 import Payment from '../components/dashboard/views/Payment'
 import About from '../components/dashboard/views/About';
+import EmployeeList from './../components/dashboard/admin/employee/EmployeeList';
+import EmployeeDetails from '../components/dashboard/admin/employee/EmployeeDetails'
+
 
 
 
@@ -17,6 +20,18 @@ export const privateRoute = [
         role: 'all'
     },
   
+    {
+        path: 'employee-list',
+        element: <EmployeeList />,
+        role: 'admin',
+
+    },
+    {
+        path: 'employee-details/:id',
+        element: <EmployeeDetails/>,
+        role: 'admin',
+
+    },
     {
         path: 'admin',
         element: <AdminPage />,

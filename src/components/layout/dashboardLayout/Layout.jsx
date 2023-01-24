@@ -75,7 +75,7 @@ const Layout = () => {
               </div>
             </div>
           </li>
-          <li className="nav-item active">
+          <li className="nav-item active ">
             <NavLink className="nav-link" to="/dashboard">
               <i className="fas fa-fw fa-home"></i>
               <span>Dashboard</span>
@@ -452,14 +452,14 @@ const Layout = () => {
 
       {/*  <!-- Logout Modal--> */}
       <div
-        className="modal fade"
+        className="modal fade bd-example-modal-sm"
         id="logoutModal"
         tabindex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog" role="document">
+        <div className="modal-dialog modal-sm modal-dialog-centered" role="document">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">

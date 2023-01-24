@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import EmployeeList from "../admin/employee/EmployeeList";
+import EmployeeDetails from './../admin/employee/EmployeeDetails';
 
 const Payment = () => {
   return (
-    <div>Payment</div>
-  )
-}
+    <>
+      {/* <EmployeeList /> */}
+      {/* <EmployeeDetails/> */}
+    </>
+  );
+};
 
-export default Payment
+export default Payment;

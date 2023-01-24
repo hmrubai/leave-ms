@@ -7,7 +7,22 @@ import Loader from "../../common/Loader";
 import TextEditor from "../../common/TextEditor";
 import Select from "react-select";
 import AsyncSelect from "react-select/async";
+import CommonModal from "../../common/CommonModal";
+import { Button } from "react-bootstrap";
+
+
+
 function About() {
+
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
+
+
   const [cVal, setcval] = useState(null);
 
   const submitHandeler = (e) => {
@@ -54,6 +69,12 @@ function About() {
       <Card />
       {/* <Table /> */}
       <TextEditor />
+
+      <CommonModal handleClose={handleClose}  show={show} />
+
+      <Button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </Button>
 
       <form action="" onSubmit={submitHandeler}>
         <Select
