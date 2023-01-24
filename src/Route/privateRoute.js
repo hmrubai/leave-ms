@@ -8,6 +8,7 @@ import Payment from '../components/dashboard/views/Payment'
 import About from '../components/dashboard/views/About';
 import EmployeeList from './../components/dashboard/admin/employee/EmployeeList';
 import EmployeeDetails from '../components/dashboard/admin/employee/EmployeeDetails'
+import CreateEmployee from './../components/dashboard/admin/employee/CreateEmployee';
 
 
 
@@ -15,19 +16,25 @@ import EmployeeDetails from '../components/dashboard/admin/employee/EmployeeDeta
 
 export const privateRoute = [
     {
-        path: '/dashboard',
+        path: '/dashboard/',
         element: <Navigate replace to ={getPath()}/>,
         role: 'all'
     },
   
     {
-        path: 'employee-list',
+        path: 'admin/employee-list',
         element: <EmployeeList />,
         role: 'admin',
 
     },
     {
-        path: 'employee-details/:id',
+        path: 'admin/create-employee',
+        element: <CreateEmployee/>,
+        role: 'admin',
+
+    },
+    {
+        path: 'admin/employee-details/:id',
         element: <EmployeeDetails/>,
         role: 'admin',
 

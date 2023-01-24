@@ -1,7 +1,7 @@
 export const navItem = [
   {
     title: "Employee List",
-    link: "employee-list",
+    link: "admin/employee-list",
     role: "admin",
     icon: "fas fa-th-list",
   },

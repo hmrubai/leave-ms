@@ -199,7 +199,7 @@ const Layout = () => {
                       href="#"
                     >
                       <div className="mr-3">
-                        <div className="icon-circle bg-primary">
+                        <div className="icon-circle bg-dark">
                           <i className="fas fa-file-alt text-white"></i>
                         </div>
                       </div>
@@ -217,7 +217,7 @@ const Layout = () => {
                       href="#"
                     >
                       <div className="mr-3">
-                        <div className="icon-circle bg-success">
+                        <div className="icon-circle bg-dark">
                           <i className="fas fa-donate text-white"></i>
                         </div>
                       </div>
@@ -285,7 +285,7 @@ const Layout = () => {
                           src="img/undraw_profile_1.svg"
                           alt="..."
                         />
-                        <div className="status-indicator bg-success"></div>
+                        <div className="status-indicator bg-dark"></div>
                       </div>
                       <div className="font-weight-bold">
                         <div className="text-truncate">
@@ -349,7 +349,7 @@ const Layout = () => {
                           src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
                           alt="..."
                         />
-                        <div className="status-indicator bg-success"></div>
+                        <div className="status-indicator bg-dark"></div>
                       </div>
                       <div>
                         <div className="text-truncate">
@@ -373,7 +373,7 @@ const Layout = () => {
 
                 <div className="topbar-divider d-none d-sm-block"></div>
 
-                {/* <!-- Nav Item - User Information --> */}
+                {/* <!-- Nav Item - User darkrmation --> */}
                 <li className="nav-item dropdown no-arrow">
                   <Link
                     className="nav-link dropdown-toggle"
@@ -393,7 +393,7 @@ const Layout = () => {
                       alt=""
                     />
                   </Link>
-                  {/*  <!-- Dropdown - User Information --> */}
+                  {/*  <!-- Dropdown - User darkrmation --> */}
                   <div
                     className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown"
@@ -486,7 +486,7 @@ const Layout = () => {
               >
                 Cancel
               </button>
-              <a className="btn btn-primary" href="login.html">
+              <a className="btn btn-dark" href="login.html">
                 Logout
               </a>
             </div>

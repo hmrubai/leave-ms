@@ -1,17 +1,37 @@
 import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
 import axios from "axios";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { ExportToCsv } from "export-to-csv"; //or use your library of choice here
 import { Box, Button } from "@mui/material";
-import { RiEditCircleFill } from "react-icons/ri";
+
 import { BsFillEyeFill } from "react-icons/bs";
 import { FaTrash,FaEdit } from "react-icons/fa";
+import  Swal from 'sweetalert2';
 
 
 const EmployeeTable = () => {
   const [data, setData] = useState([]);
+
+  const deleteHandel = async (deleteFunc, Did) => {
+    Swal.fire({
+      title: "Are you sure?",
+      // text: "You won't be able to revert this!",
+      icon: "error",
+      confirmButtonColor: "#d33 ",
+      cancelButtonColor: " #4e4e4e",
+      confirmButtonText: "Yes, delete it!",
+      width: 200,
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // deleteFunc(Did);
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+      console.log(result);
+    });
+  };
 
   useEffect(() => {
     axios("https://jsonplaceholder.typicode.com/posts").then((res) =>
@@ -98,7 +118,7 @@ const EmployeeTable = () => {
         // enablePagination="true"
         renderRowActions={(row, index) => ( 
           <>
-            <Link to={`/dashboard/employee-details/${1}`}> <BsFillEyeFill color="black" size={24} /></Link>
+            <Link to={`/dashboard/admin/employee-details/${1}`}> <BsFillEyeFill color="black" size={24} /></Link>
         
    
             <Link
@@ -113,9 +133,7 @@ const EmployeeTable = () => {
 
             <Link
               to="#"
-              onClick={(e) => {
-                e.preventDefault();
-              }}
+              onClick={()=>deleteHandel()}
          
             >
              <FaTrash size={20} color="red"/>

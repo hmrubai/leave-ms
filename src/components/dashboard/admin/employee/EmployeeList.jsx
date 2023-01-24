@@ -2,6 +2,7 @@ import React from "react";
 
 import EmployeeTable from "./EmployeeTable";
 import { BsFillPlusCircleFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 
 const EmployeeList = () => {
@@ -14,10 +15,10 @@ const EmployeeList = () => {
         </div>
         <div className="card-body">
           <div className="py-1 text-right mr-1">
-            <button className="btn btn-info">
+            <Link to={`/dashboard/admin/create-employee`} className="btn btn-info">
               {" "}
               <BsFillPlusCircleFill /> Create Employee
-            </button>
+            </Link>
           </div>
           <div>
             <EmployeeTable />
