@@ -11,25 +11,25 @@ import ScrollToTop from "react-scroll-to-top";
 
 const Layout = () => {
   const [style, setStyle] = useState(
-    "navbar-nav bg-gradient-dark sidebar sidebar-dark accordion"
+    "navbar-nav bg-dark sidebar sidebar-dark accordion"
   );
 
   const changeStyle = () => {
-    if (style == "navbar-nav bg-gradient-dark sidebar sidebar-dark accordion") {
+    if (style == "navbar-nav bg-dark sidebar sidebar-dark accordion") {
       setStyle(
-        "navbar-nav bg-gradient-dark sidebar sidebar-dark accordion toggled"
+        "navbar-nav bg-dark sidebar sidebar-dark accordion toggled"
       );
     } else {
-      setStyle("navbar-nav bg-gradient-dark sidebar sidebar-dark accordion");
+      setStyle("navbar-nav bg-dark sidebar sidebar-dark accordion");
     }
   };
   const changeStyle1 = () => {
-    if (style == "navbar-nav bg-gradient-dark sidebar sidebar-dark accordion") {
+    if (style == "navbar-nav bg-dark sidebar sidebar-dark accordion") {
       setStyle(
-        "navbar-nav bg-gradient-dark sidebar sidebar-dark accordion toggled1"
+        "navbar-nav bg-dark sidebar sidebar-dark accordion toggled1"
       );
     } else {
-      setStyle("navbar-nav bg-gradient-dark sidebar sidebar-dark accordion");
+      setStyle("navbar-nav bg-dark sidebar sidebar-dark accordion");
     }
   };
 
@@ -59,7 +59,7 @@ const Layout = () => {
 
           {/*  <!-- Nav Item - Dashboard --> */}
           <li className="nav-item active ">
-            <div className="nav-link shadow-lg rounded d-flex flex-wrap justify-content-center">
+            <div className="nav-link shadow-lg  d-flex flex-wrap justify-content-center">
               <div>
                 <img
                   className="img-profile rounded-circle "
@@ -69,14 +69,14 @@ const Layout = () => {
               </div>
 
               <div className="mt-1">
-                <span className="d-none d-lg-inline text-gray-600 small ml-2 font-weight-bold  ">
+                <span className="d-none d-lg-inline text-light-600 small ml-2 font-weight-bold ">
                   Arfin Foysal
                 </span>
               </div>
             </div>
           </li>
-          <li className="nav-item active ">
-            <NavLink className="nav-link" to="/dashboard">
+          <li className="nav-item active mt-3">
+            <NavLink className="nav-link nav-hover" to="/dashboard">
               <i className="fas fa-fw fa-home"></i>
               <span>Dashboard</span>
             </NavLink>
@@ -92,7 +92,7 @@ const Layout = () => {
             (n, i) => n.role === user.role && <Sidebar item={n} key={i} />
           )}
           {/* <!-- Divider --> */}
-          <hr className="sidebar-divider d-none d-md-block" />
+          {/* <hr className="sidebar-divider d-none d-md-block" /> */}
 
           {/* <!-- Sidebar Toggler (Sidebar) --> */}
           {/* <div className="text-center d-none d-md-inline">
@@ -199,7 +199,7 @@ const Layout = () => {
                       href="#"
                     >
                       <div className="mr-3">
-                        <div className="icon-circle bg-dark">
+                        <div className="icon-circle bg-primary">
                           <i className="fas fa-file-alt text-white"></i>
                         </div>
                       </div>
@@ -217,7 +217,7 @@ const Layout = () => {
                       href="#"
                     >
                       <div className="mr-3">
-                        <div className="icon-circle bg-dark">
+                        <div className="icon-circle bg-success">
                           <i className="fas fa-donate text-white"></i>
                         </div>
                       </div>
@@ -285,7 +285,7 @@ const Layout = () => {
                           src="img/undraw_profile_1.svg"
                           alt="..."
                         />
-                        <div className="status-indicator bg-dark"></div>
+                        <div className="status-indicator bg-success"></div>
                       </div>
                       <div className="font-weight-bold">
                         <div className="text-truncate">
@@ -349,7 +349,7 @@ const Layout = () => {
                           src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
                           alt="..."
                         />
-                        <div className="status-indicator bg-dark"></div>
+                        <div className="status-indicator bg-success"></div>
                       </div>
                       <div>
                         <div className="text-truncate">
@@ -373,7 +373,7 @@ const Layout = () => {
 
                 <div className="topbar-divider d-none d-sm-block"></div>
 
-                {/* <!-- Nav Item - User darkrmation --> */}
+                {/* <!-- Nav Item - User Information --> */}
                 <li className="nav-item dropdown no-arrow">
                   <Link
                     className="nav-link dropdown-toggle"
@@ -393,7 +393,7 @@ const Layout = () => {
                       alt=""
                     />
                   </Link>
-                  {/*  <!-- Dropdown - User darkrmation --> */}
+                  {/*  <!-- Dropdown - User Information --> */}
                   <div
                     className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown"
@@ -486,7 +486,7 @@ const Layout = () => {
               >
                 Cancel
               </button>
-              <a className="btn btn-dark" href="login.html">
+              <a className="btn btn-primary" href="login.html">
                 Logout
               </a>
             </div>

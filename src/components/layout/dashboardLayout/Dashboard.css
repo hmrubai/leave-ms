@@ -42,9 +42,16 @@
   font-weight: 500 !important;
   color: white !important;
 }
+
 .font-style-sub {
   font-weight: 500 !important;
   text-align: left !important;
   color: black !important;
 
 }
+
+.sidebar-dark .nav-item .nav-hover:hover{
+  background-color:#4e505e !important;
+  border-radius: 0px 50px 50px 0px !important;
+}
+

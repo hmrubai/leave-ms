@@ -15,7 +15,7 @@ const EmployeeList = () => {
         </div>
         <div className="card-body">
           <div className="py-1 text-right mr-1">
-            <Link to={`/dashboard/admin/create-employee`} className="btn btn-info">
+            <Link to={`/dashboard/admin/create-employee`} className="btn btn-success">
               {" "}
               <BsFillPlusCircleFill /> Create Employee
             </Link>

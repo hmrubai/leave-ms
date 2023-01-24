@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 function Sidebar({ item }) {
 
-  console.log(item)
+
   if (item.children) {
     return (
       <li className="nav-item">
         <Link
-          className="nav-link collapsed"
+          className="nav-link collapsed nav-hover"
           to="#"
           data-toggle="collapse"
           data-target={`#${item.UID}`}
@@ -42,7 +42,7 @@ function Sidebar({ item }) {
   } else {
     return (
       <li className="nav-item">
-        <Link className="nav-link" to={item.link}>
+        <Link className="nav-link nav-hover" to={item.link}>
           <i className={item.icon}></i>
           <span className="font-style">{item.title}</span>
         </Link>
