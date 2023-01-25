@@ -1,9 +1,15 @@
 export const navItem = [
   {
-    title: "Employee List",
+    title: "Employee",
     link: "admin/employee-list",
     role: "admin",
     icon: "fas fa-th-list",
+  },
+  {
+    title: "Department",
+    link: "admin/department-list",
+    role: "admin",
+    icon: "fas fa-pager",
   },
 
   {
@@ -30,12 +36,22 @@ export const navItem = [
     ],
   },
 
+  
   {
     title: "Admin",
     link: "admin",
     role: "admin",
     icon: "fas fa-yin-yang",
   },
+  {
+    title: "Settings",
+    link: "settings",
+    role: "admin",
+    icon: "fas fa-cog",
+  },
+
+
+  // Admin Nav End
 
   {
     title: "Worker",

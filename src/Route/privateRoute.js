@@ -9,6 +9,9 @@ import About from '../components/dashboard/views/About';
 import EmployeeList from './../components/dashboard/admin/employee/EmployeeList';
 import EmployeeDetails from '../components/dashboard/admin/employee/EmployeeDetails'
 import CreateEmployee from './../components/dashboard/admin/employee/CreateEmployee';
+import DepartmentList from '../components/dashboard/admin/department/DepartmentList'
+import CreateDepartment from './../components/dashboard/admin/department/CreateDepartment';
+import EditEmployee from './../components/dashboard/admin/employee/EditEmployee';
 
 
 
@@ -34,8 +37,26 @@ export const privateRoute = [
 
     },
     {
+        path: 'admin/edit-employee/:id',
+        element: <EditEmployee/>,
+        role: 'admin',
+
+    },
+    {
         path: 'admin/employee-details/:id',
         element: <EmployeeDetails/>,
+        role: 'admin',
+
+    },
+    {
+        path: 'admin/department-list',
+        element: <DepartmentList/>,
+        role: 'admin',
+
+    },
+    {
+        path: 'admin/create-department',
+        element: <CreateDepartment/>,
         role: 'admin',
 
     },
@@ -56,6 +77,7 @@ export const privateRoute = [
         element: <Payment />,
         role: 'admin'
     },
+    //<====================== Admin Route End ====================>
     {
         path: 'worker',
         element: <Worker />,

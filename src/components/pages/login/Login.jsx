@@ -1,20 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 
 const Login = () => {
-
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
-    
+      email: "",
+      password: "",
     },
-    onSubmit: (values)=>{
+    onSubmit: (values) => {
       console.log(values);
-    }
+    },
   });
-  
+
   return (
     <div className="container">
       {/* <!-- Outer Row --> */}
@@ -30,7 +28,11 @@ const Login = () => {
                     <div className="text-center">
                       <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
                     </div>
-                    <form className="user" onSubmit={formik.handleSubmit} encType="multipart/form-data">
+                    <form
+                      className="user"
+                      onSubmit={formik.handleSubmit}
+                      encType="multipart/form-data"
+                    >
                       <div className="form-group">
                         <input
                           type="email"
@@ -41,6 +43,7 @@ const Login = () => {
                           placeholder="Enter Email Address..."
                           onChange={formik.handleChange}
                           value={formik.values.name}
+                          
                         />
                       </div>
                       <div className="form-group">
@@ -63,7 +66,7 @@ const Login = () => {
                           />
                           <label
                             className="custom-control-label"
-                            for="customCheck"
+                            htmlFor="customCheck"
                           >
                             Remember Me
                           </label>
@@ -71,16 +74,12 @@ const Login = () => {
                       </div>
                       <button
                         type="submit"
-                        
                         className="btn btn-primary btn-user btn-block"
                       >
                         Login
                       </button>
                       <hr />
-                      <Link
-                        to=""
-                        className="btn btn-google btn-user btn-block"
-                      >
+                      <Link to="" className="btn btn-google btn-user btn-block">
                         <i className="fab fa-google fa-fw"></i> Login with
                         Google
                       </Link>
