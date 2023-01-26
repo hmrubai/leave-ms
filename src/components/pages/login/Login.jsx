@@ -8,6 +8,8 @@ const Login = () => {
       email: "",
       password: "",
     },
+   
+
     onSubmit: (values) => {
       console.log(values);
     },
@@ -42,8 +44,7 @@ const Login = () => {
                           aria-describedby="emailHelp"
                           placeholder="Enter Email Address..."
                           onChange={formik.handleChange}
-                          value={formik.values.name}
-                          
+                          value={formik.values.email}
                         />
                       </div>
                       <div className="form-group">

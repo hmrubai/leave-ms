@@ -9,9 +9,11 @@ import About from '../components/dashboard/views/About';
 import EmployeeList from './../components/dashboard/admin/employee/EmployeeList';
 import EmployeeDetails from '../components/dashboard/admin/employee/EmployeeDetails'
 import CreateEmployee from './../components/dashboard/admin/employee/CreateEmployee';
-import DepartmentList from '../components/dashboard/admin/department/DepartmentList'
-import CreateDepartment from './../components/dashboard/admin/department/CreateDepartment';
 import EditEmployee from './../components/dashboard/admin/employee/EditEmployee';
+import CompanyList from './../components/dashboard/admin/company/CompanyList';
+import BranchList from '../components/dashboard/admin/branch/BranchList'
+import DesignationList from './../components/dashboard/admin/designation/DesignationList';
+
 
 
 
@@ -49,17 +51,24 @@ export const privateRoute = [
 
     },
     {
-        path: 'admin/department-list',
-        element: <DepartmentList/>,
+        path: 'admin/company-list',
+        element: <CompanyList/>,
         role: 'admin',
 
     },
     {
-        path: 'admin/create-department',
-        element: <CreateDepartment/>,
+        path: 'admin/branch-list',
+        element: <BranchList/>,
         role: 'admin',
 
     },
+    {
+        path: 'admin/designation-list',
+        element: <DesignationList/>,
+        role: 'admin',
+
+    },
+ 
     {
         path: 'admin',
         element: <AdminPage />,

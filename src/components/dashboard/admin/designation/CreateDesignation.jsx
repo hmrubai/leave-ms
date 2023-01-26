@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
-const CreateEmployee = () => {
+const CreateDesignation = () => {
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -343,4 +343,4 @@ const CreateEmployee = () => {
   );
 };
 
-export default CreateEmployee;
+export default CreateDesignation;

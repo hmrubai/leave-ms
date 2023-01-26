@@ -1,19 +1,34 @@
 export const navItem = [
+ //UID Mustbe Uges String
+  {
+    title: "Company",
+    link: "admin/company-list",
+    role: "admin",
+    icon: "fas fa-building",
+  },
+
   {
     title: "Employee",
     link: "admin/employee-list",
     role: "admin",
-    icon: "fas fa-th-list",
+    icon: "fas fa-user",
   },
   {
-    title: "Department",
-    link: "admin/department-list",
+    title: "Branch",
+    link: "admin/branch-list",
     role: "admin",
-    icon: "fas fa-pager",
+    icon: "fas fa-industry",
+  },
+  {
+    title: "Designation",
+    link: "admin/designation-list",
+    role: "admin",
+    icon: "fas fa-dice-d6",
+   
   },
 
   {
-    //UID Mustbe Uges String
+   
 
     UID: "super-admin",
     title: "Super Admin",

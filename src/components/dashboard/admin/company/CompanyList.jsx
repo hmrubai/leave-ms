@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 
-import EmployeeTable from "./EmployeeTable";
 import {
   BsFillArrowLeftCircleFill,
   BsFillPlusCircleFill,
@@ -9,11 +8,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
 
 import { IoSyncCircle } from "react-icons/io5";
+import CompanyTable from "./CompanyTable";
+import CompanyModal from "./CompanyModal";
 
-const EmployeeList = () => {
+const CompanyList = () => {
   const navigate = useNavigate();
-
   const getEmpoyee = useGetEmpoyeeQuery();
+  const [clickValue, setClickValue] = useState(null);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handelClickValue = useCallback((value) => {
+    setClickValue(value);
+  }, []);
 
   const refatchClick = () => {
     getEmpoyee.refetch();
@@ -23,7 +32,7 @@ const EmployeeList = () => {
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">Employee List</h6>
+            <h6 className="m-0 font-weight-bold text-primary">All Company List</h6>
           </div>
           <div>
             <BsFillArrowLeftCircleFill
@@ -48,22 +57,30 @@ const EmployeeList = () => {
               </div>
               <div>
                 <Link
-                  to={`/dashboard/admin/create-employee`}
-                  className="btn btn-success"
+                  to="#"
+                  className="btn btn-success "
+                  onClick={() => {
+                    handleShow();
+                    handelClickValue("Add Company Information");
+                  }}
                 >
-                  <BsFillPlusCircleFill /> Add Employee
+                  <BsFillPlusCircleFill className="mb-1 mr-1" /> New
                 </Link>
               </div>
             </div>
           </div>
           <div>
-            <EmployeeTable />
+            <CompanyTable />
           </div>
         </div>
-        <div></div>
       </div>
+      <CompanyModal
+        show={show}
+        handleClose={handleClose}
+        clickValue={clickValue}
+      />
     </>
   );
 };
 
-export default EmployeeList;
+export default React.memo(CompanyList);

@@ -1,17 +1,26 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import MaterialReactTable from "material-react-table";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { ExportToCsv } from "export-to-csv"; //or use your library of choice here
 import { Box, Button } from "@mui/material";
 import { BsFillEyeFill } from "react-icons/bs";
-import { FaTrash,FaEdit } from "react-icons/fa";
-import  Swal from 'sweetalert2';
+import { FaTrash, FaEdit } from "react-icons/fa";
+import Swal from "sweetalert2";
+import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
+import Loader from "../../../common/Loader";
+import CompanyModal from "./CompanyModal";
 
-
-const DepartmentTable = () => {
-  const [data, setData] = useState([]);
+const CompanyTable = () => {
+  const { data, isSuccess, isFetching } = useGetEmpoyeeQuery();
+  const [show, setShow] = useState(false);
+  const [clickValue, setClickValue] = useState(null);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
+  const handelClickValue = useCallback((value) => {
+    setClickValue(value);
+  }, []);
 
   const deleteHandel = async (deleteFunc, Did) => {
     Swal.fire({
@@ -32,26 +41,24 @@ const DepartmentTable = () => {
     });
   };
 
-  useEffect(() => {
-    axios("https://jsonplaceholder.typicode.com/posts").then((res) =>
-      setData(res.data)
-    );
-  }, []);
-
   const columns = useMemo(
     () => [
       {
-        accessorKey: "userId", //access nested data with dot notation
-        header: "Employee Code",
+        accessorKey: "company_logo", //access nested data with dot notation
+        header: "Logo",
       },
       {
-        accessorKey: "userId", //access nested data with dot notation
+        accessorKey: "name", //access nested data with dot notation
         header: "Name",
       },
 
       {
-        accessorKey: "title", //normal accessorKey
-        header: "Title",
+        accessorKey: "address", //normal accessorKey
+        header: "Address",
+      },
+      {
+        accessorKey: "is_active", //normal accessorKey
+        header: "Status",
       },
     ],
     []
@@ -70,7 +77,7 @@ const DepartmentTable = () => {
   const csvExporter = new ExportToCsv(csvOptions);
 
   const handleExportData = () => {
-    csvExporter.generateCsv(data);
+    csvExporter.generateCsv();
   };
 
   const handleExportRows = (rows) => {
@@ -78,12 +85,19 @@ const DepartmentTable = () => {
   };
 
   return (
-    <div>
+    <>
+      {isFetching && <Loader />}
+
+      <CompanyModal
+    show={show}
+    handleClose={handleClose}
+    clickValue={clickValue}
+      />
       {/* <MaterialReactTable columns={columns} data={data} /> */}
       <MaterialReactTable
         enableRowSelection
         columns={columns}
-        data={data}
+        data={isSuccess && data}
         enableRowActions
         enableColumnActions
         enableRowNumbers
@@ -99,7 +113,7 @@ const DepartmentTable = () => {
               startIcon={<FileDownloadIcon />}
               variant="contained"
             >
-              Export All Data
+              Export
             </Button>
             <Button
               disabled={
@@ -110,41 +124,50 @@ const DepartmentTable = () => {
               startIcon={<FileDownloadIcon />}
               variant="contained"
             >
-              Export Selected Rows
+              Selected Rows
             </Button>
           </Box>
         )}
         // enablePagination="true"
-        renderRowActions={(row, index) => ( 
+        renderRowActions={(row, index) => (
           <>
-            <Link to={`/dashboard/admin/employee-details/${1}`}> <BsFillEyeFill color="black" size={24} /></Link>
-        
-   
-            <Link
-              to={`/admin/authors/edit/${row.row.original.id}`}
-              title=""
-              className="px-2"
-            >
-              <FaEdit size={22} />
-            </Link>
-          
+            <div className="d-flex">
+              <div>
+                <Link
+                  to="#"
+                  onClick={() => {
+                    handleShow();
+                    handelClickValue("Company Information");
+                  }}
+                >
+                  <BsFillEyeFill color="black" size={24} />
+                </Link>
+              </div>
+              <div>
+                <Link
+                  to={`#`}
+                  title=""
+                  className="px-2"
+                  onClick={() => {
+                    handleShow();
+                    handelClickValue("Edit Company Information");
+                  }}
+                >
+                  <FaEdit size={22} />
+                </Link>
+              </div>
 
-
-            <Link
-              to="#"
-              onClick={()=>deleteHandel()}
-         
-            >
-             <FaTrash size={20} color="red"/>
-            </Link>{" "}
+              <div>
+                <Link to="#" onClick={() => deleteHandel()}>
+                  <FaTrash size={20} color="red" />
+                </Link>{" "}
+              </div>
+            </div>
           </>
         )}
       />
-    </div>
+    </>
   );
 };
 
-
-
-
-export default DepartmentTable
+export default React.memo(CompanyTable);

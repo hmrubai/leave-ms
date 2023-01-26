@@ -1,6 +1,6 @@
 import React from "react";
 
-import EmployeeTable from "./EmployeeTable";
+import EmployeeTable from "./DesignationTable";
 import {
   BsFillArrowLeftCircleFill,
   BsFillPlusCircleFill,
@@ -10,7 +10,7 @@ import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
 
 import { IoSyncCircle } from "react-icons/io5";
 
-const EmployeeList = () => {
+const DesignationList = () => {
   const navigate = useNavigate();
 
   const getEmpoyee = useGetEmpoyeeQuery();
@@ -66,4 +66,4 @@ const EmployeeList = () => {
   );
 };
 
-export default EmployeeList;
+export default DesignationList;
