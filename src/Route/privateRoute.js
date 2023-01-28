@@ -12,7 +12,8 @@ import CreateEmployee from './../components/dashboard/admin/employee/CreateEmplo
 import EditEmployee from './../components/dashboard/admin/employee/EditEmployee';
 import CompanyList from './../components/dashboard/admin/company/CompanyList';
 import BranchList from '../components/dashboard/admin/branch/BranchList'
-import DesignationList from './../components/dashboard/admin/designation/DesignationList';
+import DesignationList from '../components/dashboard/admin/designation/DesignationList'
+
 
 
 

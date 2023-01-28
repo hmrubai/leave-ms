@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 
-import EmployeeTable from "./DesignationTable";
 import {
   BsFillArrowLeftCircleFill,
   BsFillPlusCircleFill,
@@ -9,11 +8,21 @@ import { Link, useNavigate } from "react-router-dom";
 import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
 
 import { IoSyncCircle } from "react-icons/io5";
+import DesignationTable from "./DesignationTable";
+import DesignationModal from "./DesignationModal";
 
 const DesignationList = () => {
   const navigate = useNavigate();
-
   const getEmpoyee = useGetEmpoyeeQuery();
+  const [clickValue, setClickValue] = useState(null);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handelClickValue = useCallback((value) => {
+    setClickValue(value);
+  }, []);
 
   const refatchClick = () => {
     getEmpoyee.refetch();
@@ -23,7 +32,7 @@ const DesignationList = () => {
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">Employee List</h6>
+            <h6 className="m-0 font-weight-bold text-primary">All Branch List</h6>
           </div>
           <div>
             <BsFillArrowLeftCircleFill
@@ -48,22 +57,30 @@ const DesignationList = () => {
               </div>
               <div>
                 <Link
-                  to={`/dashboard/admin/create-employee`}
-                  className="btn btn-success"
+                  to="#"
+                  className="btn btn-success "
+                  onClick={() => {
+                    handleShow();
+                    handelClickValue("Add Branch Information");
+                  }}
                 >
-                  <BsFillPlusCircleFill /> Add Employee
+                  <BsFillPlusCircleFill className="mb-1 mr-1" /> New
                 </Link>
               </div>
             </div>
           </div>
           <div>
-            <EmployeeTable />
+            <DesignationTable />
           </div>
         </div>
-        <div></div>
       </div>
+      <DesignationModal
+        show={show}
+        handleClose={handleClose}
+        clickValue={clickValue}
+      />
     </>
   );
 };
 
-export default DesignationList;
+export default React.memo(DesignationList);
