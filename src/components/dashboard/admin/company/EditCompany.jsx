@@ -1,7 +1,9 @@
 import { useFormik } from 'formik';
 import React from 'react'
 
-const EditCompany = () => {
+const EditCompany = ({paramId}) => {
+
+  // console.log(paramId)
 
   const formik = useFormik({
     initialValues: {
@@ -121,7 +123,7 @@ const EditCompany = () => {
               <input
                 type="file"
                 // className="form-control"
-                name="company_logo"
+                name="file"
               />
             </div>
           </div>
@@ -132,8 +134,8 @@ const EditCompany = () => {
                   <label className="col-sm-5 col-form-label">Status</label>
                   <div className="col-sm-7">
                     <select className="form-control" name='is_active'>
-                      <option>Active</option>
-                      <option>Dactive</option>
+                      <option value='1' >Active</option>
+                      <option value='2' >Dactive</option>
                
                     </select>
                   </div>

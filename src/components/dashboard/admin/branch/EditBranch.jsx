@@ -50,14 +50,25 @@ const EditBranch = () => {
               </div>
             </div>
           </div>
+          <div className="col-md-6">
+                <div className="form-group row">
+                  <label className="col-sm-5 col-form-label">Company</label>
+                  <div className="col-sm-7">
+                    <select className="form-control" name="company_id">
+                      <option>x</option>
+                      <option>x</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
 
           <div className="col-md-6">
             <div className="form-group row">
               <label className="col-sm-5 col-form-label">Status</label>
               <div className="col-sm-7">
                 <select className="form-control" name="is_active">
-                  <option>Active</option>
-                  <option>Dactive</option>
+                  <option value='1' >Active</option>
+                  <option value='2' >Dactive</option>
                 </select>
               </div>
             </div>

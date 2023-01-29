@@ -28,7 +28,7 @@ const EmployeeDetails = () => {
               <div className="row">
                 <div className="col-6">
                   <img
-                    class="img-fluid rounded-circle "
+                    className="img-fluid rounded-circle "
                     style={{ width: "200px", height: "200px" }}
                     src=""
                     alt=""
@@ -37,24 +37,24 @@ const EmployeeDetails = () => {
                 <div className="col-6">
                   <p>
                     Name:
-                    <span class="font-weight-bold text-primary "></span>
+                    <span className="font-weight-bold text-primary "></span>
                   </p>
                   <p>
                     Email:
-                    <span class="font-weight-bold text-primary "></span>
+                    <span className="font-weight-bold text-primary "></span>
                   </p>
                   <p>
                     Username:
-                    <span class="font-weight-bold text-primary "> </span>
+                    <span className="font-weight-bold text-primary "> </span>
                   </p>
 
                   <p>
                     Number:
-                    <span class="font-weight-bold text-primary"></span>
+                    <span className="font-weight-bold text-primary"></span>
                   </p>
                   <p>
                     Gender:
-                    <span class="font-weight-bold text-primary"></span>
+                    <span className="font-weight-bold text-primary"></span>
                   </p>
                 </div>
               </div>
@@ -64,14 +64,14 @@ const EmployeeDetails = () => {
                 <div className="col-6">
                   <p>
                     Created at :
-                    <span class="font-weight-bold text-primary">
+                    <span className="font-weight-bold text-primary">
                       {/* Time: <DayJS format="h:mm A"></DayJS>
                   || Date: <DayJS format="YYYY-MM-DD"></DayJS> */}
                     </span>
                   </p>
                   <p>
                     Updated at :
-                    <span class="font-weight-bold text-primary">
+                    <span className="font-weight-bold text-primary">
                       {/* Time: <DayJS format="h:mm A "></DayJS>
                   || Date: <DayJS format="YYYY-MM-DD"></DayJS> */}
                     </span>
@@ -80,14 +80,14 @@ const EmployeeDetails = () => {
                 <div className="col-6">
                   <p>
                     Created at :
-                    <span class="font-weight-bold text-primary">
+                    <span className="font-weight-bold text-primary">
                       {/* Time: <DayJS format="h:mm A"></DayJS>
                   || Date: <DayJS format="YYYY-MM-DD"></DayJS> */}
                     </span>
                   </p>
                   <p>
                     Updated at :
-                    <span class="font-weight-bold text-primary">
+                    <span className="font-weight-bold text-primary">
                       {/* Time: <DayJS format="h:mm A "></DayJS>
                   || Date: <DayJS format="YYYY-MM-DD"></DayJS> */}
                     </span>
@@ -106,7 +106,7 @@ const EmployeeDetails = () => {
           </h6>
         </div>
         <div className="card-body table-responsive">
-          <table class="table table-borderless">
+          <table className="table table-borderless">
             <thead className="shadow">
               <tr>
                 <th scope="col">Id</th>

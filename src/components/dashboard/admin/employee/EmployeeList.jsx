@@ -23,7 +23,7 @@ const EmployeeList = () => {
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary"></h6>
+            <h6 className="m-0 font-weight-bold text-primary">All Employee List </h6>
           </div>
           <div>
             <BsFillArrowLeftCircleFill
@@ -51,7 +51,7 @@ const EmployeeList = () => {
                   to={`/dashboard/admin/create-employee`}
                   className="btn btn-success"
                 >
-                  <BsFillPlusCircleFill /> Add Employee
+                  <BsFillPlusCircleFill /> New
                 </Link>
               </div>
             </div>

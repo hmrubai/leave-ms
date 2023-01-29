@@ -15,9 +15,10 @@ const CompanyTable = () => {
   const { data, isSuccess, isFetching } = useGetEmpoyeeQuery();
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
+  const [paramId, setParamId] = useState(null);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
+
   const handelClickValue = useCallback((value) => {
     setClickValue(value);
   }, []);
@@ -89,9 +90,10 @@ const CompanyTable = () => {
       {isFetching && <Loader />}
 
       <CompanyModal
-    show={show}
-    handleClose={handleClose}
-    clickValue={clickValue}
+        show={show}
+        handleClose={handleClose}
+        clickValue={clickValue}
+        paramId={paramId}
       />
       {/* <MaterialReactTable columns={columns} data={data} /> */}
       <MaterialReactTable
@@ -138,6 +140,7 @@ const CompanyTable = () => {
                   onClick={() => {
                     handleShow();
                     handelClickValue("Company Information");
+                    setParamId(row?.row?.original?.id);
                   }}
                 >
                   <BsFillEyeFill color="black" size={24} />
@@ -151,6 +154,7 @@ const CompanyTable = () => {
                   onClick={() => {
                     handleShow();
                     handelClickValue("Edit Company Information");
+                    setParamId(row?.row?.original?.id);
                   }}
                 >
                   <FaEdit size={22} />

@@ -6,9 +6,10 @@ import CreateCompany from "./CreateCompany";
 import EditCompany from "./EditCompany";
 
 import { AiFillCloseCircle } from "react-icons/ai";
-const CompanyModal = ({ handleClose, show, clickValue }) => {
+const CompanyModal = ({ handleClose, show, clickValue,paramId }) => {
 
 
+ 
   return (
     <>
       <Modal show={show} onHide={handleClose} size="lg">
@@ -17,9 +18,9 @@ const CompanyModal = ({ handleClose, show, clickValue }) => {
           <AiFillCloseCircle onClick={handleClose} />
         </Modal.Header>
         <Modal.Body>
-          {clickValue === "Company Information" && <CompanyDetails />}
+          {clickValue === "Company Information" && <CompanyDetails paramId={paramId} />}
           {clickValue === "Add Company Information" && <CreateCompany />}
-          {clickValue === "Edit Company Information" && <EditCompany />}
+          {clickValue === "Edit Company Information" && <EditCompany paramId={paramId} />}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>

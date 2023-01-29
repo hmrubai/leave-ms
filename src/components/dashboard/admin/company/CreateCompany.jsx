@@ -123,7 +123,7 @@ const CreateCompany = () => {
                   <input
                     type="file"
                     // className="form-control"
-                    name="company_logo"
+                    name="file"
                   />
                 </div>
               </div>

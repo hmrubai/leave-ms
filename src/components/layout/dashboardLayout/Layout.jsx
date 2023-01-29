@@ -386,6 +386,9 @@ const Layout = () => {
                   >
                     <span className="mr-2 d-none d-lg-inline text-gray-600 small">
                       Arfin Foysal
+                      {/* <div>
+                        Admin
+                      </div> */}
                     </span>
                     <img
                       className="img-profile rounded-circle"

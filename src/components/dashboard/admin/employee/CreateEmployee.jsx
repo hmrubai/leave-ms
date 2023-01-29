@@ -3,6 +3,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import image_preview from "./../../../../assets/images/image_preview.png";
 
 const CreateEmployee = () => {
   const navigate = useNavigate();
@@ -12,13 +13,11 @@ const CreateEmployee = () => {
       email: "",
       password: "",
     },
-   
 
     onSubmit: (values) => {
       console.log(values);
     },
   });
-
 
   return (
     <>
@@ -40,13 +39,17 @@ const CreateEmployee = () => {
         </div>
         <div className="card-body">
           <form className="form-sample">
-          <h5 className="card-description text-info py-2"> Personal Information : </h5>
+            <h5 className="card-description text-info py-2">
+              {" "}
+              Personal Information :{" "}
+            </h5>
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Name</label>
                   <div className="col-sm-9">
-                    <input type="text"
+                    <input
+                      type="text"
                       className="form-control"
                       name="name"
                       onChange={formik.handleChange}
@@ -63,6 +66,7 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Mobile</label>
@@ -75,20 +79,7 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">
-                    Employee Code
-                  </label>
-                  <div className="col-sm-9">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="employee_code"
-                    />
-                  </div>
-                </div>
-              </div>
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Father Name</label>
@@ -113,9 +104,7 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="row">
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Gender</label>
@@ -134,7 +123,12 @@ const CreateEmployee = () => {
                     Date of Birth
                   </label>
                   <div className="col-sm-9">
-                    <input className="form-control" placeholder="dd/mm/yyyy" />
+                    <input
+                      className="form-control"
+                      placeholder="dd/mm/yyyy"
+                      name="date_of_birth"
+                      type="date"
+                    />
                   </div>
                 </div>
               </div>
@@ -143,11 +137,7 @@ const CreateEmployee = () => {
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">NID No:</label>
                   <div className="col-sm-9">
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="mother_name"
-                    />
+                    <input type="text" className="form-control" name="nid" />
                   </div>
                 </div>
               </div>
@@ -172,21 +162,64 @@ const CreateEmployee = () => {
 
               <div className="col-md-6">
                 <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">Marital Status</label>
+                  <label className="col-sm-3 col-form-label">Institution</label>
                   <div className="col-sm-9">
-                    <select className="form-control" name="blood_group" >
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="institution"
+                      onChange={formik.handleChange}
+                      value={formik.values.institution}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label">Education</label>
+                  <div className="col-sm-9">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="education"
+                      onChange={formik.handleChange}
+                      value={formik.values.education}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label">
+                    Marital Status
+                  </label>
+                  <div className="col-sm-9">
+                    <select className="form-control" name="marital_status">
                       <option value="married">Married</option>
                       <option value="unmarried">Unmarried</option>
                     </select>
                   </div>
                 </div>
               </div>
-
             </div>
-             <h5 className="card-description text-info py-2"> Company Information : </h5>
+            <h5 className="card-description text-info py-2">
+              {" "}
+              Company Information :{" "}
+            </h5>
             <div className="row">
-           
-      
+              <div className="col-md-6">
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label">Employee ID</label>
+                  <div className="col-sm-9">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="employee_id"
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Company</label>
@@ -199,10 +232,11 @@ const CreateEmployee = () => {
                 </div>
               </div>
 
-
-            <div className="col-md-6">
+              <div className="col-md-6">
                 <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">Joining Date</label>
+                  <label className="col-sm-3 col-form-label">
+                    Joining Date
+                  </label>
                   <div className="col-sm-9">
                     <input
                       type="date"
@@ -235,34 +269,19 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">Stuck Off</label>
-                  <div className="col-sm-9">
-                    <select className="form-control" name="is_stuckoff">
-                      <option>OFF</option>
-                      <option>ON</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">Stuck Off Date</label>
-                  <div className="col-sm-9">
-                   <input className="form-control" type="date" name="stuckoff_date" id="" />
-                  </div>
-                </div>
-              </div>
             </div>
 
             <h5 className="card-description text-info py-2"> Address : </h5>
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">Present Address</label>
+                  <label className="col-sm-3 col-form-label">
+                    Present Address
+                  </label>
                   <div className="col-sm-9">
-                    <input type="text" className="form-control"
+                    <input
+                      type="text"
+                      className="form-control"
                       name="present_address"
                     />
                   </div>
@@ -270,9 +289,13 @@ const CreateEmployee = () => {
               </div>
               <div className="col-md-6">
                 <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">Permanent Address</label>
+                  <label className="col-sm-3 col-form-label">
+                    Permanent Address
+                  </label>
                   <div className="col-sm-9">
-                    <input type="text" className="form-control"
+                    <input
+                      type="text"
+                      className="form-control"
                       name="permanent_address"
                     />
                   </div>
@@ -303,34 +326,46 @@ const CreateEmployee = () => {
                 </div>
               </div>
 
-       
-
-  
-         
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">City</label>
                   <div className="col-sm-9">
-                    <select className="form-control" >
+                    <select className="form-control" name="city_id">
                       <option>X</option>
-               
                     </select>
                   </div>
                 </div>
               </div>
-  
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Area </label>
                   <div className="col-sm-9">
                     <select className="form-control" name="area_id">
                       <option>X</option>
-               
                     </select>
                   </div>
                 </div>
               </div>
-  
+
+              <div className=""></div>
+
+              <div className="col-md-12">
+                <div>
+                  <label className="col-sm-3 col-form-label">Image </label>
+                </div>
+
+                <img src={image_preview} width="105" alt="" />
+                <div className="form-group row ">
+                  <div className="ml-3">
+                    <input
+                      type="file"
+                      // className="form-control"
+                      name="image"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className=" py-5">

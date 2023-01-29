@@ -20,12 +20,12 @@ const CreateDesignation = () => {
           <div className="row">
             <div className="col-md-6">
               <div className="form-group row">
-                <label className="col-sm-4 col-form-label">Name</label>
-                <div className="col-sm-8">
+                <label className="col-sm-3 col-form-label">Title</label>
+                <div className="col-sm-9">
                   <input
                     type="text"
                     className="form-control"
-                    name="name"
+                    name="title"
                     onChange={formik.handleChange}
                     value={formik.values.name}
                   />
@@ -33,25 +33,31 @@ const CreateDesignation = () => {
               </div>
             </div>
             <div className="col-md-6">
-              <div className="form-group row">
-                <label className="col-sm-4 col-form-label">Address</label>
-                <div className="col-sm-8">
-                  <input type="text" className="form-control" name="address" />
-                </div>
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label">Company</label>
+                  <div className="col-sm-9">
+                    <select className="form-control" name="company_id" >
+                      <option>X</option>
+               
+                    </select>
+                  </div>
               </div>
+              
             </div>
+            
             <div className="col-md-6">
-              <div className="form-group row">
-                <label className="col-sm-4 col-form-label">Contact No:</label>
-                <div className="col-sm-8">
-                  <input
-                    type="number"
-                    className="form-control"
-                    name="contact_no"
-                  />
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label">Branch</label>
+                  <div className="col-sm-9">
+                    <select className="form-control" name="branch_id" >
+                      <option>X</option>
+               
+                    </select>
+                  </div>
                 </div>
               </div>
-            </div>
+     
+    
           </div>
           {/* <div className="col-6 py-5 "> */}
           <button type="submit" className=" btn btn-success  ">

@@ -32,7 +32,7 @@ const DesignationList = () => {
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">All Branch List</h6>
+            <h6 className="m-0 font-weight-bold text-primary">All Designation List</h6>
           </div>
           <div>
             <BsFillArrowLeftCircleFill
