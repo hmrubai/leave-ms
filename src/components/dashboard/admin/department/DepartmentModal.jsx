@@ -1,22 +1,22 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import CompanyDetails from "./CompanyDetails";
-import CreateCompany from "./CreateCompany";
-import EditCompany from "./EditCompany";
+import CompanyDetails from "./DepartmentDetails";
+import CreateCompany from "./CreateDepartment";
+import EditCompany from "./EditDepartment";
 
-
-const CompanyModal = ({ handleClose, show, clickValue,paramId }) => {
+import { AiFillCloseCircle } from "react-icons/ai";
+const DepartmentModal = ({ handleClose, show, clickValue,paramId }) => {
 
 
  
   return (
     <>
       <Modal show={show} onHide={handleClose} size="lg">
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>{clickValue}</Modal.Title>
-          
-        </Modal.Header >
+          <AiFillCloseCircle onClick={handleClose} />
+        </Modal.Header>
         <Modal.Body>
           {clickValue === "Company Information" && <CompanyDetails paramId={paramId} />}
           {clickValue === "Add Company Information" && <CreateCompany />}
@@ -32,4 +32,4 @@ const CompanyModal = ({ handleClose, show, clickValue,paramId }) => {
   );
 };
 
-export default React.memo(CompanyModal);
+export default React.memo(DepartmentModal);

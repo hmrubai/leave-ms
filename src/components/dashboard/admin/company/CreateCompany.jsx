@@ -121,9 +121,11 @@ const CreateCompany = () => {
                 <label className="col-sm-5 col-form-label">Company Logo</label>
                 <div className="col-sm-7">
                   <input
-                    type="file"
-                    // className="form-control"
+                    className="form-control"
                     name="file"
+                    type='file'
+                    accept='image/*'
+                    onChange={formik.handleChange}
                   />
                 </div>
               </div>

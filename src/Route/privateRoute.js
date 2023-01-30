@@ -13,6 +13,11 @@ import EditEmployee from './../components/dashboard/admin/employee/EditEmployee'
 import CompanyList from './../components/dashboard/admin/company/CompanyList';
 import BranchList from '../components/dashboard/admin/branch/BranchList'
 import DesignationList from '../components/dashboard/admin/designation/DesignationList'
+import DepartmentList from '../components/dashboard/admin/department/DepartmentList'
+import LeaveTypeList from './../components/dashboard/admin/leaveType/LeaveTypeList';
+
+
+
 
 
 
@@ -66,6 +71,18 @@ export const privateRoute = [
     {
         path: 'admin/designation-list',
         element: <DesignationList/>,
+        role: 'admin',
+
+    },
+    {
+        path: 'admin/department-list',
+        element: <DepartmentList/> ,
+        role: 'admin',
+
+    },
+    {
+        path: 'admin/leave-type',
+        element: <LeaveTypeList/> ,
         role: 'admin',
 
     },

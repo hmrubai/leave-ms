@@ -1,8 +1,7 @@
 import Cookies from "js-cookie";
+const role = JSON.parse(localStorage.getItem("leave_user_role"));
 export const authUser = localStorage.getItem("leave_user_role")
-  ? JSON.parse(localStorage.getItem("leave_user_role"))
-  : "admin";
+  ? role.toLowerCase()
+  : "";
 
-export const authUserToken = Cookies.get("leave_user_token")
-  ? JSON.parse(Cookies.get("leave_user_token"))
-  : "token";
+export const authUserToken = Cookies.get("leave_user_token") ? "token" : "";

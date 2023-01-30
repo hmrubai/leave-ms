@@ -8,11 +8,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
 
 import { IoSyncCircle } from "react-icons/io5";
-import CompanyTable from "./BranchTable";
-import CompanyModal from "./BranchModal";
 
 
-const BranchList = () => {
+import LeaveTypeModal from "./LeaveTypeModal";
+import LeaveTypeTable from "./LeaveTypeTable";
+
+const LeaveTypeList = () => {
   const navigate = useNavigate();
   const getEmpoyee = useGetEmpoyeeQuery();
   const [clickValue, setClickValue] = useState(null);
@@ -28,17 +29,12 @@ const BranchList = () => {
   const refatchClick = () => {
     getEmpoyee.refetch();
   };
-
-
   return (
     <>
-  
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">All Branch List</h6>
-
-
+            <h6 className="m-0 font-weight-bold text-primary">All Company List</h6>
           </div>
           <div>
             <BsFillArrowLeftCircleFill
@@ -67,7 +63,7 @@ const BranchList = () => {
                   className="btn btn-success "
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Add Branch Information");
+                    handelClickValue("Add Company Information");
                   }}
                 >
                   <BsFillPlusCircleFill className="mb-1 mr-1" /> New
@@ -76,11 +72,11 @@ const BranchList = () => {
             </div>
           </div>
           <div>
-            <CompanyTable />
+            <LeaveTypeTable />
           </div>
         </div>
       </div>
-      <CompanyModal
+      <LeaveTypeModal
         show={show}
         handleClose={handleClose}
         clickValue={clickValue}
@@ -89,4 +85,4 @@ const BranchList = () => {
   );
 };
 
-export default React.memo(BranchList);
+export default React.memo(LeaveTypeList);

@@ -1,33 +1,42 @@
 import React, { useState } from "react";
-import { Outlet, NavLink, Link } from "react-router-dom";
-import { navItem } from './../../../Nav/NavItem';
+import { Outlet, NavLink, Link, useNavigate } from "react-router-dom";
+import { navItem } from "./../../../Nav/NavItem";
 import { user } from "../../../Route/utils";
 import Sidebar from "./Sidebar";
 import logo_sm from "../../../assets/logo/sm_logo.png";
 import "./Dashboard.css";
 import ScrollToTop from "react-scroll-to-top";
 // import { HiBars3BottomLeft } from "react-icons/hi2";
-
+// import { useSelector } from './../../../store/index';
+import { useDispatch } from "react-redux";
+import { logout } from "../../../features/authSlice";
+import { toast, ToastContainer } from "react-toastify";
 
 const Layout = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handelLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+    toast.success('Logout Successfully');
+    window.location.reload(false);
+
+  };
+
   const [style, setStyle] = useState(
     "navbar-nav bg-dark sidebar sidebar-dark accordion"
   );
 
   const changeStyle = () => {
     if (style == "navbar-nav bg-dark sidebar sidebar-dark accordion") {
-      setStyle(
-        "navbar-nav bg-dark sidebar sidebar-dark accordion toggled"
-      );
+      setStyle("navbar-nav bg-dark sidebar sidebar-dark accordion toggled");
     } else {
       setStyle("navbar-nav bg-dark sidebar sidebar-dark accordion");
     }
   };
   const changeStyle1 = () => {
     if (style == "navbar-nav bg-dark sidebar sidebar-dark accordion") {
-      setStyle(
-        "navbar-nav bg-dark sidebar sidebar-dark accordion toggled1"
-      );
+      setStyle("navbar-nav bg-dark sidebar sidebar-dark accordion toggled1");
     } else {
       setStyle("navbar-nav bg-dark sidebar sidebar-dark accordion");
     }
@@ -35,6 +44,7 @@ const Layout = () => {
 
   return (
     <div>
+      <ToastContainer/>
       {/*  <!-- Page Wrapper --> */}
       <div id="wrapper">
         {/*  <!-- Sidebar --> */}
@@ -68,7 +78,7 @@ const Layout = () => {
                 />
               </div>
 
-              <div className="mt-1">
+              <div className="mt-1 ">
                 <span className="d-none d-lg-inline text-light-600 small ml-2 font-weight-bold ">
                   Arfin Foysal
                 </span>
@@ -110,7 +120,7 @@ const Layout = () => {
               {/*  <!-- Sidebar Toggle (Topbar) --> */}
               <button
                 id="sidebarToggleTop"
-                className="btn btn-link  d-md-none  rounded-circle mr-3"
+                className="btn btn-link  d-md-none  rounded-circle mr-3 ml-2"
                 onClick={changeStyle1}
               >
                 <i className="fa fa-bars"></i>
@@ -416,9 +426,8 @@ const Layout = () => {
                     <div className="dropdown-divider"></div>
                     <Link
                       className="dropdown-item"
-                      href="#"
-                      data-toggle="modal"
-                      data-target="#logoutModal"
+                      to="#"
+                      onClick={() => handelLogout()}
                     >
                       <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                       Logout
@@ -454,48 +463,7 @@ const Layout = () => {
                               <!-- Scroll to Top Button--> */}
 
       {/*  <!-- Logout Modal--> */}
-      <div
-        className="modal fade bd-example-modal-sm"
-        id="logoutModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-sm modal-dialog-centered" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Ready to Leave?
-              </h5>
-              <button
-                className="close"
-                type="button"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              Select "Logout" below if you are ready to end your current
-              session.
-            </div>
-            <div className="modal-footer">
-              <button
-                className="btn btn-secondary"
-                type="button"
-                data-dismiss="modal"
-              >
-                Cancel
-              </button>
-              <a className="btn btn-primary" href="login.html">
-                Logout
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+
       <ScrollToTop smooth />
     </div>
   );

@@ -1,35 +1,9 @@
 export const navItem = [
- //UID Mustbe Uges String
-  {
-    title: "Company",
-    link: "admin/company-list",
-    role: "admin",
-    icon: "fas fa-building",
-  },
+  //UID Mustbe Uges String
 
-  {
-    title: "Employee",
-    link: "admin/employee-list",
-    role: "admin",
-    icon: "fas fa-user",
-  },
-  {
-    title: "Branch",
-    link: "admin/branch-list",
-    role: "admin",
-    icon: "fas fa-industry",
-  },
-  {
-    title: "Designation",
-    link: "admin/designation-list",
-    role: "admin",
-    icon: "fas fa-dice-d6",
-   
-  },
 
+ 
   {
-   
-
     UID: "super-admin",
     title: "Super Admin",
     role: "admin",
@@ -51,7 +25,6 @@ export const navItem = [
     ],
   },
 
-  
   {
     title: "Admin",
     link: "admin",
@@ -59,12 +32,51 @@ export const navItem = [
     icon: "fas fa-yin-yang",
   },
   {
+    UID: "settings",
     title: "Settings",
-    link: "settings",
     role: "admin",
     icon: "fas fa-cog",
+    children: [
+      {
+        title: "Company",
+        link: "admin/company-list",
+        role: "admin",
+        icon: "fas fa-building",
+      },
+    
+      {
+        title: "Employee",
+        link: "admin/employee-list",
+        role: "admin",
+        icon: "fas fa-user",
+      },
+      {
+        title: "Branch",
+        link: "admin/branch-list",
+        role: "admin",
+        icon: "fas fa-industry",
+      },
+      {
+        title: "Designation",
+        link: "admin/designation-list",
+        role: "admin",
+        icon: "fas fa-dice-d6",
+      },
+      {
+        title: "Department",
+        link: "admin/department-list",
+        role: "admin",
+        icon: "fas fa-box",
+      },
+      {
+        title: "Leave Type",
+        link: "admin/leave-type",
+        role: "admin",
+        icon: "fas fa-sign-out-alt",
+    
+      },
+    ],
   },
-
 
   // Admin Nav End
 
