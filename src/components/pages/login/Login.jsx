@@ -5,6 +5,7 @@ import { useLoginMutation } from "../../../services/authApi";
 import { toast, ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { authToken, authUser, userRole } from "../../../features/authSlice";
+import logo from "../../../assets/logo/logo.png"
 
 const Login = () => {
   const [login, { data, isLoading, isSuccess }] = useLoginMutation();
@@ -38,8 +39,7 @@ const Login = () => {
 
   return (
     <>
-      
-        <ToastContainer />
+      <ToastContainer />
       <div className="container">
         {/* <!-- Outer Row --> */}
         <div className="row justify-content-center">
@@ -53,8 +53,9 @@ const Login = () => {
                     <div className="p-5">
                       <div className="text-center">
                         <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                        <img src={logo} alt=""  className="pb-3"/>
                       </div>
-                    
+
                       <form
                         className="user"
                         onSubmit={formik.handleSubmit}
@@ -104,24 +105,9 @@ const Login = () => {
                         >
                           Login
                         </button>
-                        <hr />
-                        <Link
-                          to=""
-                          className="btn btn-google btn-user btn-block text-light bg-danger"
-                        >
-                          <i className="fab fa-google fa-fw"></i> Login with
-                          Google
-                        </Link>
-                        <Link
-                          to=""
-                          className="btn btn-facebook btn-user btn-block text-light bg-info"
-                        >
-                          <i className="fab fa-facebook-f fa-fw"></i> Login with
-                          Facebook
-                        </Link>
                       </form>
-                      <hr />
-                      <div className="text-center">
+
+                      <div className="text-center mt-4">
                         <Link className="small" to="forgot-password.html">
                           Forgot Password?
                         </Link>

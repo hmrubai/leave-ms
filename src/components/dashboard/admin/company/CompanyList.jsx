@@ -58,7 +58,7 @@ const CompanyList = () => {
               <div>
                 <Link
                   to="#"
-                  className="btn btn-success "
+                  className="btn btn-primary "
                   onClick={() => {
                     handleShow();
                     handelClickValue("Add Company Information");

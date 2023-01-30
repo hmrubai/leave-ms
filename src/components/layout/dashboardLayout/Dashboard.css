@@ -43,15 +43,29 @@
   color: white !important;
 }
 
-.font-style-sub {
+.sub-manu-bg{
+  border-left: #4e505e solid 2px;
+}
+
+.sub-manu-style {
   font-weight: 500 !important;
   text-align: left !important;
-  color: black !important;
+  color: white !important;
+  display: flex;
+  text-decoration: none;
+  padding: 15px;
 
+}
+
+.sub-manu-style:hover{
+  text-decoration: none;
+  background-color: #4e505e;
+  border-radius: 0px 50px 50px 0px ;
 }
 
 .sidebar-dark .nav-item .nav-hover:hover{
   background-color:#4e505e !important;
   border-radius: 0px 50px 50px 0px !important;
 }
+
 

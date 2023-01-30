@@ -24,15 +24,16 @@ function Sidebar({ item }) {
           aria-labelledby="headingTwo"
           data-parent="#accordionSidebar"
         >
-          <div className="bg-white py-2 collapse-inner rounded">
+          <div className=" bg-dark sub-manu-bg py-2 collapse-inner rounded">
             {item.children.map((c, i) => (
               <Link
                 key={i}
-                className="nav-link text-primary font-style-sub"
+                className="sub-manu-style"
                 to={`${c.link}`}
               >
-                <i className={`${c.icon} text-dark mr-1`}></i>
+                <i className={`${c.icon} text-light mr-2 mt-1`}></i>
                 {c.title}
+              
               </Link>
             ))}
           </div>

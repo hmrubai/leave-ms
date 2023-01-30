@@ -23,7 +23,7 @@ const CompanyModal = ({ handleClose, show, clickValue,paramId }) => {
           {clickValue === "Edit Company Information" && <EditCompany paramId={paramId} />}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
+          <Button variant="dark" onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>

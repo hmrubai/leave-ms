@@ -12,16 +12,16 @@ export const routes = [
     role: "admin",
   },
   {
-    path: "/dashboard/maneger",
-    role: "maneger",
+    path: "/dashboard/employee",
+    role: "employee",
   },
   {
-    path: "/dashboard/seller",
-    role: "seller",
+    path: "/dashboard/approval-authority",
+    role: "approvalauthority",
   },
   {
-    path: "/dashboard/worker",
-    role: "worker",
+    path: "/dashboard/others",
+    role: "others",
   },
   {
     path: "/login",

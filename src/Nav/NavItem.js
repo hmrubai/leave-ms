@@ -86,22 +86,23 @@ export const navItem = [
     role: "worker",
     icon: "fas fa-yin-yang",
   },
+  
   {
-    title: "worker",
-    link: "worker",
-    role: "worker",
+    title: "Employee",
+    link: "employee",
+    role: "employee",
     icon: "fas fa-yin-yang",
   },
   {
-    title: "maneger",
-    link: "maneger",
-    role: "maneger",
+    title: "Authority",
+    link: "approval-authority",
+    role: "approvalauthority",
     icon: "fas fa-yin-yang",
   },
   {
-    title: "seller",
-    link: "seller",
-    role: "seller",
+    title: "Others",
+    link: "others",
+    role: "others",
     icon: "fas fa-yin-yang",
   },
 ];

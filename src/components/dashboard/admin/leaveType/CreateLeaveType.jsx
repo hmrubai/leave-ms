@@ -94,7 +94,7 @@ const CreateLeaveType = () => {
                     <Form.Check
                       type="switch"
                       id="custom-switch"
-                      label="Check this switch"
+                      label="True"
                     />
                   </div>
                 </div>

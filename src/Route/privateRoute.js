@@ -1,9 +1,8 @@
 import {Navigate} from 'react-router-dom'
 import {getPath} from './utils'
 import AdminPage from '../components/dashboard/views/AdminPage'
-import Maneger from '../components/dashboard/views/Maneger'
-import Worker from '../components/dashboard/views/Worker'
-import Seller from '../components/dashboard/views/Seller'
+import Others from '../components/dashboard/views/Others'
+import ApprovalAuthority from '../components/dashboard/views/ApprovalAuthority'
 import Payment from '../components/dashboard/views/Payment'
 import About from '../components/dashboard/views/About';
 import EmployeeList from './../components/dashboard/admin/employee/EmployeeList';
@@ -15,6 +14,7 @@ import BranchList from '../components/dashboard/admin/branch/BranchList'
 import DesignationList from '../components/dashboard/admin/designation/DesignationList'
 import DepartmentList from '../components/dashboard/admin/department/DepartmentList'
 import LeaveTypeList from './../components/dashboard/admin/leaveType/LeaveTypeList';
+import Employee from './../components/dashboard/views/Employee';
 
 
 
@@ -106,18 +106,19 @@ export const privateRoute = [
     },
     //<====================== Admin Route End ====================>
     {
-        path: 'worker',
-        element: <Worker />,
-        role: 'worker'
+        path: 'employee',
+        element: <Employee />,
+        role: 'employee'
     },
     {
-        path: 'seller',
-        element: <Seller />,
-        role: 'seller'
+        path: 'others',
+        element: <Others />,
+        role: 'others'
     },
     {
-        path: 'maneger',
-        element: <Maneger />,
-        role: 'maneger'
+        path: 'approval-authority',
+        element: <ApprovalAuthority />,
+        role: 'approvalauthority'
     },
+   
 ]
