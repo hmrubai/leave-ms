@@ -33,7 +33,7 @@ const DepartmentList = () => {
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">All Company List</h6>
+            <h6 className="m-0 font-weight-bold text-primary">All Department List</h6>
           </div>
           <div>
             <BsFillArrowLeftCircleFill
@@ -62,7 +62,7 @@ const DepartmentList = () => {
                   className="btn btn-success "
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Add Company Information");
+                    handelClickValue("Add Department Information");
                   }}
                 >
                   <BsFillPlusCircleFill className="mb-1 mr-1" /> New

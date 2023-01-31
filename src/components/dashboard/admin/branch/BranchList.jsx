@@ -11,6 +11,8 @@ import { IoSyncCircle } from "react-icons/io5";
 import CompanyTable from "./BranchTable";
 import CompanyModal from "./BranchModal";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
+import BranchModal from "./BranchModal";
+import BranchTable from "./BranchTable";
 
 
 const BranchList = () => {
@@ -77,14 +79,15 @@ const BranchList = () => {
             </div>
           </div>
           <div>
-            <CompanyTable />
+            <BranchTable />
           </div>
         </div>
       </div>
-      <CompanyModal
+      <BranchModal
         show={show}
         handleClose={handleClose}
         clickValue={clickValue}
+  
       />
     </>
   );

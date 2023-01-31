@@ -1,8 +1,7 @@
 import React from "react";
+import { Modal, Button } from "react-bootstrap";
 
-const CompanyDetails = ({ item }) => {
-
-
+const CompanyDetails = ({ item, handleClose }) => {
   return (
     <>
       <div className="card-body">
@@ -92,6 +91,14 @@ const CompanyDetails = ({ item }) => {
             </div>
           </div>
         </div>
+
+        <Modal.Footer>
+          <div>
+            <Button variant="dark" onClick={handleClose}>
+              Close
+            </Button>
+          </div>
+        </Modal.Footer>
       </div>
     </>
   );

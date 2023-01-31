@@ -62,7 +62,7 @@ const DesignationList = () => {
                   className="btn btn-success "
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Add Branch Information");
+                    handelClickValue("Add Designation Information");
                   }}
                 >
                   <BsFillPlusCircleFill className="mb-1 mr-1" /> New

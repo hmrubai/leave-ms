@@ -11,10 +11,11 @@ import Swal from "sweetalert2";
 import Loader from "../../../common/Loader";
 
 import DesignationModal from "./DesignationModal";
-import { useGetCompanyListQuery } from "../../../../services/companyApi";
+import { useGetDesignationListQuery } from "../../../../services/designationApi";
+
 
 const DesignationTable = () => {
-  const { data, isSuccess, isFetching } = useGetCompanyListQuery();
+  const { data, isSuccess, isFetching } = useGetDesignationListQuery();
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId,setParamId]=useState(null)
@@ -48,19 +49,33 @@ const DesignationTable = () => {
 
   const columns = useMemo(
     () => [
-   
       {
-        accessorKey: "name", //access nested data with dot notation
-        header: "Name",
+        accessorKey: "title", //access nested data with dot notation
+        header: "Title",
+      },
+      {
+        accessorKey: "company_name", //access nested data with dot notation
+        header: "Company Name",
       },
 
       {
-        accessorKey: "address", //normal accessorKey
-        header: "Address",
+        accessorKey: "branch_name", //normal accessorKey
+        header: "Branch Name",
       },
       {
-        accessorKey: "is_active", //normal accessorKey
+        accessorFn: (row) =>
+          row.is_active === true ? (
+            <>
+              <span className="badge badge-success">Active</span>
+            </>
+          ) : (
+            <>
+              <span className="badge badge-danger">Inactive</span>
+            </>
+          ), //alternate way
+        id: "is_active", //id required if you use accessorFn instead of accessorKey
         header: "Status",
+        Header: <span className="table-header">Status</span>, //optional custom markup
       },
     ],
     []
@@ -100,7 +115,7 @@ const DesignationTable = () => {
       <MaterialReactTable
         enableRowSelection
         columns={columns}
-        data={isSuccess && data}
+        data={isSuccess && data?.data}
         enableRowActions
         enableColumnActions
         enableRowNumbers
@@ -142,8 +157,8 @@ const DesignationTable = () => {
                   to="#"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Branch Information");
-                    setParamId(row?.row?.original?.id)
+                    handelClickValue("Designation Information");
+                    setParamId(row?.row?.original)
                   }}
                 >
                   <BsFillEyeFill color="black" size={24} />
@@ -157,18 +172,19 @@ const DesignationTable = () => {
                   className="px-2"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Edit Branch Information");
+                    handelClickValue("Edit Designation Information");
+                    setParamId(row?.row?.original)
                   }}
                 >
                   <FaEdit size={22} />
                 </Link>
               </div>
 
-              <div>
+              {/* <div>
                 <Link to="#" onClick={() => deleteHandel()}>
                   <FaTrash size={20} color="red" />
                 </Link>{" "}
-              </div>
+              </div> */}
             </div>
           </>
         )}

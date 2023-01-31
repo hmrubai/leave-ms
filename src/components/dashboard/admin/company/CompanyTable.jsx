@@ -188,11 +188,11 @@ const CompanyTable = () => {
                 </Link>
               </div>
 
-              <div>
+              {/* <div>
                 <Link to="#" onClick={() => deleteHandel()}>
                   <FaTrash size={20} color="red" />
                 </Link>{" "}
-              </div>
+              </div> */}
             </div>
           </>
         )}

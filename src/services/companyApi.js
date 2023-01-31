@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
+import { headers } from "./../utils/ApiHeaders";
 
 export const companyApi = createApi({
   reducerPath: "companyApi",
@@ -13,10 +14,7 @@ export const companyApi = createApi({
         url: "admin/company-list",
         method: "GET",
 
-        headers: {
-          // 'Content-type': 'application/json; charset=UTF-8',
-          Authorization: `Bearer ${Cookies.get("leave_user_token")}`,
-        },
+        headers,
       }),
       providesTags: ["Company"],
     }),
@@ -25,11 +23,8 @@ export const companyApi = createApi({
         return {
           url: `admin/company-save-or-update`,
           method: "POST",
-          body:company,
-          headers: {
-            // 'Content-type': 'multipart/form-data',
-            Authorization: `Bearer ${Cookies.get("leave_user_token")}`,
-          },
+          body: company,
+          headers,
         };
       },
       invalidatesTags: ["Company"],
@@ -37,4 +32,5 @@ export const companyApi = createApi({
   }),
 });
 
-export const { useGetCompanyListQuery,useCompanySaveOrUpdateMutation } = companyApi;
+export const { useGetCompanyListQuery, useCompanySaveOrUpdateMutation } =
+  companyApi;

@@ -1,11 +1,12 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import CompanyDetails from "./DepartmentDetails";
-import CreateCompany from "./CreateDepartment";
-import EditCompany from "./EditDepartment";
 
-import { AiFillCloseCircle } from "react-icons/ai";
+import Modal from "react-bootstrap/Modal";
+
+
+
+import DepartmentDetails from './DepartmentDetails';
+import CreateDepartment from './CreateDepartment';
+import EditDepartment from './EditDepartment';
 const DepartmentModal = ({ handleClose, show, clickValue,paramId }) => {
 
 
@@ -13,20 +14,16 @@ const DepartmentModal = ({ handleClose, show, clickValue,paramId }) => {
   return (
     <>
       <Modal show={show} onHide={handleClose} size="lg">
-        <Modal.Header>
+        <Modal.Header closeButton>
           <Modal.Title>{clickValue}</Modal.Title>
-          <AiFillCloseCircle onClick={handleClose} />
+        
         </Modal.Header>
         <Modal.Body>
-          {clickValue === "Company Information" && <CompanyDetails paramId={paramId} />}
-          {clickValue === "Add Company Information" && <CreateCompany />}
-          {clickValue === "Edit Company Information" && <EditCompany paramId={paramId} />}
+          {clickValue === "Department Information" && <DepartmentDetails item={paramId} handleClose={handleClose}/>}
+          {clickValue === "Add Department Information" && <CreateDepartment handleClose={handleClose}/>}
+          {clickValue === "Edit Department Information" && <EditDepartment item={paramId} handleClose={handleClose} />}
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
+     
       </Modal>
     </>
   );

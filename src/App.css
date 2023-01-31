@@ -24,6 +24,13 @@
 .cursor{
   cursor: pointer;
 }
+.css-g2tram-MuiToolbar-root{
+  z-index: 0 !important;
+}
+
+.MuiBox-root css-sq9qdz{
+  z-index: 0 !important;
+}
 
 
  

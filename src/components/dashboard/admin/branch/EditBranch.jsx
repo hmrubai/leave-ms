@@ -1,20 +1,18 @@
 import { useFormik } from "formik";
 import React from "react";
-import { Form } from "react-bootstrap";
+import { Form, Modal, Button } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import { useBranchSaveOrUpdateMutation } from "../../../../services/branchApi";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
 
-const EditBranch = ({item}) => {
+const EditBranch = ({ item, handleClose }) => {
   const { data } = useGetCompanyListQuery();
   const [branchSaveOrUpdate, { data: branchData, isFetching, isSuccess }] =
     useBranchSaveOrUpdateMutation();
-  
-
 
   const formik = useFormik({
     initialValues: {
-      id:item.id,
+      id: item.id,
       name: item.name,
       address: item.address,
       contact_no: item.contact_no,
@@ -22,19 +20,20 @@ const EditBranch = ({item}) => {
       is_active: item.is_active,
     },
 
-    onSubmit: async (values,{resetForm }) => {
+    onSubmit: async (values, { resetForm }) => {
       try {
         const result = await branchSaveOrUpdate(values).unwrap();
         toast.success(result.message);
-        resetForm();
-
-        // console.log(values)
-     
       } catch (error) {
         toast.warn(error.data.message);
       }
     },
+
+   
   });
+   if(isSuccess) {
+      handleClose();
+    }
   return (
     <>
       <ToastContainer />
@@ -106,13 +105,13 @@ const EditBranch = ({item}) => {
 
             <div className="col-md-6">
               <div className="form-group row">
-                <label className="col-sm-4 col-form-label">Status</label>
+                <label className="col-sm-4 col-form-label">Is Active</label>
                 <div className="col-sm-8">
-                  <div class="form-check form-switch mt-2">
+                  <div class="form-check form-switch mt-1">
                     <Form.Check
                       type="switch"
                       id="custom-switch"
-                      label=""
+                      label="Active"
                       name="is_active"
                       onChange={formik.handleChange}
                       value={formik.values.is_active}
@@ -123,13 +122,21 @@ const EditBranch = ({item}) => {
               </div>
             </div>
           </div>
-          {/* <div className="col-6 py-5 "> */}
-          <div className="py-3">
-            <button type="submit" className=" btn btn-success  ">
-              Submit
-            </button>
-          </div>
-          {/* </div> */}
+
+          <Modal.Footer>
+            <div className=" d-flex">
+              <div className="mr-5">
+                <Button type="submit" variant="success">
+                  Submit
+                </Button>
+              </div>
+              <div>
+                <Button variant="dark" onClick={handleClose}>
+                  Close
+                </Button>
+              </div>
+            </div>
+          </Modal.Footer>
         </form>
       </div>
     </>

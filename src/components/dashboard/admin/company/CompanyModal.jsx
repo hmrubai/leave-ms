@@ -18,15 +18,10 @@ const CompanyModal = ({ handleClose, show, clickValue,paramId }) => {
           
         </Modal.Header >
         <Modal.Body>
-          {clickValue === "Company Information" && <CompanyDetails item={paramId} />}
-          {clickValue === "Add Company Information" && <CreateCompany />}
-          {clickValue === "Edit Company Information" && <EditCompany item={paramId} />}
+          {clickValue === "Company Information" && <CompanyDetails item={paramId} handleClose={ handleClose} />}
+          {clickValue === "Add Company Information" && <CreateCompany handleClose={handleClose} />}
+          {clickValue === "Edit Company Information" && <EditCompany item={paramId} handleClose={handleClose} />}
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="dark" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
       </Modal>
     </>
   );

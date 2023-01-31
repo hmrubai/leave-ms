@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
+import { headers } from "./../utils/ApiHeaders";
 
 export const branchApi = createApi({
   reducerPath: "branchApi",
@@ -12,25 +13,17 @@ export const branchApi = createApi({
       query: () => ({
         url: "admin/branch-list",
         method: "GET",
-
-        headers: {
-          // 'Content-type': 'application/json; charset=UTF-8',
-          Authorization: `Bearer ${Cookies.get("leave_user_token")}`,
-        },
+        headers,
       }),
       providesTags: ["Branch"],
     }),
-   branchSaveOrUpdate: builder.mutation({
+    branchSaveOrUpdate: builder.mutation({
       query: (branch) => {
         return {
           url: `admin/branch-save-or-update`,
           method: "POST",
-          body:branch,
-          headers: {
-            // 'Content-type': 'application/json; charset=UTF-8'
-
-            Authorization: `Bearer ${Cookies.get("leave_user_token")}`,
-          },
+          body: branch,
+          headers,
         };
       },
       invalidatesTags: ["Branch"],
@@ -38,4 +31,5 @@ export const branchApi = createApi({
   }),
 });
 
-export const { useGetBranchListQuery,useBranchSaveOrUpdateMutation } = branchApi;
+export const { useGetBranchListQuery, useBranchSaveOrUpdateMutation } =
+  branchApi;

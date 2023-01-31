@@ -1,11 +1,12 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
+import { Button, Form, Modal } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import { useCompanySaveOrUpdateMutation } from "../../../../services/companyApi";
 
-const CreateCompany = () => {
+const CreateCompany = ({ handleClose }) => {
   const [previewImage, setPreviewImage] = useState();
-  const [companySaveOrUpdate,  res ] = useCompanySaveOrUpdateMutation();
+  const [companySaveOrUpdate, res] = useCompanySaveOrUpdateMutation();
 
   function handelImage(e) {
     setPreviewImage(URL.createObjectURL(e.target.files[0]));
@@ -21,13 +22,13 @@ const CreateCompany = () => {
       leave_email: "",
       employee_code_length: "",
       company_prefix: "",
-      is_active: "",
+      is_active: true,
       file: "",
     },
 
     onSubmit: async (values, { resetForm }) => {
-      
       let formData = new FormData();
+     
       formData.append("name", values.name);
       formData.append("address", values.address);
       formData.append("contact_no", values.contact_no);
@@ -38,20 +39,23 @@ const CreateCompany = () => {
       formData.append("company_prefix", values.company_prefix);
       formData.append("is_active", values.is_active);
       formData.append("file", values.file);
+
       try {
         const result = await companySaveOrUpdate(formData).unwrap();
         toast.success(result.message)
-        resetForm()
       } catch (error) {
-        console.log(error);
+        toast.warn(error.data.message);
       }
     },
   });
+  if (res.isSuccess) {
+    handleClose();
+  }
 
 
   return (
     <>
-      <ToastContainer/>
+      <ToastContainer />
       <div className="card-body">
         <form
           className="form-sample"
@@ -69,6 +73,7 @@ const CreateCompany = () => {
                     name="name"
                     onChange={formik.handleChange}
                     value={formik.values.name}
+                    required
                   />
                 </div>
               </div>
@@ -83,6 +88,7 @@ const CreateCompany = () => {
                     name="address"
                     onChange={formik.handleChange}
                     value={formik.values.address}
+                    required
                   />
                 </div>
               </div>
@@ -97,6 +103,7 @@ const CreateCompany = () => {
                     name="contact_no"
                     onChange={formik.handleChange}
                     value={formik.values.contact_no}
+                    required
                   />
                 </div>
               </div>
@@ -145,7 +152,7 @@ const CreateCompany = () => {
             </div>
             <div className="col-md-6">
               <div className="form-group row">
-                <label className="col-sm-5 col-form-label">Employee Code</label>
+                <label className="col-sm-5 col-form-label">Employee Code Length</label>
                 <div className="col-sm-7">
                   <input
                     type="text"
@@ -153,6 +160,7 @@ const CreateCompany = () => {
                     name="employee_code_length"
                     onChange={formik.handleChange}
                     value={formik.values.employee_code_length}
+                    required
                   />
                 </div>
               </div>
@@ -173,43 +181,43 @@ const CreateCompany = () => {
                 </div>
               </div>
             </div>
-            
-
-            <div className="col-md-6">
-              <div className="form-group row">
-                <label className="col-sm-5 col-form-label">Company Logo</label>
-                <div className="col-sm-7">
-                  <input
-                    className="form-control"
-                    name="file"
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => {
-                      formik.setFieldValue("file", e.currentTarget.files[0]);
-                      handelImage(e);
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
 
             <div className="col-md-6">
             <div className="form-group row">
-              <label className="col-sm-5 col-form-label">Status</label>
+              <label className="col-sm-5 col-form-label">Company Logo</label>
               <div className="col-sm-7">
-                <select
+                <input
                   className="form-control"
-                  name="is_active"
-                  onChange={formik.handleChange}
-                  value={formik.values.is_active}
-                >
-                  <option value="1">Active</option>
-                  <option value="2">Dactive</option>
-                </select>
+                  name="file"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    formik.setFieldValue("file", e.currentTarget.files[0]);
+                    handelImage(e);
+                  }}
+                />
               </div>
             </div>
           </div>
 
+            <div className="col-md-6">
+              <div className="form-group row">
+                <label className="col-sm-4 col-form-label">Is Active</label>
+                <div className="col-sm-8">
+                  <div class="form-check form-switch mt-2">
+                    <Form.Check
+                      type="switch"
+                      id="custom-switch"
+                      label="Active"
+                      name="is_active"
+                      onChange={formik.handleChange}
+                      value={formik.values.is_active}
+                      checked={formik.values.is_active}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="">
             <img
@@ -220,11 +228,20 @@ const CreateCompany = () => {
               alt=""
             />
           </div>
-          <div className="py-2">
-            <button type="submit" className=" btn btn-success  ">
-              Submit
-            </button>
-          </div>
+          <Modal.Footer>
+            <div className=" d-flex">
+              <div className="mr-5">
+                <Button type="submit" variant="success">
+                  Submit
+                </Button>
+              </div>
+              <div>
+                <Button variant="dark" onClick={handleClose}>
+                  Close
+                </Button>
+              </div>
+            </div>
+          </Modal.Footer>
         </form>
       </div>
     </>

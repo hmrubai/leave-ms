@@ -1,8 +1,7 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-import { AiFillCloseCircle } from "react-icons/ai";
+
 import CreateDesignation from "./CreateDesignation";
 import DesignationDetails from './DesignationDetails';
 import EditDesignation from './EditDesignation';
@@ -13,23 +12,19 @@ const DesignationModal = ({ handleClose, show, clickValue,paramId }) => {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose} size="lg">
-        <Modal.Header>
-          <Modal.Title>{clickValue}</Modal.Title>
-          <AiFillCloseCircle onClick={handleClose} />
-        </Modal.Header>
-        <Modal.Body>
-          {clickValue === "Branch Information" && <DesignationDetails paramId={paramId} />}
-          {clickValue === "Add Branch Information" && <CreateDesignation/>}
-          {clickValue === "Edit Branch Information" && <EditDesignation/>}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+    <Modal show={show} onHide={handleClose} size="lg">
+      <Modal.Header closeButton>
+        <Modal.Title>{clickValue}</Modal.Title>
+      
+      </Modal.Header>
+      <Modal.Body>
+        {clickValue === "Designation Information" && <DesignationDetails item={paramId} handleClose={handleClose}/>}
+        {clickValue === "Add Designation Information" && <CreateDesignation handleClose={handleClose}/>}
+        {clickValue === "Edit Designation Information" && <EditDesignation item={paramId} handleClose={handleClose} />}
+      </Modal.Body>
+   
+    </Modal>
+  </>
   );
 };
 

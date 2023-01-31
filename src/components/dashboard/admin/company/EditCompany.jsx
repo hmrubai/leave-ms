@@ -2,9 +2,9 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useCompanySaveOrUpdateMutation } from "../../../../services/companyApi";
-import { Form } from 'react-bootstrap';
+import { Button, Form, Modal } from 'react-bootstrap';
 
-const EditCompany = ({ item }) => {
+const EditCompany = ({ item ,handleClose}) => {
   const [previewImage, setPreviewImage] = useState();
   const [companySaveOrUpdate, res] = useCompanySaveOrUpdateMutation();
 
@@ -47,6 +47,7 @@ const EditCompany = ({ item }) => {
       try {
         const result = await companySaveOrUpdate(formData).unwrap();
         toast.success(result.message)
+      
       } catch (error) {
         console.log(error);
       }
@@ -198,7 +199,7 @@ const EditCompany = ({ item }) => {
 
           <div className="col-md-6">
               <div className="form-group row">
-                <label className="col-sm-4 col-form-label">Status</label>
+                <label className="col-sm-4 col-form-label">Is Active</label>
                 <div className="col-sm-8">
                   <div class="form-check form-switch mt-2">
                     <Form.Check
@@ -234,11 +235,20 @@ const EditCompany = ({ item }) => {
               />
             )}
           </div>
-          <div className="py-2">
-            <button type="submit" className=" btn btn-success  ">
-              Submit
-            </button>
-          </div>
+          <Modal.Footer>
+            <div className=" d-flex">
+              <div className="mr-5">
+                <Button type="submit" variant="success">
+                  Submit
+                </Button>
+              </div>
+              <div>
+                <Button variant="dark" onClick={handleClose}>
+                  Close
+                </Button>
+              </div>
+            </div>
+          </Modal.Footer>
         </div>
       </form>
     </div>
