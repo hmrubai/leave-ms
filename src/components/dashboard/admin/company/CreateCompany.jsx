@@ -1,9 +1,11 @@
 import { useFormik } from "formik";
-import React,{useState} from "react";
-
+import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import { useCompanySaveOrUpdateMutation } from "../../../../services/companyApi";
 
 const CreateCompany = () => {
   const [previewImage, setPreviewImage] = useState();
+  const [companySaveOrUpdate,  res ] = useCompanySaveOrUpdateMutation();
 
   function handelImage(e) {
     setPreviewImage(URL.createObjectURL(e.target.files[0]));
@@ -15,24 +17,47 @@ const CreateCompany = () => {
       address: "",
       contact_no: "",
       company_email: "",
-      hr_email:"",
+      hr_email: "",
       leave_email: "",
       employee_code_length: "",
-      company_prefix:"",
+      company_prefix: "",
+      is_active: "",
       file: "",
-      
     },
 
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values, { resetForm }) => {
+      
+      let formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("address", values.address);
+      formData.append("contact_no", values.contact_no);
+      formData.append("company_email", values.company_email);
+      formData.append("hr_email", values.hr_email);
+      formData.append("leave_email", values.leave_email);
+      formData.append("employee_code_length", values.employee_code_length);
+      formData.append("company_prefix", values.company_prefix);
+      formData.append("is_active", values.is_active);
+      formData.append("file", values.file);
+      try {
+        const result = await companySaveOrUpdate(formData).unwrap();
+        toast.success(result.message)
+        resetForm()
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
+
   return (
     <>
+      <ToastContainer/>
       <div className="card-body">
-        <form className="form-sample" onSubmit={formik.handleSubmit} encType="multipart/form-data">
-
+        <form
+          className="form-sample"
+          onSubmit={formik.handleSubmit}
+          encType="multipart/form-data"
+        >
           <div className="row">
             <div className="col-md-6">
               <div className="form-group row">
@@ -52,7 +77,9 @@ const CreateCompany = () => {
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">Address</label>
                 <div className="col-sm-7">
-                  <input type="text" className="form-control"
+                  <input
+                    type="text"
+                    className="form-control"
                     name="address"
                     onChange={formik.handleChange}
                     value={formik.values.address}
@@ -146,7 +173,8 @@ const CreateCompany = () => {
                 </div>
               </div>
             </div>
-         
+            
+
             <div className="col-md-6">
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">Company Logo</label>
@@ -154,28 +182,49 @@ const CreateCompany = () => {
                   <input
                     className="form-control"
                     name="file"
-                    type='file'
-                    accept='image/*'
-                    onChange={(e) =>
-                    {
-                      formik.setFieldValue('file', e.currentTarget.files[0]);
-                      handelImage(e)}
-                    }
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      formik.setFieldValue("file", e.currentTarget.files[0]);
+                      handelImage(e);
+                    }}
                   />
                 </div>
               </div>
             </div>
+
+            <div className="col-md-6">
+            <div className="form-group row">
+              <label className="col-sm-5 col-form-label">Status</label>
+              <div className="col-sm-7">
+                <select
+                  className="form-control"
+                  name="is_active"
+                  onChange={formik.handleChange}
+                  value={formik.values.is_active}
+                >
+                  <option value="1">Active</option>
+                  <option value="2">Dactive</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
           </div>
           <div className="">
-            <img className="py-2" src={previewImage} width="80px" height="80px" alt="" />
-            </div>
+            <img
+              className="py-2"
+              src={previewImage}
+              width="80px"
+              height="80px"
+              alt=""
+            />
+          </div>
           <div className="py-2">
-                <button type="submit" className=" btn btn-success  ">
+            <button type="submit" className=" btn btn-success  ">
               Submit
             </button>
-         </div>
-        
-        
+          </div>
         </form>
       </div>
     </>

@@ -7,14 +7,17 @@ import { Box, Button } from "@mui/material";
 import { BsFillEyeFill } from "react-icons/bs";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
 import Loader from "../../../common/Loader";
-import CompanyModal from "./BranchModal";
+import BranchModal from "./BranchModal";
+import { useGetBranchListQuery } from "../../../../services/branchApi";
+
 
 const BranchTable = () => {
-  const { data, isSuccess, isFetching } = useGetEmpoyeeQuery();
+  const { data, isSuccess, isFetching } = useGetBranchListQuery();
+
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
+  const [paramId, setParamId] = useState(null);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
@@ -54,47 +57,59 @@ const BranchTable = () => {
         header: "Address",
       },
       {
-        accessorKey: "is_active", //normal accessorKey
+        accessorFn: (row) =>
+          row.is_active === true ? (
+            <>
+              <span className="badge badge-success">Active</span>
+            </>
+          ) : (
+            <>
+              <span className="badge badge-danger">Inactive</span>
+            </>
+          ), //alternate way
+        id: "is_active", //id required if you use accessorFn instead of accessorKey
         header: "Status",
+        Header: <span className="table-header">Status</span>, //optional custom markup
       },
     ],
     []
   );
 
-  const csvOptions = {
-    fieldSeparator: ",",
-    quoteStrings: '"',
-    decimalSeparator: ".",
-    showLabels: true,
-    useBom: true,
-    useKeysAsHeaders: false,
-    headers: columns.map((c) => c.header),
-  };
+  // const csvOptions = {
+  //   fieldSeparator: ",",
+  //   quoteStrings: '"',
+  //   decimalSeparator: ".",
+  //   showLabels: true,
+  //   useBom: true,
+  //   useKeysAsHeaders: false,
+  //   headers: columns.map((c) => c.header),
+  // };
 
-  const csvExporter = new ExportToCsv(csvOptions);
+  // const csvExporter = new ExportToCsv(csvOptions);
 
-  const handleExportData = () => {
-    csvExporter.generateCsv();
-  };
+  // const handleExportData = () => {
+  //   csvExporter.generateCsv();
+  // };
 
-  const handleExportRows = (rows) => {
-    csvExporter.generateCsv(rows.map((row) => row.original));
-  };
+  // const handleExportRows = (rows) => {
+  //   csvExporter.generateCsv(rows.map((row) => row.original));
+  // };
 
   return (
     <>
       {isFetching && <Loader />}
 
-      <CompanyModal
+      <BranchModal
     show={show}
     handleClose={handleClose}
-    clickValue={clickValue}
+        clickValue={clickValue}
+        paramId={paramId}
       />
       {/* <MaterialReactTable columns={columns} data={data} /> */}
       <MaterialReactTable
         enableRowSelection
         columns={columns}
-        data={isSuccess && data}
+        data={isSuccess && data?.data}
         enableRowActions
         enableColumnActions
         enableRowNumbers
@@ -103,7 +118,7 @@ const BranchTable = () => {
           <Box
             sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}
           >
-            <Button
+            {/* <Button
               color="primary"
               //export all data that is currently in the table (ignore pagination, sorting, filtering, etc.)
               onClick={handleExportData}
@@ -111,8 +126,8 @@ const BranchTable = () => {
               variant="contained"
             >
               Export
-            </Button>
-            <Button
+            </Button> */}
+            {/* <Button
               disabled={
                 !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
               }
@@ -122,7 +137,7 @@ const BranchTable = () => {
               variant="contained"
             >
               Selected Rows
-            </Button>
+            </Button> */}
           </Box>
         )}
         // enablePagination="true"
@@ -137,6 +152,7 @@ const BranchTable = () => {
                   onClick={() => {
                     handleShow();
                     handelClickValue("Branch Information");
+                    setParamId(row?.row?.original)
                   }}
                 >
                   <BsFillEyeFill color="black" size={24} />
@@ -151,17 +167,18 @@ const BranchTable = () => {
                   onClick={() => {
                     handleShow();
                     handelClickValue("Edit Branch Information");
+                    setParamId(row?.row?.original)
                   }}
                 >
                   <FaEdit size={22} />
                 </Link>
               </div>
 
-              <div>
+              {/* <div>
                 <Link to="#" onClick={() => deleteHandel()}>
                   <FaTrash size={20} color="red" />
                 </Link>{" "}
-              </div>
+              </div> */}
             </div>
           </>
         )}

@@ -7,15 +7,18 @@ import { Box, Button } from "@mui/material";
 import { BsFillEyeFill } from "react-icons/bs";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
+
 import Loader from "../../../common/Loader";
 import CompanyModal from "./CompanyModal";
+import { useGetCompanyListQuery } from "../../../../services/companyApi";
 
 const CompanyTable = () => {
-  const { data, isSuccess, isFetching } = useGetEmpoyeeQuery();
+  const { data, isSuccess, isFetching } = useGetCompanyListQuery();
+
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -45,9 +48,22 @@ const CompanyTable = () => {
   const columns = useMemo(
     () => [
       {
-        accessorKey: "company_logo", //access nested data with dot notation
-        header: "Logo",
+        accessorFn: (row) =>
+          row.company_logo && (
+            <>
+              <img
+                className="img-fluid rounded-circle "
+                style={{ width: "50px", height: "50px" }}
+                src={`${process.env.REACT_APP_FILE_URL}${row.company_logo}`}
+                alt=""
+              />
+            </>
+          ), //alternate way
+        id: "company_logo", //id required if you use accessorFn instead of accessorKey
+        header: "Company Logo",
+        Header: <span className="table-header">Company Logo</span>, //optional custom markup
       },
+
       {
         accessorKey: "name", //access nested data with dot notation
         header: "Name",
@@ -58,8 +74,19 @@ const CompanyTable = () => {
         header: "Address",
       },
       {
-        accessorKey: "is_active", //normal accessorKey
+        accessorFn: (row) =>
+          row.is_active === true ? (
+            <>
+              <span className="badge badge-success">Active</span>
+            </>
+          ) : (
+            <>
+              <span className="badge badge-danger">Inactive</span>
+            </>
+          ), //alternate way
+        id: "is_active", //id required if you use accessorFn instead of accessorKey
         header: "Status",
+        Header: <span className="table-header">Status</span>, //optional custom markup
       },
     ],
     []
@@ -99,7 +126,7 @@ const CompanyTable = () => {
       <MaterialReactTable
         enableRowSelection
         columns={columns}
-        data={isSuccess && data}
+        data={isSuccess && data?.data}
         enableRowActions
         enableColumnActions
         enableRowNumbers
@@ -140,7 +167,7 @@ const CompanyTable = () => {
                   onClick={() => {
                     handleShow();
                     handelClickValue("Company Information");
-                    setParamId(row?.row?.original?.id);
+                    setParamId(row?.row?.original);
                   }}
                 >
                   <BsFillEyeFill color="black" size={24} />
@@ -154,7 +181,7 @@ const CompanyTable = () => {
                   onClick={() => {
                     handleShow();
                     handelClickValue("Edit Company Information");
-                    setParamId(row?.row?.original?.id);
+                    setParamId(row?.row?.original);
                   }}
                 >
                   <FaEdit size={22} />

@@ -5,15 +5,16 @@ import {
   BsFillPlusCircleFill,
 } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
+
 
 import { IoSyncCircle } from "react-icons/io5";
 import CompanyTable from "./DepartmentTable";
 import CompanyModal from "./DepartmentModal";
+import { useGetCompanyListQuery } from "../../../../services/companyApi";
 
 const DepartmentList = () => {
   const navigate = useNavigate();
-  const getEmpoyee = useGetEmpoyeeQuery();
+  const getEmpoyee = useGetCompanyListQuery();
   const [clickValue, setClickValue] = useState(null);
   const [show, setShow] = useState(false);
 

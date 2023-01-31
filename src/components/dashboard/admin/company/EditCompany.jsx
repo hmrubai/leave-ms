@@ -1,35 +1,63 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { useCompanySaveOrUpdateMutation } from "../../../../services/companyApi";
+import { Form } from 'react-bootstrap';
 
-const EditCompany = ({ paramId }) => {
+const EditCompany = ({ item }) => {
   const [previewImage, setPreviewImage] = useState();
+  const [companySaveOrUpdate, res] = useCompanySaveOrUpdateMutation();
 
   function handelImage(e) {
     setPreviewImage(URL.createObjectURL(e.target.files[0]));
   }
 
+
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      id: paramId,
-      name: "arfin",
-      address: "",
-      contact_no: "",
-      company_email: "",
-      hr_email: "",
-      leave_email: "",
-      employee_code_length: "",
-      company_prefix: "",
-      is_active: "1",
-      file: "",
+      id: item.id,
+      name: item.name,
+      address: item.address,
+      contact_no: item.contact_no,
+      company_email: item.company_email,
+      hr_email: item.hr_email,
+      leave_email: item.leave_email,
+      employee_code_length: item.employee_code_length,
+      company_prefix: item.company_prefix,
+      is_active: item.is_active,
+      file: item.company_logo,
     },
 
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values, { resetForm }) => {
+      let formData = new FormData();
+      formData.append("id", values.id);
+      formData.append("name", values.name);
+      formData.append("address", values.address);
+      formData.append("contact_no", values.contact_no);
+      formData.append("company_email", values.company_email);
+      formData.append("hr_email", values.hr_email);
+      formData.append("leave_email", values.leave_email);
+      formData.append("employee_code_length", values.employee_code_length);
+      formData.append("company_prefix", values.company_prefix);
+      formData.append("is_active", values.is_active);
+      formData.append("file", values.file);
+
+      try {
+        const result = await companySaveOrUpdate(formData).unwrap();
+        toast.success(result.message)
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
+
+
+
   return (
-    <div className="card-body">
+    <>
+       <div className="card-body">
       <form
         className="form-sample"
         onSubmit={formik.handleSubmit}
@@ -169,29 +197,29 @@ const EditCompany = ({ paramId }) => {
           </div>
 
           <div className="col-md-6">
-            <div className="form-group row">
-              <label className="col-sm-5 col-form-label">Status</label>
-              <div className="col-sm-7">
-                <select
-                  className="form-control"
-                  name="is_active"
-                  onChange={formik.handleChange}
-                  value={formik.values.is_active}
-                >
-                  <option value="1">Active</option>
-                  <option value="2">Dactive</option>
-                </select>
+              <div className="form-group row">
+                <label className="col-sm-4 col-form-label">Status</label>
+                <div className="col-sm-8">
+                  <div class="form-check form-switch mt-2">
+                    <Form.Check
+                      type="switch"
+                      id="custom-switch"
+                      label=""
+                      name="is_active"
+                      onChange={formik.handleChange}
+                      value={formik.values.is_active}
+                      checked={formik.values.is_active}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
           <div className="">
-            {/* <img className="py-2" src={`${process.env.REACT_APP_File_URL}${file}`}  width="80px" height="80px" alt="" /> */}
-
-            {formik.values.file ? (
+            {previewImage ? (
               <img
                 className="py-2"
-                src={formik.values.file}
+                src={previewImage}
                 width="80px"
                 height="80px"
                 alt=""
@@ -199,7 +227,7 @@ const EditCompany = ({ paramId }) => {
             ) : (
               <img
                 className="py-2"
-                src={previewImage}
+                src={`${process.env.REACT_APP_FILE_URL}${formik.values.file}`}
                 width="80px"
                 height="80px"
                 alt=""
@@ -214,6 +242,8 @@ const EditCompany = ({ paramId }) => {
         </div>
       </form>
     </div>
+    </>
+   
   );
 };
 

@@ -8,13 +8,14 @@ import { Box, Button } from "@mui/material";
 import { BsFillEyeFill } from "react-icons/bs";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
+
 import Loader from "../../../common/Loader";
+import { useGetCompanyListQuery } from "../../../../services/companyApi";
 
 const EmployeeTable = () => {
  
 
-  const { data, isSuccess,isFetching } = useGetEmpoyeeQuery()
+  const { data, isSuccess,isFetching } = useGetCompanyListQuery()
 
 
 

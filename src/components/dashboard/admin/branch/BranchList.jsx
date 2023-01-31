@@ -5,16 +5,17 @@ import {
   BsFillPlusCircleFill,
 } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
+
 
 import { IoSyncCircle } from "react-icons/io5";
 import CompanyTable from "./BranchTable";
 import CompanyModal from "./BranchModal";
+import { useGetCompanyListQuery } from "../../../../services/companyApi";
 
 
 const BranchList = () => {
   const navigate = useNavigate();
-  const getEmpoyee = useGetEmpoyeeQuery();
+  const getCompanyList = useGetCompanyListQuery();
   const [clickValue, setClickValue] = useState(null);
   const [show, setShow] = useState(false);
 
@@ -26,7 +27,7 @@ const BranchList = () => {
   }, []);
 
   const refatchClick = () => {
-    getEmpoyee.refetch();
+    getCompanyList.refetch();
   };
 
 
@@ -64,7 +65,7 @@ const BranchList = () => {
               <div>
                 <Link
                   to="#"
-                  className="btn btn-success "
+                  className="btn btn-primary "
                   onClick={() => {
                     handleShow();
                     handelClickValue("Add Branch Information");

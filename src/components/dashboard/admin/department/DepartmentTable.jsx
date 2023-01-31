@@ -7,12 +7,13 @@ import { Box, Button } from "@mui/material";
 import { BsFillEyeFill } from "react-icons/bs";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
+
 import Loader from "../../../common/Loader";
 import CompanyModal from "./DepartmentModal";
+import { useGetCompanyListQuery } from "../../../../services/companyApi";
 
 const DepartmentTable = () => {
-  const { data, isSuccess, isFetching } = useGetEmpoyeeQuery();
+  const { data, isSuccess, isFetching } = useGetCompanyListQuery();
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);

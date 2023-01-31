@@ -5,17 +5,18 @@ import {
   BsFillPlusCircleFill,
 } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
+
 
 import { IoSyncCircle } from "react-icons/io5";
 
 
 import LeaveTypeModal from "./LeaveTypeModal";
 import LeaveTypeTable from "./LeaveTypeTable";
+import { useGetCompanyListQuery } from "../../../../services/companyApi";
 
 const LeaveTypeList = () => {
   const navigate = useNavigate();
-  const getEmpoyee = useGetEmpoyeeQuery();
+  const getEmpoyee = useGetCompanyListQuery();
   const [clickValue, setClickValue] = useState(null);
   const [show, setShow] = useState(false);
 

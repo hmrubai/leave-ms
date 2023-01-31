@@ -6,14 +6,15 @@ import {
   BsFillPlusCircleFill,
 } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
+
 
 import { IoSyncCircle } from "react-icons/io5";
+import { useGetCompanyListQuery } from "../../../../services/companyApi";
 
 const EmployeeList = () => {
   const navigate = useNavigate();
 
-  const getEmpoyee = useGetEmpoyeeQuery();
+  const getEmpoyee = useGetCompanyListQuery();
 
   const refatchClick = () => {
     getEmpoyee.refetch();

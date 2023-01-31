@@ -5,15 +5,16 @@ import {
   BsFillPlusCircleFill,
 } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { useGetEmpoyeeQuery } from "../../../../services/employeeApi";
+
 
 import { IoSyncCircle } from "react-icons/io5";
 import CompanyTable from "./CompanyTable";
 import CompanyModal from "./CompanyModal";
+import { useGetCompanyListQuery } from "../../../../services/companyApi";
 
 const CompanyList = () => {
   const navigate = useNavigate();
-  const getEmpoyee = useGetEmpoyeeQuery();
+  const getCompanyList = useGetCompanyListQuery();
   const [clickValue, setClickValue] = useState(null);
   const [show, setShow] = useState(false);
 
@@ -25,7 +26,7 @@ const CompanyList = () => {
   }, []);
 
   const refatchClick = () => {
-    getEmpoyee.refetch();
+    getCompanyList.refetch();
   };
   return (
     <>

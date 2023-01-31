@@ -18,9 +18,9 @@ const CompanyModal = ({ handleClose, show, clickValue,paramId }) => {
           
         </Modal.Header >
         <Modal.Body>
-          {clickValue === "Company Information" && <CompanyDetails paramId={paramId} />}
+          {clickValue === "Company Information" && <CompanyDetails item={paramId} />}
           {clickValue === "Add Company Information" && <CreateCompany />}
-          {clickValue === "Edit Company Information" && <EditCompany paramId={paramId} />}
+          {clickValue === "Edit Company Information" && <EditCompany item={paramId} />}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="dark" onClick={handleClose}>
