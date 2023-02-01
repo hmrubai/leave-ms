@@ -24,21 +24,29 @@ const Layout = () => {
   };
 
   const [style, setStyle] = useState(
-    "navbar-nav bg-dark sidebar sidebar-dark accordion"
+    "navbar-nav bg-primary sidebar sidebar-dark accordion"
   );
 
   const changeStyle = () => {
-    if (style == "navbar-nav bg-dark sidebar sidebar-dark accordion") {
-      setStyle("navbar-nav bg-dark sidebar sidebar-dark accordion toggled");
+    if (
+      style === "navbar-nav bg-primary sidebar sidebar-dark accordion"
+    ) {
+      setStyle(
+        "navbar-nav bg-primary sidebar sidebar-dark accordion toggled"
+      );
     } else {
-      setStyle("navbar-nav bg-dark sidebar sidebar-dark accordion");
+      setStyle("navbar-nav bg-primary sidebar sidebar-dark accordion");
     }
   };
   const changeStyle1 = () => {
-    if (style == "navbar-nav bg-dark sidebar sidebar-dark accordion") {
-      setStyle("navbar-nav bg-dark sidebar sidebar-dark accordion toggled1");
+    if (
+      style === "navbar-nav bg-primary sidebar sidebar-dark accordion"
+    ) {
+      setStyle(
+        "navbar-nav bg-primary sidebar sidebar-dark accordion toggled1"
+      );
     } else {
-      setStyle("navbar-nav bg-dark sidebar sidebar-dark accordion");
+      setStyle("navbar-nav bg-primary sidebar sidebar-dark accordion");
     }
   };
 

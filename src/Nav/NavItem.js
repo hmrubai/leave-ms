@@ -69,6 +69,12 @@ export const navItem = [
         icon: "fas fa-box",
       },
       {
+        title: "Employment",
+        link: "admin/employment-list",
+        role: "admin",
+        icon: "fas  fa-user-tie",
+      },
+      {
         title: "Leave Type",
         link: "admin/leave-type",
         role: "admin",

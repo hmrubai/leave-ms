@@ -7,7 +7,7 @@ import { useGetCompanyListQuery } from "../../../../services/companyApi";
 
 const EditBranch = ({ item, handleClose }) => {
   const { data } = useGetCompanyListQuery();
-  const [branchSaveOrUpdate, { data: branchData, isFetching, isSuccess }] =
+  const [branchSaveOrUpdate, res] =
     useBranchSaveOrUpdateMutation();
 
   const formik = useFormik({
@@ -31,7 +31,7 @@ const EditBranch = ({ item, handleClose }) => {
 
    
   });
-   if(isSuccess) {
+   if(res.isSuccess) {
       handleClose();
     }
   return (

@@ -80,26 +80,26 @@ const DesignationTable = () => {
     ],
     []
   );
-
   const csvOptions = {
-    fieldSeparator: ",",
+    fieldSeparator: ',',
     quoteStrings: '"',
-    decimalSeparator: ".",
+    decimalSeparator: '.',
     showLabels: true,
     useBom: true,
     useKeysAsHeaders: false,
     headers: columns.map((c) => c.header),
   };
 
+
   const csvExporter = new ExportToCsv(csvOptions);
-
-  const handleExportData = () => {
-    csvExporter.generateCsv();
-  };
-
   const handleExportRows = (rows) => {
     csvExporter.generateCsv(rows.map((row) => row.original));
   };
+
+  const handleExportData = () => {
+    csvExporter.generateCsv(data);
+  };
+
 
   return (
     <>
@@ -122,29 +122,33 @@ const DesignationTable = () => {
         positionActionsColumn="last"
         renderTopToolbarCustomActions={({ table }) => (
           <Box
-            sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}
+          sx={{ display: 'flex', gap: '1rem', p: '0.5rem', flexWrap: 'wrap' }}
+        >
+   
+          <Button
+            disabled={table.getPrePaginationRowModel().rows.length === 0}
+            //export all rows, including from the next page, (still respects filtering and sorting)
+            onClick={() =>
+              handleExportRows(table.getPrePaginationRowModel().rows)
+            }
+            startIcon={<FileDownloadIcon />}
+            variant="contained"
           >
-            <Button
-              color="primary"
-              //export all data that is currently in the table (ignore pagination, sorting, filtering, etc.)
-              onClick={handleExportData}
-              startIcon={<FileDownloadIcon />}
-              variant="contained"
-            >
-              Export
-            </Button>
-            <Button
-              disabled={
-                !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
-              }
-              //only export selected rows
-              onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
-              startIcon={<FileDownloadIcon />}
-              variant="contained"
-            >
-              Selected Rows
-            </Button>
-          </Box>
+            Export All Rows
+          </Button>
+
+          <Button
+            disabled={
+              !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
+            }
+            //only export selected rows
+            onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
+            startIcon={<FileDownloadIcon />}
+            variant="contained"
+          >
+            Export Selected Rows
+          </Button>
+        </Box>
         )}
         // enablePagination="true"
         renderRowActions={(row, index) => (

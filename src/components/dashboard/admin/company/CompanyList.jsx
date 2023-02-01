@@ -1,20 +1,20 @@
 import React, { useState, useCallback } from "react";
 
 import {
-  BsFillArrowLeftCircleFill,
   BsFillPlusCircleFill,
 } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 import { IoSyncCircle } from "react-icons/io5";
 import CompanyTable from "./CompanyTable";
 import CompanyModal from "./CompanyModal";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
+import PageTopHeader from "../../../common/PageTopHeader";
 
 const CompanyList = () => {
-  const navigate = useNavigate();
-  const getCompanyList = useGetCompanyListQuery();
+
+  const get = useGetCompanyListQuery();
   const [clickValue, setClickValue] = useState(null);
   const [show, setShow] = useState(false);
 
@@ -26,23 +26,17 @@ const CompanyList = () => {
   }, []);
 
   const refatchClick = () => {
-    getCompanyList.refetch();
+    get.refetch();
   };
   return (
     <>
+      <PageTopHeader title="Company" />
       <div className="card shadow mb-4">
-        <div className="card-header py-3 d-flex justify-content-between">
+        <div className="card-header py-3">
           <div>
             <h6 className="m-0 font-weight-bold text-primary">All Company List</h6>
           </div>
-          <div>
-            <BsFillArrowLeftCircleFill
-              onClick={() => navigate(-1)}
-              className="cursor"
-              color="black"
-              size={20}
-            />
-          </div>
+
         </div>
 
         <div className="card-body">

@@ -2,38 +2,33 @@ import React from "react";
 
 import EmployeeTable from "./EmployeeTable";
 import {
-  BsFillArrowLeftCircleFill,
+
   BsFillPlusCircleFill,
 } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 import { IoSyncCircle } from "react-icons/io5";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
+import PageTopHeader from "../../../common/PageTopHeader";
 
 const EmployeeList = () => {
-  const navigate = useNavigate();
 
-  const getEmpoyee = useGetCompanyListQuery();
+
+  const get = useGetCompanyListQuery();
 
   const refatchClick = () => {
-    getEmpoyee.refetch();
+    get.refetch();
   };
   return (
     <>
+      <PageTopHeader title="Employee"/>
       <div className="card shadow mb-4">
-        <div className="card-header py-3 d-flex justify-content-between">
+        <div className="card-header py-3 ">
           <div>
             <h6 className="m-0 font-weight-bold text-primary">All Employee List </h6>
           </div>
-          <div>
-            <BsFillArrowLeftCircleFill
-              onClick={() => navigate(-1)}
-              className="cursor"
-              color="black"
-              size={20}
-            />
-          </div>
+
         </div>
 
         <div className="card-body">

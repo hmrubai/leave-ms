@@ -44,7 +44,7 @@
 }
 
 .sub-manu-bg{
-  border-left: #4e505e solid 2px;
+  border-left: white solid 2px;
 }
 
 .sub-manu-style {
@@ -59,12 +59,12 @@
 
 .sub-manu-style:hover{
   text-decoration: none;
-  background-color: #4e505e;
+  background-color: #0c63e4;
   border-radius: 0px 50px 50px 0px ;
 }
 
 .sidebar-dark .nav-item .nav-hover:hover{
-  background-color:#4e505e !important;
+  background-color:#0c63e4 !important;
   border-radius: 0px 50px 50px 0px !important;
 }
 

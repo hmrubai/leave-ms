@@ -75,25 +75,25 @@ const BranchTable = () => {
     []
   );
 
-  // const csvOptions = {
-  //   fieldSeparator: ",",
-  //   quoteStrings: '"',
-  //   decimalSeparator: ".",
-  //   showLabels: true,
-  //   useBom: true,
-  //   useKeysAsHeaders: false,
-  //   headers: columns.map((c) => c.header),
-  // };
+  const csvOptions = {
+    fieldSeparator: ",",
+    quoteStrings: '"',
+    decimalSeparator: ".",
+    showLabels: true,
+    useBom: true,
+    useKeysAsHeaders: false,
+    headers: columns.map((c) => c.header),
+  };
 
-  // const csvExporter = new ExportToCsv(csvOptions);
+  const csvExporter = new ExportToCsv(csvOptions);
 
-  // const handleExportData = () => {
-  //   csvExporter.generateCsv();
-  // };
+  const handleExportData = () => {
+    csvExporter.generateCsv();
+  };
 
-  // const handleExportRows = (rows) => {
-  //   csvExporter.generateCsv(rows.map((row) => row.original));
-  // };
+  const handleExportRows = (rows) => {
+    csvExporter.generateCsv(rows.map((row) => row.original));
+  };
 
   return (
     <>
@@ -114,11 +114,12 @@ const BranchTable = () => {
         enableColumnActions
         enableRowNumbers
         positionActionsColumn="last"
+        
         renderTopToolbarCustomActions={({ table }) => (
           <Box
             sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}
           >
-            {/* <Button
+            <Button
               color="primary"
               //export all data that is currently in the table (ignore pagination, sorting, filtering, etc.)
               onClick={handleExportData}
@@ -126,8 +127,8 @@ const BranchTable = () => {
               variant="contained"
             >
               Export
-            </Button> */}
-            {/* <Button
+            </Button> 
+            <Button
               disabled={
                 !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
               }
@@ -137,7 +138,7 @@ const BranchTable = () => {
               variant="contained"
             >
               Selected Rows
-            </Button> */}
+            </Button>
           </Box>
         )}
         // enablePagination="true"
