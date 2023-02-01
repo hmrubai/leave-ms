@@ -15,6 +15,7 @@ import DesignationList from '../components/dashboard/admin/designation/Designati
 import DepartmentList from '../components/dashboard/admin/department/DepartmentList'
 import LeaveTypeList from './../components/dashboard/admin/leaveType/LeaveTypeList';
 import Employee from './../components/dashboard/views/Employee';
+import FiscalYearList from '../components/dashboard/admin/fiscalYear/FiscalYearList'
 
 
 
@@ -83,6 +84,12 @@ export const privateRoute = [
     {
         path: 'admin/leave-type',
         element: <LeaveTypeList/> ,
+        role: 'admin',
+
+    },
+    {
+        path: 'admin/fiscal-year-list',
+        element: <FiscalYearList/> ,
         role: 'admin',
 
     },

@@ -1,8 +1,8 @@
 import React from "react";
 
-const LeaveTypeDetails = ( {paramId} ) => {
-  const id = paramId;
-  console.log(id)
+const LeaveTypeDetails = ( {item} ) => {
+
+  console.log(item)
 
 
   return (
@@ -10,61 +10,51 @@ const LeaveTypeDetails = ( {paramId} ) => {
     
       <div className="card-body">
         <div className="row">
-          <div className="col-md-7 col-12">
+          <div className="col-md-6 col-12">
             <div className="row">
-              <div className="col-4">
-                <img
-                  className="img-fluid rounded-circle "
-                  style={{ width: "150px", height: "150px" }}
-                  src=""
-                  alt=""
-                />
-              </div>
+      
               <div className="col-8">
                 <p>
-                  Name:
-                  <span className="font-weight-bold text-primary "></span>
+                Leave Title:
+                  <span className="font-weight-bold text-primary ">{item.leave_title}</span>
                 </p>
                 <p>
-                  Address:
-                  <span className="font-weight-bold text-primary "></span>
+                Leave Short Code:
+                  <span className="font-weight-bold text-primary ">{item.leave_short_code}</span>
                 </p>
                 <p>
-                  Contact No:
-                  <span className="font-weight-bold text-primary "> </span>
+                Total Days:
+                  <span className="font-weight-bold text-primary ">{item.total_days} </span>
                 </p>
                 <p>
-                  Employee Code:
-                  <span className="font-weight-bold text-primary"></span>
+                Max Carry Forward Days:
+                  <span className="font-weight-bold text-primary">{item.max_carry_forward_days} </span>
                 </p>
           
               </div>
             </div>
           </div>
-          <div className="col-md-5">
+          <div className="col-md-6">
             <div className="row">
-              <div className="col-6">
+              <div className="col-12">
                 <p>
-                  Company Email:
-                  <span className="font-weight-bold text-primary"></span>
+                Document Upload After Days:
+                  <span className="font-weight-bold text-primary">{item.document_upload_after_days}</span>
                 </p>
                 <p>
-                  HR Email:
-                  <span className="font-weight-bold text-primary"></span>
+                Applicable For:
+                  <span className="font-weight-bold text-primary">{item.applicable_for}</span>
                 </p>
 
+             
                 <p>
-                  Leave Email:
-                  <span className="font-weight-bold text-primary"></span>
-                </p>
-                <p>
-                  Company Prefix:
-                  <span className="font-weight-bold text-primary"></span>
-                </p>
-                <p>
-                  Status:
-                  <span className="font-weight-bold text-primary"></span>
-                </p>
+                Ts Leave Cut Applicable:
+              <span className="font-weight-bold text-primary">
+                {" "}
+                {item.is_leave_cut_applicable === true ? "Active" : "Inactive"}
+              </span>
+            </p>
+      
          
               </div>
             </div>

@@ -75,6 +75,13 @@ export const navItem = [
         icon: "fas fa-sign-out-alt",
     
       },
+      {
+        title: "Fiscal Year",
+        link: "admin/fiscal-year-list",
+        role: "admin",
+        icon: "fas fa-vote-yea",
+     
+      },
     ],
   },
 

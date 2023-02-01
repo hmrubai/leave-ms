@@ -99,6 +99,7 @@ function About() {
           cacheOptions
           getOptionLabel={(e) => e.color}
           getOptionValue={(e) => e.value}
+          
           defaultOptions={[
             { value: "green", label: "Green", color: "#36B37E" },
             { value: "forest", label: "Forest", color: "#00875A" },

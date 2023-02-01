@@ -6,13 +6,14 @@ import {
 } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 
+
 import { IoSyncCircle } from "react-icons/io5";
 
-import LeaveTypeModal from "./LeaveTypeModal";
-import LeaveTypeTable from "./LeaveTypeTable";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
+import FiscalYearModal from "./FiscalYearModal";
+import FiscalYearTable from "./FiscalYearTable";
 
-const LeaveTypeList = () => {
+const FiscalYearList = () => {
   const navigate = useNavigate();
   const getEmpoyee = useGetCompanyListQuery();
   const [clickValue, setClickValue] = useState(null);
@@ -33,9 +34,7 @@ const LeaveTypeList = () => {
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">
-              All Leave List
-            </h6>
+            <h6 className="m-0 font-weight-bold text-primary">All Fiscal Year List</h6>
           </div>
           <div>
             <BsFillArrowLeftCircleFill
@@ -64,7 +63,7 @@ const LeaveTypeList = () => {
                   className="btn btn-primary "
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Add Leave Information");
+                    handelClickValue("Add Fiscal Year Information");
                   }}
                 >
                   <BsFillPlusCircleFill className="mb-1 mr-1" /> New
@@ -73,11 +72,11 @@ const LeaveTypeList = () => {
             </div>
           </div>
           <div>
-            <LeaveTypeTable />
+            <FiscalYearTable />
           </div>
         </div>
       </div>
-      <LeaveTypeModal
+      <FiscalYearModal
         show={show}
         handleClose={handleClose}
         clickValue={clickValue}
@@ -86,4 +85,4 @@ const LeaveTypeList = () => {
   );
 };
 
-export default React.memo(LeaveTypeList);
+export default React.memo(FiscalYearList);

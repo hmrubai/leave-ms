@@ -4,16 +4,15 @@ import { Link } from "react-router-dom";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { ExportToCsv } from "export-to-csv"; //or use your library of choice here
 import { Box, Button } from "@mui/material";
-import { ImCross } from "react-icons/im";
-import { FaTrash, FaEdit, FaCheck } from "react-icons/fa";
+import { BsFillEyeFill } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
-
 import Loader from "../../../common/Loader";
-import CompanyModal from "./LeaveTypeModal";
-import { useGetLeavePolicyListQuery } from "../../../../services/leavepolicyApi";
+import FiscalYearModal from "./FiscalYearModal";
+import { useGetFiscalYearListQuery } from "../../../../services/fiscalyearApi";
 
-const LeaveTypeTable = () => {
-  const { data, isSuccess, isFetching } = useGetLeavePolicyListQuery();
+const FiscalYearTable = () => {
+  const { data, isSuccess, isFetching } =useGetFiscalYearListQuery ();
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
@@ -43,127 +42,23 @@ const LeaveTypeTable = () => {
     });
   };
 
+  
+
   const columns = useMemo(
     () => [
       {
-        accessorFn: (row) => ` ${row.leave_title} ( ${row.leave_short_code})`,
-
-        //alternate way
-        id: "leave_title", //id required if you use accessorFn instead of accessorKey
-        header: "leave_title",
-        Header: <span className="table-header">Leave Type</span>, //optional custom markup
+        accessorKey: "fiscal_year", //access nested data with dot notation
+        header: "Fiscal Year",
+      },
+      {
+        accessorKey: "start_date", //access nested data with dot notation
+        header: "Start Date",
       },
 
       {
-        accessorKey: "total_days", //normal accessorKey
-        header: "Total Days",
+        accessorKey: "end_date", //normal accessorKey
+        header: "End Date",
       },
-
-      {
-        accessorFn: (row) =>
-          row.is_applicable_for_all === true ? (
-            <>
-              <span className="">
-                <FaCheck color="green" />
-                {row.applicable_for}
-              </span>
-            </>
-          ) : (
-            <>
-              <span className="">
-                <ImCross color="red" />
-                {row.applicable_for}
-              </span>
-            </>
-          ), //alternate way
-        id: "is_applicable_for_all", //id required if you use accessorFn instead of accessorKey
-        header: "is_applicable_for_all",
-        Header: <span className="table-header"> For All</span>, //optional custom markup
-      },
-      {
-        accessorFn: (row) =>
-          row.is_leave_cut_applicable === true ? (
-            <>
-              <span className="">
-                <FaCheck color="green" />
-              </span>
-            </>
-          ) : (
-            <>
-              <span className="">
-                <ImCross color="red" />
-              </span>
-            </>
-          ), //alternate way
-        id: "is_leave_cut_applicable", //id required if you use accessorFn instead of accessorKey
-        header: "is_leave_cut_applicable",
-        Header: <span className="table-header">Cut Applicable</span>, //optional custom markup
-      },
-
-      {
-        accessorFn: (row) =>
-          row.is_carry_forward === true ? (
-            <>
-              <span className="">
-                <FaCheck color="green" />
-                {row.max_carry_forward_days} Days
-              </span>
-            </>
-          ) : (
-            <>
-              <span className="">
-                <ImCross color="red" />
-                {row.max_carry_forward_days} Days
-              </span>
-            </>
-          ), //alternate way
-        id: "is_carry_forward", //id required if you use accessorFn instead of accessorKey
-        header: "is_carry_forward",
-        Header: <span className="table-header">Carry Forward</span>, //optional custom markup
-      },
-
-      {
-        accessorFn: (row) =>
-          row.is_document_upload === true ? (
-            <>
-              <span className="">
-                <FaCheck color="green" />
-                After {row.document_upload_after_days} Days
-              </span>
-            </>
-          ) : (
-            <>
-              <span className="">
-                <ImCross color="red" />
-                After {row.document_upload_after_days} Days
-              </span>
-            </>
-          ), //alternate way
-        id: "is_document_upload", //id required if you use accessorFn instead of accessorKey
-        header: "is_document_upload",
-        Header: <span className="table-header">Document Upload</span>, //optional custom markup
-      },
-
-      {
-        accessorFn: (row) =>
-          row.is_holiday_deduct === true ? (
-            <>
-              <span className="">
-                <FaCheck color="green" />
-              </span>
-            </>
-          ) : (
-            <>
-              <span className="">
-                <ImCross color="red" />
-              </span>
-            </>
-          ), //alternate way
-        id: "is_holiday_deduct", //id required if you use accessorFn instead of accessorKey
-        header: "is_holiday_deduct",
-        Header: <span className="table-header">Holiday Deduct</span>, //optional custom markup
-      },
-
       {
         accessorFn: (row) =>
           row.is_active === true ? (
@@ -207,7 +102,7 @@ const LeaveTypeTable = () => {
     <>
       {isFetching && <Loader />}
 
-      <CompanyModal
+      <FiscalYearModal
         show={show}
         handleClose={handleClose}
         clickValue={clickValue}
@@ -252,18 +147,18 @@ const LeaveTypeTable = () => {
         renderRowActions={(row, index) => (
           <>
             <div className="d-flex">
-              {/* <div>
+              <div>
                 <Link
                   to="#"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Leave Information");
+                    handelClickValue("Fiscal Year Information");
                     setParamId(row?.row?.original);
                   }}
                 >
                   <BsFillEyeFill color="black" size={24} />
                 </Link>
-              </div> */}
+              </div>
               <div>
                 <Link
                   to={`#`}
@@ -271,7 +166,7 @@ const LeaveTypeTable = () => {
                   className="px-2"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Edit Leave Information");
+                    handelClickValue("Edit Fiscal Year Information");
                     setParamId(row?.row?.original);
                   }}
                 >
@@ -292,4 +187,4 @@ const LeaveTypeTable = () => {
   );
 };
 
-export default React.memo(LeaveTypeTable);
+export default React.memo(FiscalYearTable);
