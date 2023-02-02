@@ -4,21 +4,25 @@ import { Link } from "react-router-dom";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { ExportToCsv } from "export-to-csv"; //or use your library of choice here
 import { Box, Button } from "@mui/material";
-import { BsFillEyeFill } from "react-icons/bs";
+import { BsFillEyeFill, BsFillPlusCircleFill } from "react-icons/bs";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
-
 import Loader from "../../../common/Loader";
-import CompanyModal from "./CompanyModal";
-import { useGetCompanyListQuery } from "../../../../services/companyApi";
 
-const CompanyTable = () => {
-  const { data, isSuccess, isFetching } = useGetCompanyListQuery();
+import DepartmentModal from "./LeaveBalanceModal";
+import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
+import { useGetLeaveBalanceListQuery } from "../../../../services/leaveBalanceApi";
+import { IoSyncCircle } from "react-icons/io5";
+import Select from "react-select";
 
+const LeaveBalanceTable = () => {
+  const [employmentTypeId, setEmploymentTypeId] = useState(0);
+  const { data: employmentType } = useGetEmploymentTypeListQuery();
+  const { data, isSuccess, isFetching } =
+    useGetLeaveBalanceListQuery(employmentTypeId);
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -48,30 +52,26 @@ const CompanyTable = () => {
   const columns = useMemo(
     () => [
       {
-        accessorFn: (row) =>
-          row.company_logo && (
-            <>
-              <img
-                className="img-fluid rounded-circle shadow"
-                style={{ width: "50px", height: "50px" }}
-                src={`${process.env.REACT_APP_FILE_URL}${row.company_logo}`}
-                alt=""
-              />
-            </>
-          ), //alternate way
-        id: "company_logo", //id required if you use accessorFn instead of accessorKey
-        header: "Company Logo",
-        Header: <span className="table-header">Company Logo</span>, //optional custom markup
+        accessorFn: (row) => ` ${row.leave_title} ( ${row.leave_short_code})`,
+
+        //alternate way
+        id: "leave_title", //id required if you use accessorFn instead of accessorKey
+        header: "leave_title",
+        Header: <span className="table-header">Leave Type</span>, //optional custom markup
       },
 
       {
-        accessorKey: "name", //access nested data with dot notation
-        header: "Name",
+        accessorKey: "total_days", //access nested data with dot notation
+        header: "Total Days",
+      },
+      {
+        accessorKey: "company_name", //access nested data with dot notation
+        header: "Company Name",
       },
 
       {
-        accessorKey: "address", //normal accessorKey
-        header: "Address",
+        accessorKey: "employment_type", //normal accessorKey
+        header: "Employment Type",
       },
       {
         accessorFn: (row) =>
@@ -116,13 +116,52 @@ const CompanyTable = () => {
     <>
       {isFetching && <Loader />}
 
-      <CompanyModal
+      <DepartmentModal
         show={show}
         handleClose={handleClose}
         clickValue={clickValue}
         paramId={paramId}
       />
       {/* <MaterialReactTable columns={columns} data={data} /> */}
+
+      <div className="pb-3 text-right mr-1 ">
+        <div className="d-flex justify-content-end  row">
+          <div className="mt-1 col-md-9 ">
+            <IoSyncCircle
+              className="cursor "
+              color="black"
+              size={25}
+              // onClick={() => refatchClick()}
+            />
+          </div>
+
+          <div className="col-md-2">
+            <Select
+              
+              isClearable={true}
+              classNamePrefix="Select Category"
+              backspaceRemovesValue={true}
+              onChange={(e) => setEmploymentTypeId(e.id)}
+              getOptionValue={(option) => `${option["id"]}`}
+              getOptionLabel={(option) => `${option["type"]}`}
+              options={employmentType?.data}
+            />
+          </div>
+          <div className="col-md-1">
+            <Link
+              to="#"
+              className="btn btn-primary "
+              onClick={() => {
+                handleShow();
+                handelClickValue("Add Leave Balance Information");
+              }}
+            >
+              <BsFillPlusCircleFill className="mb-1 mr-1" /> New
+            </Link>
+          </div>
+        </div>
+      </div>
+
       <MaterialReactTable
         enableRowSelection
         columns={columns}
@@ -166,7 +205,7 @@ const CompanyTable = () => {
                   to="#"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Company Information");
+                    handelClickValue("Leave Balance Information");
                     setParamId(row?.row?.original);
                   }}
                 >
@@ -180,7 +219,7 @@ const CompanyTable = () => {
                   className="px-2"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Edit Company Information");
+                    handelClickValue("Edit Leave Balance Information");
                     setParamId(row?.row?.original);
                   }}
                 >
@@ -201,4 +240,4 @@ const CompanyTable = () => {
   );
 };
 
-export default React.memo(CompanyTable);
+export default React.memo(LeaveBalanceTable);

@@ -53,7 +53,10 @@ const EditCompany = ({ item ,handleClose}) => {
       }
     },
   });
-
+  
+  if(res.isSuccess) {
+    handleClose();
+  }
 
 
   return (

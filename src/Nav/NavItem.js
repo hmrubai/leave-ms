@@ -3,37 +3,17 @@ export const navItem = [
 
 
  
-  {
-    UID: "super-admin",
-    title: "Super Admin",
-    role: "admin",
-    icon: "fas fa-user-shield",
-    children: [
-      {
-        title: "About",
-        link: "about",
-        role: "admin",
-        icon: "fas fa-arrow-right",
-      },
 
-      {
-        title: "Payment",
-        link: "payment",
-        role: "admin",
-        icon: "fas fa-arrow-right",
-      },
-    ],
-  },
 
   {
-    title: "Admin",
-    link: "admin",
+    title: "About",
+    link: "about",
     role: "admin",
-    icon: "fas fa-yin-yang",
+    icon: "fas fa-dice-d6",
   },
   {
     UID: "settings",
-    title: "Settings",
+    title: "Master Settings",
     role: "admin",
     icon: "fas fa-cog",
     children: [
@@ -87,6 +67,12 @@ export const navItem = [
         role: "admin",
         icon: "fas fa-vote-yea",
      
+      },
+      {
+        title: "Leave Balance",
+        link: "admin/leave-balance",
+        role: "admin",
+        icon: "fas fa-money-check",
       },
     ],
   },

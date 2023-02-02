@@ -53,10 +53,12 @@ const CreateCompany = ({ handleClose }) => {
   }
 
 
+
   return (
     <>
       <ToastContainer />
       <div className="card-body">
+   
         <form
           className="form-sample"
           onSubmit={formik.handleSubmit}

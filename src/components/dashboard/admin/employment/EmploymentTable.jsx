@@ -5,20 +5,17 @@ import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { ExportToCsv } from "export-to-csv"; //or use your library of choice here
 import { Box, Button } from "@mui/material";
 import { BsFillEyeFill } from "react-icons/bs";
-import { FaTrash, FaEdit } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
-
 import Loader from "../../../common/Loader";
-import CompanyModal from "./CompanyModal";
-import { useGetCompanyListQuery } from "../../../../services/companyApi";
+import EmploymentModal from "./EmploymentModal";
+import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
 
-const CompanyTable = () => {
-  const { data, isSuccess, isFetching } = useGetCompanyListQuery();
-
+const EmploymentTable = () => {
+  const { data, isSuccess, isFetching } =useGetEmploymentTypeListQuery ();
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -45,33 +42,16 @@ const CompanyTable = () => {
     });
   };
 
+  
+
   const columns = useMemo(
     () => [
-      {
-        accessorFn: (row) =>
-          row.company_logo && (
-            <>
-              <img
-                className="img-fluid rounded-circle shadow"
-                style={{ width: "50px", height: "50px" }}
-                src={`${process.env.REACT_APP_FILE_URL}${row.company_logo}`}
-                alt=""
-              />
-            </>
-          ), //alternate way
-        id: "company_logo", //id required if you use accessorFn instead of accessorKey
-        header: "Company Logo",
-        Header: <span className="table-header">Company Logo</span>, //optional custom markup
-      },
+  
+ 
 
       {
-        accessorKey: "name", //access nested data with dot notation
-        header: "Name",
-      },
-
-      {
-        accessorKey: "address", //normal accessorKey
-        header: "Address",
+        accessorKey: "type", //normal accessorKey
+        header: "Employment Type",
       },
       {
         accessorFn: (row) =>
@@ -116,7 +96,7 @@ const CompanyTable = () => {
     <>
       {isFetching && <Loader />}
 
-      <CompanyModal
+      <EmploymentModal
         show={show}
         handleClose={handleClose}
         clickValue={clickValue}
@@ -166,7 +146,7 @@ const CompanyTable = () => {
                   to="#"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Company Information");
+                    handelClickValue("Employment Information");
                     setParamId(row?.row?.original);
                   }}
                 >
@@ -180,7 +160,7 @@ const CompanyTable = () => {
                   className="px-2"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Edit Company Information");
+                    handelClickValue("Edit Employment Information");
                     setParamId(row?.row?.original);
                   }}
                 >
@@ -201,4 +181,4 @@ const CompanyTable = () => {
   );
 };
 
-export default React.memo(CompanyTable);
+export default React.memo(EmploymentTable);
