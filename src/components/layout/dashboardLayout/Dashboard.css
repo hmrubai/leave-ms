@@ -1,0 +1,71 @@
+.a1 {
+  width: 50% " aria-valuenow=" 50 " aria-valuemin=" 0 " aria-valuemax=" 100
+    ";
+}
+.a2
+{
+    width: 20%" aria-valuenow= "20" aria-valuemin= "0" aria-valuemax=
+    "100";
+}
+.a3 {
+  width: 40% " aria-valuenow=" 40 " aria-valuemin=" 0 " aria-valuemax=" 100
+    ";
+}
+.a4
+{
+    width: 80%" aria-valuenow= "80" aria-valuemin= "0" aria-valuemax=
+    "100";
+}
+.a5 {
+  width: 100% " aria-valuenow=" 100 " aria-valuemin=" 0 " aria-valuemax=" 100
+    ";
+}
+.a6
+{
+    width: 25rem;
+}
+.a7
+{
+    width: 60%" aria-valuenow= "60"
+    aria-valuemin= "0" aria-valuemax= "100";
+}
+.toggled {
+  overflow: visible;
+  width: 6.5rem !important;
+}
+.toggled1 {
+  width: 0 !important;
+  overflow: hidden;
+}
+.font-style {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: white !important;
+}
+
+.sub-manu-bg{
+  border-left: white solid 2px;
+}
+
+.sub-manu-style {
+  font-weight: 500 !important;
+  text-align: left !important;
+  color: white !important;
+  display: flex;
+  text-decoration: none;
+  padding: 15px;
+
+}
+
+.sub-manu-style:hover{
+  text-decoration: none;
+  background-color: #0c63e4;
+  border-radius: 0px 50px 50px 0px ;
+}
+
+.sidebar-dark .nav-item .nav-hover:hover{
+  background-color:#0c63e4 !important;
+  border-radius: 0px 50px 50px 0px !important;
+}
+
+
