@@ -8,7 +8,7 @@ export const leaveBalanceApi = createApi({
   }),
   tagTypes: ["LeaveBalance"],
   endpoints: (builder) => ({
-    getLeaveBalanceList: builder.query({
+    getleaveSettingList: builder.query({
       query: (id) => ({
         url: `admin/leave-setting-list/${id}`,
         method: "GET",
@@ -17,10 +17,10 @@ export const leaveBalanceApi = createApi({
       providesTags: ["LeaveBalance"],
     }),
 
-    departmentSaveOrUpdate: builder.mutation({
+    leaveSettingSaveOrUpdate: builder.mutation({
       query: (department) => {
         return {
-          url: `admin/department-save-or-update`,
+          url: `admin/leave-setting-save-or-update`,
           method: "POST",
           body: department,
           headers,
@@ -33,5 +33,5 @@ export const leaveBalanceApi = createApi({
   }),
 });
 
-export const {useGetLeaveBalanceListQuery} =
+export const {useGetleaveSettingListQuery ,useLeaveSettingSaveOrUpdateMutation} =
 leaveBalanceApi;

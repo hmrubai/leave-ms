@@ -11,7 +11,7 @@ import Loader from "../../../common/Loader";
 
 import DepartmentModal from "./LeaveBalanceModal";
 import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
-import { useGetLeaveBalanceListQuery } from "../../../../services/leaveBalanceApi";
+import { useGetleaveSettingListQuery } from "../../../../services/leaveBalanceApi";
 import { IoSyncCircle } from "react-icons/io5";
 import Select from "react-select";
 
@@ -19,7 +19,8 @@ const LeaveBalanceTable = () => {
   const [employmentTypeId, setEmploymentTypeId] = useState(0);
   const { data: employmentType } = useGetEmploymentTypeListQuery();
   const { data, isSuccess, isFetching } =
-    useGetLeaveBalanceListQuery(employmentTypeId);
+    useGetleaveSettingListQuery(employmentTypeId);
+    const get= useGetleaveSettingListQuery(employmentTypeId);
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
@@ -29,6 +30,10 @@ const LeaveBalanceTable = () => {
   const handelClickValue = useCallback((value) => {
     setClickValue(value);
   }, []);
+
+  const refatchClick = () => {
+    get.refetch();
+  };
 
   const deleteHandel = async (deleteFunc, Did) => {
     Swal.fire({
@@ -52,6 +57,10 @@ const LeaveBalanceTable = () => {
   const columns = useMemo(
     () => [
       {
+        accessorKey: "employment_type", //normal accessorKey
+        header: "Employment Type",
+      },
+      {
         accessorFn: (row) => ` ${row.leave_title} ( ${row.leave_short_code})`,
 
         //alternate way
@@ -69,10 +78,7 @@ const LeaveBalanceTable = () => {
         header: "Company Name",
       },
 
-      {
-        accessorKey: "employment_type", //normal accessorKey
-        header: "Employment Type",
-      },
+     
       {
         accessorFn: (row) =>
           row.is_active === true ? (
@@ -125,21 +131,21 @@ const LeaveBalanceTable = () => {
       {/* <MaterialReactTable columns={columns} data={data} /> */}
 
       <div className="pb-3 text-right mr-1 ">
-        <div className="d-flex justify-content-end  row">
-          <div className="mt-1 col-md-9 ">
+        <div className=" row">
+        <div className="d-flex justify-content-end  ">
+          <div className="mt-1 col-md-8 ">
             <IoSyncCircle
               className="cursor "
               color="black"
               size={25}
-              // onClick={() => refatchClick()}
+              onClick={() => refatchClick()}
             />
           </div>
 
           <div className="col-md-2">
             <Select
-              
               isClearable={true}
-              classNamePrefix="Select Category"
+              classNamePrefix="Employment Type"
               backspaceRemovesValue={true}
               onChange={(e) => setEmploymentTypeId(e.id)}
               getOptionValue={(option) => `${option["id"]}`}
@@ -147,7 +153,7 @@ const LeaveBalanceTable = () => {
               options={employmentType?.data}
             />
           </div>
-          <div className="col-md-1">
+          <div className="col-md-2">
             <Link
               to="#"
               className="btn btn-primary "
@@ -160,6 +166,7 @@ const LeaveBalanceTable = () => {
             </Link>
           </div>
         </div>
+       </div>
       </div>
 
       <MaterialReactTable
@@ -201,7 +208,7 @@ const LeaveBalanceTable = () => {
           <>
             <div className="d-flex">
               <div>
-                <Link
+                {/* <Link
                   to="#"
                   onClick={() => {
                     handleShow();
@@ -210,7 +217,7 @@ const LeaveBalanceTable = () => {
                   }}
                 >
                   <BsFillEyeFill color="black" size={24} />
-                </Link>
+                </Link> */}
               </div>
               <div>
                 <Link

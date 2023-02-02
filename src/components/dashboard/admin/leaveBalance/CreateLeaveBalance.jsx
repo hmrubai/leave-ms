@@ -3,24 +3,30 @@ import React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
-import { useBranchListByCompanyIdQuery, useDepartmentSaveOrUpdateMutation } from "../../../../services/departmentApi";
+import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
+import { useLeaveSettingSaveOrUpdateMutation } from "../../../../services/leaveBalanceApi";
+import { useGetLeavePolicyListQuery } from "../../../../services/leavepolicyApi";
 
 const CreateLeaveBalance = ({ handleClose }) => {
   const { data } = useGetCompanyListQuery();
-  const [departmentSaveOrUpdate, res] =
-    useDepartmentSaveOrUpdateMutation();
+  const { data:LeavePolicy } = useGetLeavePolicyListQuery();
+  const { data:EmploymentType } = useGetEmploymentTypeListQuery();
+
+  const [leaveSettingSaveOrUpdate, res] =
+    useLeaveSettingSaveOrUpdateMutation();
   
   const formik = useFormik({
     initialValues: {
-      name: "",
       company_id:"",
-      branch_id: "",
+      leave_policy_id:"",
+      employment_type_id: "",
+      total_days:"",
       is_active: true,
     },
 
     onSubmit: async (values, { resetForm }) => {
       try {
-        const result = await departmentSaveOrUpdate(values).unwrap();
+        const result = await leaveSettingSaveOrUpdate(values).unwrap();
         toast.success(result.message);
         resetForm();
       } catch (error) {
@@ -28,8 +34,7 @@ const CreateLeaveBalance = ({ handleClose }) => {
       }
     },
   });
-  const { data: baranchData } = useBranchListByCompanyIdQuery(formik.values.company_id)
-  
+
   if (res.isSuccess) {
     handleClose();
   }
@@ -42,21 +47,7 @@ const CreateLeaveBalance = ({ handleClose }) => {
       <div className="card-body">
         <form className="form-sample" onSubmit={formik.handleSubmit}>
           <div className="row">
-            <div className="col-md-6">
-              <div className="form-group row">
-                <label className="col-sm-3 col-form-label">Name</label>
-                <div className="col-sm-9">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="name"
-                    onChange={formik.handleChange}
-                    value={formik.values.name}
-                    required
-                  />
-                </div>
-              </div>
-            </div>
+    
             <div className="col-md-6">
               <div className="form-group row">
                 <label className="col-sm-3 col-form-label">Company</label>
@@ -79,25 +70,59 @@ const CreateLeaveBalance = ({ handleClose }) => {
             </div>
             <div className="col-md-6">
               <div className="form-group row">
-                <label className="col-sm-3 col-form-label">Branch</label>
+                <label className="col-sm-3 col-form-label">Employment Type</label>
                 <div className="col-sm-9">
                 <select
                     className="form-control"
-                    name="branch_id"
+                    name="employment_type_id"
                     onChange={formik.handleChange}
-                   value={formik.values.branch_id}
+                   value={formik.values.employment_type_id}
                   >
-                    <option>Selact Branch</option>
-                    {baranchData?.data?.map((branch, i) => (
-                      <option key={i} value={branch.id}>
-                        {branch.name}
+                    <option>Selact</option>
+                    {EmploymentType?.data?.map((employmentType, i) => (
+                      <option key={i} value={employmentType.id}>
+                        {employmentType.type}
                       </option>
                     ))}
                   </select>
                 </div>
               </div>
             </div>
-
+            <div className="col-md-6">
+              <div className="form-group row">
+                <label className="col-sm-3 col-form-label">Leave Type</label>
+                <div className="col-sm-9">
+                <select
+                    className="form-control"
+                    name="leave_policy_id"
+                    onChange={formik.handleChange}
+                   value={formik.values.leave_policy_id}
+                  >
+                    <option>Selact</option>
+                    {LeavePolicy?.data?.map((Leave, i) => (
+                      <option key={i} value={Leave.id}>
+                        {Leave.leave_title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form-group row">
+                <label className="col-sm-3 col-form-label">Total Days</label>
+                <div className="col-sm-9">
+                  <input
+                    type="number"
+                    className="form-control"
+                    name="total_days"
+                    onChange={formik.handleChange}
+                    value={formik.values.total_days}
+                    required
+                  />
+                </div>
+              </div>
+            </div>
             <div className="col-md-6">
               <div className="form-group row">
                 <label className="col-sm-4 col-form-label">Is Active</label>
