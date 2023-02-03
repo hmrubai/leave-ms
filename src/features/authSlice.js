@@ -38,7 +38,7 @@ export const authSlice = createSlice({
 
     logout: (state) => {
       Cookies.remove("leave_user_token");
-      localStorage.removeItem("leve_user");
+      localStorage.removeItem("leave_user");
       localStorage.removeItem("leave_permissions");
       localStorage.removeItem("leave_user_role");
       
