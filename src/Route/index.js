@@ -1,5 +1,4 @@
 import { privateRoute } from "./privateRoute";
-
 import { user } from "./utils";
 import { Navigate } from "react-router-dom";
 import Layout from '../../src/components/layout/dashboardLayout/Layout';

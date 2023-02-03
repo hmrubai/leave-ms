@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 
 const initialState = {
-  user: localStorage.getItem("leve_user")
-    ? JSON.parse(localStorage.getItem("leve_user"))
+  user: localStorage.getItem("leave_user")
+    ? JSON.parse(localStorage.getItem("leave_user"))
     : null,
   permissions: localStorage.getItem("leave_permissions")
     ? JSON.parse(localStorage.getItem("leave_permissions"))
@@ -11,8 +11,8 @@ const initialState = {
   token: Cookies.get("leave_user_token")
     ? Cookies.get("leave_user_token")
     : null,
-  role: localStorage.getItem("leve_user")
-    ? JSON.parse(localStorage.getItem("leve_user")).role
+  role: localStorage.getItem("leave_user_role")
+    ? JSON.parse(localStorage.getItem("leave_user_role"))
     : null,
 };
 
@@ -25,7 +25,7 @@ export const authSlice = createSlice({
     },
 
     authUser: (state, action) => {
-      localStorage.setItem("leve_user", JSON.stringify(action.payload));
+      localStorage.setItem("leave_user", JSON.stringify(action.payload));
     },
 
     userRole: (state, action) => {

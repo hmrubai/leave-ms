@@ -9,9 +9,14 @@ import BranchModal from "./BranchModal";
 import BranchTable from "./BranchTable";
 import { useGetBranchListQuery } from "../../../../services/branchApi";
 import PageTopHeader from "../../../common/PageTopHeader";
+// import { useSelector } from "react-redux";
 
 
 const BranchList = () => {
+
+//  const user= useSelector((state) => state.auth.role);
+
+// console.log(user);
 
   const get = useGetBranchListQuery();
   const [clickValue, setClickValue] = useState(null);

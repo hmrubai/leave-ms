@@ -131,8 +131,8 @@ const LeaveBalanceTable = () => {
       {/* <MaterialReactTable columns={columns} data={data} /> */}
 
       <div className="pb-3 text-right mr-1 ">
-        <div className=" row">
-        <div className="d-flex justify-content-end  ">
+      
+        <div className=" d-flex justify-content-end  ">
           <div className="mt-1 col-md-8 ">
             <IoSyncCircle
               className="cursor "
@@ -166,7 +166,7 @@ const LeaveBalanceTable = () => {
             </Link>
           </div>
         </div>
-       </div>
+     
       </div>
 
       <MaterialReactTable

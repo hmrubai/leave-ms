@@ -5,7 +5,7 @@ import { useLoginMutation } from "../../../services/authApi";
 import { toast, ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { authToken, authUser, userRole } from "../../../features/authSlice";
-import logo from "../../../assets/logo/logo.png"
+import logo from "../../../assets/logo/logo.png";
 import LoginLoader from "../../common/LoginLoader";
 
 const Login = () => {
@@ -31,7 +31,7 @@ const Login = () => {
   });
 
   if (isSuccess) {
-    dispatch(authUser(data));
+    dispatch(authUser(data?.data));
     dispatch(authToken(data?.data?.token));
     dispatch(userRole(data?.data?.user_type));
     navigate("/dashboard");
@@ -39,9 +39,6 @@ const Login = () => {
 
   return (
     <>
-      
-   
-      
       <ToastContainer />
       <div className="container">
         {/* <!-- Outer Row --> */}
@@ -54,15 +51,11 @@ const Login = () => {
                   {/* <div className="col-lg-6 d-none d-lg-block bg-login-image"></div> */}
                   <div className="col">
                     <div className="m-5">
+                      {isLoading && <LoginLoader />}
 
-                      {isLoading && (
-                        <LoginLoader />
-                      )
-                        }
-                  
                       <div className="text-center">
                         <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                        <img src={logo} alt=""  className="pb-3"/>
+                        <img src={logo} alt="" className="pb-3" />
                       </div>
 
                       <form
