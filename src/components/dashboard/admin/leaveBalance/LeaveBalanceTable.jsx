@@ -20,7 +20,7 @@ const LeaveBalanceTable = () => {
   const { data: employmentType } = useGetEmploymentTypeListQuery();
   const { data, isSuccess, isFetching } =
     useGetleaveSettingListQuery(employmentTypeId);
-    const get= useGetleaveSettingListQuery(employmentTypeId);
+  const get = useGetleaveSettingListQuery(employmentTypeId);
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
@@ -78,7 +78,6 @@ const LeaveBalanceTable = () => {
         header: "Company Name",
       },
 
-     
       {
         accessorFn: (row) =>
           row.is_active === true ? (
@@ -131,7 +130,6 @@ const LeaveBalanceTable = () => {
       {/* <MaterialReactTable columns={columns} data={data} /> */}
 
       <div className="pb-3 text-right mr-1 ">
-      
         <div className=" d-flex justify-content-end  ">
           <div className="mt-1 col-md-8 ">
             <IoSyncCircle
@@ -166,7 +164,6 @@ const LeaveBalanceTable = () => {
             </Link>
           </div>
         </div>
-     
       </div>
 
       <MaterialReactTable

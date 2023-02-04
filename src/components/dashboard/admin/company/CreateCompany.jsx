@@ -39,6 +39,7 @@ const CreateCompany = ({ handleClose }) => {
       formData.append("company_prefix", values.company_prefix);
       formData.append("is_active", values.is_active);
       formData.append("file", values.file);
+      resetForm()
 
       try {
         const result = await companySaveOrUpdate(formData).unwrap();

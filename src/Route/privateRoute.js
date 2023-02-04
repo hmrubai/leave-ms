@@ -1,6 +1,6 @@
 import {Navigate} from 'react-router-dom'
 import {getPath} from './utils'
-import AdminPage from '../components/dashboard/views/AdminPage'
+import AdminPage from '../components/dashboard/admin/adminDashboardPage/AdminPage'
 import Others from '../components/dashboard/views/Others'
 import ApprovalAuthority from '../components/dashboard/views/ApprovalAuthority'
 import Payment from '../components/dashboard/views/Payment'

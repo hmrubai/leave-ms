@@ -8,19 +8,20 @@ import "./Dashboard.css";
 import ScrollToTop from "react-scroll-to-top";
 // import { HiBars3BottomLeft } from "react-icons/hi2";
 // import { useSelector } from './../../../store/index';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../features/authSlice";
 import { toast, ToastContainer } from "react-toastify";
 
 const Layout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const authUser = useSelector((state) => state.auth.user);
+
   const handelLogout = () => {
     dispatch(logout());
     navigate("/login");
-    toast.success('Logout Successfully');
+    toast.success("Logout Successfully");
     window.location.reload(false);
-
   };
 
   const [style, setStyle] = useState(
@@ -28,23 +29,15 @@ const Layout = () => {
   );
 
   const changeStyle = () => {
-    if (
-      style === "navbar-nav bg-primary sidebar sidebar-dark accordion"
-    ) {
-      setStyle(
-        "navbar-nav bg-primary sidebar sidebar-dark accordion toggled"
-      );
+    if (style === "navbar-nav bg-primary sidebar sidebar-dark accordion") {
+      setStyle("navbar-nav bg-primary sidebar sidebar-dark accordion toggled");
     } else {
       setStyle("navbar-nav bg-primary sidebar sidebar-dark accordion");
     }
   };
   const changeStyle1 = () => {
-    if (
-      style === "navbar-nav bg-primary sidebar sidebar-dark accordion"
-    ) {
-      setStyle(
-        "navbar-nav bg-primary sidebar sidebar-dark accordion toggled1"
-      );
+    if (style === "navbar-nav bg-primary sidebar sidebar-dark accordion") {
+      setStyle("navbar-nav bg-primary sidebar sidebar-dark accordion toggled1");
     } else {
       setStyle("navbar-nav bg-primary sidebar sidebar-dark accordion");
     }
@@ -52,7 +45,7 @@ const Layout = () => {
 
   return (
     <div>
-      <ToastContainer/>
+      <ToastContainer />
       {/*  <!-- Page Wrapper --> */}
       <div id="wrapper">
         {/*  <!-- Sidebar --> */}
@@ -77,18 +70,32 @@ const Layout = () => {
 
           {/*  <!-- Nav Item - Dashboard --> */}
           <li className="nav-item active ">
-            <div className="nav-link shadow-lg  d-flex flex-wrap justify-content-center">
+            <div className="nav-link shadow-lg   d-flex flex-wrap justify-content-center">
               <div>
-                <img
-                  className="img-profile rounded-circle "
-                  src="img/undraw_profile.svg"
-                  alt=""
-                />
+                {authUser && authUser.image ? (
+                  <img
+                    className="img-profile rounded-circle "
+                    src={`${process.env.REACT_APP_FILE_URL}${authUser.image}`}
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    className="img-profile rounded-circle "
+                    src="img/undraw_profile.svg"
+                    alt=""
+                  />
+                )}
               </div>
 
               <div className="mt-1 ">
                 <span className="d-none d-lg-inline text-light-600 small ml-2 font-weight-bold ">
-                  Arfin Foysal
+                  {authUser && authUser.name}
+                  {/* <br />
+                  <span className="d-none d-lg-inline text-light-600 small ml-2  ">
+                    {authUser && authUser.user_type} 
+                  </span> */}
+                 
+                  
                 </span>
               </div>
             </div>
@@ -403,16 +410,28 @@ const Layout = () => {
                     aria-expanded="false"
                   >
                     <span className="mr-2 d-none d-lg-inline text-gray-600 small">
-                      Arfin Foysal
-                      {/* <div>
-                        Admin
-                      </div> */}
+                      {authUser && authUser.name}
                     </span>
-                    <img
+
+                    {authUser && authUser.image ? (
+                      <img
+                        className="img-profile rounded-circle "
+                        src={`${process.env.REACT_APP_FILE_URL}${authUser.image}`}
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        className="img-profile rounded-circle "
+                        src="img/undraw_profile.svg"
+                        alt=""
+                      />
+                    )}
+
+                    {/* <img
                       className="img-profile rounded-circle"
                       src="img/undraw_profile.svg"
                       alt=""
-                    />
+                    /> */}
                   </Link>
                   {/*  <!-- Dropdown - User Information --> */}
                   <div
