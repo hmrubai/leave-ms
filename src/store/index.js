@@ -15,6 +15,7 @@ import { leavepolicyApi } from "../services/leavepolicyApi";
 import { fiscalyearApi } from "../services/fiscalyearApi";
 import { employmentApi } from "../services/employmentApi";
 import { leaveBalanceApi } from "../services/leaveBalanceApi";
+import { employeeApi } from "../services/employeeApi";
 
 const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ const store = configureStore({
     [fiscalyearApi.reducerPath]: fiscalyearApi.reducer,
     [employmentApi.reducerPath]: employmentApi.reducer,
     [leaveBalanceApi.reducerPath]: leaveBalanceApi.reducer,
+    [employeeApi.reducerPath]: employeeApi.reducer,
 
     devTools: true,
   },
@@ -42,6 +44,7 @@ const store = configureStore({
       fiscalyearApi.middleware,
       employmentApi.middleware,
       leaveBalanceApi.middleware,
+      employeeApi.middleware,
     ]),
 });
 setupListeners(store.dispatch);
