@@ -1,5 +1,3 @@
-import { useFormik } from "formik";
-import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -7,46 +5,48 @@ import { useNavigate } from "react-router-dom";
 // import JoditEditor from "jodit-react";
 import { useRef, useState } from "react";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
-import {
-  getBranchListByCompanyId,
-  useGetBranchListByCompanyIdQuery,
-  useGetBranchListQuery,
-} from "../../../../services/branchApi";
-import {
-  useGetDesignationListQuery,
-  useGetDesignationtListByCompanyAndBranchIdQuery,
-} from "../../../../services/designationApi";
-import {
-  useGetDepartmentListByCompanyAndBranchIdQuery,
-  useGetdepartmentListQuery,
-} from "../../../../services/departmentApi";
+import { useGetBranchListQuery } from "../../../../services/branchApi";
+import { useGetDesignationListQuery } from "../../../../services/designationApi";
+import { useGetdepartmentListQuery } from "../../../../services/departmentApi";
 import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
 import {
-  useAddEmployeeMutation,
   useGetAreaListByIdQuery,
   useGetDistrictListByIdQuery,
   useGetDivisionListQuery,
   useGetUpazilaListByIdQuery,
 } from "../../../../services/employeeApi";
-import { toast } from "react-toastify";
 
 const CreateEmployee = () => {
   const navigate = useNavigate();
   const companyRes = useGetCompanyListQuery();
-
+  const branchRes = useGetBranchListQuery();
+  const designationRes = useGetDesignationListQuery();
+  const departmentRes = useGetdepartmentListQuery();
   const employmentRes = useGetEmploymentTypeListQuery();
   const divisionRes = useGetDivisionListQuery();
-  const [addEmployee, empRes] = useAddEmployeeMutation();
+
+
+  // const [allData, setData] = useState({
+  //   email: '',
+  //   password: ''
+  // });
+ 
+  // name="email"
+  // value={allData.email}
+  // onChandleChange}
+
+  // name="catagory_id"
+// onChange={(e) => setCatagry_id(e.target.value)}
+
+  // const { data: baranchData } = useBranchListByCompanyIdQuery()
+  // const [description, setDescription] = useState();
+
+
   const [previewImage, setPreviewImage] = useState();
+  // const editor = useRef(null);
 
-  const [divisions_id, setdivision_id] = useState();
-  const [districts_id, setdistrict_id] = useState();
-  const [city_id, setcity_id] = useState();
-
-  const [company_id, setCompany_id] = useState();
-  const [branch_id, setBranch_id] = useState();
-
-  const initialValues = {
+  
+ const initialValues= {
     name: "",
     email: "",
     mobile: "",
@@ -72,7 +72,7 @@ const CreateEmployee = () => {
     district_id: "",
     city_id: "",
     area_id: "",
-    is_active: true,
+    is_active: "",
     image: "",
     blood_group: "",
     office_contact_number: "",
@@ -92,107 +92,22 @@ const CreateEmployee = () => {
     official_achievement: "",
     remarks: "",
     employment_type_id: "",
-  };
-
-  const formik = useFormik({
-    initialValues,
-
-    onSubmit: async (values) => {
-      let formData = new FormData();
-
-      formData.append("name", values.name);
-      formData.append("email", values.email);
-      formData.append("mobile", values.mobile);
-      formData.append("institution", values.institution);
-      formData.append("education", values.education);
-      formData.append("present_address", values.present_address);
-      formData.append("permanent_address", values.permanent_address);
-      formData.append("father_name", values.father_name);
-      formData.append("fathers_contact_number", values.fathers_contact_number);
-      formData.append("mother_name", values.mother_name);
-      formData.append("mothers_contact_number", values.mothers_contact_number);
-      formData.append("date_of_birth", values.date_of_birth);
-      formData.append("employee_id", values.employee_id);
-      formData.append("nid", values.nid);
-      formData.append("joining_date", values.joining_date);
-      formData.append("marital_status", values.marital_status);
-      formData.append("company_id", values.company_id);
-      formData.append("branch_id", values.branch_id);
-      formData.append("department_id", values.department_id);
-      formData.append("designation_id", values.designation_id);
-      formData.append("division_id", values.division_id);
-      formData.append("gender", values.gender);
-      formData.append("district_id", values.district_id);
-      formData.append("city_id", values.city_id);
-      formData.append("area_id", values.area_id);
-      formData.append("is_active", values.is_active);
-      formData.append("image", values.image);
-      formData.append("blood_group", values.blood_group);
-      formData.append("office_contact_number", values.office_contact_number);
-      formData.append("finger_print_id", values.finger_print_id);
-      formData.append(
-        "personal_alt_contact_number",
-        values.personal_alt_contact_number
-      );
-      formData.append("personal_email", values.personal_email);
-      formData.append("passport_number", values.passport_number);
-      formData.append("spouse_name", values.spouse_name);
-      formData.append("spouse_number", values.spouse_number);
-      formData.append("referee_office", values.referee_office);
-      formData.append("referee_relative", values.a);
-      formData.append(
-        "referee_contact_details",
-        values.referee_contact_details
-      );
-      formData.append("key_skills", values.key_skills);
-      formData.append("highest_level_of_study", values.highest_level_of_study);
-      formData.append("e_tin", values.e_tin);
-      formData.append("applicable_tax_amount", values.applicable_tax_amount);
-      formData.append("official_achievement", values.official_achievement);
-      formData.append("remarks", values.remarks);
-      formData.append("employment_type_id", values.employment_type_id);
-      try {
-        const result = await addEmployee(formData).unwrap();
-        toast.success(result.message);
-      } catch (error) {
-        toast.warn(error.data.message);
-      }
-    },
-  });
-
-  if (empRes.isSuccess) {
-    navigate("/admin/employee-list");
   }
 
-  const focusHandelerOne = (name, id) => {
-    setdivision_id(id);
-    if (name === "division_id") {
-      setdistrict_id(null);
-      setcity_id(null);
-    }
-  };
 
-  const focusHandelerTwo = (name, id) => {
-    setdistrict_id(id);
-    if (name === "district_id") {
-      setcity_id(null);
-    }
-  };
+  const [empData, setEmpdata] = useState(initialValues)
+  const handleChange = (e) => setEmpdata({ ...empData, [e.target.name]: e.target.value });
 
-  const districtRes = useGetDistrictListByIdQuery(divisions_id);
-  const upazilaRes = useGetUpazilaListByIdQuery(districts_id);
-  const areaRes = useGetAreaListByIdQuery(city_id);
 
-  const branchRes = useGetBranchListByCompanyIdQuery(company_id);
-  const departmentRes = useGetDepartmentListByCompanyAndBranchIdQuery({
-    comId: company_id,
-    braId: branch_id,
-  });
+  const submitHandeler = (e) => {
+    e.preventDefault()
+       console.log(empData)
+   }
 
-  const designationRes = useGetDesignationtListByCompanyAndBranchIdQuery({
-    comId: company_id,
-    braId: branch_id,
-  });
+  const districtRes = useGetDistrictListByIdQuery(empData.division_id);
+  const upazilaRes = useGetUpazilaListByIdQuery(empData.district_id);
+  const areaRes = useGetAreaListByIdQuery(empData.city_id);
+
 
   function handelImage(e) {
     setPreviewImage(URL.createObjectURL(e.target.files[0]));
@@ -219,7 +134,7 @@ const CreateEmployee = () => {
         <div className="card-body">
           <form
             className="form-sample"
-            onSubmit={formik.handleSubmit}
+            onSubmit={submitHandeler}
             encType="multipart/form-data"
           >
             <h5 className="card-description text-info py-2">
@@ -237,8 +152,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="name"
-                      onChange={formik.handleChange}
-                      value={formik.values.name}
+                      onChange={handleChange}
+                      value={empData.name}
                     />
                   </div>
                 </div>
@@ -253,8 +168,8 @@ const CreateEmployee = () => {
                       type="email"
                       className="form-control"
                       name="personal_email"
-                      onChange={formik.handleChange}
-                      value={formik.values.personal_email}
+                      onChange={handleChange}
+                      value={empData.personal_email}
                     />
                   </div>
                 </div>
@@ -270,8 +185,8 @@ const CreateEmployee = () => {
                       type="number"
                       className="form-control"
                       name="mobile"
-                      onChange={formik.handleChange}
-                      value={formik.values.mobile}
+                      onChange={handleChange}
+                      value={empData.mobile}
                     />
                   </div>
                 </div>
@@ -286,8 +201,8 @@ const CreateEmployee = () => {
                       type="number"
                       className="form-control"
                       name="personal_alt_contact_number"
-                      onChange={formik.handleChange}
-                      value={formik.values.personal_alt_contact_number}
+                      onChange={handleChange}
+                      value={empData.personal_alt_contact_number}
                     />
                   </div>
                 </div>
@@ -301,8 +216,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="father_name"
-                      onChange={formik.handleChange}
-                      value={formik.values.father_name}
+                      onChange={handleChange}
+                      value={empData.father_name}
                     />
                   </div>
                 </div>
@@ -317,8 +232,8 @@ const CreateEmployee = () => {
                       type="number"
                       className="form-control"
                       name="fathers_contact_number"
-                      onChange={formik.handleChange}
-                      value={formik.values.fathers_contact_number}
+                      onChange={handleChange}
+                      value={empData.fathers_contact_number}
                     />
                   </div>
                 </div>
@@ -331,8 +246,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="mother_name"
-                      onChange={formik.handleChange}
-                      value={formik.values.mother_name}
+                      onChange={handleChange}
+                      value={empData.mother_name}
                     />
                   </div>
                 </div>
@@ -348,8 +263,8 @@ const CreateEmployee = () => {
                       type="number"
                       className="form-control"
                       name="mothers_contact_number"
-                      onChange={formik.handleChange}
-                      value={formik.values.mothers_contact_number}
+                      onChange={handleChange}
+                      value={empData.mothers_contact_number}
                     />
                   </div>
                 </div>
@@ -362,8 +277,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="spouse_name"
-                      onChange={formik.handleChange}
-                      value={formik.values.spouse_name}
+                      onChange={handleChange}
+                      value={empData.spouse_name}
                     />
                   </div>
                 </div>
@@ -378,8 +293,8 @@ const CreateEmployee = () => {
                       type="number"
                       className="form-control"
                       name="spouse_number"
-                      onChange={formik.handleChange}
-                      value={formik.values.spouse_number}
+                      onChange={handleChange}
+                      value={empData.spouse_number}
                     />
                   </div>
                 </div>
@@ -392,8 +307,8 @@ const CreateEmployee = () => {
                     <select
                       className="form-control"
                       name="gender"
-                      onChange={formik.handleChange}
-                      value={formik.values.gender}
+                      onChange={handleChange}
+                      value={empData.gender}
                     >
                       <option value="male">Male</option>
                       <option value="female">Female</option>
@@ -413,8 +328,8 @@ const CreateEmployee = () => {
                       placeholder="dd/mm/yyyy"
                       name="date_of_birth"
                       type="date"
-                      onChange={formik.handleChange}
-                      value={formik.values.date_of_birth}
+                      onChange={handleChange}
+                      value={empData.date_of_birth}
                     />
                   </div>
                 </div>
@@ -430,8 +345,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="nid"
-                      onChange={formik.handleChange}
-                      value={formik.values.nid}
+                      onChange={handleChange}
+                      value={empData.nid}
                     />
                   </div>
                 </div>
@@ -446,8 +361,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="passport_number"
-                      onChange={formik.handleChange}
-                      value={formik.values.passport_number}
+                      onChange={handleChange}
+                      value={empData.passport_number}
                     />
                   </div>
                 </div>
@@ -460,8 +375,8 @@ const CreateEmployee = () => {
                     <select
                       className="form-control"
                       name="blood_group"
-                      onChange={formik.handleChange}
-                      value={formik.values.blood_group}
+                      onChange={handleChange}
+                      value={empData.blood_group}
                     >
                       <option value="A+">A+</option>
                       <option value="B+">B+</option>
@@ -484,8 +399,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="institution"
-                      onChange={formik.handleChange}
-                      value={formik.values.institution}
+                      onChange={handleChange}
+                      value={empData.institution}
                     />
                   </div>
                 </div>
@@ -498,8 +413,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="education"
-                      onChange={formik.handleChange}
-                      value={formik.values.education}
+                      onChange={handleChange}
+                      value={empData.education}
                     />
                   </div>
                 </div>
@@ -513,8 +428,8 @@ const CreateEmployee = () => {
                     <select
                       className="form-control"
                       name="marital_status"
-                      onChange={formik.handleChange}
-                      value={formik.values.marital_status}
+                      onChange={handleChange}
+                      value={empData.marital_status}
                     >
                       <option value="married">Married</option>
                       <option value="unmarried">Unmarried</option>
@@ -532,8 +447,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="referee_office"
-                      onChange={formik.handleChange}
-                      value={formik.values.referee_office}
+                      onChange={handleChange}
+                      value={empData.referee_office}
                     />
                   </div>
                 </div>
@@ -548,8 +463,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="referee_relative"
-                      onChange={formik.handleChange}
-                      value={formik.values.referee_relative}
+                      onChange={handleChange}
+                      value={empData.referee_relative}
                     />
                   </div>
                 </div>
@@ -565,8 +480,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="referee_contact_details"
-                      onChange={formik.handleChange}
-                      value={formik.values.referee_contact_details}
+                      onChange={handleChange}
+                      value={empData.referee_contact_details}
                     />
                   </div>
                 </div>
@@ -581,8 +496,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="highest_level_of_study"
-                      onChange={formik.handleChange}
-                      value={formik.values.highest_level_of_study}
+                      onChange={handleChange}
+                      value={empData.highest_level_of_study}
                     />
                   </div>
                 </div>
@@ -595,8 +510,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="e_tin"
-                      onChange={formik.handleChange}
-                      value={formik.values.e_tin}
+                      onChange={handleChange}
+                      value={empData.e_tin}
                     />
                   </div>
                 </div>
@@ -611,8 +526,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="applicable_tax_amount"
-                      onChange={formik.handleChange}
-                      value={formik.values.applicable_tax_amount}
+                      onChange={handleChange}
+                      value={empData.applicable_tax_amount}
                     />
                   </div>
                 </div>
@@ -625,8 +540,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="remarks"
-                      onChange={formik.handleChange}
-                      value={formik.values.remarks}
+                      onChange={handleChange}
+                      value={empData.remarks}
                     />
                   </div>
                 </div>
@@ -641,8 +556,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="official_achievement"
-                      onChange={formik.handleChange}
-                      value={formik.values.official_achievement}
+                      onChange={handleChange}
+                      value={empData.official_achievement}
                     />
                   </div>
                 </div>
@@ -655,8 +570,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="key_skills"
-                      onChange={formik.handleChange}
-                      value={formik.values.key_skills}
+                      onChange={handleChange}
+                      value={empData.key_skills}
                     />
                   </div>
                 </div>
@@ -692,8 +607,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="employee_id"
-                      onChange={formik.handleChange}
-                      value={formik.values.employee_id}
+                      onChange={handleChange}
+                      value={empData.employee_id}
                     />
                   </div>
                 </div>
@@ -709,8 +624,8 @@ const CreateEmployee = () => {
                       type="email"
                       className="form-control"
                       name="email"
-                      onChange={formik.handleChange}
-                      value={formik.values.email}
+                      onChange={handleChange}
+                      value={empData.email}
                     />
                   </div>
                 </div>
@@ -725,8 +640,8 @@ const CreateEmployee = () => {
                       type="number"
                       className="form-control"
                       name="office_contact_number"
-                      onChange={formik.handleChange}
-                      value={formik.values.office_contact_number}
+                      onChange={handleChange}
+                      value={empData.office_contact_number}
                     />
                   </div>
                 </div>
@@ -741,33 +656,9 @@ const CreateEmployee = () => {
                       type="number"
                       className="form-control"
                       name="finger_print_id"
-                      onChange={formik.handleChange}
-                      value={formik.values.finger_print_id}
+                      onChange={handleChange}
+                      value={empData.finger_print_id}
                     />
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6">
-                <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">Company</label>
-                  <div className="col-sm-9">
-                    <select
-                      className="form-control"
-                      name="company_id"
-                      onChange={(e) => {
-                        formik.handleChange(e);
-                        setCompany_id(e.target.value);
-                      }}
-                      value={formik.values.company_id}
-                    >
-                      <option>Selact Company</option>
-                      {companyRes?.data?.data?.map((company, i) => (
-                        <option key={i} value={company.id}>
-                          {company.name}
-                        </option>
-                      ))}
-                    </select>
                   </div>
                 </div>
               </div>
@@ -782,12 +673,35 @@ const CreateEmployee = () => {
                       type="date"
                       className="form-control"
                       name="joining_date"
-                      onChange={formik.handleChange}
-                      value={formik.values.joining_date}
+                      onChange={handleChange}
+                      value={empData.joining_date}
                     />
                   </div>
                 </div>
               </div>
+
+              <div className="col-md-6">
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label">Company</label>
+                  <div className="col-sm-9">
+                    <select
+                      className="form-control"
+                      name="company_id"
+                      onChange={handleChange}
+                      value={empData.company_id}
+                    >
+                      <option>Selact Company</option>
+                      {companyRes?.data?.data?.map((company, i) => (
+                        <option key={i} value={company.id}>
+                          {company.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+          
 
               <div className="col-md-6">
                 <div className="form-group row">
@@ -796,11 +710,8 @@ const CreateEmployee = () => {
                     <select
                       className="form-control"
                       name="branch_id"
-                      onChange={(e) => {
-                        formik.handleChange(e);
-                        setBranch_id(e.target.value);
-                      }}
-                      value={formik.values.branch_id}
+                      onChange={handleChange}
+                      value={empData.branch_id}
                     >
                       <option>Selact Branch</option>
                       {branchRes?.data?.data?.map((branch, i) => (
@@ -819,8 +730,8 @@ const CreateEmployee = () => {
                     <select
                       className="form-control"
                       name="designation_id"
-                      onChange={formik.handleChange}
-                      value={formik.values.designation_id}
+                      onChange={handleChange}
+                      value={empData.designation_id}
                     >
                       <option>Selact Designation</option>
                       {designationRes?.data?.data?.map((designation, i) => (
@@ -839,8 +750,8 @@ const CreateEmployee = () => {
                     <select
                       className="form-control"
                       name="department_id"
-                      onChange={formik.handleChange}
-                      value={formik.values.department_id}
+                      onChange={handleChange}
+                      value={empData.department_id}
                     >
                       <option>Selact Department</option>
                       {departmentRes?.data?.data?.map((department, i) => (
@@ -859,8 +770,8 @@ const CreateEmployee = () => {
                     <select
                       className="form-control"
                       name="employment_type_id"
-                      onChange={formik.handleChange}
-                      value={formik.values.employment_type_id}
+                      onChange={handleChange}
+                      value={empData.employment_type_id}
                     >
                       <option>Selact Employment</option>
                       {employmentRes?.data?.data?.map((employment, i) => (
@@ -886,8 +797,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="present_address"
-                      onChange={formik.handleChange}
-                      value={formik.values.present_address}
+                      onChange={handleChange}
+                      value={empData.present_address}
                     />
                   </div>
                 </div>
@@ -902,8 +813,8 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="permanent_address"
-                      onChange={formik.handleChange}
-                      value={formik.values.permanent_address}
+                      onChange={handleChange}
+                      value={empData.permanent_address}
                     />
                   </div>
                 </div>
@@ -916,11 +827,8 @@ const CreateEmployee = () => {
                     <select
                       className="form-control"
                       name="division_id"
-                      onChange={(e) => {
-                        formik.handleChange(e);
-                        focusHandelerOne(e.target.name, e.target.value);
-                      }}
-                      value={formik.values.division_id}
+                      onChange={handleChange}
+                      value={empData.division_id}
                     >
                       <option>Selact Division</option>
                       {divisionRes?.data?.data?.map((division, i) => (
@@ -940,11 +848,8 @@ const CreateEmployee = () => {
                     <select
                       className="form-control"
                       name="district_id"
-                      onChange={(e) => {
-                        formik.handleChange(e);
-                        focusHandelerTwo(e.target.name, e.target.value);
-                      }}
-                      value={formik.values.district_id}
+                      onChange={handleChange}
+                      value={empData.district_id}
                     >
                       <option>Selact District</option>
                       {districtRes?.data?.data?.map((district, i) => (
@@ -956,19 +861,16 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
-
+         
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">City</label>
                   <div className="col-sm-9">
-                    <select
+                  <select
                       className="form-control"
                       name="city_id"
-                      onChange={(e) => {
-                        formik.handleChange(e);
-                        setcity_id(e.target.value);
-                      }}
-                      value={formik.values.city_id}
+                      onChange={handleChange}
+                      value={empData.city_id}
                     >
                       <option>Selact City</option>
                       {upazilaRes?.data?.data?.map((upazila, i) => (
@@ -980,16 +882,16 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
-
+       
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Area</label>
                   <div className="col-sm-9">
-                    <select
+                  <select
                       className="form-control"
                       name="area_id"
-                      onChange={formik.handleChange}
-                      value={formik.values.area_id}
+                      onChange={handleChange}
+                      value={empData.area_id}
                     >
                       <option>Selact City</option>
                       {areaRes?.data?.data?.map((area, i) => (
@@ -1011,7 +913,7 @@ const CreateEmployee = () => {
                       className="form-control"
                       name="image"
                       onChange={(e) => {
-                        formik.setFieldValue("file", e.currentTarget.files[0]);
+                       handleChange(e)
                         handelImage(e);
                       }}
                     />
@@ -1028,9 +930,9 @@ const CreateEmployee = () => {
                         id="custom-switch"
                         label="Active"
                         name="is_active"
-                        onChange={formik.handleChange}
-                        value={formik.values.is_active}
-                        checked={formik.values.is_active}
+                        onChange={handleChange}
+                        value={empData.is_active}
+                       
                       />
                     </div>
                   </div>

@@ -4,18 +4,17 @@ import { Link } from "react-router-dom";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { ExportToCsv } from "export-to-csv"; //or use your library of choice here
 import { Box, Button } from "@mui/material";
-
 import { BsFillEyeFill } from "react-icons/bs";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
-
 import Loader from "../../../common/Loader";
-import { useGetCompanyListQuery } from "../../../../services/companyApi";
+
+import { useGetEmployeeListQuery } from "../../../../services/employeeApi";
 
 const EmployeeTable = () => {
  
 
-  const { data, isSuccess,isFetching } = useGetCompanyListQuery()
+  const { data, isSuccess,isFetching } = useGetEmployeeListQuery()
 
 
 
@@ -39,22 +38,26 @@ const EmployeeTable = () => {
   };
 
 
+  console.log(data)
 
   const columns = useMemo(
     () => [
+   
       {
-        accessorKey: "userId", //access nested data with dot notation
-        header: "Employee Code",
-      },
-      {
-        accessorKey: "id", //access nested data with dot notation
+        accessorKey: "name", //access nested data with dot notation
         header: "Name",
       },
-
       {
-        accessorKey: "title", //normal accessorKey
-        header: "Title",
+        accessorKey: "employee_code", //access nested data with dot notation
+        header: "Code",
       },
+      {
+        accessorKey: "email", //access nested data with dot notation
+        header: "Email",
+      },
+
+      
+  
     ],
     []
   );
@@ -72,7 +75,7 @@ const EmployeeTable = () => {
   const csvExporter = new ExportToCsv(csvOptions);
 
   const handleExportData = () => {
-    csvExporter.generateCsv(data);
+    csvExporter.generateCsv(data?.data);
   };
 
   const handleExportRows = (rows) => {
@@ -86,7 +89,7 @@ const EmployeeTable = () => {
       <MaterialReactTable
         enableRowSelection
         columns={columns}
-        data={isSuccess&&data}
+        data={isSuccess&&data?.data}
         enableRowActions
         enableColumnActions
         enableRowNumbers

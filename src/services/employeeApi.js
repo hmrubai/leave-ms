@@ -9,21 +9,20 @@ export const employeeApi = createApi({
   }),
   tagTypes: ["Employee"],
   endpoints: (builder) => ({
-    getCompanyList: builder.query({
+    getEmployeeList: builder.query({
       query: () => ({
-        url: "admin/company-list",
+        url: "admin/employee-list",
         method: "GET",
-
         headers,
       }),
       providesTags: ["Employee"],
     }),
-    companySaveOrUpdate: builder.mutation({
-      query: (company) => {
+    addEmployee: builder.mutation({
+      query: (employee) => {
         return {
-          url: `admin/company-save-or-update`,
+          url: `admin/add-employee`,
           method: "POST",
-          body: company,
+          body: employee,
           headers,
         };
       },
@@ -63,10 +62,17 @@ export const employeeApi = createApi({
       }),
       providesTags: ['Employee']
     }),
+  
 
 
   }),
 });
 
-export const { useGetCompanyListQuery, useCompanySaveOrUpdateMutation,useGetDivisionListQuery,useGetDistrictListByIdQuery, useGetUpazilaListByIdQuery,useGetAreaListByIdQuery} =
+export const {
+  useGetEmployeeListQuery,
+  useAddEmployeeMutation,
+  useGetDivisionListQuery,
+  useGetDistrictListByIdQuery,
+  useGetUpazilaListByIdQuery,
+  useGetAreaListByIdQuery } =
 employeeApi;

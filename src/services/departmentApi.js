@@ -37,8 +37,20 @@ export const departmentApi = createApi({
       providesTags: ['Department']
     }),
 
+    getDepartmentListByCompanyAndBranchId: builder.query({
+      query: ({ comId,braId }) => ({
+      
+        url: `admin/department-list-by-id/${comId}/${braId}`,
+        method: 'GET',
+        headers
+      }),
+      providesTags: ['Department']
+    }),
+
   }),
 });
 
-export const {useGetdepartmentListQuery,useDepartmentSaveOrUpdateMutation,useBranchListByCompanyIdQuery} =
+export const { useGetdepartmentListQuery, useDepartmentSaveOrUpdateMutation, useBranchListByCompanyIdQuery,
+  useGetDepartmentListByCompanyAndBranchIdQuery
+} =
 departmentApi;
