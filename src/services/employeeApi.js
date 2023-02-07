@@ -28,6 +28,19 @@ export const employeeApi = createApi({
       },
       invalidatesTags: ["Employee"],
     }),
+    updateEmployee: builder.mutation({
+      query: (employee) => {
+        return {
+          url: `admin/update-employee`,
+          method: "POST",
+          body: employee,
+          headers,
+        };
+      },
+      invalidatesTags: ["Employee"],
+    }),
+
+
 
     getDivisionList: builder.query({
       query: () => ({
@@ -38,6 +51,8 @@ export const employeeApi = createApi({
       }),
       providesTags: ["Employee"],
     }),
+
+    
     getDistrictListById: builder.query({
       query: (id) => ({
         url: `district-list/${id}`,
@@ -46,6 +61,7 @@ export const employeeApi = createApi({
       }),
       providesTags: ['Employee']
     }),
+
     getUpazilaListById: builder.query({
       query: (id) => ({
         url: `upazila-list/${id}`,
@@ -71,8 +87,10 @@ export const employeeApi = createApi({
 export const {
   useGetEmployeeListQuery,
   useAddEmployeeMutation,
+  useUpdateEmployeeMutation,
   useGetDivisionListQuery,
   useGetDistrictListByIdQuery,
   useGetUpazilaListByIdQuery,
-  useGetAreaListByIdQuery } =
+  useGetAreaListByIdQuery
+} =
 employeeApi;

@@ -55,6 +55,10 @@ const EmployeeTable = () => {
         accessorKey: "email", //access nested data with dot notation
         header: "Email",
       },
+      {
+        accessorKey: "designation", //access nested data with dot notation
+        header: "Designation",
+      },
 
       
   
@@ -128,7 +132,7 @@ const EmployeeTable = () => {
               <BsFillEyeFill color="black" size={24} />
             </Link>
             <Link
-              to={`/dashboard/admin/edit-employee/${2}`}
+              to={`/dashboard/admin/edit-employee/${row?.row?.original?.id}`}
               title=""
               className="px-2"
             >
