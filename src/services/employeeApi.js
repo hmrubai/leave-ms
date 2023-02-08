@@ -78,6 +78,14 @@ export const employeeApi = createApi({
       }),
       providesTags: ['Employee']
     }),
+    employeeDetailsById: builder.query({
+      query: (id) => ({
+        url: `/admin/employee-details-by-id/${id}`,
+        method: 'GET',
+        headers
+      }),
+      providesTags: ['Employee']
+    }),
   
 
 
@@ -91,6 +99,7 @@ export const {
   useGetDivisionListQuery,
   useGetDistrictListByIdQuery,
   useGetUpazilaListByIdQuery,
-  useGetAreaListByIdQuery
+  useGetAreaListByIdQuery,
+  useEmployeeDetailsByIdQuery
 } =
 employeeApi;

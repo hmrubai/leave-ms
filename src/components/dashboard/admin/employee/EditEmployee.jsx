@@ -3,7 +3,8 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { toast } from "react-toastify";
+import Loader from "../../../common/Loader";
 // import JoditEditor from "jodit-react";
 import { useRef, useState } from "react";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
@@ -12,87 +13,89 @@ import { useGetDesignationtListByCompanyAndBranchIdQuery } from "../../../../ser
 import { useGetDepartmentListByCompanyAndBranchIdQuery } from "../../../../services/departmentApi";
 import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
 import {
+  useEmployeeDetailsByIdQuery,
   useGetAreaListByIdQuery,
   useGetDistrictListByIdQuery,
   useGetDivisionListQuery,
   useGetUpazilaListByIdQuery,
   useUpdateEmployeeMutation,
 } from "../../../../services/employeeApi";
-import { toast } from "react-toastify";
 
-const CreateEmployee = () => {
-  const { id } = useParams()
-  console.log(id)
+const EditEmployee = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const companyRes = useGetCompanyListQuery();
-
+  const empDetailsRes = useEmployeeDetailsByIdQuery(id);
   const employmentRes = useGetEmploymentTypeListQuery();
   const divisionRes = useGetDivisionListQuery();
-  const [updateEmployee, empRes] =  useUpdateEmployeeMutation ();
-  const [previewImage, setPreviewImage] = useState();
 
+  const [updateEmployee, empUpdateRes] = useUpdateEmployeeMutation();
+  const [previewImage, setPreviewImage] = useState();
   const [divisions_id, setdivision_id] = useState();
   const [districts_id, setdistrict_id] = useState();
   const [city_id, setcity_id] = useState();
-
   const [company_id, setCompany_id] = useState();
   const [branch_id, setBranch_id] = useState();
 
+
+
+
   const initialValues = {
-    
-    name: "",
-    email: "",
-    mobile: "",
-    institution: "",
-    education: "",
-    present_address: "",
-    permanent_address: "",
-    father_name: "",
-    fathers_contact_number: "",
-    mother_name: "",
-    mothers_contact_number: "",
-    date_of_birth: "",
-    employee_id: "",
-    nid: "",
-    joining_date: "",
-    marital_status: "",
-    company_id: "",
-    branch_id: "",
-    department_id: "",
-    designation_id: "",
-    division_id: "",
-    gender: "",
-    district_id: "",
-    city_id: "",
-    area_id: "",
-    is_active: true,
-    image: "",
-    blood_group: "",
-    office_contact_number: "",
-    finger_print_id: "",
-    personal_alt_contact_number: "",
-    personal_email: "",
-    passport_number: "",
-    spouse_name: "",
-    spouse_number: "",
-    referee_office: "",
-    referee_relative: "",
-    referee_contact_details: "",
-    key_skills: "",
-    highest_level_of_study: "",
-    e_tin: "",
-    applicable_tax_amount: "",
-    official_achievement: "",
-    remarks: "",
-    employment_type_id: "",
+    name: empDetailsRes?.data?.data?.name,
+    email: empDetailsRes?.data?.data?.email,
+    mobile: empDetailsRes?.data?.data?.mobile,
+    institution: empDetailsRes?.data?.data?.institution,
+    education: empDetailsRes?.data?.data?.education,
+    present_address: empDetailsRes?.data?.data?.present_address,
+    permanent_address: empDetailsRes?.data?.data?.permanent_address,
+    father_name: empDetailsRes?.data?.data?.father_name,
+    fathers_contact_number: empDetailsRes?.data?.data?.fathers_contact_number,
+    mother_name: empDetailsRes?.data?.data?.mother_name,
+    mothers_contact_number: empDetailsRes?.data?.data?.mothers_contact_number,
+    date_of_birth: empDetailsRes?.data?.data?.date_of_birth,
+    employee_id: empDetailsRes?.data?.data?.employee_id,
+    nid: empDetailsRes?.data?.data?.nid,
+    joining_date: empDetailsRes?.data?.data?.joining_date,
+    marital_status: empDetailsRes?.data?.data?.marital_status,
+    company_id: empDetailsRes?.data?.data?.company_id,
+    branch_id: empDetailsRes?.data?.data?.branch_id,
+    department_id: empDetailsRes?.data?.data?.department_id,
+    designation_id: empDetailsRes?.data?.data?.designation_id,
+    division_id: empDetailsRes?.data?.data?.division_id,
+    gender: empDetailsRes?.data?.data?.gender,
+    district_id: empDetailsRes?.data?.data?.district_id,
+    city_id: empDetailsRes?.data?.data?.city_id,
+    area_id: empDetailsRes?.data?.data?.area_id,
+    is_active: empDetailsRes?.data?.data?.is_active,
+    image: empDetailsRes?.data?.data?.image,
+    blood_group: empDetailsRes?.data?.data?.blood_group,
+    office_contact_number: empDetailsRes?.data?.data?.office_contact_number,
+    finger_print_id: empDetailsRes?.data?.data?.finger_print_id,
+    personal_alt_contact_number:
+      empDetailsRes?.data?.data?.personal_alt_contact_number,
+    personal_email: empDetailsRes?.data?.data?.personal_email,
+    passport_number: empDetailsRes?.data?.data?.passport_number,
+    spouse_name: empDetailsRes?.data?.data?.spouse_name,
+    spouse_number: empDetailsRes?.data?.data?.spouse_number,
+    referee_office: empDetailsRes?.data?.data?.referee_office,
+    referee_relative: empDetailsRes?.data?.data?.referee_relative,
+    referee_contact_details: empDetailsRes?.data?.data?.referee_contact_details,
+    key_skills: empDetailsRes?.data?.data?.key_skills,
+    highest_level_of_study: empDetailsRes?.data?.data?.highest_level_of_study,
+    e_tin: empDetailsRes?.data?.data?.e_tin,
+    applicable_tax_amount: empDetailsRes?.data?.data?.applicable_tax_amount,
+    official_achievement: empDetailsRes?.data?.data?.official_achievement,
+    remarks: empDetailsRes?.data?.data?.remarks,
+    employment_type_id: empDetailsRes?.data?.data?.employment_type_id,
   };
 
   const formik = useFormik({
     initialValues,
 
+    enableReinitialize: true,
     onSubmit: async (values) => {
       let formData = new FormData();
-
+      formData.append("id", id);
       formData.append("name", values.name);
       formData.append("email", values.email);
       formData.append("mobile", values.mobile);
@@ -153,8 +156,8 @@ const CreateEmployee = () => {
     },
   });
 
-  if (empRes.isSuccess) {
-    navigate("/admin/employee-list");
+  if (empUpdateRes.isSuccess) {
+    navigate("/dashboard/admin/employee-list");
   }
 
   const focusHandelerOne = (name, id) => {
@@ -196,9 +199,7 @@ const CreateEmployee = () => {
       <div className=" card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">
-              Create Employee
-            </h6>
+            <h6 className="m-0 font-weight-bold text-primary">Edit Employee</h6>
           </div>
           <div>
             <BsFillArrowLeftCircleFill
@@ -209,6 +210,9 @@ const CreateEmployee = () => {
             />
           </div>
         </div>
+
+        {empDetailsRes.isFetching && <Loader />}
+
         <div className="card-body">
           <form
             className="form-sample"
@@ -388,12 +392,16 @@ const CreateEmployee = () => {
                       onChange={formik.handleChange}
                       value={formik.values.gender}
                     >
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Transgender">Transgender</option>
                     </select>
                   </div>
                 </div>
               </div>
+
+
+         
 
               <div className="col-md-6">
                 <div className="form-group row">
@@ -509,8 +517,9 @@ const CreateEmployee = () => {
                       onChange={formik.handleChange}
                       value={formik.values.marital_status}
                     >
-                      <option value="married">Married</option>
-                      <option value="unmarried">Unmarried</option>
+                      <option value="Married">Married</option>
+                      <option value="Unmarried">Unmarried</option>
+                      <option value="Dnmarried">Dnmarried</option>
                     </select>
                   </div>
                 </div>{" "}
@@ -644,13 +653,15 @@ const CreateEmployee = () => {
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Key Skills</label>
                   <div className="col-sm-9">
-                    <input
-                      type="text"
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
                       className="form-control"
                       name="key_skills"
                       onChange={formik.handleChange}
                       value={formik.values.key_skills}
-                    />
+                    ></textarea>
                   </div>
                 </div>
               </div>
@@ -1004,7 +1015,7 @@ const CreateEmployee = () => {
                       className="form-control"
                       name="image"
                       onChange={(e) => {
-                        formik.setFieldValue("file", e.currentTarget.files[0]);
+                        formik.setFieldValue("image", e.currentTarget.files[0]);
                         handelImage(e);
                       }}
                     />
@@ -1030,17 +1041,24 @@ const CreateEmployee = () => {
                 </div>
               </div>
             </div>
-            <div className="form-group row ">
-              <div className="ml-3"></div>
-            </div>
-            <div>
-              <img
-                className="py-2"
-                src={previewImage}
-                width="80px"
-                height="80px"
-                alt=""
-              />
+            <div className="">
+              {previewImage ? (
+                <img
+                  className="py-2"
+                  src={previewImage}
+                  width="80px"
+                  height="80px"
+                  alt=""
+                />
+              ) : (
+                <img
+                  className="py-2"
+                  src={`${process.env.REACT_APP_FILE_URL}${formik.values.image}`}
+                  width="80px"
+                  height="80px"
+                  alt=""
+                />
+              )}
             </div>
 
             <div className=" py-3">
@@ -1055,4 +1073,4 @@ const CreateEmployee = () => {
   );
 };
 
-export default CreateEmployee;
+export default EditEmployee;

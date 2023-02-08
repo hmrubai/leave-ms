@@ -38,7 +38,7 @@ const EmployeeTable = () => {
   };
 
 
-  console.log(data)
+
 
   const columns = useMemo(
     () => [
@@ -127,7 +127,7 @@ const EmployeeTable = () => {
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>
-            <Link to={`/dashboard/admin/employee-details/${1}`}>
+            <Link to={`/dashboard/admin/employee-details/${row?.row?.original?.id}`}>
               {" "}
               <BsFillEyeFill color="black" size={24} />
             </Link>

@@ -4,22 +4,12 @@ import { Button, Form } from "react-bootstrap";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
-// import JoditEditor from "jodit-react";
+import JoditEditor from "jodit-react";
 import { useRef, useState } from "react";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
-import {
-  getBranchListByCompanyId,
-  useGetBranchListByCompanyIdQuery,
-  useGetBranchListQuery,
-} from "../../../../services/branchApi";
-import {
-  useGetDesignationListQuery,
-  useGetDesignationtListByCompanyAndBranchIdQuery,
-} from "../../../../services/designationApi";
-import {
-  useGetDepartmentListByCompanyAndBranchIdQuery,
-  useGetdepartmentListQuery,
-} from "../../../../services/departmentApi";
+import { useGetBranchListByCompanyIdQuery } from "../../../../services/branchApi";
+import { useGetDesignationtListByCompanyAndBranchIdQuery } from "../../../../services/designationApi";
+import { useGetDepartmentListByCompanyAndBranchIdQuery } from "../../../../services/departmentApi";
 import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
 import {
   useAddEmployeeMutation,
@@ -33,16 +23,14 @@ import { toast } from "react-toastify";
 const CreateEmployee = () => {
   const navigate = useNavigate();
   const companyRes = useGetCompanyListQuery();
-
   const employmentRes = useGetEmploymentTypeListQuery();
   const divisionRes = useGetDivisionListQuery();
+
   const [addEmployee, empRes] = useAddEmployeeMutation();
   const [previewImage, setPreviewImage] = useState();
-
   const [divisions_id, setdivision_id] = useState();
   const [districts_id, setdistrict_id] = useState();
   const [city_id, setcity_id] = useState();
-
   const [company_id, setCompany_id] = useState();
   const [branch_id, setBranch_id] = useState();
 
@@ -99,7 +87,6 @@ const CreateEmployee = () => {
 
     onSubmit: async (values) => {
       let formData = new FormData();
-
       formData.append("name", values.name);
       formData.append("email", values.email);
       formData.append("mobile", values.mobile);
@@ -159,6 +146,7 @@ const CreateEmployee = () => {
       }
     },
   });
+  // const editor = useRef(null);
 
   if (empRes.isSuccess) {
     navigate("/admin/employee-list");
@@ -395,8 +383,9 @@ const CreateEmployee = () => {
                       onChange={formik.handleChange}
                       value={formik.values.gender}
                     >
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Transgender">Transgender</option>
                     </select>
                   </div>
                 </div>
@@ -516,8 +505,9 @@ const CreateEmployee = () => {
                       onChange={formik.handleChange}
                       value={formik.values.marital_status}
                     >
-                      <option value="married">Married</option>
-                      <option value="unmarried">Unmarried</option>
+                      <option value="Married">Married</option>
+                      <option value="Unmarried">Unmarried</option>
+                      <option value="Dnmarried">Dnmarried</option>
                     </select>
                   </div>
                 </div>{" "}
@@ -651,13 +641,13 @@ const CreateEmployee = () => {
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Key Skills</label>
                   <div className="col-sm-9">
-                    <input
-                      type="text"
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
                       className="form-control"
                       name="key_skills"
                       onChange={formik.handleChange}
                       value={formik.values.key_skills}
-                    />
+                    ></textarea>
+             
                   </div>
                 </div>
               </div>
@@ -667,11 +657,11 @@ const CreateEmployee = () => {
                   <label className="col-sm-3 col-form-label">Key Skills</label>
                   <JoditEditor
                     ref={editor}
-                    value={description}
+                    value={formik.values.key_skills}
                     // config={config}
                     tabIndex={1} // tabIndex of textarea
-                    onBlur={(newContent) => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
-                    // onChange={(newContent) => {setDescription(newContent.target.value)}}
+                    onBlur={formik.handleChange} // preferred to use only this option to update the content for performance reasons
+                    onChange={formik.handleChange}
                   />
                 </div>
               </div> */}
