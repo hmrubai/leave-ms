@@ -19,6 +19,7 @@ import {
   useGetUpazilaListByIdQuery,
 } from "../../../../services/employeeApi";
 import { toast } from "react-toastify";
+import { employeeSchema } from "./../../../../Validation/employeeSchema";
 
 const CreateEmployee = () => {
   const navigate = useNavigate();
@@ -33,6 +34,8 @@ const CreateEmployee = () => {
   const [city_id, setcity_id] = useState();
   const [company_id, setCompany_id] = useState();
   const [branch_id, setBranch_id] = useState();
+
+  
 
   const initialValues = {
     name: "",
@@ -84,8 +87,9 @@ const CreateEmployee = () => {
 
   const formik = useFormik({
     initialValues,
-
-    onSubmit: async (values) => {
+    validationSchema: employeeSchema,
+    onSubmit: async (values,errors) => {
+      console.log(errors)
       let formData = new FormData();
       formData.append("name", values.name);
       formData.append("email", values.email);
@@ -641,13 +645,15 @@ const CreateEmployee = () => {
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Key Skills</label>
                   <div className="col-sm-9">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                    <textarea
+                      class="form-control"
+                      id="exampleFormControlTextarea1"
+                      rows="3"
                       className="form-control"
                       name="key_skills"
                       onChange={formik.handleChange}
                       value={formik.values.key_skills}
                     ></textarea>
-             
                   </div>
                 </div>
               </div>
