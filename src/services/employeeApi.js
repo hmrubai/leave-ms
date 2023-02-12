@@ -40,8 +40,6 @@ export const employeeApi = createApi({
       invalidatesTags: ["Employee"],
     }),
 
-
-
     getDivisionList: builder.query({
       query: () => ({
         url: "division-list",
@@ -52,43 +50,47 @@ export const employeeApi = createApi({
       providesTags: ["Employee"],
     }),
 
-    
     getDistrictListById: builder.query({
       query: (id) => ({
         url: `district-list/${id}`,
-        method: 'GET',
-        headers
+        method: "GET",
+        headers,
       }),
-      providesTags: ['Employee']
+      providesTags: ["Employee"],
     }),
 
     getUpazilaListById: builder.query({
       query: (id) => ({
         url: `upazila-list/${id}`,
-        method: 'GET',
-        headers
+        method: "GET",
+        headers,
       }),
-      providesTags: ['Employee']
+      providesTags: ["Employee"],
     }),
     getAreaListById: builder.query({
       query: (id) => ({
         url: `area-list/${id}`,
-        method: 'GET',
-        headers
+        method: "GET",
+        headers,
       }),
-      providesTags: ['Employee']
+      providesTags: ["Employee"],
     }),
     employeeDetailsById: builder.query({
       query: (id) => ({
         url: `/admin/employee-details-by-id/${id}`,
-        method: 'GET',
-        headers
+        method: "GET",
+        headers,
       }),
-      providesTags: ['Employee']
+      providesTags: ["Employee"],
     }),
-  
-
-
+    leaveBalanceListByEmpId: builder.query({
+      query: (id) => ({
+        url: `/admin/leave-balance-list/${id}`,
+        method: "GET",
+        headers,
+      }),
+      providesTags: ["Employee"],
+    }),
   }),
 });
 
@@ -100,6 +102,6 @@ export const {
   useGetDistrictListByIdQuery,
   useGetUpazilaListByIdQuery,
   useGetAreaListByIdQuery,
-  useEmployeeDetailsByIdQuery
-} =
-employeeApi;
+  useEmployeeDetailsByIdQuery,
+  useLeaveBalanceListByEmpIdQuery
+} = employeeApi;

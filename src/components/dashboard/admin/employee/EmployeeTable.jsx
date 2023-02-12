@@ -138,9 +138,9 @@ const EmployeeTable = () => {
             >
               <FaEdit size={22} />
             </Link>
-            <Link to="#" onClick={() => deleteHandel()}>
+            {/* <Link to="#" onClick={() => deleteHandel()}>
               <FaTrash size={20} color="red" />
-            </Link>{" "}
+            </Link>{" "} */}
           </>
         )}
       />

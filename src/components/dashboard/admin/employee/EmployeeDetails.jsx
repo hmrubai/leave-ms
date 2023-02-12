@@ -1,15 +1,22 @@
 import React from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEmployeeDetailsByIdQuery } from "../../../../services/employeeApi";
+import {
+  // useEmployeeDetailsByIdQuery,
+  useLeaveBalanceListByEmpIdQuery,
+} from "../../../../services/employeeApi";
 import Loader from "../../../common/Loader";
 
 const EmployeeDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const empDetailsRes = useEmployeeDetailsByIdQuery(id);
+  // const res = useEmployeeDetailsByIdQuery(id);
+  const empDetailsRes = useLeaveBalanceListByEmpIdQuery(id);
 
-  console.log(empDetailsRes?.data?.data);
+  // console.log(res?.data?.data)
+
+  console.log(empDetailsRes?.data?.data?.balance_list);
+
   return (
     <>
       {empDetailsRes.isFetching && <Loader />}
@@ -34,27 +41,25 @@ const EmployeeDetails = () => {
           <div className="row">
             <div className="col-md-4 ">
               <div className="text-center">
-                     <img
-                className="img-fluid rounded-circle "
-                style={{ width: "200px", height: "200px" }}
-                src={`${process.env.REACT_APP_FILE_URL}${empDetailsRes?.data?.data?.image}`}
-                alt=""
-              />
-          </div>
-         
+                <img
+                  className="img-fluid rounded-circle "
+                  style={{ width: "200px", height: "200px" }}
+                  src={`${process.env.REACT_APP_FILE_URL}${empDetailsRes?.data?.data?.image}`}
+                  alt=""
+                />
+              </div>
+
               <div className="pt-2">
-                <p className="p-2 mb-5 text-center">
+                <div className="p-2 mb-5 text-center">
                   <div className="font-weight-bold text-dark d-inline  rounded">
                     {empDetailsRes?.data?.data?.name}
                   </div>
-                  <p >
+                  <p>
                     <span className=" shadow-lg p-1 rounded text-primary">
-                        {empDetailsRes?.data?.data?.designation}
+                      {empDetailsRes?.data?.data?.designation}
                     </span>
-                  
                   </p>
-                  
-                </p>
+                </div>
                 <p>
                   Email:
                   <span className="font-weight-bold text-primary ">
@@ -81,10 +86,13 @@ const EmployeeDetails = () => {
                     {empDetailsRes?.data?.data?.department}
                   </span>
                 </p>
+
+
                 <p>
+
                   Key Skills :
                   <span className="font-weight-bold text-primary">
-                    {empDetailsRes?.data?.data?.key_skills}
+                  {empDetailsRes?.data?.data?.key_skills === 'undefined' ? 'No Description' : <div dangerouslySetInnerHTML={{ __html: empDetailsRes?.data?.data?.key_skills}} />}
                   </span>
                 </p>
               </div>
@@ -138,7 +146,7 @@ const EmployeeDetails = () => {
                       {empDetailsRes?.data?.data?.blood_group}
                     </span>
                   </p>
-             
+
                   <p>
                     Referee (office):
                     <span className="font-weight-bold text-primary">
@@ -318,22 +326,17 @@ const EmployeeDetails = () => {
                     Present Address:
                     <span className="font-weight-bold text-primary ">
                       {" "}
-                      {empDetailsRes?.data?.data?.name}
+                      {empDetailsRes?.data?.data?.present_address}
                     </span>
                   </p>
                   <p>
                     Permanent Address :
                     <span className="font-weight-bold text-primary ">
                       {" "}
-                      {empDetailsRes?.data?.data?.email}
+                      {empDetailsRes?.data?.data?.permanent_address}
                     </span>
                   </p>
-                  <p>
-                    Office Number :
-                    <span className="font-weight-bold text-primary ">
-                      {empDetailsRes?.data?.data?.designation}
-                    </span>
-                  </p>
+          
                   <p>
                     Status:
                     <span className="font-weight-bold text-primary">
@@ -348,7 +351,7 @@ const EmployeeDetails = () => {
                   <p>
                     Division:
                     <span className="font-weight-bold text-primary">
-                      {empDetailsRes?.data?.data?.mobile}
+                      {empDetailsRes?.data?.data?.division_name}
                     </span>
                   </p>
 
@@ -356,21 +359,21 @@ const EmployeeDetails = () => {
                     District:
                     <span className="font-weight-bold text-primary ">
                       {" "}
-                      {empDetailsRes?.data?.data?.email}
+                      {empDetailsRes?.data?.data?.district_name}
                     </span>
                   </p>
                   <p>
                     City:
                     <span className="font-weight-bold text-primary ">
                       {" "}
-                      {empDetailsRes?.data?.data?.name}
+                      {empDetailsRes?.data?.data?.city_name}
                     </span>
                   </p>
 
                   <p>
                     Area:
                     <span className="font-weight-bold text-primary">
-                      {empDetailsRes?.data?.data?.mobile}
+                      {empDetailsRes?.data?.data?.area_name}
                     </span>
                   </p>
                 </div>
@@ -392,19 +395,40 @@ const EmployeeDetails = () => {
               <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Leave Type</th>
-                <th scope="col">Balence</th>
-                <th scope="col">Count</th>
-                <th scope="col">Applied</th>
+                <th scope="col">Total Balence</th>
+                <th scope="col">Availed Days</th>
+                <th scope="col">Remaining Days</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>@mdo</td>
-              </tr>
+              {empDetailsRes?.data?.data?.balance_list.map((item, index) => {
+                return (
+                  <tr key={index} className="border">
+                    <th scope="row">{index + 1}</th>
+                    <th>{`${item.leave_title} (${item.leave_short_code})`}</th>
+                    <td>
+                      <span className="text-primary font-weight-bold">
+                        {item.total_days}
+                      </span>
+                       days
+                    </td>
+
+                    <td>
+                      <span className="text-danger font-weight-bold">
+                        {item.availed_days}
+                      </span>
+                       days
+                    </td>
+
+                    <td>
+                      <span className="text-success  font-weight-bold">
+                        {item.remaining_days}
+                      </span>
+                       days
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

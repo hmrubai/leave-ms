@@ -1,34 +1,29 @@
 import React from "react";
 
 import EmployeeTable from "./EmployeeTable";
-import {
-
-  BsFillPlusCircleFill,
-} from "react-icons/bs";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-
 import { IoSyncCircle } from "react-icons/io5";
-import { useGetCompanyListQuery } from "../../../../services/companyApi";
 import PageTopHeader from "../../../common/PageTopHeader";
+import { useGetEmployeeListQuery } from "../../../../services/employeeApi";
 
 const EmployeeList = () => {
-
-
-  const get = useGetCompanyListQuery();
+  const get = useGetEmployeeListQuery();
 
   const refatchClick = () => {
     get.refetch();
   };
   return (
     <>
-      <PageTopHeader title="Employee"/>
+      <PageTopHeader title="Employee" />
       <div className="card shadow mb-4">
         <div className="card-header py-3 ">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">All Employee List </h6>
+            <h6 className="m-0 font-weight-bold text-primary">
+              All Employee List{" "}
+            </h6>
           </div>
-
         </div>
 
         <div className="card-body">

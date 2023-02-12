@@ -3,9 +3,8 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
-import Loader from "../../../common/Loader";
-// import JoditEditor from "jodit-react";
+
+import JoditEditor from "jodit-react";
 import { useRef, useState } from "react";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
 import { useGetBranchListByCompanyIdQuery } from "../../../../services/branchApi";
@@ -13,23 +12,25 @@ import { useGetDesignationtListByCompanyAndBranchIdQuery } from "../../../../ser
 import { useGetDepartmentListByCompanyAndBranchIdQuery } from "../../../../services/departmentApi";
 import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
 import {
-  useEmployeeDetailsByIdQuery,
   useGetAreaListByIdQuery,
   useGetDistrictListByIdQuery,
   useGetDivisionListQuery,
   useGetUpazilaListByIdQuery,
   useUpdateEmployeeMutation,
+  useEmployeeDetailsByIdQuery,
 } from "../../../../services/employeeApi";
+import { toast } from "react-toastify";
+import { employeeSchema } from "./../../../../Validation/employeeSchema";
 
 const EditEmployee = () => {
-  const { id } = useParams();
   const navigate = useNavigate();
+  const { id } = useParams();
   const companyRes = useGetCompanyListQuery();
-  const empDetailsRes = useEmployeeDetailsByIdQuery(id);
   const employmentRes = useGetEmploymentTypeListQuery();
   const divisionRes = useGetDivisionListQuery();
+  const empDetailsRes = useEmployeeDetailsByIdQuery(id);
 
-  const [updateEmployee, empUpdateRes] = useUpdateEmployeeMutation();
+  const [updateEmployee, empRes] = useUpdateEmployeeMutation();
   const [previewImage, setPreviewImage] = useState();
   const [divisions_id, setdivision_id] = useState();
   const [districts_id, setdistrict_id] = useState();
@@ -37,62 +38,99 @@ const EditEmployee = () => {
   const [company_id, setCompany_id] = useState();
   const [branch_id, setBranch_id] = useState();
 
-
-
-
   const initialValues = {
-    name: empDetailsRes?.data?.data?.name,
-    email: empDetailsRes?.data?.data?.email,
-    mobile: empDetailsRes?.data?.data?.mobile,
-    institution: empDetailsRes?.data?.data?.institution,
-    education: empDetailsRes?.data?.data?.education,
-    present_address: empDetailsRes?.data?.data?.present_address,
-    permanent_address: empDetailsRes?.data?.data?.permanent_address,
-    father_name: empDetailsRes?.data?.data?.father_name,
-    fathers_contact_number: empDetailsRes?.data?.data?.fathers_contact_number,
-    mother_name: empDetailsRes?.data?.data?.mother_name,
-    mothers_contact_number: empDetailsRes?.data?.data?.mothers_contact_number,
-    date_of_birth: empDetailsRes?.data?.data?.date_of_birth,
-    employee_id: empDetailsRes?.data?.data?.employee_id,
-    nid: empDetailsRes?.data?.data?.nid,
-    joining_date: empDetailsRes?.data?.data?.joining_date,
-    marital_status: empDetailsRes?.data?.data?.marital_status,
-    company_id: empDetailsRes?.data?.data?.company_id,
-    branch_id: empDetailsRes?.data?.data?.branch_id,
-    department_id: empDetailsRes?.data?.data?.department_id,
-    designation_id: empDetailsRes?.data?.data?.designation_id,
-    division_id: empDetailsRes?.data?.data?.division_id,
-    gender: empDetailsRes?.data?.data?.gender,
-    district_id: empDetailsRes?.data?.data?.district_id,
-    city_id: empDetailsRes?.data?.data?.city_id,
-    area_id: empDetailsRes?.data?.data?.area_id,
-    is_active: empDetailsRes?.data?.data?.is_active,
-    image: empDetailsRes?.data?.data?.image,
-    blood_group: empDetailsRes?.data?.data?.blood_group,
-    office_contact_number: empDetailsRes?.data?.data?.office_contact_number,
-    finger_print_id: empDetailsRes?.data?.data?.finger_print_id,
+    name: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.name,
+    email: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.email,
+    mobile: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.mobile,
+    institution:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.institution,
+    education: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.education,
+    present_address:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.present_address,
+    permanent_address:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.permanent_address,
+    father_name:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.father_name,
+    fathers_contact_number:
+      empDetailsRes.isSuccess &&
+      empDetailsRes?.data?.data?.fathers_contact_number,
+    mother_name:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.mother_name,
+    mothers_contact_number:
+      empDetailsRes.isSuccess &&
+      empDetailsRes?.data?.data?.mothers_contact_number,
+    date_of_birth:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.date_of_birth,
+    employee_id:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.employee_id,
+    nid: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.nid,
+    joining_date:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.joining_date,
+    marital_status:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.marital_status,
+    company_id:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.company_id,
+    branch_id: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.branch_id,
+    department_id:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.department_id,
+    designation_id:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.designation_id,
+    division_id:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.division_id,
+    gender: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.gender,
+    district_id:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.district_id,
+    city_id: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.city_id,
+    area_id: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.area_id,
+    is_active: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.is_active,
+    image: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.image,
+    blood_group:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.blood_group,
+    office_contact_number:
+      empDetailsRes.isSuccess &&
+      empDetailsRes?.data?.data?.office_contact_number,
+    finger_print_id:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.finger_print_id,
     personal_alt_contact_number:
+      empDetailsRes.isSuccess &&
       empDetailsRes?.data?.data?.personal_alt_contact_number,
-    personal_email: empDetailsRes?.data?.data?.personal_email,
-    passport_number: empDetailsRes?.data?.data?.passport_number,
-    spouse_name: empDetailsRes?.data?.data?.spouse_name,
-    spouse_number: empDetailsRes?.data?.data?.spouse_number,
-    referee_office: empDetailsRes?.data?.data?.referee_office,
-    referee_relative: empDetailsRes?.data?.data?.referee_relative,
-    referee_contact_details: empDetailsRes?.data?.data?.referee_contact_details,
-    key_skills: empDetailsRes?.data?.data?.key_skills,
-    highest_level_of_study: empDetailsRes?.data?.data?.highest_level_of_study,
-    e_tin: empDetailsRes?.data?.data?.e_tin,
-    applicable_tax_amount: empDetailsRes?.data?.data?.applicable_tax_amount,
-    official_achievement: empDetailsRes?.data?.data?.official_achievement,
-    remarks: empDetailsRes?.data?.data?.remarks,
-    employment_type_id: empDetailsRes?.data?.data?.employment_type_id,
+    personal_email:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.personal_email,
+    passport_number:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.passport_number,
+    spouse_name:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.spouse_name,
+    spouse_number:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.spouse_number,
+    referee_office:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.referee_office,
+    referee_relative:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.referee_relative,
+    referee_contact_details:
+      empDetailsRes.isSuccess &&
+      empDetailsRes?.data?.data?.referee_contact_details,
+    key_skills:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.key_skills,
+    highest_level_of_study:
+      empDetailsRes.isSuccess &&
+      empDetailsRes?.data?.data?.highest_level_of_study,
+    e_tin: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.e_tin,
+    applicable_tax_amount:
+      empDetailsRes.isSuccess &&
+      empDetailsRes?.data?.data?.applicable_tax_amount,
+    official_achievement:
+      empDetailsRes.isSuccess &&
+      empDetailsRes?.data?.data?.official_achievement,
+    remarks: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.remarks,
+    employment_type_id:
+      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.employment_type_id,
   };
 
   const formik = useFormik({
     initialValues,
-
+    validationSchema: employeeSchema,
     enableReinitialize: true,
+
     onSubmit: async (values) => {
       let formData = new FormData();
       formData.append("id", id);
@@ -155,8 +193,9 @@ const EditEmployee = () => {
       }
     },
   });
+  // const editor = useRef(null);
 
-  if (empUpdateRes.isSuccess) {
+  if (empRes.isSuccess) {
     navigate("/dashboard/admin/employee-list");
   }
 
@@ -175,19 +214,27 @@ const EditEmployee = () => {
     }
   };
 
-  const districtRes = useGetDistrictListByIdQuery(divisions_id);
-  const upazilaRes = useGetUpazilaListByIdQuery(districts_id);
-  const areaRes = useGetAreaListByIdQuery(city_id);
+  const districtRes = useGetDistrictListByIdQuery(
+    empDetailsRes.isSuccess && empDetailsRes?.data?.data?.division_id
+  );
+  const upazilaRes = useGetUpazilaListByIdQuery(
+    empDetailsRes.isSuccess && empDetailsRes?.data?.data?.district_id
+  );
+  const areaRes = useGetAreaListByIdQuery(
+    empDetailsRes.isSuccess && empDetailsRes?.data?.data?.city_id
+  );
 
-  const branchRes = useGetBranchListByCompanyIdQuery(company_id);
+  const branchRes = useGetBranchListByCompanyIdQuery(
+    empDetailsRes.isSuccess && empDetailsRes?.data?.data?.company_id
+  );
   const departmentRes = useGetDepartmentListByCompanyAndBranchIdQuery({
-    comId: company_id,
-    braId: branch_id,
+    comId: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.company_id,
+    braId: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.branch_id,
   });
 
   const designationRes = useGetDesignationtListByCompanyAndBranchIdQuery({
-    comId: company_id,
-    braId: branch_id,
+    comId: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.company_id,
+    braId: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.branch_id,
   });
 
   function handelImage(e) {
@@ -199,7 +246,9 @@ const EditEmployee = () => {
       <div className=" card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">Edit Employee</h6>
+            <h6 className="m-0 font-weight-bold text-primary">
+              Create Employee
+            </h6>
           </div>
           <div>
             <BsFillArrowLeftCircleFill
@@ -210,9 +259,6 @@ const EditEmployee = () => {
             />
           </div>
         </div>
-
-        {empDetailsRes.isFetching && <Loader />}
-
         <div className="card-body">
           <form
             className="form-sample"
@@ -232,11 +278,21 @@ const EditEmployee = () => {
                   <div className="col-sm-9">
                     <input
                       type="text"
-                      className="form-control"
                       name="name"
                       onChange={formik.handleChange}
                       value={formik.values.name}
+                      onBlur={formik.handleBlur}
+                      className={
+                        formik.errors.name && formik.touched.name
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     />
+                    {formik.errors.name && formik.touched.name ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.name}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -265,11 +321,20 @@ const EditEmployee = () => {
                   <div className="col-sm-9">
                     <input
                       type="number"
-                      className="form-control"
                       name="mobile"
                       onChange={formik.handleChange}
                       value={formik.values.mobile}
+                      className={
+                        formik.errors.mobile && formik.touched.mobile
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     />
+                    {formik.errors.mobile && formik.touched.mobile ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.mobile}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -296,11 +361,20 @@ const EditEmployee = () => {
                   <div className="col-sm-9">
                     <input
                       type="text"
-                      className="form-control"
                       name="father_name"
                       onChange={formik.handleChange}
                       value={formik.values.father_name}
+                      className={
+                        formik.errors.father_name && formik.touched.father_name
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     />
+                    {formik.errors.father_name && formik.touched.father_name ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.father_name}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -326,11 +400,20 @@ const EditEmployee = () => {
                   <div className="col-sm-9">
                     <input
                       type="text"
-                      className="form-control"
                       name="mother_name"
                       onChange={formik.handleChange}
                       value={formik.values.mother_name}
+                      className={
+                        formik.errors.mother_name && formik.touched.mother_name
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     />
+                    {formik.errors.mother_name && formik.touched.mother_name ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.mother_name}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -387,21 +470,27 @@ const EditEmployee = () => {
                   <label className="col-sm-3 col-form-label">Gender</label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
                       name="gender"
                       onChange={formik.handleChange}
                       value={formik.values.gender}
+                      className={
+                        formik.errors.gender && formik.touched.gender
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     >
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                       <option value="Transgender">Transgender</option>
                     </select>
+                    {formik.errors.gender && formik.touched.gender ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.gender}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
-
-
-         
 
               <div className="col-md-6">
                 <div className="form-group row">
@@ -410,13 +499,24 @@ const EditEmployee = () => {
                   </label>
                   <div className="col-sm-9">
                     <input
-                      className="form-control"
                       placeholder="dd/mm/yyyy"
                       name="date_of_birth"
                       type="date"
                       onChange={formik.handleChange}
                       value={formik.values.date_of_birth}
+                      className={
+                        formik.errors.date_of_birth &&
+                        formik.touched.date_of_birth
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     />
+                    {formik.errors.date_of_birth &&
+                    formik.touched.date_of_birth ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.date_of_birth}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -429,11 +529,20 @@ const EditEmployee = () => {
                   <div className="col-sm-9">
                     <input
                       type="text"
-                      className="form-control"
                       name="nid"
                       onChange={formik.handleChange}
                       value={formik.values.nid}
+                      className={
+                        formik.errors.nid && formik.touched.nid
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     />
+                    {formik.errors.nid && formik.touched.nid ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.nid}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -512,18 +621,30 @@ const EditEmployee = () => {
                   </label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
                       name="marital_status"
                       onChange={formik.handleChange}
                       value={formik.values.marital_status}
+                      className={
+                        formik.errors.marital_status &&
+                        formik.touched.marital_status
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     >
                       <option value="Married">Married</option>
                       <option value="Unmarried">Unmarried</option>
                       <option value="Dnmarried">Dnmarried</option>
                     </select>
+                    {formik.errors.marital_status &&
+                    formik.touched.marital_status ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.marital_status}
+                      </div>
+                    ) : null}
                   </div>
                 </div>{" "}
               </div>
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">
@@ -671,11 +792,11 @@ const EditEmployee = () => {
                   <label className="col-sm-3 col-form-label">Key Skills</label>
                   <JoditEditor
                     ref={editor}
-                    value={description}
+                    value={formik.values.key_skills}
                     // config={config}
                     tabIndex={1} // tabIndex of textarea
-                    onBlur={(newContent) => setDescription(newContent)} // preferred to use only this option to update the content for performance reasons
-                    // onChange={(newContent) => {setDescription(newContent.target.value)}}
+                    onBlur={formik.handleChange} // preferred to use only this option to update the content for performance reasons
+                    onChange={formik.handleChange}
                   />
                 </div>
               </div> */}
@@ -694,11 +815,20 @@ const EditEmployee = () => {
                   <div className="col-sm-9">
                     <input
                       type="text"
-                      className="form-control"
                       name="employee_id"
                       onChange={formik.handleChange}
                       value={formik.values.employee_id}
+                      className={
+                        formik.errors.employee_id && formik.touched.employee_id
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     />
+                    {formik.errors.employee_id && formik.touched.employee_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.employee_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -757,7 +887,11 @@ const EditEmployee = () => {
                   <label className="col-sm-3 col-form-label">Company</label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
+                      className={
+                        formik.errors.company_id && formik.touched.company_id
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                       name="company_id"
                       onChange={(e) => {
                         formik.handleChange(e);
@@ -772,6 +906,11 @@ const EditEmployee = () => {
                         </option>
                       ))}
                     </select>
+                    {formik.errors.company_id && formik.touched.company_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.company_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -784,11 +923,22 @@ const EditEmployee = () => {
                   <div className="col-sm-9">
                     <input
                       type="date"
-                      className="form-control"
                       name="joining_date"
                       onChange={formik.handleChange}
                       value={formik.values.joining_date}
+                      className={
+                        formik.errors.joining_date &&
+                        formik.touched.joining_date
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     />
+                    {formik.errors.joining_date &&
+                    formik.touched.joining_date ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.joining_date}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -798,13 +948,17 @@ const EditEmployee = () => {
                   <label className="col-sm-3 col-form-label">Branch</label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
                       name="branch_id"
                       onChange={(e) => {
                         formik.handleChange(e);
                         setBranch_id(e.target.value);
                       }}
                       value={formik.values.branch_id}
+                      className={
+                        formik.errors.branch_id && formik.touched.branch_id
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     >
                       <option>Selact Branch</option>
                       {branchRes?.data?.data?.map((branch, i) => (
@@ -813,18 +967,29 @@ const EditEmployee = () => {
                         </option>
                       ))}
                     </select>
+                    {formik.errors.branch_id && formik.touched.branch_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.branch_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Designation</label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
                       name="designation_id"
                       onChange={formik.handleChange}
                       value={formik.values.designation_id}
+                      className={
+                        formik.errors.designation_id &&
+                        formik.touched.designation_id
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     >
                       <option>Selact Designation</option>
                       {designationRes?.data?.data?.map((designation, i) => (
@@ -833,18 +998,30 @@ const EditEmployee = () => {
                         </option>
                       ))}
                     </select>
+                    {formik.errors.designation_id &&
+                    formik.touched.designation_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.designation_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Department</label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
                       name="department_id"
                       onChange={formik.handleChange}
                       value={formik.values.department_id}
+                      className={
+                        formik.errors.department_id &&
+                        formik.touched.department_id
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     >
                       <option>Selact Department</option>
                       {departmentRes?.data?.data?.map((department, i) => (
@@ -853,18 +1030,30 @@ const EditEmployee = () => {
                         </option>
                       ))}
                     </select>
+                    {formik.errors.department_id &&
+                    formik.touched.department_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.department_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Employment</label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
                       name="employment_type_id"
                       onChange={formik.handleChange}
                       value={formik.values.employment_type_id}
+                      className={
+                        formik.errors.employment_type_id &&
+                        formik.touched.employment_type_id
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     >
                       <option>Selact Employment</option>
                       {employmentRes?.data?.data?.map((employment, i) => (
@@ -873,6 +1062,12 @@ const EditEmployee = () => {
                         </option>
                       ))}
                     </select>
+                    {formik.errors.employment_type_id &&
+                    formik.touched.employment_type_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.employment_type_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -888,11 +1083,22 @@ const EditEmployee = () => {
                   <div className="col-sm-9">
                     <input
                       type="text"
-                      className="form-control"
                       name="present_address"
                       onChange={formik.handleChange}
                       value={formik.values.present_address}
+                      className={
+                        formik.errors.present_address &&
+                        formik.touched.present_address
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     />
+                    {formik.errors.present_address &&
+                    formik.touched.present_address ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.present_address}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -904,11 +1110,22 @@ const EditEmployee = () => {
                   <div className="col-sm-9">
                     <input
                       type="text"
-                      className="form-control"
                       name="permanent_address"
                       onChange={formik.handleChange}
                       value={formik.values.permanent_address}
+                      className={
+                        formik.errors.permanent_address &&
+                        formik.touched.permanent_address
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     />
+                    {formik.errors.permanent_address &&
+                    formik.touched.permanent_address ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.permanent_address}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -918,13 +1135,17 @@ const EditEmployee = () => {
                   <label className="col-sm-3 col-form-label">Division</label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
                       name="division_id"
                       onChange={(e) => {
                         formik.handleChange(e);
                         focusHandelerOne(e.target.name, e.target.value);
                       }}
                       value={formik.values.division_id}
+                      className={
+                        formik.errors.division_id && formik.touched.division_id
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     >
                       <option>Selact Division</option>
                       {divisionRes?.data?.data?.map((division, i) => (
@@ -933,22 +1154,31 @@ const EditEmployee = () => {
                         </option>
                       ))}
                     </select>
+                    {formik.errors.division_id && formik.touched.division_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.division_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
-              {/* district_id */}
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">District</label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
                       name="district_id"
                       onChange={(e) => {
                         formik.handleChange(e);
                         focusHandelerTwo(e.target.name, e.target.value);
                       }}
                       value={formik.values.district_id}
+                      className={
+                        formik.errors.district_id && formik.touched.district_id
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     >
                       <option>Selact District</option>
                       {districtRes?.data?.data?.map((district, i) => (
@@ -957,6 +1187,11 @@ const EditEmployee = () => {
                         </option>
                       ))}
                     </select>
+                    {formik.errors.district_id && formik.touched.district_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.district_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -966,13 +1201,17 @@ const EditEmployee = () => {
                   <label className="col-sm-3 col-form-label">City</label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
                       name="city_id"
                       onChange={(e) => {
                         formik.handleChange(e);
                         setcity_id(e.target.value);
                       }}
                       value={formik.values.city_id}
+                      className={
+                        formik.errors.city_id && formik.touched.city_id
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
                     >
                       <option>Selact City</option>
                       {upazilaRes?.data?.data?.map((upazila, i) => (
@@ -981,6 +1220,11 @@ const EditEmployee = () => {
                         </option>
                       ))}
                     </select>
+                    {formik.errors.city_id && formik.touched.city_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.city_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -995,7 +1239,7 @@ const EditEmployee = () => {
                       onChange={formik.handleChange}
                       value={formik.values.area_id}
                     >
-                      <option>Selact City</option>
+                      <option>Selact Area</option>
                       {areaRes?.data?.data?.map((area, i) => (
                         <option key={i} value={area.id}>
                           {area.name}
@@ -1040,6 +1284,9 @@ const EditEmployee = () => {
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="form-group row ">
+              <div className="ml-3"></div>
             </div>
             <div className="">
               {previewImage ? (

@@ -50,7 +50,7 @@ const CompanyList = () => {
                   onClick={() => refatchClick()}
                 />
               </div>
-              <div>
+              {/* <div>
                 <Link
                   to="#"
                   className="btn btn-primary "
@@ -61,7 +61,7 @@ const CompanyList = () => {
                 >
                   <BsFillPlusCircleFill className="mb-1 mr-1" /> New
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
           <div>
