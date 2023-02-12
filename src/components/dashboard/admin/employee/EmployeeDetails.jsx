@@ -1,21 +1,20 @@
 import React from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Moment from 'react-moment';
+import 'moment-timezone';
 import {
   // useEmployeeDetailsByIdQuery,
   useLeaveBalanceListByEmpIdQuery,
 } from "../../../../services/employeeApi";
 import Loader from "../../../common/Loader";
+import { FaEdit } from "react-icons/fa";
 
 const EmployeeDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   // const res = useEmployeeDetailsByIdQuery(id);
   const empDetailsRes = useLeaveBalanceListByEmpIdQuery(id);
-
-  // console.log(res?.data?.data)
-
-  console.log(empDetailsRes?.data?.data?.balance_list);
 
   return (
     <>
@@ -38,8 +37,8 @@ const EmployeeDetails = () => {
           </div>
         </div>
         <div className="card-body">
-          <div className="row">
-            <div className="col-md-4 ">
+          <div className="row ">
+            <div className="col-md-4 shadow p-4">
               <div className="text-center">
                 <img
                   className="img-fluid rounded-circle "
@@ -87,19 +86,35 @@ const EmployeeDetails = () => {
                   </span>
                 </p>
 
-
-                <p>
-
+                <div>
                   Key Skills :
-                  <span className="font-weight-bold text-primary">
-                  {empDetailsRes?.data?.data?.key_skills === 'undefined' ? 'No Description' : <div dangerouslySetInnerHTML={{ __html: empDetailsRes?.data?.data?.key_skills}} />}
-                  </span>
-                </p>
+                  {empDetailsRes?.data?.data?.key_skills === "undefined" ? (
+                    "No Description"
+                  ) : (
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: empDetailsRes?.data?.data?.key_skills,
+                      }}
+                    />
+                  )}
+                </div>
               </div>
             </div>
-            <div className="col-md-8">
+            <div className="col-md-8 p-5">
               <div className="row ">
-                <h4 className="py-2">Personal Info</h4>
+                <div className="d-flex justify-content-between">
+                  <div> <h4 className="py-2">Personal Details.</h4></div>
+                  <div>
+                  <Link
+              to={`/dashboard/admin/edit-employee/${empDetailsRes?.data?.data?.id}`}
+              title=""
+              className="px-2"
+            >
+              <FaEdit size={22} />
+            </Link>
+                  </div>
+                </div>
+               
                 <div className="col-md-6">
                   <p>
                     Father Name:
@@ -190,7 +205,9 @@ const EmployeeDetails = () => {
                   <p>
                     Date of Birth:
                     <span className="font-weight-bold text-primary ">
-                      {empDetailsRes?.data?.data?.date_of_birth}
+                      
+                      <Moment format="YYYY/MM/DD"  >{empDetailsRes?.data?.data?.date_of_birth}</Moment>
+                  
                     </span>
                   </p>
 
@@ -245,7 +262,7 @@ const EmployeeDetails = () => {
                 </div>
               </div>
               <div className="row ">
-                <h4 className="py-2 ">Company Info</h4>
+                <h4 className="py-2 ">Company Details.</h4>
 
                 <div className="col-md-6">
                   <p>
@@ -279,8 +296,8 @@ const EmployeeDetails = () => {
                   <p>
                     Joining Date:
                     <span className="font-weight-bold text-primary ">
-                      {" "}
-                      {empDetailsRes?.data?.data?.joining_date}
+                    <Moment format="YYYY/MM/DD"  >{empDetailsRes?.data?.data?.joining_date}</Moment>
+                      
                     </span>
                   </p>
                 </div>
@@ -320,7 +337,7 @@ const EmployeeDetails = () => {
                 </div>
               </div>
               <div className="row ">
-                <h4 className="py-2 ">Address Info</h4>
+                <h4 className="py-2 ">Address Details.</h4>
                 <div className="col-md-6">
                   <p>
                     Present Address:
@@ -336,7 +353,7 @@ const EmployeeDetails = () => {
                       {empDetailsRes?.data?.data?.permanent_address}
                     </span>
                   </p>
-          
+
                   <p>
                     Status:
                     <span className="font-weight-bold text-primary">
@@ -410,21 +427,21 @@ const EmployeeDetails = () => {
                       <span className="text-primary font-weight-bold">
                         {item.total_days}
                       </span>
-                       days
+                      days
                     </td>
 
                     <td>
                       <span className="text-danger font-weight-bold">
                         {item.availed_days}
                       </span>
-                       days
+                      days
                     </td>
 
                     <td>
                       <span className="text-success  font-weight-bold">
                         {item.remaining_days}
                       </span>
-                       days
+                      days
                     </td>
                   </tr>
                 );

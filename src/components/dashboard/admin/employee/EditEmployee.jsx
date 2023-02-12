@@ -5,7 +5,7 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useNavigate, useParams } from "react-router-dom";
 
 import JoditEditor from "jodit-react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
 import { useGetBranchListByCompanyIdQuery } from "../../../../services/branchApi";
 import { useGetDesignationtListByCompanyAndBranchIdQuery } from "../../../../services/designationApi";
@@ -20,27 +20,39 @@ import {
   useEmployeeDetailsByIdQuery,
 } from "../../../../services/employeeApi";
 import { toast } from "react-toastify";
-import { employeeSchema } from "./../../../../Validation/employeeSchema";
+
+import { editEmployeeSchema } from "./../../../../Validation/editEmployeeSchema";
 
 const EditEmployee = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const editor = useRef(null);
+
+  // <==============data request strat===================>
+
   const companyRes = useGetCompanyListQuery();
   const employmentRes = useGetEmploymentTypeListQuery();
   const divisionRes = useGetDivisionListQuery();
   const empDetailsRes = useEmployeeDetailsByIdQuery(id);
-
   const [updateEmployee, empRes] = useUpdateEmployeeMutation();
+
+ // <==============data request end===================>
+
   const [previewImage, setPreviewImage] = useState();
   const [divisions_id, setdivision_id] = useState();
   const [districts_id, setdistrict_id] = useState();
   const [city_id, setcity_id] = useState();
   const [company_id, setCompany_id] = useState();
   const [branch_id, setBranch_id] = useState();
+  const [area_id, setarea_id] = useState();
+  const [designation_id, setdesignation_id] = useState();
+  const [department_id, setdepartment_id] = useState();
+
+  const [keySkillis, setKeySkillis] = useState();
 
   const initialValues = {
     name: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.name,
-    email: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.email,
+
     mobile: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.mobile,
     institution:
       empDetailsRes.isSuccess && empDetailsRes?.data?.data?.institution,
@@ -109,8 +121,8 @@ const EditEmployee = () => {
     referee_contact_details:
       empDetailsRes.isSuccess &&
       empDetailsRes?.data?.data?.referee_contact_details,
-    key_skills:
-      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.key_skills,
+    // key_skills:
+    //   empDetailsRes.isSuccess && empDetailsRes?.data?.data?.key_skills,
     highest_level_of_study:
       empDetailsRes.isSuccess &&
       empDetailsRes?.data?.data?.highest_level_of_study,
@@ -128,14 +140,13 @@ const EditEmployee = () => {
 
   const formik = useFormik({
     initialValues,
-    validationSchema: employeeSchema,
+    validationSchema: editEmployeeSchema,
     enableReinitialize: true,
 
     onSubmit: async (values) => {
       let formData = new FormData();
       formData.append("id", id);
       formData.append("name", values.name);
-      formData.append("email", values.email);
       formData.append("mobile", values.mobile);
       formData.append("institution", values.institution);
       formData.append("education", values.education);
@@ -146,19 +157,19 @@ const EditEmployee = () => {
       formData.append("mother_name", values.mother_name);
       formData.append("mothers_contact_number", values.mothers_contact_number);
       formData.append("date_of_birth", values.date_of_birth);
+      formData.append("gender", values.gender);
       formData.append("employee_id", values.employee_id);
       formData.append("nid", values.nid);
       formData.append("joining_date", values.joining_date);
       formData.append("marital_status", values.marital_status);
-      formData.append("company_id", values.company_id);
-      formData.append("branch_id", values.branch_id);
-      formData.append("department_id", values.department_id);
-      formData.append("designation_id", values.designation_id);
-      formData.append("division_id", values.division_id);
-      formData.append("gender", values.gender);
-      formData.append("district_id", values.district_id);
-      formData.append("city_id", values.city_id);
-      formData.append("area_id", values.area_id);
+      formData.append("company_id", company_id);
+      formData.append("branch_id", branch_id);
+      formData.append("department_id", department_id);
+      formData.append("designation_id", designation_id);
+      formData.append("division_id", divisions_id);
+      formData.append("district_id", districts_id);
+      formData.append("city_id", city_id);
+      formData.append("area_id", area_id);
       formData.append("is_active", values.is_active);
       formData.append("image", values.image);
       formData.append("blood_group", values.blood_group);
@@ -178,13 +189,14 @@ const EditEmployee = () => {
         "referee_contact_details",
         values.referee_contact_details
       );
-      formData.append("key_skills", values.key_skills);
+      formData.append("key_skills", keySkillis);
       formData.append("highest_level_of_study", values.highest_level_of_study);
       formData.append("e_tin", values.e_tin);
       formData.append("applicable_tax_amount", values.applicable_tax_amount);
       formData.append("official_achievement", values.official_achievement);
       formData.append("remarks", values.remarks);
       formData.append("employment_type_id", values.employment_type_id);
+
       try {
         const result = await updateEmployee(formData).unwrap();
         toast.success(result.message);
@@ -192,8 +204,9 @@ const EditEmployee = () => {
         toast.warn(error.data.message);
       }
     },
+
   });
-  // const editor = useRef(null);
+
 
   if (empRes.isSuccess) {
     navigate("/dashboard/admin/employee-list");
@@ -214,28 +227,37 @@ const EditEmployee = () => {
     }
   };
 
-  const districtRes = useGetDistrictListByIdQuery(
-    empDetailsRes.isSuccess && empDetailsRes?.data?.data?.division_id
-  );
-  const upazilaRes = useGetUpazilaListByIdQuery(
-    empDetailsRes.isSuccess && empDetailsRes?.data?.data?.district_id
-  );
-  const areaRes = useGetAreaListByIdQuery(
-    empDetailsRes.isSuccess && empDetailsRes?.data?.data?.city_id
-  );
+  useEffect(() => {
+    if (empDetailsRes.isSuccess) {
+      setdivision_id(empDetailsRes?.data?.data?.division_id);
+      setdistrict_id(empDetailsRes?.data?.data?.district_id);
+      setcity_id(empDetailsRes?.data?.data?.city_id);
+      setCompany_id(empDetailsRes?.data?.data?.company_id);
+      setBranch_id(empDetailsRes?.data?.data?.branch_id);
+      setKeySkillis(empDetailsRes?.data?.data?.key_skills);
+      setarea_id(empDetailsRes?.data?.data?.area_id);
+      setdepartment_id(empDetailsRes?.data?.data?.department_id);
+      setdesignation_id(empDetailsRes?.data?.data?.designation_id);
+    }
+  }, [empDetailsRes]);
 
-  const branchRes = useGetBranchListByCompanyIdQuery(
-    empDetailsRes.isSuccess && empDetailsRes?.data?.data?.company_id
-  );
+   // <==============singal data request strat===================>
+  const districtRes = useGetDistrictListByIdQuery(divisions_id);
+  const upazilaRes = useGetUpazilaListByIdQuery(districts_id);
+  const areaRes = useGetAreaListByIdQuery(city_id);
+
+  const branchRes = useGetBranchListByCompanyIdQuery(company_id);
   const departmentRes = useGetDepartmentListByCompanyAndBranchIdQuery({
-    comId: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.company_id,
-    braId: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.branch_id,
+    comId: company_id,
+    braId: branch_id,
   });
 
   const designationRes = useGetDesignationtListByCompanyAndBranchIdQuery({
-    comId: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.company_id,
-    braId: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.branch_id,
+    comId: company_id,
+    braId: branch_id,
   });
+
+   // <==============singal request end===================>
 
   function handelImage(e) {
     setPreviewImage(URL.createObjectURL(e.target.files[0]));
@@ -246,9 +268,7 @@ const EditEmployee = () => {
       <div className=" card shadow mb-4">
         <div className="card-header py-3 d-flex justify-content-between">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">
-              Create Employee
-            </h6>
+            <h6 className="m-0 font-weight-bold text-primary">Edit Employee</h6>
           </div>
           <div>
             <BsFillArrowLeftCircleFill
@@ -770,7 +790,7 @@ const EditEmployee = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              {/* <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Key Skills</label>
                   <div className="col-sm-9">
@@ -785,21 +805,21 @@ const EditEmployee = () => {
                     ></textarea>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              {/* <div className="col-md-12">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Key Skills</label>
                   <JoditEditor
                     ref={editor}
-                    value={formik.values.key_skills}
-                    // config={config}
-                    tabIndex={1} // tabIndex of textarea
-                    onBlur={formik.handleChange} // preferred to use only this option to update the content for performance reasons
-                    onChange={formik.handleChange}
+                    value={keySkillis}
+                    // name="key_skills"
+                    tabIndex={1}
+                    onBlur={(newContent) => setKeySkillis(newContent)} // preferred to use only this option to update the content for performance reasons
+                    // onChange={(newContent) => {setDescription(newContent.target.value)}}
                   />
                 </div>
-              </div> */}
+              </div>
             </div>
             <h5 className="card-description text-info py-2">
               {" "}
@@ -836,22 +856,6 @@ const EditEmployee = () => {
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">
-                    Office e-Mail ID
-                  </label>
-                  <div className="col-sm-9">
-                    <input
-                      type="email"
-                      className="form-control"
-                      name="email"
-                      onChange={formik.handleChange}
-                      value={formik.values.email}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">
                     Office Number
                   </label>
                   <div className="col-sm-9">
@@ -881,7 +885,33 @@ const EditEmployee = () => {
                   </div>
                 </div>
               </div>
-
+              <div className="col-md-6">
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label">
+                    Joining Date
+                  </label>
+                  <div className="col-sm-9">
+                    <input
+                      type="date"
+                      name="joining_date"
+                      onChange={formik.handleChange}
+                      value={formik.values.joining_date}
+                      className={
+                        formik.errors.joining_date &&
+                        formik.touched.joining_date
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
+                    />
+                    {formik.errors.joining_date &&
+                    formik.touched.joining_date ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.joining_date}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Company</label>
@@ -909,34 +939,6 @@ const EditEmployee = () => {
                     {formik.errors.company_id && formik.touched.company_id ? (
                       <div className="invalid-feedback">
                         {formik.errors.company_id}
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6">
-                <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">
-                    Joining Date
-                  </label>
-                  <div className="col-sm-9">
-                    <input
-                      type="date"
-                      name="joining_date"
-                      onChange={formik.handleChange}
-                      value={formik.values.joining_date}
-                      className={
-                        formik.errors.joining_date &&
-                        formik.touched.joining_date
-                          ? "form-control is-invalid"
-                          : "form-control"
-                      }
-                    />
-                    {formik.errors.joining_date &&
-                    formik.touched.joining_date ? (
-                      <div className="invalid-feedback">
-                        {formik.errors.joining_date}
                       </div>
                     ) : null}
                   </div>
@@ -975,46 +977,16 @@ const EditEmployee = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="col-md-6">
-                <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">Designation</label>
-                  <div className="col-sm-9">
-                    <select
-                      name="designation_id"
-                      onChange={formik.handleChange}
-                      value={formik.values.designation_id}
-                      className={
-                        formik.errors.designation_id &&
-                        formik.touched.designation_id
-                          ? "form-control is-invalid"
-                          : "form-control"
-                      }
-                    >
-                      <option>Selact Designation</option>
-                      {designationRes?.data?.data?.map((designation, i) => (
-                        <option key={i} value={designation.id}>
-                          {designation.title}
-                        </option>
-                      ))}
-                    </select>
-                    {formik.errors.designation_id &&
-                    formik.touched.designation_id ? (
-                      <div className="invalid-feedback">
-                        {formik.errors.designation_id}
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-              </div>
-
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Department</label>
                   <div className="col-sm-9">
                     <select
                       name="department_id"
-                      onChange={formik.handleChange}
+                      onChange={(e) => {
+                        formik.handleChange(e);
+                        setdepartment_id(e.target.value);
+                      }}
                       value={formik.values.department_id}
                       className={
                         formik.errors.department_id &&
@@ -1034,6 +1006,40 @@ const EditEmployee = () => {
                     formik.touched.department_id ? (
                       <div className="invalid-feedback">
                         {formik.errors.department_id}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label">Designation</label>
+                  <div className="col-sm-9">
+                    <select
+                      name="designation_id"
+                      onChange={(e) => {
+                        formik.handleChange(e);
+                        setdesignation_id(e.target.value);
+                      }}
+                      value={formik.values.designation_id}
+                      className={
+                        formik.errors.designation_id &&
+                        formik.touched.designation_id
+                          ? "form-control is-invalid"
+                          : "form-control"
+                      }
+                    >
+                      <option>Selact Designation</option>
+                      {designationRes?.data?.data?.map((designation, i) => (
+                        <option key={i} value={designation.id}>
+                          {designation.title}
+                        </option>
+                      ))}
+                    </select>
+                    {formik.errors.designation_id &&
+                    formik.touched.designation_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.designation_id}
                       </div>
                     ) : null}
                   </div>
@@ -1236,7 +1242,10 @@ const EditEmployee = () => {
                     <select
                       className="form-control"
                       name="area_id"
-                      onChange={formik.handleChange}
+                      onChange={(e) => {
+                        formik.handleChange(e);
+                        setarea_id(e.target.value);
+                      }}
                       value={formik.values.area_id}
                     >
                       <option>Selact Area</option>

@@ -34,6 +34,10 @@ const CreateEmployee = () => {
   const [city_id, setcity_id] = useState();
   const [company_id, setCompany_id] = useState();
   const [branch_id, setBranch_id] = useState();
+  const [keySkillis, setKeySkillis] = useState();
+
+  const editor = useRef(null);
+
 
 
   const initialValues = {
@@ -75,7 +79,7 @@ const CreateEmployee = () => {
     referee_office: "",
     referee_relative: "",
     referee_contact_details: "",
-    key_skills: "",
+    // key_skills: "",
     highest_level_of_study: "",
     e_tin: "",
     applicable_tax_amount: "",
@@ -134,7 +138,7 @@ const CreateEmployee = () => {
         "referee_contact_details",
         values.referee_contact_details
       );
-      formData.append("key_skills", values.key_skills);
+      formData.append("key_skills", keySkillis);
       formData.append("highest_level_of_study", values.highest_level_of_study);
       formData.append("e_tin", values.e_tin);
       formData.append("applicable_tax_amount", values.applicable_tax_amount);
@@ -149,11 +153,10 @@ const CreateEmployee = () => {
       }
     },
   });
-  // const editor = useRef(null);
-  console.log(formik.errors);
+
 
   if (empRes.isSuccess) {
-    navigate("/admin/employee-list");
+    navigate("/dashboard/admin/employee-list");
   }
 
   const focusHandelerOne = (name, id) => {
@@ -428,6 +431,7 @@ const CreateEmployee = () => {
                           : "form-control"
                       }
                     >
+                      <option>Selact Gender</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                       <option value="Transgender">Transgender</option>
@@ -521,6 +525,7 @@ const CreateEmployee = () => {
                       onChange={formik.handleChange}
                       value={formik.values.blood_group}
                     >
+                    <option>Selact Group</option>
                       <option value="A+">A+</option>
                       <option value="B+">B+</option>
                       <option value="AB+">AB+</option>
@@ -579,6 +584,7 @@ const CreateEmployee = () => {
                           : "form-control"
                       }
                     >
+                      <option>Selact Status</option>
                       <option value="Married">Married</option>
                       <option value="Unmarried">Unmarried</option>
                       <option value="Dnmarried">Dnmarried</option>
@@ -717,7 +723,7 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              {/* <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Key Skills</label>
                   <div className="col-sm-9">
@@ -732,21 +738,21 @@ const CreateEmployee = () => {
                     ></textarea>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              {/* <div className="col-md-12">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Key Skills</label>
                   <JoditEditor
                     ref={editor}
-                    value={formik.values.key_skills}
-                    // config={config}
-                    tabIndex={1} // tabIndex of textarea
-                    onBlur={formik.handleChange} // preferred to use only this option to update the content for performance reasons
-                    onChange={formik.handleChange}
+                    value={keySkillis}
+                    // name="key_skills"
+                    tabIndex={1}
+                    onBlur={(newContent) => setKeySkillis(newContent)} // preferred to use only this option to update the content for performance reasons
+                    // onChange={(newContent) => {setDescription(newContent.target.value)}}
                   />
                 </div>
-              </div> */}
+              </div>
             </div>
             <h5 className="card-description text-info py-2">
               {" "}

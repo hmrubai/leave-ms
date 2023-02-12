@@ -409,9 +409,14 @@ const Layout = () => {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <span className="mr-2 d-none d-lg-inline text-gray-600 small">
+                    <div className="mr-2 d-none d-lg-inline text-gray-600 small">
                       {authUser && authUser.name}
-                    </span>
+                      <div className="text-end text-info fw-bold">
+                        {authUser && authUser.user_type}
+                      </div>
+                     
+                      
+                    </div>
 
                     {authUser && authUser.image ? (
                       <img
