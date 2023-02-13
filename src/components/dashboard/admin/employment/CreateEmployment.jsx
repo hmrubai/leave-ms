@@ -48,6 +48,7 @@ const CreateEmployment = ({ handleClose }) => {
                   <input
                     type="text"
                     className="form-control"
+                    placeholder="enter employment type"
                     name="type"
                     onChange={formik.handleChange}
                     value={formik.values.type}

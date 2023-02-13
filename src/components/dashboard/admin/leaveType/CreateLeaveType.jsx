@@ -52,6 +52,7 @@ const CreateLeaveType = ({ handleClose }) => {
                   <input
                     type="text"
                     className="form-control"
+                    placeholder="Enter Leave Title"
                     name="leave_title"
                     onChange={formik.handleChange}
                     value={formik.values.leave_title}
@@ -67,6 +68,7 @@ const CreateLeaveType = ({ handleClose }) => {
                 <div className="col-sm-7">
                   <input
                     type="text"
+                    placeholder="Enter Leave Short Code"
                     className="form-control"
                     name="leave_short_code"
                     onChange={formik.handleChange}
@@ -83,6 +85,7 @@ const CreateLeaveType = ({ handleClose }) => {
                   <input
                     type="number"
                     className="form-control"
+                    placeholder="Enter Total Days"
                     name="total_days"
                     onChange={formik.handleChange}
                     value={formik.values.total_days}
@@ -119,6 +122,7 @@ const CreateLeaveType = ({ handleClose }) => {
                 <div className="col-sm-7">
                   <input
                     type="number"
+                    placeholder="Enter Document Upload After Days"
                     className="form-control"
                     name="document_upload_after_days"
                     onChange={formik.handleChange}
@@ -136,6 +140,7 @@ const CreateLeaveType = ({ handleClose }) => {
                 <div className="col-sm-7">
                   <input
                     type="number"
+                    placeholder="Enter Max Carry Forward Days"
                     className="form-control"
                     name="max_carry_forward_days"
                     onChange={formik.handleChange}

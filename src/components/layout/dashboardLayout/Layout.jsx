@@ -54,7 +54,7 @@ const Layout = () => {
           {/*  <!-- Sidebar - Brand --> */}
           <Link
             className="sidebar-brand d-flex align-items-center justify-content-center "
-            href="#"
+            to="#"
           >
             <Link to="/" className="sidebar-brand-icon rotate-n-15">
               <img src={logo_sm} width="30" alt="" />
@@ -165,7 +165,7 @@ const Layout = () => {
                 <li className="nav-item dropdown no-arrow d-sm-none">
                   <Link
                     className="nav-link dropdown-toggle"
-                    href="#"
+                    to="#"
                     id="searchDropdown"
                     role="button"
                     data-toggle="dropdown"
@@ -202,7 +202,7 @@ const Layout = () => {
                 <li className="nav-item dropdown no-arrow mx-1">
                   <Link
                     className="nav-link dropdown-toggle"
-                    href="#"
+                    to="#"
                     id="alertsDropdown"
                     role="button"
                     data-toggle="dropdown"
@@ -221,7 +221,7 @@ const Layout = () => {
                     <h6 className="dropdown-header">Alerts Center</h6>
                     <Link
                       className="dropdown-item d-flex align-items-center"
-                      href="#"
+                      to="#"
                     >
                       <div className="mr-3">
                         <div className="icon-circle bg-primary">
@@ -239,7 +239,7 @@ const Layout = () => {
                     </Link>
                     <Link
                       className="dropdown-item d-flex align-items-center"
-                      href="#"
+                      to="#"
                     >
                       <div className="mr-3">
                         <div className="icon-circle bg-success">
@@ -255,7 +255,7 @@ const Layout = () => {
                     </Link>
                     <Link
                       className="dropdown-item d-flex align-items-center"
-                      href="#"
+                      to="#"
                     >
                       <div className="mr-3">
                         <div className="icon-circle bg-warning">
@@ -272,7 +272,7 @@ const Layout = () => {
                     </Link>
                     <Link
                       className="dropdown-item text-center small text-gray-500"
-                      href="#"
+                      to="#"
                     >
                       Show All Alerts
                     </Link>
@@ -283,7 +283,7 @@ const Layout = () => {
                 <li className="nav-item dropdown no-arrow mx-1">
                   <Link
                     className="nav-link dropdown-toggle"
-                    href="#"
+                    to="#"
                     id="messagesDropdown"
                     role="button"
                     data-toggle="dropdown"
@@ -302,7 +302,7 @@ const Layout = () => {
                     <h6 className="dropdown-header">Message Center</h6>
                     <Link
                       className="dropdown-item d-flex align-items-center"
-                      href="#"
+                      to="#"
                     >
                       <div className="dropdown-list-image mr-3">
                         <img
@@ -324,7 +324,7 @@ const Layout = () => {
                     </Link>
                     <Link
                       className="dropdown-item d-flex align-items-center"
-                      href="#"
+                      to="#"
                     >
                       <div className="dropdown-list-image mr-3">
                         <img
@@ -344,7 +344,7 @@ const Layout = () => {
                     </Link>
                     <Link
                       className="dropdown-item d-flex align-items-center"
-                      href="#"
+                      to="#"
                     >
                       <div className="dropdown-list-image mr-3">
                         <img
@@ -366,7 +366,7 @@ const Layout = () => {
                     </Link>
                     <Link
                       className="dropdown-item d-flex align-items-center"
-                      href="#"
+                      to="#"
                     >
                       <div className="dropdown-list-image mr-3">
                         <img
@@ -389,7 +389,7 @@ const Layout = () => {
                     </Link>
                     <Link
                       className="dropdown-item text-center small text-gray-500"
-                      href="#"
+                      to="#"
                     >
                       Read More Messages
                     </Link>
@@ -402,7 +402,7 @@ const Layout = () => {
                 <li className="nav-item dropdown no-arrow">
                   <Link
                     className="nav-link dropdown-toggle"
-                    href="#"
+                    to="#"
                     id="userDropdown"
                     role="button"
                     data-toggle="dropdown"
@@ -443,15 +443,15 @@ const Layout = () => {
                     className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown"
                   >
-                    <Link className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                       Profile
                     </Link>
-                    <Link className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                       Settings
                     </Link>
-                    <Link className="dropdown-item" href="#">
+                    <Link className="dropdown-item" to="#">
                       <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                       Activity Log
                     </Link>

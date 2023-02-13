@@ -46,6 +46,7 @@ const CreateBranch = ({ handleClose }) => {
                   <input
                     type="text"
                     className="form-control"
+                    placeholder="enter branch name"
                     name="name"
                     onChange={formik.handleChange}
                     value={formik.values.name}
@@ -61,6 +62,7 @@ const CreateBranch = ({ handleClose }) => {
                     type="text"
                     className="form-control"
                     name="address"
+                    placeholder="enter branch address"
                     onChange={formik.handleChange}
                     value={formik.values.address}
                   />
@@ -74,6 +76,7 @@ const CreateBranch = ({ handleClose }) => {
                   <input
                     type="number"
                     className="form-control"
+                    placeholder="enter contact no"
                     name="contact_no"
                     onChange={formik.handleChange}
                     value={formik.values.contact_no}

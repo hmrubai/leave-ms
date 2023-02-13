@@ -38,8 +38,6 @@ const CreateEmployee = () => {
 
   const editor = useRef(null);
 
-
-
   const initialValues = {
     name: "",
     email: "",
@@ -86,13 +84,13 @@ const CreateEmployee = () => {
     official_achievement: "",
     remarks: "",
     employment_type_id: "",
+    user_type: "",
   };
 
   const formik = useFormik({
     initialValues,
     validationSchema: employeeSchema,
     onSubmit: async (values, errors) => {
-      console.log(errors);
       let formData = new FormData();
       formData.append("name", values.name);
       formData.append("email", values.email);
@@ -145,6 +143,7 @@ const CreateEmployee = () => {
       formData.append("official_achievement", values.official_achievement);
       formData.append("remarks", values.remarks);
       formData.append("employment_type_id", values.employment_type_id);
+      formData.append("user_type", values.user_type);
       try {
         const result = await addEmployee(formData).unwrap();
         toast.success(result.message);
@@ -153,7 +152,6 @@ const CreateEmployee = () => {
       }
     },
   });
-
 
   if (empRes.isSuccess) {
     navigate("/dashboard/admin/employee-list");
@@ -177,8 +175,8 @@ const CreateEmployee = () => {
   const districtRes = useGetDistrictListByIdQuery(divisions_id);
   const upazilaRes = useGetUpazilaListByIdQuery(districts_id);
   const areaRes = useGetAreaListByIdQuery(city_id);
-
   const branchRes = useGetBranchListByCompanyIdQuery(company_id);
+
   const departmentRes = useGetDepartmentListByCompanyAndBranchIdQuery({
     comId: company_id,
     braId: branch_id,
@@ -234,6 +232,7 @@ const CreateEmployee = () => {
                       onChange={formik.handleChange}
                       value={formik.values.name}
                       onBlur={formik.handleBlur}
+                      placeholder="Enter Employee Name"
                       className={
                         formik.errors.name && formik.touched.name
                           ? "form-control is-invalid"
@@ -258,6 +257,7 @@ const CreateEmployee = () => {
                       type="email"
                       className="form-control"
                       name="personal_email"
+                      placeholder="Enter Personal e-mail ID"
                       onChange={formik.handleChange}
                       value={formik.values.personal_email}
                     />
@@ -274,8 +274,10 @@ const CreateEmployee = () => {
                     <input
                       type="number"
                       name="mobile"
+                      placeholder="Enter Personal Contact Number"
                       onChange={formik.handleChange}
                       value={formik.values.mobile}
+                      onBlur={formik.handleBlur}
                       className={
                         formik.errors.mobile && formik.touched.mobile
                           ? "form-control is-invalid"
@@ -299,6 +301,7 @@ const CreateEmployee = () => {
                     <input
                       type="number"
                       className="form-control"
+                      placeholder="Enter Personal Alt. Contact Number"
                       name="personal_alt_contact_number"
                       onChange={formik.handleChange}
                       value={formik.values.personal_alt_contact_number}
@@ -314,8 +317,10 @@ const CreateEmployee = () => {
                     <input
                       type="text"
                       name="father_name"
+                      placeholder="Enter Father Name"
                       onChange={formik.handleChange}
                       value={formik.values.father_name}
+                      onBlur={formik.handleBlur}
                       className={
                         formik.errors.father_name && formik.touched.father_name
                           ? "form-control is-invalid"
@@ -338,6 +343,7 @@ const CreateEmployee = () => {
                   <div className="col-sm-9">
                     <input
                       type="number"
+                      placeholder="Enter Fathers Contact Number"
                       className="form-control"
                       name="fathers_contact_number"
                       onChange={formik.handleChange}
@@ -354,7 +360,9 @@ const CreateEmployee = () => {
                       type="text"
                       name="mother_name"
                       onChange={formik.handleChange}
+                      placeholder="Enter Mother Name"
                       value={formik.values.mother_name}
+                      onBlur={formik.handleBlur}
                       className={
                         formik.errors.mother_name && formik.touched.mother_name
                           ? "form-control is-invalid"
@@ -378,6 +386,7 @@ const CreateEmployee = () => {
                   <div className="col-sm-9">
                     <input
                       type="number"
+                      placeholder="Enter Mothers Contact Number"
                       className="form-control"
                       name="mothers_contact_number"
                       onChange={formik.handleChange}
@@ -393,6 +402,7 @@ const CreateEmployee = () => {
                     <input
                       type="text"
                       className="form-control"
+                      placeholder="Enter Spouse Name"
                       name="spouse_name"
                       onChange={formik.handleChange}
                       value={formik.values.spouse_name}
@@ -409,6 +419,7 @@ const CreateEmployee = () => {
                     <input
                       type="number"
                       className="form-control"
+                      placeholder="Enter Spouse Number"
                       name="spouse_number"
                       onChange={formik.handleChange}
                       value={formik.values.spouse_number}
@@ -425,6 +436,7 @@ const CreateEmployee = () => {
                       name="gender"
                       onChange={formik.handleChange}
                       value={formik.values.gender}
+                      onBlur={formik.handleBlur}
                       className={
                         formik.errors.gender && formik.touched.gender
                           ? "form-control is-invalid"
@@ -437,12 +449,13 @@ const CreateEmployee = () => {
                       <option value="Transgender">Transgender</option>
                     </select>
                     {formik.errors.gender && formik.touched.gender ? (
-                <div className="invalid-feedback">{formik.errors.gender}</div>
-              ) : null}
+                      <div className="invalid-feedback">
+                        {formik.errors.gender}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
-            
 
               <div className="col-md-6">
                 <div className="form-group row">
@@ -456,6 +469,7 @@ const CreateEmployee = () => {
                       type="date"
                       onChange={formik.handleChange}
                       value={formik.values.date_of_birth}
+                      onBlur={formik.handleBlur}
                       className={
                         formik.errors.date_of_birth &&
                         formik.touched.date_of_birth
@@ -482,8 +496,10 @@ const CreateEmployee = () => {
                     <input
                       type="text"
                       name="nid"
+                      placeholder="Enter NID/Birth ID/ Driving License Number"
                       onChange={formik.handleChange}
                       value={formik.values.nid}
+                      onBlur={formik.handleBlur}
                       className={
                         formik.errors.nid && formik.touched.nid
                           ? "form-control is-invalid"
@@ -507,6 +523,7 @@ const CreateEmployee = () => {
                     <input
                       type="text"
                       className="form-control"
+                      placeholder="Enter Passport Number"
                       name="passport_number"
                       onChange={formik.handleChange}
                       value={formik.values.passport_number}
@@ -525,7 +542,7 @@ const CreateEmployee = () => {
                       onChange={formik.handleChange}
                       value={formik.values.blood_group}
                     >
-                    <option>Selact Group</option>
+                      <option>Selact Group</option>
                       <option value="A+">A+</option>
                       <option value="B+">B+</option>
                       <option value="AB+">AB+</option>
@@ -547,6 +564,7 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="institution"
+                      placeholder="Enter Institution"
                       onChange={formik.handleChange}
                       value={formik.values.institution}
                     />
@@ -560,6 +578,7 @@ const CreateEmployee = () => {
                     <input
                       type="text"
                       className="form-control"
+                      placeholder="Enter Education"
                       name="education"
                       onChange={formik.handleChange}
                       value={formik.values.education}
@@ -577,6 +596,7 @@ const CreateEmployee = () => {
                       name="marital_status"
                       onChange={formik.handleChange}
                       value={formik.values.marital_status}
+                      onBlur={formik.handleBlur}
                       className={
                         formik.errors.marital_status &&
                         formik.touched.marital_status
@@ -584,20 +604,21 @@ const CreateEmployee = () => {
                           : "form-control"
                       }
                     >
-                      <option>Selact Status</option>
+                      <option value="">Selact Status</option>
                       <option value="Married">Married</option>
                       <option value="Unmarried">Unmarried</option>
                       <option value="Dnmarried">Dnmarried</option>
                     </select>
-                    {formik.errors.marital_status && formik.touched.marital_status ? (
-                <div className="invalid-feedback">
-                  {formik.errors.marital_status}
-                </div>
-              ) : null}
+                    {formik.errors.marital_status &&
+                    formik.touched.marital_status ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.marital_status}
+                      </div>
+                    ) : null}
                   </div>
                 </div>{" "}
               </div>
-           
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">
@@ -606,6 +627,7 @@ const CreateEmployee = () => {
                   <div className="col-sm-9">
                     <input
                       type="text"
+                      placeholder="Enter Referee (office)"
                       className="form-control"
                       name="referee_office"
                       onChange={formik.handleChange}
@@ -623,6 +645,7 @@ const CreateEmployee = () => {
                     <input
                       type="text"
                       className="form-control"
+                      placeholder="Enter Referee (Relative)"
                       name="referee_relative"
                       onChange={formik.handleChange}
                       value={formik.values.referee_relative}
@@ -640,6 +663,7 @@ const CreateEmployee = () => {
                     <input
                       type="text"
                       className="form-control"
+                      placeholder="Enter Referee Contact Details"
                       name="referee_contact_details"
                       onChange={formik.handleChange}
                       value={formik.values.referee_contact_details}
@@ -657,6 +681,7 @@ const CreateEmployee = () => {
                       type="text"
                       className="form-control"
                       name="highest_level_of_study"
+                      placeholder="Enter Highest Level of Study"
                       onChange={formik.handleChange}
                       value={formik.values.highest_level_of_study}
                     />
@@ -670,6 +695,7 @@ const CreateEmployee = () => {
                     <input
                       type="text"
                       className="form-control"
+                      placeholder="Enter e-TIN"
                       name="e_tin"
                       onChange={formik.handleChange}
                       value={formik.values.e_tin}
@@ -686,6 +712,7 @@ const CreateEmployee = () => {
                     <input
                       type="text"
                       className="form-control"
+                      placeholder="Enter Applicable Tax Amount"
                       name="applicable_tax_amount"
                       onChange={formik.handleChange}
                       value={formik.values.applicable_tax_amount}
@@ -700,6 +727,7 @@ const CreateEmployee = () => {
                     <input
                       type="text"
                       className="form-control"
+                      placeholder="Enter Remarks"
                       name="remarks"
                       onChange={formik.handleChange}
                       value={formik.values.remarks}
@@ -716,6 +744,7 @@ const CreateEmployee = () => {
                     <input
                       type="text"
                       className="form-control"
+                      placeholder="Enter Official Achievement"
                       name="official_achievement"
                       onChange={formik.handleChange}
                       value={formik.values.official_achievement}
@@ -771,6 +800,8 @@ const CreateEmployee = () => {
                       name="employee_id"
                       onChange={formik.handleChange}
                       value={formik.values.employee_id}
+                      placeholder="Enter Office ID Number"
+                      onBlur={formik.handleBlur}
                       className={
                         formik.errors.employee_id && formik.touched.employee_id
                           ? "form-control is-invalid"
@@ -795,6 +826,7 @@ const CreateEmployee = () => {
                     <input
                       type="email"
                       className="form-control"
+                      placeholder="Enter Office e-Mail ID"
                       name="email"
                       onChange={formik.handleChange}
                       value={formik.values.email}
@@ -811,6 +843,7 @@ const CreateEmployee = () => {
                     <input
                       type="number"
                       className="form-control"
+                      placeholder="Enter Office Number"
                       name="office_contact_number"
                       onChange={formik.handleChange}
                       value={formik.values.office_contact_number}
@@ -828,6 +861,7 @@ const CreateEmployee = () => {
                       type="number"
                       className="form-control"
                       name="finger_print_id"
+                      placeholder="Enter Finger Print ID"
                       onChange={formik.handleChange}
                       value={formik.values.finger_print_id}
                     />
@@ -850,6 +884,7 @@ const CreateEmployee = () => {
                         formik.handleChange(e);
                         setCompany_id(e.target.value);
                       }}
+                      onBlur={formik.handleBlur}
                       value={formik.values.company_id}
                     >
                       <option>Selact Company</option>
@@ -860,15 +895,13 @@ const CreateEmployee = () => {
                       ))}
                     </select>
                     {formik.errors.company_id && formik.touched.company_id ? (
-                <div className="invalid-feedback">
-                  {formik.errors.company_id}
-                </div>
-              ) : null}
+                      <div className="invalid-feedback">
+                        {formik.errors.company_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
-
-          
 
               <div className="col-md-6">
                 <div className="form-group row">
@@ -887,6 +920,7 @@ const CreateEmployee = () => {
                           ? "form-control is-invalid"
                           : "form-control"
                       }
+                      onBlur={formik.handleBlur}
                     />
                     {formik.errors.joining_date &&
                     formik.touched.joining_date ? (
@@ -908,6 +942,7 @@ const CreateEmployee = () => {
                         formik.handleChange(e);
                         setBranch_id(e.target.value);
                       }}
+                      onBlur={formik.handleBlur}
                       value={formik.values.branch_id}
                       className={
                         formik.errors.branch_id && formik.touched.branch_id
@@ -923,14 +958,13 @@ const CreateEmployee = () => {
                       ))}
                     </select>
                     {formik.errors.branch_id && formik.touched.branch_id ? (
-                <div className="invalid-feedback">
-                  {formik.errors.branch_id}
-                </div>
-              ) : null}
+                      <div className="invalid-feedback">
+                        {formik.errors.branch_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
-          
 
               <div className="col-md-6">
                 <div className="form-group row">
@@ -940,8 +974,10 @@ const CreateEmployee = () => {
                       name="designation_id"
                       onChange={formik.handleChange}
                       value={formik.values.designation_id}
+                      onBlur={formik.handleBlur}
                       className={
-                        formik.errors.designation_id && formik.touched.designation_id
+                        formik.errors.designation_id &&
+                        formik.touched.designation_id
                           ? "form-control is-invalid"
                           : "form-control"
                       }
@@ -953,15 +989,16 @@ const CreateEmployee = () => {
                         </option>
                       ))}
                     </select>
-                    {formik.errors.designation_id && formik.touched.designation_id ? (
-                <div className="invalid-feedback">
-                  {formik.errors.designation_id}
-                </div>
-              ) : null}
+                    {formik.errors.designation_id &&
+                    formik.touched.designation_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.designation_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
-        
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Department</label>
@@ -970,6 +1007,7 @@ const CreateEmployee = () => {
                       name="department_id"
                       onChange={formik.handleChange}
                       value={formik.values.department_id}
+                      onBlur={formik.handleBlur}
                       className={
                         formik.errors.department_id &&
                         formik.touched.department_id
@@ -984,15 +1022,16 @@ const CreateEmployee = () => {
                         </option>
                       ))}
                     </select>
-                    {formik.errors.department_id && formik.touched.department_id ? (
-                <div className="invalid-feedback">
-                  {formik.errors.department_id}
-                </div>
-              ) : null}
+                    {formik.errors.department_id &&
+                    formik.touched.department_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.department_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
-          
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Employment</label>
@@ -1007,6 +1046,7 @@ const CreateEmployee = () => {
                           ? "form-control is-invalid"
                           : "form-control"
                       }
+                      onBlur={formik.handleBlur}
                     >
                       <option>Selact Employment</option>
                       {employmentRes?.data?.data?.map((employment, i) => (
@@ -1016,15 +1056,14 @@ const CreateEmployee = () => {
                       ))}
                     </select>
                     {formik.errors.employment_type_id &&
-              formik.touched.employment_type_id ? (
-                <div className="invalid-feedback">
-                  {formik.errors.employment_type_id}
-                </div>
-              ) : null}
+                    formik.touched.employment_type_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.employment_type_id}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
-      
             </div>
 
             <h5 className="card-description text-info py-2"> Address : </h5>
@@ -1038,8 +1077,10 @@ const CreateEmployee = () => {
                     <input
                       type="text"
                       name="present_address"
+                      placeholder="Present Address"
                       onChange={formik.handleChange}
                       value={formik.values.present_address}
+                      onBlur={formik.handleBlur}
                       className={
                         formik.errors.present_address &&
                         formik.touched.present_address
@@ -1066,7 +1107,9 @@ const CreateEmployee = () => {
                       type="text"
                       name="permanent_address"
                       onChange={formik.handleChange}
+                      placeholder="Permanent Address"
                       value={formik.values.permanent_address}
+                      onBlur={formik.handleBlur}
                       className={
                         formik.errors.permanent_address &&
                         formik.touched.permanent_address
@@ -1089,16 +1132,15 @@ const CreateEmployee = () => {
                   <label className="col-sm-3 col-form-label">Division</label>
                   <div className="col-sm-9">
                     <select
-               
                       name="division_id"
                       onChange={(e) => {
                         formik.handleChange(e);
                         focusHandelerOne(e.target.name, e.target.value);
                       }}
+                      onBlur={formik.handleBlur}
                       value={formik.values.division_id}
                       className={
-                        formik.errors.division_id &&
-                        formik.touched.division_id
+                        formik.errors.division_id && formik.touched.division_id
                           ? "form-control is-invalid"
                           : "form-control"
                       }
@@ -1110,8 +1152,7 @@ const CreateEmployee = () => {
                         </option>
                       ))}
                     </select>
-                    {formik.errors.division_id &&
-                    formik.touched.division_id ? (
+                    {formik.errors.division_id && formik.touched.division_id ? (
                       <div className="invalid-feedback">
                         {formik.errors.division_id}
                       </div>
@@ -1119,23 +1160,21 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
-            
-     
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">District</label>
                   <div className="col-sm-9">
                     <select
-
                       name="district_id"
                       onChange={(e) => {
                         formik.handleChange(e);
                         focusHandelerTwo(e.target.name, e.target.value);
                       }}
+                      onBlur={formik.handleBlur}
                       value={formik.values.district_id}
                       className={
-                        formik.errors.district_id &&
-                        formik.touched.district_id
+                        formik.errors.district_id && formik.touched.district_id
                           ? "form-control is-invalid"
                           : "form-control"
                       }
@@ -1147,8 +1186,7 @@ const CreateEmployee = () => {
                         </option>
                       ))}
                     </select>
-                    {formik.errors.district_id &&
-                    formik.touched.district_id ? (
+                    {formik.errors.district_id && formik.touched.district_id ? (
                       <div className="invalid-feedback">
                         {formik.errors.district_id}
                       </div>
@@ -1156,23 +1194,21 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
-      
 
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">City</label>
                   <div className="col-sm-9">
                     <select
-  
                       name="city_id"
                       onChange={(e) => {
                         formik.handleChange(e);
                         setcity_id(e.target.value);
                       }}
                       value={formik.values.city_id}
+                      onBlur={formik.handleBlur}
                       className={
-                        formik.errors.city_id &&
-                        formik.touched.city_id
+                        formik.errors.city_id && formik.touched.city_id
                           ? "form-control is-invalid"
                           : "form-control"
                       }
@@ -1184,8 +1220,7 @@ const CreateEmployee = () => {
                         </option>
                       ))}
                     </select>
-                    {formik.errors.city_id &&
-                    formik.touched.city_id ? (
+                    {formik.errors.city_id && formik.touched.city_id ? (
                       <div className="invalid-feedback">
                         {formik.errors.city_id}
                       </div>
@@ -1193,7 +1228,6 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
-              
 
               <div className="col-md-6">
                 <div className="form-group row">
@@ -1204,6 +1238,7 @@ const CreateEmployee = () => {
                       name="area_id"
                       onChange={formik.handleChange}
                       value={formik.values.area_id}
+                      onBlur={formik.handleBlur}
                     >
                       <option>Selact Area</option>
                       {areaRes?.data?.data?.map((area, i) => (
@@ -1232,10 +1267,37 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
+
+              <h5 className="card-description text-info mt-3  py-2">
+                User Role :
+              </h5>
+
               <div className="col-md-6">
                 <div className="form-group row">
-                  <label className="col-sm-4 col-form-label">Is Active</label>
-                  <div className="col-sm-8">
+                  <label className="col-sm-3 col-form-label">User Type</label>
+                  <div className="col-sm-9">
+                    <select
+                      name="user_type"
+                      onChange={formik.handleChange}
+                      value={formik.values.user_type}
+                      className=" form-control"
+                    >
+                      <option value="">Select Type</option>
+                      <option value="Admin">Admin</option>
+                      <option value="Employee">Employee</option>
+                      <option value="ApprovalAuthority">
+                        Approval Authority
+                      </option>
+                      <option value="Others">Others</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-12">
+                <div className="form-group row">
+                  <label className="col-sm-4 col-md-1 col-form-label">Is Active</label>
+                  <div className="col-sm-8 ps-4 ">
                     <div class="form-check form-switch mt-2">
                       <Form.Check
                         type="switch"
@@ -1251,9 +1313,7 @@ const CreateEmployee = () => {
                 </div>
               </div>
             </div>
-            <div className="form-group row ">
-              <div className="ml-3"></div>
-            </div>
+
             <div>
               <img
                 className="py-2"
@@ -1264,8 +1324,8 @@ const CreateEmployee = () => {
               />
             </div>
 
-            <div className=" py-3">
-              <Button className="btn btn-success" type="submit">
+            <div className=" py-5">
+              <Button className="btn btn-success px-5" type="submit">
                 Submit
               </Button>
             </div>

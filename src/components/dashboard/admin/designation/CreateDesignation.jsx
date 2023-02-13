@@ -50,6 +50,7 @@ const CreateDesignation = ({ handleClose }) => {
                     type="text"
                     className="form-control"
                     name="title"
+                    placeholder="enter designation name"
                     onChange={formik.handleChange}
                     value={formik.values.title}
                     required

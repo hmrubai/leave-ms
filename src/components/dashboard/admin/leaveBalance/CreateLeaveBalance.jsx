@@ -115,6 +115,7 @@ const CreateLeaveBalance = ({ handleClose }) => {
                   <input
                     type="number"
                     className="form-control"
+                    placeholder="Enter Total Days"
                     name="total_days"
                     onChange={formik.handleChange}
                     value={formik.values.total_days}

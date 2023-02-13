@@ -50,6 +50,7 @@ const CreateDepartment = ({ handleClose }) => {
                     type="text"
                     className="form-control"
                     name="name"
+                    placeholder="enter department name"
                     onChange={formik.handleChange}
                     value={formik.values.name}
                     required
@@ -64,6 +65,7 @@ const CreateDepartment = ({ handleClose }) => {
                 <select
                     className="form-control"
                     name="company_id"
+                    
                     onChange={formik.handleChange}
                     value={formik.values.company_id}
                   >

@@ -41,7 +41,7 @@ const EmployeeDetails = () => {
             <div className="col-md-4 shadow p-4">
               <div className="text-center">
                 <img
-                  className="img-fluid rounded-circle "
+                  className="img-fluid rounded-circle shadow-lg"
                   style={{ width: "200px", height: "200px" }}
                   src={`${process.env.REACT_APP_FILE_URL}${empDetailsRes?.data?.data?.image}`}
                   alt=""

@@ -8,7 +8,6 @@ import About from '../components/dashboard/views/About';
 import EmployeeList from './../components/dashboard/admin/employee/EmployeeList';
 import EmployeeDetails from '../components/dashboard/admin/employee/EmployeeDetails'
 import CreateEmployee from './../components/dashboard/admin/employee/CreateEmployee';
-import EditEmployee from './../components/dashboard/admin/employee/EditEmployee';
 import CompanyList from './../components/dashboard/admin/company/CompanyList';
 import BranchList from '../components/dashboard/admin/branch/BranchList'
 import DesignationList from '../components/dashboard/admin/designation/DesignationList'
@@ -18,6 +17,7 @@ import Employee from './../components/dashboard/views/Employee';
 import FiscalYearList from '../components/dashboard/admin/fiscalYear/FiscalYearList'
 import EmploymentList from '../components/dashboard/admin/employment/EmploymentList'
 import LeaveBalanceList from '../components/dashboard/admin/leaveBalance/LeaveBalanceList'
+import EditEmployee from '../components/dashboard/admin/employee/EditEmployee'
 
 
 
