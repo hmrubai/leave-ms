@@ -18,6 +18,7 @@ import FiscalYearList from '../components/dashboard/admin/fiscalYear/FiscalYearL
 import EmploymentList from '../components/dashboard/admin/employment/EmploymentList'
 import LeaveBalanceList from '../components/dashboard/admin/leaveBalance/LeaveBalanceList'
 import EditEmployee from '../components/dashboard/admin/employee/EditEmployee'
+import BalanceSetupList from '../components/dashboard/admin/balanceSetup/BalanceSetupList'
 
 
 
@@ -27,16 +28,16 @@ import EditEmployee from '../components/dashboard/admin/employee/EditEmployee'
 
 
 
-
+// We can use this route for private route
 
 
 export const privateRoute = [
+    //<====================== Admin Route start ====================>
     {
         path: '/dashboard/',
         element: <Navigate replace to ={getPath()}/>,
         role: 'all'
     },
-  
     {
         path: 'admin/employee-list',
         element: <EmployeeList />,
@@ -109,8 +110,12 @@ export const privateRoute = [
         role: 'admin',
 
     },
+    {
+        path: 'admin/balance-setup',
+        element: <BalanceSetupList/> ,
+        role: 'admin',
 
- 
+    },
     {
         path: 'admin',
         element: <AdminPage />,

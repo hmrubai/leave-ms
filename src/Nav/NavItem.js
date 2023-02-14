@@ -74,7 +74,28 @@ export const navItem = [
         role: "admin",
         icon: "fas fa-money-check",
       },
+
+
     ],
+
+    
+  },
+
+  {
+    UID: "blance",
+    title: "Balance",
+    role: "admin",
+    icon: "fas fa-layer-group",
+
+    children: [
+      {
+        title: "Balance Setup",
+        link: "admin/balance-setup",
+        role: "admin",
+        icon: "fas fa-th-large",
+      },
+    ]
+
   },
 
   // Admin Nav End

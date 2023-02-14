@@ -1,7 +1,7 @@
 import React from "react";
 
 import Modal from "react-bootstrap/Modal";
-import LeaveBalanceDetails from './LeaveBalanceDetails';
+import LeaveBalanceDetails from './LeaveLeaveBalance';
 import CreateLeaveBalance from './CreateLeaveBalance';
 import EditLeaveBalance from './EditLeaveBalance';
 const LeaveBalanceModal = ({ handleClose, show, clickValue,paramId }) => {

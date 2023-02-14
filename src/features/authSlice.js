@@ -43,8 +43,9 @@ export const authSlice = createSlice({
       localStorage.removeItem("leave_user_role");
       
       state.user = null;
-      state.Permissions = null;
+      state.permissions = null;
       state.token = null;
+      state.role = null;
     },
   },
 });

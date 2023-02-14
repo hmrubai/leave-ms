@@ -8,24 +8,31 @@ import { BsFillEyeFill, BsFillPlusCircleFill } from "react-icons/bs";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Loader from "../../../common/Loader";
-
-import LeaveBalanceModal from "./LeaveBalanceModal";
-import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
-import { useGetleaveSettingListQuery } from "../../../../services/leaveBalanceApi";
 import { IoSyncCircle } from "react-icons/io5";
 import Select from "react-select";
+import BalanceSetupModal from "./BalanceSetupModal";
+import { useGetBalanceSetupListQuery } from "../../../../services/balanceSetupApi";
+import { useGetEmployeeListQuery } from "../../../../services/employeeApi";
 
-const LeaveBalanceTable = () => {
-  const [employmentTypeId, setEmploymentTypeId] = useState(0);
-  const { data: employmentType } = useGetEmploymentTypeListQuery();
-  const { data, isSuccess, isFetching } =
-    useGetleaveSettingListQuery(employmentTypeId);
-  const get = useGetleaveSettingListQuery(employmentTypeId);
+
+const BalanceSetupTable = () => {
+  const [employeeId, setEmployeeId] = useState(1);
+ 
+
+
+
+
+  const { data, isSuccess, isFetching } = useGetBalanceSetupListQuery(employeeId);
+
+  const { data: employeeList } = useGetEmployeeListQuery();
+  const get = useGetBalanceSetupListQuery(employeeId);
+
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
 
   const handelClickValue = useCallback((value) => {
     setClickValue(value);
@@ -35,31 +42,27 @@ const LeaveBalanceTable = () => {
     get.refetch();
   };
 
-  const deleteHandel = async (deleteFunc, Did) => {
-    Swal.fire({
-      title: "Are you sure?",
-      // text: "You won't be able to revert this!",
-      icon: "error",
-      confirmButtonColor: "#d33 ",
-      cancelButtonColor: " #4e4e4e",
-      confirmButtonText: "Yes, delete it!",
-      width: 200,
-      showCancelButton: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // deleteFunc(Did);
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-      console.log(result);
-    });
-  };
+  // const deleteHandel = async (deleteFunc, Did) => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     // text: "You won't be able to revert this!",
+  //     icon: "error",
+  //     confirmButtonColor: "#d33 ",
+  //     cancelButtonColor: " #4e4e4e",
+  //     confirmButtonText: "Yes, delete it!",
+  //     width: 200,
+  //     showCancelButton: true,
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       // deleteFunc(Did);
+  //       Swal.fire("Deleted!", "Your file has been deleted.", "success");
+  //     }
+  //     console.log(result);
+  //   });
+  // };
 
   const columns = useMemo(
     () => [
-      {
-        accessorKey: "employment_type", //normal accessorKey
-        header: "Employment Type",
-      },
       {
         accessorFn: (row) => ` ${row.leave_title} ( ${row.leave_short_code})`,
 
@@ -74,24 +77,13 @@ const LeaveBalanceTable = () => {
         header: "Total Days",
       },
       {
-        accessorKey: "company_name", //access nested data with dot notation
-        header: "Company Name",
+        accessorKey: "availed_days", //access nested data with dot notation
+        header: "Availed Days",
       },
-
       {
-        accessorFn: (row) =>
-          row.is_active === true ? (
-            <>
-              <span className="badge badge-success">Active</span>
-            </>
-          ) : (
-            <>
-              <span className="badge badge-danger">Inactive</span>
-            </>
-          ), //alternate way
-        id: "is_active", //id required if you use accessorFn instead of accessorKey
-        header: "Status",
-        Header: <span className="table-header">Status</span>, //optional custom markup
+        accessorKey: "remaining_days",
+
+        header: "Remaining",
       },
     ],
     []
@@ -117,11 +109,13 @@ const LeaveBalanceTable = () => {
     csvExporter.generateCsv(rows.map((row) => row.original));
   };
 
+
+
   return (
     <>
       {isFetching && <Loader />}
 
-      <LeaveBalanceModal
+      <BalanceSetupModal
         show={show}
         handleClose={handleClose}
         clickValue={clickValue}
@@ -140,18 +134,19 @@ const LeaveBalanceTable = () => {
             />
           </div>
 
-          <div className="col-md-2">
+          <div className="col-md-3">
             <Select
+
               isClearable={true}
               classNamePrefix="Employment Type"
               backspaceRemovesValue={true}
-              onChange={(e) => setEmploymentTypeId(e.id)}
+              onChange={(e) => setEmployeeId(e.id)}
               getOptionValue={(option) => `${option["id"]}`}
-              getOptionLabel={(option) => `${option["type"]}`}
-              options={employmentType?.data}
+              getOptionLabel={(option) => `${option["name"]} (${option["employee_code"]})`}
+              options={employeeList?.data}
             />
           </div>
-          <div className="col-md-2">
+          {/* <div className="col-md-2">
             <Link
               to="#"
               className="btn btn-primary "
@@ -162,18 +157,21 @@ const LeaveBalanceTable = () => {
             >
               <BsFillPlusCircleFill className="mb-1 mr-1" /> New
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
 
       <MaterialReactTable
+        
+
         enableRowSelection
         columns={columns}
-        data={isSuccess && data?.data}
+        data={isSuccess && data?.data?.balance_list}
         enableRowActions
         enableColumnActions
         enableRowNumbers
         positionActionsColumn="last"
+        
         renderTopToolbarCustomActions={({ table }) => (
           <Box
             sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}
@@ -223,7 +221,7 @@ const LeaveBalanceTable = () => {
                   className="px-2"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Edit Leave Balance Information");
+                    handelClickValue("Edit Balance Setup Information");
                     setParamId(row?.row?.original);
                   }}
                 >
@@ -244,4 +242,4 @@ const LeaveBalanceTable = () => {
   );
 };
 
-export default React.memo(LeaveBalanceTable);
+export default React.memo(BalanceSetupTable);

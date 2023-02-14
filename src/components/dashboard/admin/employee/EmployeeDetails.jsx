@@ -53,16 +53,20 @@ const EmployeeDetails = () => {
                   <div className="font-weight-bold text-dark d-inline  rounded">
                     {empDetailsRes?.data?.data?.name}
                   </div>
-                  <p>
-                    <span className=" shadow-lg p-1 rounded text-primary">
+                  <p className="mt-2">
+                    <span className=" shadow-lg p-1 rounded border text-primary">
                       {empDetailsRes?.data?.data?.designation}
+                    </span>
+                  </p>
+                  <p>
+                    <span className=" shadow-lg p-1 rounded border text-primary">
+                      {empDetailsRes?.data?.data?.user_type}
                     </span>
                   </p>
                 </div>
                 <p>
                   Email:
                   <span className="font-weight-bold text-primary ">
-                    {" "}
                     {empDetailsRes?.data?.data?.email}
                   </span>
                 </p>
@@ -412,7 +416,7 @@ const EmployeeDetails = () => {
               <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Leave Type</th>
-                <th scope="col">Total Balence</th>
+                <th scope="col">Total Days</th>
                 <th scope="col">Availed Days</th>
                 <th scope="col">Remaining Days</th>
               </tr>
