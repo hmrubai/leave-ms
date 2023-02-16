@@ -17,6 +17,7 @@ import { employmentApi } from "../services/employmentApi";
 import { leaveBalanceApi } from "../services/leaveBalanceApi";
 import { employeeApi } from "../services/employeeApi";
 import { balanceSetupApi } from './../services/balanceSetupApi';
+import { leaveApprovalFlowApi } from "../services/leaveApprovalFlowApi";
 
 const store = configureStore({
   reducer: {
@@ -32,6 +33,7 @@ const store = configureStore({
     [leaveBalanceApi.reducerPath]: leaveBalanceApi.reducer,
     [employeeApi.reducerPath]: employeeApi.reducer,
     [balanceSetupApi.reducerPath]: balanceSetupApi.reducer,
+    [leaveApprovalFlowApi.reducerPath]: leaveApprovalFlowApi.reducer,
 
 
     devTools: true,
@@ -49,6 +51,7 @@ const store = configureStore({
       leaveBalanceApi.middleware,
       employeeApi.middleware,
       balanceSetupApi.middleware,
+      leaveApprovalFlowApi.middleware,
     ]),
 });
 setupListeners(store.dispatch);

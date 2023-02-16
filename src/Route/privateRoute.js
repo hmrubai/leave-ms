@@ -19,6 +19,9 @@ import EmploymentList from '../components/dashboard/admin/employment/EmploymentL
 import LeaveBalanceList from '../components/dashboard/admin/leaveBalance/LeaveBalanceList'
 import EditEmployee from '../components/dashboard/admin/employee/EditEmployee'
 import BalanceSetupList from '../components/dashboard/admin/balanceSetup/BalanceSetupList'
+import LeaveApprovalFlowList from '../components/dashboard/admin/leaveApprovalFlow/LeaveApprovalFlowList'
+
+
 
 
 
@@ -113,6 +116,12 @@ export const privateRoute = [
     {
         path: 'admin/balance-setup',
         element: <BalanceSetupList/> ,
+        role: 'admin',
+
+    },
+    {
+        path: 'admin/ApprovalFlow',
+        element: <LeaveApprovalFlowList/> ,
         role: 'admin',
 
     },

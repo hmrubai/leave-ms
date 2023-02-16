@@ -98,6 +98,19 @@ export const navItem = [
 
   },
 
+  {
+    title: "Approval Flow",
+    link: "admin/ApprovalFlow",
+    role: "admin",
+    icon: "fas fa-stop ",
+  },
+  {
+    title: "Calendar",
+    link: "admin/ApprovalFlow",
+    role: "admin",
+    icon: "fas fa-calendar-alt",
+  },
+
   // Admin Nav End
 
   {

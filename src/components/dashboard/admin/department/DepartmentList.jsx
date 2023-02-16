@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 
 
 import { IoSyncCircle } from "react-icons/io5";
-import CompanyTable from "./DepartmentTable";
-import CompanyModal from "./DepartmentModal";
+import DepartmentTable from "./DepartmentTable";
+import DepartmentModal from "./DepartmentModal";
 import { useGetdepartmentListQuery } from "../../../../services/departmentApi";
 import PageTopHeader from "../../../common/PageTopHeader";
 
@@ -65,11 +65,11 @@ const DepartmentList = () => {
             </div>
           </div>
           <div>
-            <CompanyTable />
+            <DepartmentTable />
           </div>
         </div>
       </div>
-      <CompanyModal
+      <DepartmentModal
         show={show}
         handleClose={handleClose}
         clickValue={clickValue}
