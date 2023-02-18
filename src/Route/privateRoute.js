@@ -20,6 +20,10 @@ import LeaveBalanceList from '../components/dashboard/admin/leaveBalance/LeaveBa
 import EditEmployee from '../components/dashboard/admin/employee/EditEmployee'
 import BalanceSetupList from '../components/dashboard/admin/balanceSetup/BalanceSetupList'
 import LeaveApprovalFlowList from '../components/dashboard/admin/leaveApprovalFlow/LeaveApprovalFlowList'
+import DayTypeSetupList from './../components/dashboard/admin/calender/dayTypeSetup/DayTypeSetupList';
+import WorkingDayList from '../components/dashboard/admin/calender/workingDaySetup/WorkingDayList'
+
+
 
 
 
@@ -119,6 +123,20 @@ export const privateRoute = [
         role: 'admin',
 
     },
+    {
+        path: 'admin/day-type-setup',
+        element: <DayTypeSetupList/> ,
+        role: 'admin',
+
+    },
+    {
+        path: 'admin/working-day-setup',
+        element: <WorkingDayList/> ,
+        role: 'admin',
+
+    },
+
+
     {
         path: 'admin/ApprovalFlow',
         element: <LeaveApprovalFlowList/> ,

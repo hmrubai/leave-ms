@@ -97,6 +97,34 @@ export const navItem = [
     ]
 
   },
+  {
+    UID: "calendar",
+    title: "Calendar",
+    role: "admin",
+    icon: "fas fa-calendar-alt",
+
+    children: [
+      {
+        title: "Day Type Setup",
+        link: "admin/day-type-setup",
+        role: "admin",
+        icon: "fas fa-stop ",
+      },
+      {
+        title: "Working Day Setup",
+        link: "admin/working-day-setup",
+        role: "admin",
+        icon: "fas fa-stop ",
+      },
+      {
+        title: "Calendar Setup",
+        link: "admin/ApprovalFlow",
+        role: "admin",
+        icon: "fas fa-calendar-alt",
+      },
+    ]
+
+  },
 
   {
     title: "Approval Flow",
@@ -104,12 +132,10 @@ export const navItem = [
     role: "admin",
     icon: "fas fa-stop ",
   },
-  {
-    title: "Calendar",
-    link: "admin/ApprovalFlow",
-    role: "admin",
-    icon: "fas fa-calendar-alt",
-  },
+
+  
+
+
 
   // Admin Nav End
 

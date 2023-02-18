@@ -1,18 +1,15 @@
 import React from 'react'
-import PageTopHeader from '../../../common/PageTopHeader';
-import { IoSyncCircle } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
-import CreateLeaveApprovalFlow from './CreateLeaveApprovalFlow';
+import PageTopHeader from '../../../../common/PageTopHeader'
+import DayTypeSetupTable from './DayTypeSetupTable'
 
-const LeaveApprovalFlowList = () => {
-
+const DayTypeSetupList = () => {
   return (
     <>
-      <PageTopHeader title="Leave Workflow"/>
+      <PageTopHeader title="Day Type Setup"/>
       <div className="card shadow mb-4">
         <div className="card-header py-3 ">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">Leave Workflow Setting</h6>
+            <h6 className="m-0 font-weight-bold text-primary">Day Type Setup</h6>
           </div>
 
         </div>
@@ -30,7 +27,7 @@ const LeaveApprovalFlowList = () => {
               </div>
             </div>
           </div>
-          <CreateLeaveApprovalFlow/>
+          <DayTypeSetupTable/>
         </div>
       </div>
 
@@ -38,4 +35,4 @@ const LeaveApprovalFlowList = () => {
   )
 }
 
-export default LeaveApprovalFlowList
+export default DayTypeSetupList

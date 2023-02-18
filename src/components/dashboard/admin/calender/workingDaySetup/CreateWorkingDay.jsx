@@ -2,31 +2,26 @@ import { useFormik } from "formik";
 import React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
-import { useGetCompanyListQuery } from "../../../../services/companyApi";
-import { useBranchListByCompanyIdQuery } from "../../../../services/departmentApi";
-import { useDesignationSaveOrUpdateMutation } from "../../../../services/designationApi";
-
-const EditDesignation = ({ item, handleClose }) => {
-  
-  
+import { useGetCompanyListQuery } from "../../../../../services/companyApi";
+import { useBranchSaveOrUpdateMutation } from "../../../../../services/branchApi";
 
 
-
+const CreateWorkingDay = ({ handleClose }) => {
   const { data } = useGetCompanyListQuery();
-  const [DesignationSaveOrUpdate, res] =
-    useDesignationSaveOrUpdateMutation();
+  const [branchSaveOrUpdate, res] = useBranchSaveOrUpdateMutation();
+
   const formik = useFormik({
     initialValues: {
-      id:item.id,
-      title: item.title,
-      company_id:item.company_id,
-      branch_id: item.branch_id,
-      is_active: item.is_active,
+      name: "",
+      address: "",
+      contact_no: "",
+      company_id: "",
+      is_active: false,
     },
 
     onSubmit: async (values, { resetForm }) => {
       try {
-        const result = await DesignationSaveOrUpdate(values).unwrap();
+        const result = await branchSaveOrUpdate(values).unwrap();
         toast.success(result.message);
         resetForm();
       } catch (error) {
@@ -34,40 +29,67 @@ const EditDesignation = ({ item, handleClose }) => {
       }
     },
   });
-  const { data: baranchData } = useBranchListByCompanyIdQuery(formik.values.company_id)
-  
+
   if (res.isSuccess) {
     handleClose();
   }
 
-
-
   return (
     <>
-           <ToastContainer/>
+      <ToastContainer />
       <div className="card-body">
         <form className="form-sample" onSubmit={formik.handleSubmit}>
           <div className="row">
             <div className="col-md-6">
               <div className="form-group row">
-                <label className="col-sm-3 col-form-label">Title</label>
-                <div className="col-sm-9">
+                <label className="col-sm-4 col-form-label">Name</label>
+                <div className="col-sm-8">
                   <input
                     type="text"
                     className="form-control"
-                    name="title"
+                    placeholder="enter branch name"
+                    name="name"
                     onChange={formik.handleChange}
-                    value={formik.values.title}
-                    required
+                    value={formik.values.name}
                   />
                 </div>
               </div>
             </div>
             <div className="col-md-6">
               <div className="form-group row">
-                <label className="col-sm-3 col-form-label">Company</label>
-                <div className="col-sm-9">
-                <select
+                <label className="col-sm-4 col-form-label">Address</label>
+                <div className="col-sm-8">
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="address"
+                    placeholder="enter branch address"
+                    onChange={formik.handleChange}
+                    value={formik.values.address}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form-group row">
+                <label className="col-sm-4 col-form-label">Contact No:</label>
+                <div className="col-sm-8">
+                  <input
+                    type="number"
+                    className="form-control"
+                    placeholder="enter contact no"
+                    name="contact_no"
+                    onChange={formik.handleChange}
+                    value={formik.values.contact_no}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <div className="form-group row">
+                <label className="col-sm-4 col-form-label">Company</label>
+                <div className="col-sm-8">
+                  <select
                     className="form-control"
                     name="company_id"
                     onChange={formik.handleChange}
@@ -80,26 +102,6 @@ const EditDesignation = ({ item, handleClose }) => {
                       </option>
                     ))}
                   </select>
-                </div> 
-              </div>
-            </div>
-            <div className="col-md-6">
-              <div className="form-group row">
-                <label className="col-sm-3 col-form-label">Branch</label>
-                <div className="col-sm-9">
-                <select
-                    className="form-control"
-                    name="branch_id"
-                    onChange={formik.handleChange}
-                   value={formik.values.branch_id}
-                  >
-                    <option>Selact Branch</option>
-                    {baranchData?.data?.map((branch, i) => (
-                      <option key={i} value={branch.id}>
-                        {branch.name}
-                      </option>
-                    ))}
-                  </select>
                 </div>
               </div>
             </div>
@@ -108,7 +110,7 @@ const EditDesignation = ({ item, handleClose }) => {
               <div className="form-group row">
                 <label className="col-sm-4 col-form-label">Is Active</label>
                 <div className="col-sm-8">
-                  <div class="form-check form-switch mt-1">
+                  <div class="form-check form-switch mt-2">
                     <Form.Check
                       type="switch"
                       id="custom-switch"
@@ -116,7 +118,6 @@ const EditDesignation = ({ item, handleClose }) => {
                       name="is_active"
                       onChange={formik.handleChange}
                       value={formik.values.is_active}
-                      checked={formik.values.is_active}
                     />
                   </div>
                 </div>
@@ -143,4 +144,4 @@ const EditDesignation = ({ item, handleClose }) => {
   );
 };
 
-export default EditDesignation;
+export default CreateWorkingDay;

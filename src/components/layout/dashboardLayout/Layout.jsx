@@ -81,7 +81,7 @@ const Layout = () => {
                 ) : (
                   <img
                     className="img-profile rounded-circle "
-                    src="img/undraw_profile.svg"
+                    src="/static/img/undraw_profile.svg"
                     alt=""
                   />
                 )}
@@ -307,7 +307,7 @@ const Layout = () => {
                       <div className="dropdown-list-image mr-3">
                         <img
                           className="rounded-circle"
-                          src="img/undraw_profile_1.svg"
+                          src="/static/img/undraw_profile_1.svg"
                           alt="..."
                         />
                         <div className="status-indicator bg-success"></div>
@@ -329,7 +329,7 @@ const Layout = () => {
                       <div className="dropdown-list-image mr-3">
                         <img
                           className="rounded-circle"
-                          src="img/undraw_profile_2.svg"
+                          src="/static/img/undraw_profile_2.svg"
                           alt="..."
                         />
                         <div className="status-indicator"></div>
@@ -349,7 +349,7 @@ const Layout = () => {
                       <div className="dropdown-list-image mr-3">
                         <img
                           className="rounded-circle"
-                          src="img/undraw_profile_3.svg"
+                          src="/static/img/undraw_profile_3.svg"
                           alt="..."
                         />
                         <div className="status-indicator bg-warning"></div>
@@ -427,7 +427,7 @@ const Layout = () => {
                     ) : (
                       <img
                         className="img-profile rounded-circle "
-                        src="img/undraw_profile.svg"
+                        src="/static/img/undraw_profile.svg"
                         alt=""
                       />
                     )}
