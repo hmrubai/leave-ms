@@ -2,11 +2,10 @@ import { useFormik } from "formik";
 import React from "react";
 import { Form, Modal, Button } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
-
-import Options from "./Options";
+import Select from "./Select";
 import { useUpdateWorkingdayStatusMutation } from "../../../../../services/calenderApi";
 
-const EditWorkingDay = ({ item, handleClose }) => {
+const EditWorkingDays = ({ item, handleClose }) => {
   const [updateWorkingdayStatus, res] = useUpdateWorkingdayStatusMutation();
 
   const initialValues = {
@@ -46,14 +45,11 @@ const EditWorkingDay = ({ item, handleClose }) => {
               <div className="form-group row">
                 <label className="col-sm-12 col-form-label">Saturday</label>
                 <div className="col-sm-12">
-                  <select
-                    className="form-control"
+                  <Select
                     name="saturday"
                     onChange={formik.handleChange}
                     value={formik.values.saturday}
-                  >
-                    <Options />
-                  </select>
+                  />
                 </div>
               </div>
             </div>
@@ -61,14 +57,12 @@ const EditWorkingDay = ({ item, handleClose }) => {
               <div className="form-group row">
                 <label className="col-sm-12 col-form-label">Sunday</label>
                 <div className="col-sm-12">
-                  <select
+                  <Select
                     className="form-control"
                     name="sunday"
                     onChange={formik.handleChange}
                     value={formik.values.sunday}
-                  >
-                    <Options />
-                  </select>
+                  ></Select>
                 </div>
               </div>
             </div>
@@ -76,14 +70,12 @@ const EditWorkingDay = ({ item, handleClose }) => {
               <div className="form-group row">
                 <label className="col-sm-12 col-form-label">Monday</label>
                 <div className="col-sm-12">
-                  <select
+                  <Select
                     className="form-control"
                     name="monday"
                     onChange={formik.handleChange}
                     value={formik.values.monday}
-                  >
-                    <Options />
-                  </select>
+                  ></Select>
                 </div>
               </div>
             </div>
@@ -91,14 +83,12 @@ const EditWorkingDay = ({ item, handleClose }) => {
               <div className="form-group row">
                 <label className="col-sm-12 col-form-label">Tuesday</label>
                 <div className="col-sm-12">
-                  <select
+                  <Select
                     className="form-control"
                     name="tuesday"
                     onChange={formik.handleChange}
                     value={formik.values.tuesday}
-                  >
-                    <Options />
-                  </select>
+                  ></Select>
                 </div>
               </div>
             </div>
@@ -106,14 +96,12 @@ const EditWorkingDay = ({ item, handleClose }) => {
               <div className="form-group row">
                 <label className="col-sm-12 col-form-label">Wednesday</label>
                 <div className="col-sm-12">
-                  <select
+                  <Select
                     className="form-control"
                     name="wednesday"
                     onChange={formik.handleChange}
                     value={formik.values.wednesday}
-                  >
-                    <Options />
-                  </select>
+                  ></Select>
                 </div>
               </div>
             </div>
@@ -121,14 +109,12 @@ const EditWorkingDay = ({ item, handleClose }) => {
               <div className="form-group row">
                 <label className="col-sm-12 col-form-label">Thursday</label>
                 <div className="col-sm-12">
-                  <select
+                  <Select
                     className="form-control"
                     name="thursday"
                     onChange={formik.handleChange}
                     value={formik.values.thursday}
-                  >
-                    <Options />
-                  </select>
+                  ></Select>
                 </div>
               </div>
             </div>
@@ -136,14 +122,12 @@ const EditWorkingDay = ({ item, handleClose }) => {
               <div className="form-group row">
                 <label className="col-sm-12 col-form-label">Friday</label>
                 <div className="col-sm-12">
-                  <select
+                  <Select
                     className="form-control"
                     name="friday"
                     onChange={formik.handleChange}
                     value={formik.values.friday}
-                  >
-                    <Options />
-                  </select>
+                  ></Select>
                 </div>
               </div>
             </div>
@@ -169,4 +153,4 @@ const EditWorkingDay = ({ item, handleClose }) => {
   );
 };
 
-export default EditWorkingDay;
+export default EditWorkingDays;

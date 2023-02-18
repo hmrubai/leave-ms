@@ -1,11 +1,8 @@
 import React, { useState, useCallback } from "react";
 
-import {
-  BsFillPlusCircleFill,
-} from "react-icons/bs";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { IoSyncCircle } from "react-icons/io5";
-
 
 import WorkingDayTable from "./WorkingDayTable";
 import WorkingDayModal from "./WorkingDayModal";
@@ -13,12 +10,10 @@ import { useGetBranchListQuery } from "../../../../../services/branchApi";
 import PageTopHeader from "../../../../common/PageTopHeader";
 // import { useSelector } from "react-redux";
 
-
 const WorkingDayList = () => {
+  //  const user= useSelector((state) => state.auth.role);
 
-//  const user= useSelector((state) => state.auth.role);
-
-// console.log(user);
+  // console.log(user);
 
   const get = useGetBranchListQuery();
   const [clickValue, setClickValue] = useState(null);
@@ -35,18 +30,14 @@ const WorkingDayList = () => {
   //   get.refetch();
   // };
 
-
   return (
     <>
-  <PageTopHeader title="Branch"/>
+      <PageTopHeader title="Working Day" />
       <div className="card shadow mb-4">
         <div className="card-header py-3 n">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">All Branch List</h6>
-
-
+            <h6 className="m-0 font-weight-bold text-primary">Working Day</h6>
           </div>
-
         </div>
 
         <div className="card-body">
