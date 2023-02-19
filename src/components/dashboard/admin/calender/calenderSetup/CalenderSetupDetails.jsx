@@ -1,9 +1,9 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 
-const LeaveBalanceDetails = ( {item,handleClose} ) => {
+const CalenderSetupDetails = ( {item,handleClose} ) => {
 
-  console.log(item)
+
 
 
   return (
@@ -62,4 +62,4 @@ const LeaveBalanceDetails = ( {item,handleClose} ) => {
   );
 };
 
-export default LeaveBalanceDetails;
+export default CalenderSetupDetails;

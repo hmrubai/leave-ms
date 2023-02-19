@@ -1,14 +1,14 @@
 import React, { useState, useCallback } from "react";
-
 import WorkingDayModal from "./WorkingDayModal";
 import Loader from "./../../../../common/Loader";
-
-import { useGetWorkingDayStatusListQuery } from "../../../../../services/calenderApi";
+import { useGetWorkingDayStatusListQuery, useTestQuery } from "../../../../../services/calenderApi";
 import DayRow from "./DayRow";
 import { FaEdit } from "react-icons/fa";
 
+
 const WorkingDayTable = () => {
   const { data, isSuccess, isFetching } = useGetWorkingDayStatusListQuery();
+
 
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);

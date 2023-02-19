@@ -7,20 +7,29 @@ import { Box, Button } from "@mui/material";
 import { BsFillEyeFill, BsFillPlusCircleFill } from "react-icons/bs";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
-import Loader from "../../../common/Loader";
 
-import LeaveBalanceModal from "./LeaveBalanceModal";
-import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
-import { useGetleaveSettingListQuery } from "../../../../services/leaveBalanceApi";
+
+
 import { IoSyncCircle } from "react-icons/io5";
 import Select from "react-select";
+import Loader from "../../../common/Loader";
 
-const LeaveBalanceTable = () => {
+import {
+  useGetCalenderListByYearQuery,
+  useGetYearListQuery,
+} from "../../../../services/calenderApi";
+import { useGetLeaveBalenceSettingsQuery } from "../../../../services/leaveBalanceSettingsApi";
+import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
+
+import BalanceSettingsModal from "./BalanceSettingsModal";
+
+const BalanceSettingsTable = () => {
   const [employmentTypeId, setEmploymentTypeId] = useState(0);
   const { data: employmentType } = useGetEmploymentTypeListQuery();
+
   const { data, isSuccess, isFetching } =
-    useGetleaveSettingListQuery(employmentTypeId);
-  const get = useGetleaveSettingListQuery(employmentTypeId);
+    useGetLeaveBalenceSettingsQuery(employmentTypeId);
+  const get = useGetCalenderListByYearQuery(employmentTypeId);
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
@@ -121,7 +130,7 @@ const LeaveBalanceTable = () => {
     <>
       {isFetching && <Loader />}
 
-      <LeaveBalanceModal
+      <BalanceSettingsModal
         show={show}
         handleClose={handleClose}
         clickValue={clickValue}
@@ -160,7 +169,8 @@ const LeaveBalanceTable = () => {
                 handelClickValue("Add Leave Balance Information");
               }}
             >
-              <BsFillPlusCircleFill className="mb-1 mr-1" /> New
+              <BsFillPlusCircleFill className="mb-1 mr-1" />
+              New Leave Settings
             </Link>
           </div>
         </div>
@@ -244,4 +254,4 @@ const LeaveBalanceTable = () => {
   );
 };
 
-export default React.memo(LeaveBalanceTable);
+export default React.memo(BalanceSettingsTable);

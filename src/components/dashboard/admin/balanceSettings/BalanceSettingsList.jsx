@@ -5,11 +5,15 @@ import { Link } from "react-router-dom";
 import { IoSyncCircle } from "react-icons/io5";
 import { useGetdepartmentListQuery } from "../../../../services/departmentApi";
 import PageTopHeader from "../../../common/PageTopHeader";
-import LeaveBalanceModal from "./LeaveBalanceModal";
-import LeaveBalanceTable from "./LeaveBalanceTable";
+import LeaveBalanceModal from "./BalanceSettingsModal";
+import LeaveBalanceTable from "./BalanceSettingsTable";
+import { useGetLeaveBalenceSettingsQuery } from "../../../../services/leaveBalanceSettingsApi";
 
-const LeaveBalanceList = () => {
+const BalanceSettingsList = () => {
   const get = useGetdepartmentListQuery();
+
+
+
   const [clickValue, setClickValue] = useState(null);
   const [show, setShow] = useState(false);
 
@@ -74,5 +78,5 @@ const LeaveBalanceList = () => {
   );
 };
 
-export default React.memo(LeaveBalanceList);
+export default React.memo(BalanceSettingsList);
 

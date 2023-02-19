@@ -4,16 +4,17 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
 import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
-import { useLeaveSettingSaveOrUpdateMutation } from "../../../../services/leaveBalanceApi";
-import { useGetLeavePolicyListQuery } from "../../../../services/leavepolicyApi";
 
-const EditLeaveBalance = ({ handleClose,item }) => {
+import { useGetLeavePolicyListQuery } from "../../../../services/leavepolicyApi";
+import { useLeaveBalanceSettingSaveOrUpdateMutation } from "../../../../services/leaveBalanceSettingsApi";
+
+const EditBalanceSettings = ({ handleClose,item }) => {
   const { data } = useGetCompanyListQuery();
   const { data:LeavePolicy } = useGetLeavePolicyListQuery();
   const { data:EmploymentType } = useGetEmploymentTypeListQuery();
 
-  const [leaveSettingSaveOrUpdate, res] =
-    useLeaveSettingSaveOrUpdateMutation();
+  const [leaveBalanceSettingSaveOrUpdate, res] =
+  useLeaveBalanceSettingSaveOrUpdateMutation();
   
   const formik = useFormik({
     initialValues: {
@@ -27,7 +28,7 @@ const EditLeaveBalance = ({ handleClose,item }) => {
 
     onSubmit: async (values, { resetForm }) => {
       try {
-        const result = await leaveSettingSaveOrUpdate(values).unwrap();
+        const result = await leaveBalanceSettingSaveOrUpdate(values).unwrap();
         toast.success(result.message);
         resetForm();
       } catch (error) {
@@ -163,4 +164,4 @@ const EditLeaveBalance = ({ handleClose,item }) => {
   );
 };
 
-export default EditLeaveBalance;
+export default EditBalanceSettings;

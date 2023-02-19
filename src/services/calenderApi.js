@@ -7,6 +7,7 @@ export const calenderApi = createApi({
     baseUrl: process.env.REACT_APP_API_URL,
   }),
   tagTypes: ["Calender"],
+
   endpoints: (builder) => ({
     getDayTypeList: builder.query({
       query: () => ({
@@ -16,6 +17,7 @@ export const calenderApi = createApi({
       }),
       providesTags: ["Calender"],
     }),
+
     getWorkingDayStatusList: builder.query({
       query: () => ({
         url: `admin/day-status-list`,
@@ -37,9 +39,69 @@ export const calenderApi = createApi({
       invalidatesTags: ["Calender"],
     }),
 
+    getCalenderListByYear: builder.query({
+      query: (year) => ({
+        url: `/admin/calender?year=${year}`,
+        method: "GET",
+        headers,
+      }),
+      providesTags: ["Calender"],
+    }),
+ 
+    getYearList: builder.query({
+      query: () => ({
+        url: `admin/year-list`,
+        method: "GET",
+        headers,
+      }),
+      providesTags: ["Calender"],
+    }),
+
+
+    generateCalender: builder.mutation({
+      query: (status) => {
+        return {
+          url: `admin/generate-calender`,
+          method: "POST",
+          body: status,
+          headers,
+        };
+      },
+      invalidatesTags: ["Calender"],
+    }),
+    updateCalender: builder.mutation({
+      query: (status) => {
+        return {
+          url: `admin/update-calender`,
+          method: "POST",
+          body: status,
+          headers,
+        };
+      },
+      invalidatesTags: ["Calender"],
+    }),
+
+
+   test: builder.query({
+      query: (id) => ({
+        url: `admin/leave-setting-list/${id}}`,
+        method: "GET",
+        headers,
+      }),
+      providesTags: ["Calender"],
+    }),
+
 
   }),
 });
 
-export const {useGetDayTypeListQuery ,useGetWorkingDayStatusListQuery,useUpdateWorkingdayStatusMutation} =
-calenderApi;
+export const {
+  useGetDayTypeListQuery,
+  useGetWorkingDayStatusListQuery,
+  useUpdateWorkingdayStatusMutation,
+  useGetCalenderListByYearQuery,
+  useGetYearListQuery,
+  useGenerateCalenderMutation,
+  useUpdateCalenderMutation,
+  useTestQuery
+} = calenderApi;

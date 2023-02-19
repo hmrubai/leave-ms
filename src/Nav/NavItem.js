@@ -5,12 +5,12 @@ export const navItem = [
  
 
 
-  {
-    title: "About",
-    link: "about",
-    role: "admin",
-    icon: "fas fa-dice-d6",
-  },
+  // {
+  //   title: "About",
+  //   link: "about",
+  //   role: "admin",
+  //   icon: "fas fa-dice-d6",
+  // },
   {
     UID: "settings",
     title: "Master Settings",
@@ -55,7 +55,7 @@ export const navItem = [
         icon: "fas  fa-user-tie",
       },
       {
-        title: "Leave Type",
+        title: "Leave Policy",
         link: "admin/leave-type",
         role: "admin",
         icon: "fas fa-sign-out-alt",
@@ -69,7 +69,7 @@ export const navItem = [
      
       },
       {
-        title: "Leave Balance",
+        title: "Balance Settings",
         link: "admin/leave-balance",
         role: "admin",
         icon: "fas fa-money-check",
@@ -118,7 +118,7 @@ export const navItem = [
       },
       {
         title: "Calendar Setup",
-        link: "admin/ApprovalFlow",
+        link: "admin/calendar-setup",
         role: "admin",
         icon: "fas fa-calendar-alt",
       },
