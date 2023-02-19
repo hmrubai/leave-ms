@@ -6,8 +6,8 @@ import Sidebar from "./Sidebar";
 import logo_sm from "../../../assets/logo/sm_logo.png";
 import "./Dashboard.css";
 import ScrollToTop from "react-scroll-to-top";
-// import { HiBars3BottomLeft } from "react-icons/hi2";
-// import { useSelector } from './../../../store/index';
+import { BiHomeAlt } from "react-icons/bi";
+
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../features/authSlice";
 import { toast, ToastContainer } from "react-toastify";
@@ -102,8 +102,8 @@ const Layout = () => {
           </li>
           <li className="nav-item active mt-3">
             <NavLink className="nav-link nav-hover" to="/dashboard">
-              <i className="fas fa-fw fa-home"></i>
-              <span>Dashboard</span>
+              <BiHomeAlt size={18} />
+              <span className="ms-1">Dashboard</span>
             </NavLink>
             {/* <div className="text-center d-none d-md-inline">
                           <button className="rounded-circle border-0" id="sidebarToggle" onClick={changeStyle}></button>

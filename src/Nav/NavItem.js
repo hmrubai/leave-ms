@@ -1,3 +1,18 @@
+import { FiSettings } from 'react-icons/fi';
+import { BiWalletAlt } from 'react-icons/bi';
+import { BsCalendar3,BsBox,BsCalendar2Check,BsCalendar2Day,BsCalendarCheck } from 'react-icons/bs';
+import { MdAppRegistration,MdOutlinePolicy } from 'react-icons/md';
+import { HiOutlineOfficeBuilding, } from 'react-icons/hi';
+import { TbGitBranch } from 'react-icons/tb';
+import { FaSith ,FaCodepen,FaUserInjured} from 'react-icons/fa';
+import { GoGraph } from 'react-icons/go';
+import { AiOutlineCodeSandbox } from 'react-icons/ai';
+import { MdWorkOutline } from 'react-icons/md';
+
+
+
+
+
 export const navItem = [
   //UID Mustbe Uges String
 
@@ -15,64 +30,64 @@ export const navItem = [
     UID: "settings",
     title: "Master Settings",
     role: "admin",
-    icon: "fas fa-cog",
+    icon: <FiSettings/>,
     children: [
       {
-        title: "Company",
+        title: "Company Info",
         link: "admin/company-list",
         role: "admin",
-        icon: "fas fa-building",
+        icon: <HiOutlineOfficeBuilding size={18}/>,
       },
     
       {
         title: "Employee",
         link: "admin/employee-list",
         role: "admin",
-        icon: "fas fa-user",
+        icon: <FaUserInjured size={17} />,
       },
       {
         title: "Branch",
         link: "admin/branch-list",
         role: "admin",
-        icon: "fas fa-industry",
+        icon: <TbGitBranch size={ 19} />,
       },
       {
         title: "Designation",
         link: "admin/designation-list",
         role: "admin",
-        icon: "fas fa-dice-d6",
+        icon: <FaSith size={18}/>,
       },
       {
         title: "Department",
         link: "admin/department-list",
         role: "admin",
-        icon: "fas fa-box",
+        icon: <FaCodepen size={18}/>,
       },
       {
         title: "Employment",
         link: "admin/employment-list",
         role: "admin",
-        icon: "fas  fa-user-tie",
+        icon: <BsBox size={16}/>,
       },
       {
         title: "Leave Policy",
         link: "admin/leave-type",
         role: "admin",
-        icon: "fas fa-sign-out-alt",
+        icon: <MdOutlinePolicy size={18}/>,
     
       },
       {
         title: "Fiscal Year",
         link: "admin/fiscal-year-list",
         role: "admin",
-        icon: "fas fa-vote-yea",
+        icon: <BsCalendar2Check size={16}/>,
      
       },
       {
         title: "Balance Settings",
         link: "admin/leave-balance",
         role: "admin",
-        icon: "fas fa-money-check",
+        icon: <GoGraph size={17}/>,
       },
 
 
@@ -85,14 +100,14 @@ export const navItem = [
     UID: "blance",
     title: "Balance",
     role: "admin",
-    icon: "fas fa-layer-group",
+    icon: <BiWalletAlt size={18}/>,
 
     children: [
       {
         title: "Balance Setup",
         link: "admin/balance-setup",
         role: "admin",
-        icon: "fas fa-th-large",
+        icon: <AiOutlineCodeSandbox size={18}/>,
       },
     ]
 
@@ -101,26 +116,26 @@ export const navItem = [
     UID: "calendar",
     title: "Calendar",
     role: "admin",
-    icon: "fas fa-calendar-alt",
+    icon: <BsCalendar3 size={15}/>,
 
     children: [
       {
         title: "Day Type Setup",
         link: "admin/day-type-setup",
         role: "admin",
-        icon: "fas fa-stop ",
+        icon: <BsCalendar2Day size={15}/>,
       },
       {
         title: "Working Day Setup",
         link: "admin/working-day-setup",
         role: "admin",
-        icon: "fas fa-stop ",
+        icon: <MdWorkOutline size={18}/>,
       },
       {
         title: "Calendar Setup",
         link: "admin/calendar-setup",
         role: "admin",
-        icon: "fas fa-calendar-alt",
+        icon: <BsCalendarCheck size={15}/>,
       },
     ]
 
@@ -130,7 +145,7 @@ export const navItem = [
     title: "Approval Flow",
     link: "admin/ApprovalFlow",
     role: "admin",
-    icon: "fas fa-stop ",
+    icon: <MdAppRegistration size={20}/>,
   },
 
   
