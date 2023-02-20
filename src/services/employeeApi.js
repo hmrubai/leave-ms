@@ -91,6 +91,14 @@ export const employeeApi = createApi({
       }),
       providesTags: ["Employee"],
     }),
+    getApprovalAuthorityList: builder.query({
+      query: () => ({
+        url: "admin/approval-authority-list",
+        method: "GET",
+        headers,
+      }),
+      providesTags: ["Employee"],
+    }),
   }),
 });
 
@@ -103,5 +111,6 @@ export const {
   useGetUpazilaListByIdQuery,
   useGetAreaListByIdQuery,
   useEmployeeDetailsByIdQuery,
-  useLeaveBalanceListByEmpIdQuery
+  useLeaveBalanceListByEmpIdQuery,
+  useGetApprovalAuthorityListQuery,
 } = employeeApi;
