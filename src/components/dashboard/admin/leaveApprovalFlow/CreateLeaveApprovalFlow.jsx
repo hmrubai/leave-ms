@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import { useGetEmployeeFilterListQuery } from "../../../../services/leaveApprovalFlowApi";
+import { BsFillPlusCircleFill } from "react-icons/bs";
+import { RxCrossCircled } from "react-icons/rx";
+import {
+  useAddApprovalFlowMutation,
+  useGetEmployeeFilterListQuery,
+} from "../../../../services/leaveApprovalFlowApi";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
 import { useGetBranchListByCompanyIdQuery } from "../../../../services/branchApi";
 import { useGetDepartmentListByCompanyAndBranchIdQuery } from "../../../../services/departmentApi";
-import { useFormik } from "formik";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { useGetDesignationtListByCompanyAndBranchIdQuery } from "../../../../services/designationApi";
 import StepSelect from "./StepSelect";
 
@@ -15,34 +19,25 @@ const CreateLeaveApprovalFlow = () => {
   const [branchId, setBranchId] = useState(0);
   const [departmentId, setDepartmentId] = useState(0);
   const [designationId, setDesignationId] = useState(0);
-  const [noOfSteps, setNoOfSteps] = useState(0);
+  const [addApprovalFlow, res] = useAddApprovalFlowMutation();
+  const [stepList, setstepList] = useState([{ authority_id: "" }]);
 
-  const [selectNoOfSteps, setSelectNoOfSteps] = useState([]);
+  const handleServiceChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...stepList];
+    list[index][name] = value;
+    setstepList(list);
+  };
 
-  const [stepOne, setStepOne] = useState({
-    step_count: 1,
-    authority_id:"",
-  });
+  const handleServiceRemove = (index) => {
+    const list = [...stepList];
+    list.splice(index, 1);
+    setstepList(list);
+  };
 
-  const [stepTwo, setStepTwo] = useState({
-    step_count: 2,
-    authority_id: "",
-  });
-  const [stepThree, setStepThree] = useState({
-    step_count: 3,
-    authority_id: "",
-  });
-  const [stepFour, setStepFour] = useState({
-    step_count: 4 ,
-    authority_id: "",
-  });
-
-  console.log(stepOne);
-
-  const handleChange = (e) => setStepOne({ ...stepOne, [e.target.name]: e.target.value });
-
-
-
+  const handleServiceAdd = () => {
+    setstepList([...stepList, { authority_id: "" }]);
+  };
 
   const companyList = useGetCompanyListQuery();
   const branchList = useGetBranchListByCompanyIdQuery(companyId);
@@ -90,37 +85,52 @@ const CreateLeaveApprovalFlow = () => {
     }
   };
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const employeeid = [];
+    if (employeeId === undefined) {
+      toast.warn("Please Select Employee");
+    }
 
+    if (employeeId !== undefined) {
+      employeeId.map((item) => {
+        employeeid.push(item.id);
+      });
+    }
 
-  const formik = useFormik({
-    initialValues: {
-      employee_ids: [],
-      steps: [],
-    },
+    if (stepList[0].authority_id === "") {
+      toast.warn("Please Select Step");
+    }
 
+    if (employeeId !== undefined && stepList[0].authority_id !== "") {
+      const data = {
+        employee_ids: employeeid,
+        steps: stepList,
+      };
 
-
-    onSubmit: async (values, { resetForm }) => {
       try {
-        // const result = await DesignationSaveOrUpdate(values).unwrap();
-        // toast.success(result.message);
-        const employeeid = [];
-        employeeId.map((item) => {
-          employeeid.push(item.id);
-        });
+        const result = await addApprovalFlow(data).unwrap();
+        toast.success(result.message);
 
-        console.log(employeeid);
-
-        resetForm();
+        // console.log(data);
+        setCompanyId(0);
+        setBranchId(0);
+        setDepartmentId(0);
+        setDesignationId(0);
+        setEmployeeId("");
+        setstepList([{ authority_id: "" }]);
       } catch (error) {
         toast.warn(error.data.message);
       }
-    },
-  });
+    }
+  };
 
   return (
     <div>
-      <form className="form-sample" onSubmit={formik.handleSubmit}>
+      {res.isLoading && <div className="loader"></div>}
+
+      <ToastContainer />
+      <form className="form-sample" onSubmit={submitHandler}>
         <div className="row">
           <div className="col-md-3">
             <div>
@@ -201,7 +211,7 @@ const CreateLeaveApprovalFlow = () => {
             </select>
           </div>
 
-          <div className="col-md-8">
+          <div className="col-md-12">
             <div>
               <label className="form-label">Employee</label>
             </div>
@@ -219,71 +229,47 @@ const CreateLeaveApprovalFlow = () => {
             />
           </div>
 
-          <div className="col-md-4">
-            <div>
-              <label className="form-label">No. Of Steps</label>
-            </div>
+          <div className="row pt-2">
+            <label htmlFor="authority_id">Appruval By</label>
+            {stepList.map((singleService, index) => (
+              <div key={index} className=" col-md-3">
+                <div className="first-division ">
+                  <StepSelect
+                    step={index}
+                    name="authority_id"
+                    type="text"
+                    id="authority_id"
+                    value={singleService.authority_id}
+                    onChange={(e) => handleServiceChange(e, index)}
+                    required
+                  />
+                </div>
 
-            <select
-              className="form-select"
-              aria-label="Default select example"
-              onChange={(e) => setNoOfSteps(e.target.value)}
-              name="noOfSteps"
-            >
-              <option selected value="0">
-                Select step
-              </option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
-          </div>
+                <div className=" d-flex py-2">
+                  <div>
+                    {stepList.length - 1 === index && stepList.length < 4 && (
+                      <BsFillPlusCircleFill
+                        className="cursor-pointer ms-2"
+                        size={20}
+                        color="green"
+                        onClick={handleServiceAdd}
+                      />
+                    )}
+                  </div>
 
-          <div className={noOfSteps >= "1" ? " d-block col-md-3" : "d-none"}>
-            <div>
-              <label className="form-label">Step-1:</label>
-            </div>
-
-            <StepSelect
-              name="authority_id"
-              onChange={handleChange}
-              value={stepOne.authority_id}
-            />
-          </div>
-          <div className={noOfSteps >= "2" ? " d-block col-md-3" : "d-none"}>
-            <div>
-              <label className="form-label">Step-2:</label>
-            </div>
-
-            <StepSelect
-              name="authority_id"
-              onChange={handleChange}
-              
-            />
-          </div>
-
-          <div className={noOfSteps >= "3" ? " d-block col-md-3" : "d-none"}>
-            <div>
-              <label className="form-label">Step-3:</label>
-            </div>
-
-            <StepSelect
-              // name={stepThree}
-              // onChange={(e) => setStepThree(e.target.value)}
-              // value={stepThree}
-            />
-          </div>
-          <div className={noOfSteps >= "4" ? " d-block col-md-3" : "d-none"}>
-            <div>
-              <label className="form-label">Step-4:</label>
-            </div>
-
-            <StepSelect
-              // name={stepFour}
-              // onChange={(e) => setStepFour(e.target.value)}
-              // value={stepFour}
-            />
+                  <div className="second-division">
+                    {stepList.length !== 1 && (
+                      <RxCrossCircled
+                        onClick={() => handleServiceRemove(index)}
+                        color="red"
+                        size={22}
+                        className="cursor-pointer ms-2"
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
