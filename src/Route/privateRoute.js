@@ -48,6 +48,12 @@ export const privateRoute = [
         role: 'all'
     },
     {
+        path: 'admin',
+        element: <AdminPage />,
+        role: 'admin',
+
+    },
+    {
         path: 'admin/employee-list',
         element: <EmployeeList />,
         role: 'admin',
@@ -146,43 +152,52 @@ export const privateRoute = [
 
 
     {
-        path: 'admin/ApprovalFlow',
+        path: 'admin/approval-flow',
         element: <LeaveApprovalFlowList/> ,
         role: 'admin',
 
     },
-    {
-        path: 'admin',
-        element: <AdminPage />,
-        role: 'admin',
+ 
+    // {
+    //     path: 'about',
+    //     element: <About />,
+    //     role: 'admin',
 
-    },
-    {
-        path: 'about',
-        element: <About />,
-        role: 'admin',
+    // },
 
-    },
-    {
-        path: 'payment',
-        element: <Payment />,
-        role: 'admin'
-    },
     //<====================== Admin Route End ====================>
-    {
-        path: 'employee',
-        element: <Employee />,
-        role: 'employee'
-    },
-    {
-        path: 'others',
-        element: <Others />,
-        role: 'others'
-    },
+
+    
+    //  <====================== Approval Authority Route Start ====================>
+
     {
         path: 'approval-authority',
         element: <ApprovalAuthority />,
         role: 'approvalauthority'
     },
+
+    //  <====================== Approval Authority Route End ====================>
+
+    // <====================== Employee Route Start ====================>
+    
+    {
+        path: 'employee',
+        element: <Employee />,
+        role: 'employee'
+    },
+
+    // <====================== Employee Route End ====================>
+
+    // <====================== Others Route Start ====================>
+
+    {
+        path: 'others',
+        element: <Others />,
+        role: 'others'
+    },
+
+    // <====================== Others Route End ====================>
+
+
    
 ]

@@ -48,7 +48,7 @@ const EditLeaveApprovalFlow = ({ item, handleClose }) => {
 
       <ToastContainer />
       <form className="form-sample" onSubmit={formik.handleSubmit}>
-        <div className="row">
+        <div className="row ">
           <div>
             <h5>Employee: {item.employee_name}</h5>
             <h5>Email: {item.employee_email}</h5>

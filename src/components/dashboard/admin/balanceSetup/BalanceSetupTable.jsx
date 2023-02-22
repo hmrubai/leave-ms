@@ -14,10 +14,13 @@ import BalanceSetupModal from "./BalanceSetupModal";
 import { useGetBalanceSetupListQuery } from "../../../../services/balanceSetupApi";
 import { useGetEmployeeListQuery } from "../../../../services/employeeApi";
 
-
 const BalanceSetupTable = () => {
   const [employeeId, setEmployeeId] = useState(1);
-  const { data, isSuccess, isFetching } = useGetBalanceSetupListQuery(employeeId);
+  const [isTrue, setIsTrue] = useState(true);
+  const { data, isSuccess, isFetching } = useGetBalanceSetupListQuery(
+    employeeId,
+    { skip: isTrue }
+  );
   const { data: employeeList } = useGetEmployeeListQuery();
   const get = useGetBalanceSetupListQuery(employeeId);
 
@@ -26,7 +29,6 @@ const BalanceSetupTable = () => {
   const [paramId, setParamId] = useState(null);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
 
   const handelClickValue = useCallback((value) => {
     setClickValue(value);
@@ -103,8 +105,6 @@ const BalanceSetupTable = () => {
     csvExporter.generateCsv(rows.map((row) => row.original));
   };
 
-
-
   return (
     <>
       {isFetching && <Loader />}
@@ -130,13 +130,14 @@ const BalanceSetupTable = () => {
 
           <div className="col-md-3">
             <Select
-
-              isClearable={true}
+              // isClearable={true}
               classNamePrefix="Employment Type"
-              backspaceRemovesValue={true}
-              onChange={(e) => setEmployeeId(e.id)}
+              // backspaceRemovesValue={true}
+              onChange={(e) => setEmployeeId(e.id, setIsTrue(false))}
               getOptionValue={(option) => `${option["id"]}`}
-              getOptionLabel={(option) => `${option["name"]} (${option["employee_code"]})`}
+              getOptionLabel={(option) =>
+                `${option["name"]} (${option["employee_code"]})`
+              }
               options={employeeList?.data}
             />
           </div>
@@ -156,8 +157,6 @@ const BalanceSetupTable = () => {
       </div>
 
       <MaterialReactTable
-        
-
         enableRowSelection
         columns={columns}
         data={isSuccess && data?.data?.balance_list}
@@ -165,7 +164,6 @@ const BalanceSetupTable = () => {
         enableColumnActions
         enableRowNumbers
         positionActionsColumn="last"
-        
         renderTopToolbarCustomActions={({ table }) => (
           <Box
             sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}

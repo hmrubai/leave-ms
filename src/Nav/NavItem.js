@@ -104,7 +104,7 @@ export const navItem = [
       },
       {
         title: "Approval Flow",
-        link: "admin/ApprovalFlow",
+        link: "admin/approval-flow",
         role: "admin",
         icon: <MdAppRegistration size={20} />,
       },
@@ -143,6 +143,7 @@ export const navItem = [
     role: "admin",
     icon: <FcLeave size={18} />,
   },
+  
 
   // Admin Nav End
 

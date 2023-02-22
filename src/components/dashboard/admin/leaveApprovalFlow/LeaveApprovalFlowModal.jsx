@@ -10,12 +10,12 @@ const LeaveApprovalFlowModal = ({ handleClose, show, clickValue, paramId }) => {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose} size="md">
+      <Modal show={show} onHide={handleClose}  size="md">
         <Modal.Header closeButton>
           <Modal.Title>{clickValue}</Modal.Title>
         
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body >
           {clickValue === "Branch Information" && <BranchDetails item={paramId} handleClose={handleClose}/>}
           {clickValue === "Add approval" && <CreateLeaveApprovalFlow handleClose={handleClose}/>}
           {clickValue === "Edit Step" && <EditLeaveApprovalFlow item={paramId} handleClose={handleClose} />}
