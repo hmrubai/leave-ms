@@ -3,15 +3,17 @@ import { useGetApprovalAuthorityListQuery } from "../../../../services/employeeA
 
 const StepSelect = ({ onChange, value, name,step }) => {
   const res = useGetApprovalAuthorityListQuery();
+
   return (
     <>
+      <label className="form-label"> {step===0&& `${step+1}st`} {step===1&& `${step+1}nd`} {step===2&& `${step+1}nd`} Step</label>
       <select
-        className="form-control"
-        name={name}
-        onChange={onChange}
-        value={value}
+             className="form-control"
+             name={name}
+             onChange={onChange}
+             value={value}
       >
-        <option value="">Select Step { step+1}</option>
+        <option value="">Select Authority</option>
         {res.isSuccess &&
           res?.data?.data?.map((item, i) => (
             <option key={i} value={item.id}>

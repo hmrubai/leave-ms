@@ -8,6 +8,8 @@ export const branchApi = createApi({
   }),
   tagTypes: ["Branch"],
   endpoints: (builder) => ({
+
+
     getBranchList: builder.query({
       query: () => ({
         url: "admin/branch-list",
@@ -16,6 +18,8 @@ export const branchApi = createApi({
       }),
       providesTags: ["Branch"],
     }),
+
+    
     branchSaveOrUpdate: builder.mutation({
       query: (branch) => {
         return {

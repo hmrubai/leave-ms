@@ -20,7 +20,6 @@ export const leaveApprovalFlowApi = createApi({
       },
       providesTags: ["Leave ApprovalFlow"],
     }),
-    // /
 
     addApprovalFlow: builder.mutation({
       query: (Flow) => {
@@ -34,9 +33,32 @@ export const leaveApprovalFlowApi = createApi({
       invalidatesTags: ["Leave ApprovalFlow"],
     }),
 
-  
+    updateApprovalFlow: builder.mutation({
+      query: (Flow) => {
+        return {
+          url: `/admin/update-approval-flow`,
+          method: "POST",
+          body: Flow,
+          headers,
+        };
+      },
+      invalidatesTags: ["Leave ApprovalFlow"],
+    }),
 
+    getApprovalFlowList: builder.query({
+      query: () => ({
+        url: "admin/approval-flow-list",
+        method: "GET",
+        headers,
+      }),
+      providesTags: ["Leave ApprovalFlow"],
+    }),
   }),
 });
 
-export const { useGetEmployeeFilterListQuery, useAddApprovalFlowMutation} = leaveApprovalFlowApi;
+export const {
+  useGetEmployeeFilterListQuery,
+  useAddApprovalFlowMutation,
+  useGetApprovalFlowListQuery,
+  useUpdateApprovalFlowMutation,
+} = leaveApprovalFlowApi;

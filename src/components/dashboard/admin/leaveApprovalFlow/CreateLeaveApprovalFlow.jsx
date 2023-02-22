@@ -12,20 +12,21 @@ import { useGetDepartmentListByCompanyAndBranchIdQuery } from "../../../../servi
 import { ToastContainer, toast } from "react-toastify";
 import { useGetDesignationtListByCompanyAndBranchIdQuery } from "../../../../services/designationApi";
 import StepSelect from "./StepSelect";
+import { Button, Modal } from "react-bootstrap";
 
-const CreateLeaveApprovalFlow = () => {
+const CreateLeaveApprovalFlow = ({ handleClose }) => {
   const [employeeId, setEmployeeId] = useState();
   const [companyId, setCompanyId] = useState(0);
   const [branchId, setBranchId] = useState(0);
   const [departmentId, setDepartmentId] = useState(0);
   const [designationId, setDesignationId] = useState(0);
   const [addApprovalFlow, res] = useAddApprovalFlowMutation();
-  const [stepList, setstepList] = useState([{ authority_id: "" }]);
+  const [stepList, setstepList] = useState([{ authority_id: 0 }]);
 
   const handleServiceChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...stepList];
-    list[index][name] = value;
+    list[index][name] = Number(value);
     setstepList(list);
   };
 
@@ -36,7 +37,7 @@ const CreateLeaveApprovalFlow = () => {
   };
 
   const handleServiceAdd = () => {
-    setstepList([...stepList, { authority_id: "" }]);
+    setstepList([...stepList, { authority_id: 0 }]);
   };
 
   const companyList = useGetCompanyListQuery();
@@ -80,8 +81,8 @@ const CreateLeaveApprovalFlow = () => {
   const focusHandelerThree = (name, id) => {
     setDepartmentId(id);
     if (name === "department_id") {
-      setDesignationId(0);
       setEmployeeId("");
+      setDesignationId(0);
     }
   };
 
@@ -112,7 +113,6 @@ const CreateLeaveApprovalFlow = () => {
         const result = await addApprovalFlow(data).unwrap();
         toast.success(result.message);
 
-        // console.log(data);
         setCompanyId(0);
         setBranchId(0);
         setDepartmentId(0);
@@ -132,7 +132,7 @@ const CreateLeaveApprovalFlow = () => {
       <ToastContainer />
       <form className="form-sample" onSubmit={submitHandler}>
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-6">
             <div>
               <label className="form-label">Company</label>
             </div>
@@ -152,7 +152,7 @@ const CreateLeaveApprovalFlow = () => {
               ))}
             </select>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-6">
             <div>
               <label className="form-label">Branch</label>
             </div>
@@ -171,7 +171,7 @@ const CreateLeaveApprovalFlow = () => {
               ))}
             </select>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-6">
             <div>
               <label className="form-label">Department</label>
             </div>
@@ -190,7 +190,7 @@ const CreateLeaveApprovalFlow = () => {
               ))}
             </select>
           </div>
-          <div className="col-md-3">
+          <div className="col-md-6">
             <div>
               <label className="form-label">Designation</label>
             </div>
@@ -229,11 +229,11 @@ const CreateLeaveApprovalFlow = () => {
             />
           </div>
 
-          <div className="row pt-2">
-            <label htmlFor="authority_id">Appruval By</label>
+          <div className="row py-2">
+            {/* <label htmlFor="authority_id">Appruval By</label> */}
             {stepList.map((singleService, index) => (
-              <div key={index} className=" col-md-3">
-                <div className="first-division ">
+              <div key={index} className=" col-md-4 d-flex">
+                <div >
                   <StepSelect
                     step={index}
                     name="authority_id"
@@ -243,11 +243,11 @@ const CreateLeaveApprovalFlow = () => {
                     onChange={(e) => handleServiceChange(e, index)}
                     required
                   />
+                  
                 </div>
-
-                <div className=" d-flex py-2">
+                <div className="select-btn">
                   <div>
-                    {stepList.length - 1 === index && stepList.length < 4 && (
+                    {stepList.length - 1 === index && stepList.length < 3 && (
                       <BsFillPlusCircleFill
                         className="cursor-pointer ms-2"
                         size={20}
@@ -257,7 +257,7 @@ const CreateLeaveApprovalFlow = () => {
                     )}
                   </div>
 
-                  <div className="second-division">
+                  <div >
                     {stepList.length !== 1 && (
                       <RxCrossCircled
                         onClick={() => handleServiceRemove(index)}
@@ -268,17 +268,26 @@ const CreateLeaveApprovalFlow = () => {
                     )}
                   </div>
                 </div>
+              
               </div>
             ))}
           </div>
         </div>
 
-        <div className="pt-3">
-          <button type="submit" className="btn btn-primary mr-2">
-            Submit
-          </button>
-          <button className="btn btn-dark">Cancel</button>
-        </div>
+        <Modal.Footer>
+          <div className=" d-flex">
+            <div className="mr-5">
+              <Button type="submit" variant="success">
+                Submit
+              </Button>
+            </div>
+            <div>
+              <Button variant="dark" onClick={handleClose}>
+                Close
+              </Button>
+            </div>
+          </div>
+        </Modal.Footer>
       </form>
     </div>
   );

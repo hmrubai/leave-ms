@@ -8,6 +8,7 @@ export const leaveBalanceApi = createApi({
   }),
   tagTypes: ["LeaveBalance"],
   endpoints: (builder) => ({
+    
     getleaveSettingList: builder.query({
       query: (id) => ({
         url: `admin/leave-setting-list/${id}`,

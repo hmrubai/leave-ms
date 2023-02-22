@@ -1,10 +1,25 @@
-import React from 'react'
+import { useState,useCallback } from 'react';
 import PageTopHeader from '../../../common/PageTopHeader';
 import { IoSyncCircle } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-import CreateLeaveApprovalFlow from './CreateLeaveApprovalFlow';
+import LeaveApprovalFlowTable from './LeaveApprovalFlowTable';
+import { BsFillPlusCircleFill } from 'react-icons/bs';
+import LeaveApprovalFlowModal from './LeaveApprovalFlowModal';
+
 
 const LeaveApprovalFlowList = () => {
+
+  const [clickValue, setClickValue] = useState(null);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handelClickValue = useCallback((value) => {
+    setClickValue(value);
+  }, []);
+
+
 
   return (
     <>
@@ -18,22 +33,33 @@ const LeaveApprovalFlowList = () => {
         </div>
 
         <div className="card-body">
-          <div className="py-2 text-right mr-1">
-            <div className="d-flex justify-content-end">
-              <div className="mt-1">
-                {/* <IoSyncCircle
-                  className="cursor "
-                  color="black"
-                  size={25}
-                //   onClick={() => refatchClick()}
-                /> */}
+
+         
+          <div className="d-flex justify-content-end">
+             
+              <div>
+              <Link
+                  to="#"
+                  className="btn btn-primary "
+                  onClick={() => {
+                    handleShow();
+                    handelClickValue("Add approval");
+                  }}
+                >
+                  <BsFillPlusCircleFill className="mb-1 mr-1" /> Add Flow
+                </Link>
               </div>
             </div>
-          </div>
-          <CreateLeaveApprovalFlow/>
+        
+
+          <LeaveApprovalFlowTable/>
         </div>
       </div>
-
+      <LeaveApprovalFlowModal
+        show={show}
+        handleClose={handleClose}
+        clickValue={clickValue}
+      />
     </>
   )
 }
