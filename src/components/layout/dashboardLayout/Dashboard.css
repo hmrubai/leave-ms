@@ -37,36 +37,7 @@
   width: 0 !important;
   overflow: hidden;
 }
-.font-style {
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  color: white !important;
-}
 
-.sub-manu-bg{
-  border-left: white solid 2px;
-}
-
-.sub-manu-style {
-  font-weight: 500 !important;
-  text-align: left !important;
-  color: white !important;
-  display: flex;
-  text-decoration: none;
-  padding: 15px;
-
-}
-
-.sub-manu-style:hover{
-  text-decoration: none;
-  background-color: #0c63e4;
-  border-radius: 0px 50px 50px 0px ;
-}
-
-.sidebar-dark .nav-item .nav-hover:hover{
-  background-color:#0c63e4 !important;
-  border-radius: 0px 50px 50px 0px !important;
-}
 
 
 /* 

@@ -1,8 +1,8 @@
 import React from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Moment from 'react-moment';
-import 'moment-timezone';
+import Moment from "react-moment";
+import "moment-timezone";
 import {
   // useEmployeeDetailsByIdQuery,
   useLeaveBalanceListByEmpIdQuery,
@@ -105,20 +105,24 @@ const EmployeeDetails = () => {
               </div>
             </div>
             <div className="col-md-8 p-5">
-              <div className="row ">
-                <div className="d-flex justify-content-between">
-                  <div> <h4 className="py-2">Personal Details.</h4></div>
+            <div className="  d-flex justify-content-between">
                   <div>
-                  <Link
-              to={`/dashboard/admin/edit-employee/${empDetailsRes?.data?.data?.id}`}
-              title=""
-              className="px-2"
-            >
-              <FaEdit size={22} />
-            </Link>
+                    {" "}
+                    <h4 className="py-2">Personal Details.</h4>
+                  </div>
+                  <div>
+                    <Link
+                      to={`/dashboard/admin/edit-employee/${empDetailsRes?.data?.data?.id}`}
+                      title=""
+                      className="px-2"
+                    >
+                      <FaEdit size={22} />
+                    </Link>
                   </div>
                 </div>
-               
+              <div className="row">
+             
+
                 <div className="col-md-6">
                   <p>
                     Father Name:
@@ -209,9 +213,9 @@ const EmployeeDetails = () => {
                   <p>
                     Date of Birth:
                     <span className="font-weight-bold text-primary ">
-                      
-                      <Moment format="YYYY/MM/DD"  >{empDetailsRes?.data?.data?.date_of_birth}</Moment>
-                  
+                      <Moment format="YYYY/MM/DD">
+                        {empDetailsRes?.data?.data?.date_of_birth}
+                      </Moment>
                     </span>
                   </p>
 
@@ -265,8 +269,9 @@ const EmployeeDetails = () => {
                   </p>
                 </div>
               </div>
-              <div className="row ">
                 <h4 className="py-2 ">Company Details.</h4>
+              <div className="row ">
+              
 
                 <div className="col-md-6">
                   <p>
@@ -300,8 +305,9 @@ const EmployeeDetails = () => {
                   <p>
                     Joining Date:
                     <span className="font-weight-bold text-primary ">
-                    <Moment format="YYYY/MM/DD"  >{empDetailsRes?.data?.data?.joining_date}</Moment>
-                      
+                      <Moment format="YYYY/MM/DD">
+                        {empDetailsRes?.data?.data?.joining_date}
+                      </Moment>
                     </span>
                   </p>
                 </div>
@@ -340,8 +346,9 @@ const EmployeeDetails = () => {
                   </p>
                 </div>
               </div>
+              <h4 className="py-2 ">Address Details.</h4>
               <div className="row ">
-                <h4 className="py-2 ">Address Details.</h4>
+                
                 <div className="col-md-6">
                   <p>
                     Present Address:

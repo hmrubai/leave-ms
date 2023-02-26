@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { getRoute } from './Route';
 import { publicRoute } from './Route/publicRoute'
 import Router from './Route/Router'
-import './App.css';
+// import './App.css';
 
 const App = () => {
 

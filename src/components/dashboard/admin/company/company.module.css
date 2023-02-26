@@ -1,0 +1,21 @@
+/* Sweet Alert Coustomize Start */
+.swal2-title {
+    font-size: 13px !important;
+  }
+  
+  .swal2-html-container {
+    font-size: 12px !important;
+  }
+  .swal2-icon {
+    font-size: 8px !important;
+  }
+  .swal2-styled.swal2-confirm {
+    font-size: 11px !important;
+  }
+  .swal2-styled.swal2-cancel {
+    font-size: 11px !important;
+  }
+  
+  .swal2-popup {
+    width: 200px !important;
+  }
