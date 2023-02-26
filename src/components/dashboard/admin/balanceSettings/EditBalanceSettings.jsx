@@ -50,12 +50,12 @@ const EditBalanceSettings = ({ handleClose,item }) => {
         <form className="form-sample" onSubmit={formik.handleSubmit}>
           <div className="row">
     
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-3 col-form-label">Company</label>
                 <div className="col-sm-9">
                 <select
-                    className="form-control"
+                    className="form-control form-select"
                     name="company_id"
                     onChange={formik.handleChange}
                     value={formik.values.company_id}
@@ -70,12 +70,12 @@ const EditBalanceSettings = ({ handleClose,item }) => {
                 </div> 
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-3 col-form-label">Employment Type</label>
                 <div className="col-sm-9">
                 <select
-                    className="form-control"
+                    className="form-control form-select"
                     name="employment_type_id"
                     onChange={formik.handleChange}
                    value={formik.values.employment_type_id}
@@ -90,12 +90,12 @@ const EditBalanceSettings = ({ handleClose,item }) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-3 col-form-label">Leave Type</label>
                 <div className="col-sm-9">
                 <select
-                    className="form-control"
+                    className="form-control form-select"
                     name="leave_policy_id"
                     onChange={formik.handleChange}
                    value={formik.values.leave_policy_id}
@@ -110,7 +110,7 @@ const EditBalanceSettings = ({ handleClose,item }) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-3 col-form-label">Total Days</label>
                 <div className="col-sm-9">
@@ -125,7 +125,7 @@ const EditBalanceSettings = ({ handleClose,item }) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-4 col-form-label">Is Active</label>
                 <div className="col-sm-8">

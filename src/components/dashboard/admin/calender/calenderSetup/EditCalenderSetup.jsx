@@ -7,11 +7,7 @@ import Select from "./../workingDaySetup/Select";
 import { useUpdateCalenderMutation } from "../../../../../services/calenderApi";
 
 const EditCalenderSetup = ({ handleClose, item }) => {
-
   const [updateCalender, res] = useUpdateCalenderMutation();
-
-
-
   const formik = useFormik({
     initialValues: {
       id: item.id,
@@ -31,13 +27,14 @@ const EditCalenderSetup = ({ handleClose, item }) => {
     },
   });
 
+  
   if (res.isSuccess) {
     handleClose();
   }
 
   return (
     <>
-      <ToastContainer/>
+      <ToastContainer />
       <div className="card-body">
         <form className="form-sample" onSubmit={formik.handleSubmit}>
           <div className="row">
@@ -79,7 +76,6 @@ const EditCalenderSetup = ({ handleClose, item }) => {
                     name="day_note"
                     onChange={formik.handleChange}
                     value={formik.values.day_note}
-              
                   />
                 </div>
               </div>

@@ -48,7 +48,7 @@ const EditLeaveType = ({ handleClose ,item}) => {
       <div className="card-body">
         <form className="form-sample"  onSubmit={formik.handleSubmit}>
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">Leave Title</label>
                 <div className="col-sm-7">
@@ -63,7 +63,7 @@ const EditLeaveType = ({ handleClose ,item}) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">
                   leave Short Code
@@ -80,7 +80,7 @@ const EditLeaveType = ({ handleClose ,item}) => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">Total Days</label>
                 <div className="col-sm-7">
@@ -95,7 +95,7 @@ const EditLeaveType = ({ handleClose ,item}) => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">
                   Applicable For
@@ -115,7 +115,7 @@ const EditLeaveType = ({ handleClose ,item}) => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">
                   Document Upload After Days
@@ -132,7 +132,7 @@ const EditLeaveType = ({ handleClose ,item}) => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">
                   Max Carry Forward Days
@@ -148,7 +148,7 @@ const EditLeaveType = ({ handleClose ,item}) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">Company</label>
                 <div className="col-sm-7">
@@ -170,7 +170,7 @@ const EditLeaveType = ({ handleClose ,item}) => {
             </div>
 
             <div className="row mt-3">
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-4 col-form-label">
                     {" "}
@@ -191,7 +191,7 @@ const EditLeaveType = ({ handleClose ,item}) => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-4 col-form-label">
                     {" "}
@@ -212,7 +212,7 @@ const EditLeaveType = ({ handleClose ,item}) => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-4 col-form-label">
                     Is Carry Forward
@@ -232,7 +232,7 @@ const EditLeaveType = ({ handleClose ,item}) => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-4 col-form-label">
                     Is Document Upload
@@ -252,7 +252,7 @@ const EditLeaveType = ({ handleClose ,item}) => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-4 col-form-label">
                     Is Holiday Deduct
@@ -273,7 +273,7 @@ const EditLeaveType = ({ handleClose ,item}) => {
                 </div>
               </div>
 
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-4 col-form-label">Is Active</label>
                   <div className="col-sm-8">

@@ -13,7 +13,7 @@ const DepartmentModal = ({ handleClose, show, clickValue,paramId }) => {
  
   return (
     <>
-      <Modal show={show} onHide={handleClose} size="lg">
+      <Modal show={show} onHide={handleClose} size="md">
         <Modal.Header closeButton>
           <Modal.Title>{clickValue}</Modal.Title>
         

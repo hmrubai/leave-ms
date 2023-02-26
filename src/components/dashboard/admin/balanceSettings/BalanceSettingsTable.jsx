@@ -151,9 +151,9 @@ const BalanceSettingsTable = () => {
 
           <div className="col-md-2">
             <Select
-              isClearable={true}
+              // isClearable={true}
               classNamePrefix="Employment Type"
-              backspaceRemovesValue={true}
+              // backspaceRemovesValue={true}
               onChange={(e) => setEmploymentTypeId(e.id)}
               getOptionValue={(option) => `${option["id"]}`}
               getOptionLabel={(option) => `${option["type"]}`}

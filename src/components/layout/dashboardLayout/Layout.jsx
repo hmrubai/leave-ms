@@ -11,6 +11,7 @@ import { BiHomeAlt } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../features/authSlice";
 import { toast, ToastContainer } from "react-toastify";
+import profilePicture from "../../../assets/images/profile-picture.png"
 
 const Layout = () => {
   const dispatch = useDispatch();
@@ -81,7 +82,7 @@ const Layout = () => {
                 ) : (
                   <img
                     className="img-profile rounded-circle "
-                    src="/static/img/undraw_profile.svg"
+                    src={profilePicture}
                     alt=""
                   />
                 )}
@@ -307,7 +308,7 @@ const Layout = () => {
                       <div className="dropdown-list-image mr-3">
                         <img
                           className="rounded-circle"
-                          src="/static/img/undraw_profile_1.svg"
+                          src={profilePicture}
                           alt="..."
                         />
                         <div className="status-indicator bg-success"></div>
@@ -329,7 +330,7 @@ const Layout = () => {
                       <div className="dropdown-list-image mr-3">
                         <img
                           className="rounded-circle"
-                          src="/static/img/undraw_profile_2.svg"
+                          src={profilePicture}
                           alt="..."
                         />
                         <div className="status-indicator"></div>
@@ -349,7 +350,7 @@ const Layout = () => {
                       <div className="dropdown-list-image mr-3">
                         <img
                           className="rounded-circle"
-                          src="/static/img/undraw_profile_3.svg"
+                          src={profilePicture}
                           alt="..."
                         />
                         <div className="status-indicator bg-warning"></div>
@@ -371,7 +372,7 @@ const Layout = () => {
                       <div className="dropdown-list-image mr-3">
                         <img
                           className="rounded-circle"
-                          src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                          src={profilePicture}
                           alt="..."
                         />
                         <div className="status-indicator bg-success"></div>
@@ -427,7 +428,7 @@ const Layout = () => {
                     ) : (
                       <img
                         className="img-profile rounded-circle "
-                        src="/static/img/undraw_profile.svg"
+                        src={profilePicture}
                         alt=""
                       />
                     )}

@@ -10,9 +10,10 @@ import Swal from "sweetalert2";
 import Loader from "../../../common/Loader";
 import FiscalYearModal from "./FiscalYearModal";
 import { useGetFiscalYearListQuery } from "../../../../services/fiscalyearApi";
+import Moment from "react-moment";
 
 const FiscalYearTable = () => {
-  const { data, isSuccess, isFetching } =useGetFiscalYearListQuery ();
+  const { data, isSuccess, isFetching } = useGetFiscalYearListQuery();
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
@@ -42,23 +43,40 @@ const FiscalYearTable = () => {
     });
   };
 
-  
-
   const columns = useMemo(
     () => [
       {
         accessorKey: "fiscal_year", //access nested data with dot notation
         header: "Fiscal Year",
       },
-      {
-        accessorKey: "start_date", //access nested data with dot notation
-        header: "Start Date",
-      },
 
       {
-        accessorKey: "end_date", //normal accessorKey
-        header: "End Date",
+        // <Moment format="DD MMM YYYY" >{row.start_date}</Moment>
+        accessorFn: (row) =>
+          row.start_date && (
+            <>
+              <Moment format="dddd, DD MMM, YYYY">{row.start_date}</Moment>
+            </>
+          ), //alternate way
+        id: "start_date", //id required if you use accessorFn instead of accessorKey
+        header: "Start Date",
+        Header: <span className="table-header">Start Date</span>, //optional custom markup
       },
+      {
+        // <Moment format="DD MMM YYYY" >{row.start_date}</Moment>
+        accessorFn: (row) =>
+          row.start_date && (
+            <>
+              <Moment format="dddd, DD MMM, YYYY">{row.end_date}</Moment>
+            </>
+          ), //alternate way
+        id: "end_date", //id required if you use accessorFn instead of accessorKey
+        header: "Start Date",
+        Header: <span className="table-header">End Date</span>, //optional custom markup
+      },
+
+
+
       {
         accessorFn: (row) =>
           row.is_active === true ? (

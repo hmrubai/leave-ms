@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
+import  Moment from "react-moment";
 
 const FiscalYearDetails = ({ item, handleClose }) => {
   return (
@@ -17,16 +18,15 @@ const FiscalYearDetails = ({ item, handleClose }) => {
             <p>
               Start Date:
               <span className="font-weight-bold text-primary ">
-                {" "}
-                {item.start_date}{" "}
+                <Moment format="dddd, DD MMM, YYYY">{item.start_date}</Moment>
               </span>
             </p>
 
             <p>
               End Date:
               <span className="font-weight-bold text-primary ">
-                {" "}
-                {item.end_date}{" "}
+               
+                <Moment format="dddd, DD MMM, YYYY">{item.end_date}</Moment>
               </span>
             </p>
             <p>

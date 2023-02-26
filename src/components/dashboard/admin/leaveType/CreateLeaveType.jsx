@@ -45,14 +45,34 @@ const CreateLeaveType = ({ handleClose }) => {
       <div className="card-body">
         <form className="form-sample"  onSubmit={formik.handleSubmit}>
           <div className="row">
-            <div className="col-md-6">
+          <div className="col-md-12">
               <div className="form-group row">
-                <label className="col-sm-5 col-form-label">Leave Title</label>
+                <label className="col-sm-5 col-form-label">Company</label>
+                <div className="col-sm-7">
+                  <select
+                    className="form-control form-select"
+                    name="company_id"
+                    onChange={formik.handleChange}
+                    value={formik.values.company_id}
+                  >
+                    <option>Selact Company</option>
+                    {data?.data?.map((company, i) => (
+                      <option key={i} value={company.id}>
+                        {company.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-12">
+              <div className="form-group row">
+                <label className="col-sm-5 col-form-label">Leave Type</label>
                 <div className="col-sm-7">
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Enter Leave Title"
+                    placeholder="Enter Leave Type"
                     name="leave_title"
                     onChange={formik.handleChange}
                     value={formik.values.leave_title}
@@ -60,7 +80,7 @@ const CreateLeaveType = ({ handleClose }) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">
                   leave Short Code
@@ -78,14 +98,14 @@ const CreateLeaveType = ({ handleClose }) => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">Total Days</label>
                 <div className="col-sm-7">
                   <input
                     type="number"
                     className="form-control"
-                    placeholder="Enter Total Days"
+                    placeholder="0"
                     name="total_days"
                     onChange={formik.handleChange}
                     value={formik.values.total_days}
@@ -94,7 +114,7 @@ const CreateLeaveType = ({ handleClose }) => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">
                   Applicable For
@@ -114,7 +134,7 @@ const CreateLeaveType = ({ handleClose }) => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">
                   Document Upload After Days
@@ -122,7 +142,7 @@ const CreateLeaveType = ({ handleClose }) => {
                 <div className="col-sm-7">
                   <input
                     type="number"
-                    placeholder="Enter Document Upload After Days"
+                    placeholder="0"
                     className="form-control"
                     name="document_upload_after_days"
                     onChange={formik.handleChange}
@@ -132,7 +152,7 @@ const CreateLeaveType = ({ handleClose }) => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-5 col-form-label">
                   Max Carry Forward Days
@@ -140,7 +160,7 @@ const CreateLeaveType = ({ handleClose }) => {
                 <div className="col-sm-7">
                   <input
                     type="number"
-                    placeholder="Enter Max Carry Forward Days"
+                    placeholder="0"
                     className="form-control"
                     name="max_carry_forward_days"
                     onChange={formik.handleChange}
@@ -149,29 +169,10 @@ const CreateLeaveType = ({ handleClose }) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
-              <div className="form-group row">
-                <label className="col-sm-5 col-form-label">Company</label>
-                <div className="col-sm-7">
-                  <select
-                    className="form-control"
-                    name="company_id"
-                    onChange={formik.handleChange}
-                    value={formik.values.company_id}
-                  >
-                    <option>Selact Company</option>
-                    {data?.data?.map((company, i) => (
-                      <option key={i} value={company.id}>
-                        {company.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
+
 
             <div className="row mt-3">
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-4 col-form-label">
                     {" "}
@@ -182,7 +183,7 @@ const CreateLeaveType = ({ handleClose }) => {
                       <Form.Check
                         type="switch"
                         id="custom-switch"
-                        label="Active"
+                        label="Yes"
                         name="is_applicable_for_all"
                         onChange={formik.handleChange}
                         value={formik.values.is_applicable_for_all}
@@ -192,7 +193,7 @@ const CreateLeaveType = ({ handleClose }) => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-4 col-form-label">
                     {" "}
@@ -203,7 +204,7 @@ const CreateLeaveType = ({ handleClose }) => {
                       <Form.Check
                         type="switch"
                         id="custom-switch"
-                        label="Active"
+                        label="Yes"
                         name="is_leave_cut_applicable"
                         onChange={formik.handleChange}
                         value={formik.values.is_leave_cut_applicable}
@@ -213,7 +214,7 @@ const CreateLeaveType = ({ handleClose }) => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-4 col-form-label">
                     Is Carry Forward
@@ -223,7 +224,7 @@ const CreateLeaveType = ({ handleClose }) => {
                       <Form.Check
                         type="switch"
                         id="custom-switch"
-                        label="Active"
+                        label="Yes"
                         name="is_carry_forward"
                         onChange={formik.handleChange}
                         value={formik.values.is_carry_forward}
@@ -233,7 +234,7 @@ const CreateLeaveType = ({ handleClose }) => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-4 col-form-label">
                     Is Document Upload
@@ -243,7 +244,7 @@ const CreateLeaveType = ({ handleClose }) => {
                       <Form.Check
                         type="switch"
                         id="custom-switch"
-                        label="Active"
+                        label="Yes"
                         name="is_document_upload"
                         onChange={formik.handleChange}
                         value={formik.values.is_document_upload}
@@ -253,7 +254,7 @@ const CreateLeaveType = ({ handleClose }) => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-4 col-form-label">
                     Is Holiday Deduct
@@ -263,7 +264,7 @@ const CreateLeaveType = ({ handleClose }) => {
                       <Form.Check
                         type="switch"
                         id="custom-switch"
-                        label="Active"
+                        label="Yes"
                         name="is_holiday_deduct"
                         onChange={formik.handleChange}
                         value={formik.values.is_holiday_deduct}
@@ -274,7 +275,7 @@ const CreateLeaveType = ({ handleClose }) => {
                 </div>
               </div>
 
-              <div className="col-md-6">
+              <div className="col-md-12">
                 <div className="form-group row">
                   <label className="col-sm-4 col-form-label">Is Active</label>
                   <div className="col-sm-8">

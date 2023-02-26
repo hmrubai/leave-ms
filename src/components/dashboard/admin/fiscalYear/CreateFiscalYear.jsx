@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
 import { useFascalYearSaveOrUpdateMutation } from "../../../../services/fiscalyearApi";
@@ -15,6 +15,7 @@ const CreateFiscalYear = ({ handleClose }) => {
       fiscal_year: "",
       start_date: "",
       end_date: "",
+      is_active: true,
     },
 
     onSubmit: async (values, { resetForm }) => {
@@ -65,6 +66,7 @@ const CreateFiscalYear = ({ handleClose }) => {
                 <label className="col-sm-3 col-form-label">Fiscal Year</label>
                 <div className="col-sm-9">
                   <input
+                  placeholder="Fiscal Year"
                     type="text"
                     className="form-control"
                     name="fiscal_year"
@@ -101,6 +103,24 @@ const CreateFiscalYear = ({ handleClose }) => {
                     onChange={formik.handleChange}
                     value={formik.values.end_date}
                   />
+                </div>
+              </div>
+            </div>
+            <div className="col-md-12">
+              <div className="form-group row">
+                <label className="col-sm-4 col-form-label">Is Active</label>
+                <div className="col-sm-8">
+                  <div class="form-check form-switch mt-2">
+                    <Form.Check
+                      type="switch"
+                      id="custom-switch"
+                      label=""
+                      name="is_active"
+                      onChange={formik.handleChange}
+                      value={formik.values.is_active}
+                      checked={formik.values.is_active}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

@@ -57,6 +57,11 @@ const BranchTable = () => {
         header: "Address",
       },
       {
+        accessorKey: "contact_no", //normal accessorKey
+        header: "Contact No",
+        size: 10, 
+      },
+      {
         accessorFn: (row) =>
           row.is_active === true ? (
             <>
@@ -67,6 +72,7 @@ const BranchTable = () => {
               <span className="badge badge-danger">Inactive</span>
             </>
           ), //alternate way
+        size: 10, //optional
         id: "is_active", //id required if you use accessorFn instead of accessorKey
         header: "Status",
         Header: <span className="table-header">Status</span>, //optional custom markup

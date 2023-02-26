@@ -7,7 +7,7 @@ const BranchDetails = ({ item,handleClose }) => {
     <>
       <div className="card-body">
         <div className="row">
-          <div className="col-6">
+          <div className="col-12">
             <p>
               Name:
               <span class="font-weight-bold text-primary ">{item.name}</span>
@@ -27,7 +27,7 @@ const BranchDetails = ({ item,handleClose }) => {
               </span>
             </p>
           </div>
-          <div className="col-6">
+          <div className="col-12">
             <p>
               Company:
               <span class="font-weight-bold text-primary ">

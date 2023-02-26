@@ -140,9 +140,10 @@ const CalenderSetupTable = () => {
 
           <div className="col-md-2">
             <Select
-              isClearable={true}
+              placeholder="Select Year"
+              // isClearable={true}
               classNamePrefix="Employment Type"
-              backspaceRemovesValue={true}
+              // backspaceRemovesValue={true}
               onChange={(e) => setYearId(e.year)}
               getOptionValue={(option) => `${option["id"]}`}
               getOptionLabel={(option) => `${option["year"]}`}

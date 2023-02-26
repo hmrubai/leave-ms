@@ -222,7 +222,7 @@ const CreateCompany = ({ handleClose }) => {
               </div>
             </div>
           </div>
-          <div className="">
+          <div >
             <img
               className="py-2"
               src={previewImage}

@@ -7,14 +7,17 @@ import {
   BsCalendar2Day,
   BsCalendarCheck,
 } from "react-icons/bs";
-import { MdAppRegistration, MdOutlinePolicy } from "react-icons/md";
-import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import { MdAppRegistration, MdOutlinePolicy,MdOutlineStopScreenShare } from "react-icons/md";
+import { HiOutlineOfficeBuilding, } from "react-icons/hi";
 import { TbGitBranch } from "react-icons/tb";
 import { FaSith, FaCodepen, FaUserInjured } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import { AiOutlineCodeSandbox } from "react-icons/ai";
 import { MdWorkOutline } from "react-icons/md";
 import { FcLeave } from "react-icons/fc";
+import { RiFileList3Line } from "react-icons/ri";
+
+
 
 export const navItem = [
   //UID Mustbe Uges String
@@ -39,6 +42,13 @@ export const navItem = [
       },
 
       {
+        title: "Fiscal Year",
+        link: "admin/fiscal-year-list",
+        role: "admin",
+        icon: <BsCalendar2Check size={16} />,
+      },
+
+      {
         title: "Employee",
         link: "admin/employee-list",
         role: "admin",
@@ -51,17 +61,18 @@ export const navItem = [
         icon: <TbGitBranch size={19} />,
       },
       {
-        title: "Designation",
-        link: "admin/designation-list",
-        role: "admin",
-        icon: <FaSith size={18} />,
-      },
-      {
         title: "Department",
         link: "admin/department-list",
         role: "admin",
         icon: <FaCodepen size={18} />,
       },
+      {
+        title: "Designation",
+        link: "admin/designation-list",
+        role: "admin",
+        icon: <FaSith size={18} />,
+      },
+   
       {
         title: "Employment",
         link: "admin/employment-list",
@@ -74,12 +85,7 @@ export const navItem = [
         role: "admin",
         icon: <MdOutlinePolicy size={18} />,
       },
-      {
-        title: "Fiscal Year",
-        link: "admin/fiscal-year-list",
-        role: "admin",
-        icon: <BsCalendar2Check size={16} />,
-      },
+
       {
         title: "Balance Settings",
         link: "admin/leave-balance",
@@ -142,6 +148,20 @@ export const navItem = [
     title: "Leave Application",
     role: "admin",
     icon: <FcLeave size={18} />,
+    children: [
+      {
+        title: "Apply For Leave",
+        link: "admin/apply-for-leave",
+        role: "admin",
+        icon:<MdOutlineStopScreenShare size={18} />, 
+      },
+      {
+        title: "Applied List",
+        link: "admin/applied-list",
+        role: "admin",
+        icon: <RiFileList3Line size={18} />,
+      },
+    ]
   },
   
 

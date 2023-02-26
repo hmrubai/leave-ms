@@ -7,7 +7,8 @@ import { ImCross } from "react-icons/im";
 import { BsStack } from "react-icons/bs";
 import { FaEdit } from 'react-icons/fa';
 import { green } from "@mui/material/colors";
-import Calender from "./Calender";
+import CalenderSetupC from "./Calender";
+
 
 const AdminPage = () => {
   return (
@@ -211,7 +212,7 @@ const AdminPage = () => {
               </h6>
             </div>
             <div className="card-body">
-            <Calender/>
+       <CalenderSetupC/>
             </div>
           </div>
 

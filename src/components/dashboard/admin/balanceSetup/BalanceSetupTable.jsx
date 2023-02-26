@@ -130,6 +130,7 @@ const BalanceSetupTable = () => {
 
           <div className="col-md-3">
             <Select
+              placeholder="Select Employee"
               // isClearable={true}
               classNamePrefix="Employment Type"
               // backspaceRemovesValue={true}
