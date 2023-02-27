@@ -13,8 +13,9 @@ import { logout } from "../../../features/authSlice";
 import { toast, ToastContainer } from "react-toastify";
 import profilePicture from "../../../assets/images/profile-picture.png"
 import { FaBars, FaDonate, FaExclamationTriangle } from "react-icons/fa";
-import { BsBoxArrowRight, BsFillBellFill, BsFillEnvelopeFill, BsFillPersonFill, BsGearFill, BsListCheck } from "react-icons/bs";
+import {  BsFillBellFill, BsFillEnvelopeFill, BsFillPersonFill, BsGearFill, BsListCheck } from "react-icons/bs";
 import { AiFillFileText } from "react-icons/ai";
+import { RiLogoutCircleRFill } from "react-icons/ri";
 
 
 const Layout = () => {
@@ -497,7 +498,8 @@ const Layout = () => {
                     >
 
                       {/* <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> */}
-                      <BsBoxArrowRight className="mr-1" />
+           
+                      <RiLogoutCircleRFill size={16} className="mr-1 mb-1" />
 
 
                       Logout

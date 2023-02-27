@@ -463,6 +463,38 @@ const EditEmployee = () => {
               </div>
               <div className="col-md-6">
                 <div className="form-group row">
+                  <label className="col-sm-3 col-form-label">
+                    Marital Status
+                  </label>
+                  <div className="col-sm-9">
+                    <select
+                      name="marital_status"
+                      onChange={formik.handleChange}
+                      value={formik.values.marital_status}
+                      className={
+                        formik.errors.marital_status &&
+                        formik.touched.marital_status
+                          ? "form-control is-invalid"
+                          : "form-control form-select"
+                      }
+                      onBlur={formik.handleBlur}
+                    >
+                      <option value="">Select Status</option>
+                      <option value="Married">Married</option>
+                      <option value="Unmarried">Unmarried</option>
+                      <option value="Dnmarried">Dnmarried</option>
+                    </select>
+                    {formik.errors.marital_status &&
+                    formik.touched.marital_status ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.marital_status}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>{" "}
+              </div>
+              <div className="col-md-6">
+                <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Spouse Name</label>
                   <div className="col-sm-9">
                     <input
@@ -503,7 +535,7 @@ const EditEmployee = () => {
                       className={
                         formik.errors.gender && formik.touched.gender
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                       onBlur={formik.handleBlur}
                     >
@@ -599,7 +631,7 @@ const EditEmployee = () => {
                   <label className="col-sm-3 col-form-label">Blood Group</label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
+                      className="form-control form-select"
                       name="blood_group"
                       onChange={formik.handleChange}
                       value={formik.values.blood_group}
@@ -646,38 +678,7 @@ const EditEmployee = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">
-                    Marital Status
-                  </label>
-                  <div className="col-sm-9">
-                    <select
-                      name="marital_status"
-                      onChange={formik.handleChange}
-                      value={formik.values.marital_status}
-                      className={
-                        formik.errors.marital_status &&
-                        formik.touched.marital_status
-                          ? "form-control is-invalid"
-                          : "form-control"
-                      }
-                      onBlur={formik.handleBlur}
-                    >
-                      <option value="">Select Status</option>
-                      <option value="Married">Married</option>
-                      <option value="Unmarried">Unmarried</option>
-                      <option value="Dnmarried">Dnmarried</option>
-                    </select>
-                    {formik.errors.marital_status &&
-                    formik.touched.marital_status ? (
-                      <div className="invalid-feedback">
-                        {formik.errors.marital_status}
-                      </div>
-                    ) : null}
-                  </div>
-                </div>{" "}
-              </div>
+        
 
               <div className="col-md-6">
                 <div className="form-group row">
@@ -915,7 +916,7 @@ const EditEmployee = () => {
                         formik.errors.joining_date &&
                         formik.touched.joining_date
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control  "
                       }
                       onBlur={formik.handleBlur}
                     />
@@ -936,7 +937,7 @@ const EditEmployee = () => {
                       className={
                         formik.errors.company_id && formik.touched.company_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                       name="company_id"
                       onChange={(e) => {
@@ -977,7 +978,7 @@ const EditEmployee = () => {
                       className={
                         formik.errors.branch_id && formik.touched.branch_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                     >
                       <option value="">Selact Branch</option>
@@ -1010,7 +1011,7 @@ const EditEmployee = () => {
                         formik.errors.department_id &&
                         formik.touched.department_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                       onBlur={formik.handleBlur}
                     >
@@ -1045,7 +1046,7 @@ const EditEmployee = () => {
                         formik.errors.designation_id &&
                         formik.touched.designation_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                       onBlur={formik.handleBlur}
                     >
@@ -1078,7 +1079,7 @@ const EditEmployee = () => {
                         formik.errors.employment_type_id &&
                         formik.touched.employment_type_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                       onBlur={formik.handleBlur}
                     >
@@ -1108,7 +1109,7 @@ const EditEmployee = () => {
                     Present Address
                   </label>
                   <div className="col-sm-9">
-                    <input
+                    <textarea
                       type="text"
                       name="present_address"
                       onChange={formik.handleChange}
@@ -1117,7 +1118,7 @@ const EditEmployee = () => {
                         formik.errors.present_address &&
                         formik.touched.present_address
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control "
                       }
                       onBlur={formik.handleBlur}
                     />
@@ -1136,7 +1137,7 @@ const EditEmployee = () => {
                     Permanent Address
                   </label>
                   <div className="col-sm-9">
-                    <input
+                    <textarea
                       type="text"
                       name="permanent_address"
                       onChange={formik.handleChange}
@@ -1145,7 +1146,7 @@ const EditEmployee = () => {
                         formik.errors.permanent_address &&
                         formik.touched.permanent_address
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control "
                       }
                       onBlur={formik.handleBlur}
                     />
@@ -1173,7 +1174,7 @@ const EditEmployee = () => {
                       className={
                         formik.errors.division_id && formik.touched.division_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                       onBlur={formik.handleBlur}
                     >
@@ -1207,7 +1208,7 @@ const EditEmployee = () => {
                       className={
                         formik.errors.district_id && formik.touched.district_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                       onBlur={formik.handleBlur}
                     >
@@ -1241,7 +1242,7 @@ const EditEmployee = () => {
                       className={
                         formik.errors.city_id && formik.touched.city_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                       onBlur={formik.handleBlur}
                     >
@@ -1266,7 +1267,7 @@ const EditEmployee = () => {
                   <label className="col-sm-3 col-form-label">Area</label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
+                      className="form-control form-select"
                       name="area_id"
                       onChange={(e) => {
                         formik.handleChange(e);
@@ -1303,7 +1304,7 @@ const EditEmployee = () => {
                 </div>
               </div>
               <h5 className="card-description text-info mt-3  py-2">
-                User Role :
+                Employee Role :
               </h5>
 
               <div className="col-md-6">
@@ -1314,8 +1315,7 @@ const EditEmployee = () => {
                       name="user_type"
                       onChange={formik.handleChange}
                       value={formik.values.user_type}
-                 
-                      className=" form-control"
+                      className=" form-control form-select"
                     >
                       <option value="">Select Type</option>
                       <option value="Admin">Admin</option>

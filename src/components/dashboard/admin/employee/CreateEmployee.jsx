@@ -397,6 +397,38 @@ const CreateEmployee = () => {
               </div>
               <div className="col-md-6">
                 <div className="form-group row">
+                  <label className="col-sm-3 col-form-label">
+                    Marital Status
+                  </label>
+                  <div className="col-sm-9">
+                    <select
+                      name="marital_status"
+                      onChange={formik.handleChange}
+                      value={formik.values.marital_status}
+                      onBlur={formik.handleBlur}
+                      className={
+                        formik.errors.marital_status &&
+                        formik.touched.marital_status
+                          ? "form-control is-invalid"
+                          : "form-control form-select"
+                      }
+                    >
+                      <option value="">Selact Status</option>
+                      <option value="Married">Married</option>
+                      <option value="Unmarried">Unmarried</option>
+                      <option value="Dnmarried">Dnmarried</option>
+                    </select>
+                    {formik.errors.marital_status &&
+                    formik.touched.marital_status ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.marital_status}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>{" "}
+              </div>
+              <div className="col-md-6">
+                <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Spouse Name</label>
                   <div className="col-sm-9">
                     <input
@@ -439,8 +471,8 @@ const CreateEmployee = () => {
                       onBlur={formik.handleBlur}
                       className={
                         formik.errors.gender && formik.touched.gender
-                          ? "form-control is-invalid"
-                          : "form-control"
+                          ? "form-control is-invalid "
+                          : "form-control form-select"
                       }
                     >
                       <option>Selact Gender</option>
@@ -537,7 +569,7 @@ const CreateEmployee = () => {
                   <label className="col-sm-3 col-form-label">Blood Group</label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
+                      className="form-control form-select"
                       name="blood_group"
                       onChange={formik.handleChange}
                       value={formik.values.blood_group}
@@ -586,38 +618,7 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">
-                    Marital Status
-                  </label>
-                  <div className="col-sm-9">
-                    <select
-                      name="marital_status"
-                      onChange={formik.handleChange}
-                      value={formik.values.marital_status}
-                      onBlur={formik.handleBlur}
-                      className={
-                        formik.errors.marital_status &&
-                        formik.touched.marital_status
-                          ? "form-control is-invalid"
-                          : "form-control"
-                      }
-                    >
-                      <option value="">Selact Status</option>
-                      <option value="Married">Married</option>
-                      <option value="Unmarried">Unmarried</option>
-                      <option value="Dnmarried">Dnmarried</option>
-                    </select>
-                    {formik.errors.marital_status &&
-                    formik.touched.marital_status ? (
-                      <div className="invalid-feedback">
-                        {formik.errors.marital_status}
-                      </div>
-                    ) : null}
-                  </div>
-                </div>{" "}
-              </div>
+          
 
               <div className="col-md-6">
                 <div className="form-group row">
@@ -877,7 +878,7 @@ const CreateEmployee = () => {
                       className={
                         formik.errors.company_id && formik.touched.company_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                       name="company_id"
                       onChange={(e) => {
@@ -947,7 +948,7 @@ const CreateEmployee = () => {
                       className={
                         formik.errors.branch_id && formik.touched.branch_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                     >
                       <option>Selact Branch</option>
@@ -965,7 +966,38 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
-
+              <div className="col-md-6">
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label">Department</label>
+                  <div className="col-sm-9">
+                    <select
+                      name="department_id"
+                      onChange={formik.handleChange}
+                      value={formik.values.department_id}
+                      onBlur={formik.handleBlur}
+                      className={
+                        formik.errors.department_id &&
+                        formik.touched.department_id
+                          ? "form-control is-invalid"
+                          : "form-control form-select"
+                      }
+                    >
+                      <option>Selact Department</option>
+                      {departmentRes?.data?.data?.map((department, i) => (
+                        <option key={i} value={department.id}>
+                          {department.name}
+                        </option>
+                      ))}
+                    </select>
+                    {formik.errors.department_id &&
+                    formik.touched.department_id ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.department_id}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Designation</label>
@@ -979,7 +1011,7 @@ const CreateEmployee = () => {
                         formik.errors.designation_id &&
                         formik.touched.designation_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                     >
                       <option>Selact Designation</option>
@@ -999,38 +1031,7 @@ const CreateEmployee = () => {
                 </div>
               </div>
 
-              <div className="col-md-6">
-                <div className="form-group row">
-                  <label className="col-sm-3 col-form-label">Department</label>
-                  <div className="col-sm-9">
-                    <select
-                      name="department_id"
-                      onChange={formik.handleChange}
-                      value={formik.values.department_id}
-                      onBlur={formik.handleBlur}
-                      className={
-                        formik.errors.department_id &&
-                        formik.touched.department_id
-                          ? "form-control is-invalid"
-                          : "form-control"
-                      }
-                    >
-                      <option>Selact Department</option>
-                      {departmentRes?.data?.data?.map((department, i) => (
-                        <option key={i} value={department.id}>
-                          {department.name}
-                        </option>
-                      ))}
-                    </select>
-                    {formik.errors.department_id &&
-                    formik.touched.department_id ? (
-                      <div className="invalid-feedback">
-                        {formik.errors.department_id}
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-              </div>
+            
 
               <div className="col-md-6">
                 <div className="form-group row">
@@ -1044,7 +1045,7 @@ const CreateEmployee = () => {
                         formik.errors.employment_type_id &&
                         formik.touched.employment_type_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                       onBlur={formik.handleBlur}
                     >
@@ -1074,7 +1075,7 @@ const CreateEmployee = () => {
                     Present Address
                   </label>
                   <div className="col-sm-9">
-                    <input
+                    <textarea
                       type="text"
                       name="present_address"
                       placeholder="Present Address"
@@ -1087,7 +1088,7 @@ const CreateEmployee = () => {
                           ? "form-control is-invalid"
                           : "form-control"
                       }
-                    />
+                    ></textarea>
                     {formik.errors.present_address &&
                     formik.touched.present_address ? (
                       <div className="invalid-feedback">
@@ -1103,7 +1104,8 @@ const CreateEmployee = () => {
                     Permanent Address
                   </label>
                   <div className="col-sm-9">
-                    <input
+
+                    <textarea
                       type="text"
                       name="permanent_address"
                       onChange={formik.handleChange}
@@ -1116,7 +1118,7 @@ const CreateEmployee = () => {
                           ? "form-control is-invalid"
                           : "form-control"
                       }
-                    />
+                    ></textarea>
                     {formik.errors.permanent_address &&
                     formik.touched.permanent_address ? (
                       <div className="invalid-feedback">
@@ -1142,7 +1144,7 @@ const CreateEmployee = () => {
                       className={
                         formik.errors.division_id && formik.touched.division_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                     >
                       <option>Selact Division</option>
@@ -1176,7 +1178,7 @@ const CreateEmployee = () => {
                       className={
                         formik.errors.district_id && formik.touched.district_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                     >
                       <option>Selact District</option>
@@ -1210,7 +1212,7 @@ const CreateEmployee = () => {
                       className={
                         formik.errors.city_id && formik.touched.city_id
                           ? "form-control is-invalid"
-                          : "form-control"
+                          : "form-control form-select"
                       }
                     >
                       <option>Selact City</option>
@@ -1234,7 +1236,7 @@ const CreateEmployee = () => {
                   <label className="col-sm-3 col-form-label">Area</label>
                   <div className="col-sm-9">
                     <select
-                      className="form-control"
+                      className="form-control form-select"
                       name="area_id"
                       onChange={formik.handleChange}
                       value={formik.values.area_id}
@@ -1269,7 +1271,7 @@ const CreateEmployee = () => {
               </div>
 
               <h5 className="card-description text-info mt-3  py-2">
-                User Role :
+                Employee Role :
               </h5>
 
               <div className="col-md-6">
@@ -1280,7 +1282,7 @@ const CreateEmployee = () => {
                       name="user_type"
                       onChange={formik.handleChange}
                       value={formik.values.user_type}
-                      className=" form-control"
+                      className=" form-control form-select"
                     >
                       <option value="">Select Type</option>
                       <option value="Admin">Admin</option>

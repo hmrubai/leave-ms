@@ -46,7 +46,7 @@ const CreateFiscalYear = ({ handleClose }) => {
                 <label className="col-sm-3 col-form-label">Company</label>
                 <div className="col-sm-9">
                   <select
-                    className="form-control"
+                    className="form-control form-select"
                     name="company_id"
                     onChange={formik.handleChange}
                     value={formik.values.company_id}
