@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useCompanySaveOrUpdateMutation } from "../../../../services/companyApi";
 import { Button, Form, Modal } from "react-bootstrap";
 
+// import 'bootstrap/dist/css/bootstrap.min.css';
 const EditCompany = ({ item, handleClose }) => {
   const [previewImage, setPreviewImage] = useState();
   const [companySaveOrUpdate, res] = useCompanySaveOrUpdateMutation();

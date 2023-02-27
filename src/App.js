@@ -12,8 +12,7 @@ const App = () => {
           setAllRoute([...allRoute, route])
         }, [])
         return <Router allRoute={allRoute} />
-      
-  
+
 }
 
 export default App

@@ -1,10 +1,11 @@
-import {Navigate} from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { Navigate } from 'react-router-dom'
 import {getPath} from './utils'
 import AdminPage from '../components/dashboard/admin/adminDashboardPage/AdminPage'
 import Others from '../components/dashboard/views/Others'
 import ApprovalAuthority from '../components/dashboard/views/ApprovalAuthority'
-import Payment from '../components/dashboard/views/Payment'
-import About from '../components/dashboard/views/About';
 import EmployeeList from './../components/dashboard/admin/employee/EmployeeList';
 import EmployeeDetails from '../components/dashboard/admin/employee/EmployeeDetails'
 import CreateEmployee from './../components/dashboard/admin/employee/CreateEmployee';
@@ -16,7 +17,6 @@ import LeaveTypeList from './../components/dashboard/admin/leaveType/LeaveTypeLi
 import Employee from './../components/dashboard/views/Employee';
 import FiscalYearList from '../components/dashboard/admin/fiscalYear/FiscalYearList'
 import EmploymentList from '../components/dashboard/admin/employment/EmploymentList'
-
 import EditEmployee from '../components/dashboard/admin/employee/EditEmployee'
 import BalanceSetupList from '../components/dashboard/admin/balanceSetup/BalanceSetupList'
 import LeaveApprovalFlowList from '../components/dashboard/admin/leaveApprovalFlow/LeaveApprovalFlowList'
@@ -24,16 +24,6 @@ import DayTypeSetupList from './../components/dashboard/admin/calender/dayTypeSe
 import WorkingDayList from '../components/dashboard/admin/calender/workingDaySetup/WorkingDayList'
 import CalenderSetupList from '../components/dashboard/admin/calender/calenderSetup/CalenderSetupList'
 import BalanceSettingsList from '../components/dashboard/admin/balanceSettings/BalanceSettingsList'
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -21,6 +21,7 @@ function Sidebar({ item }) {
         >
           {item.icon}
           <span className="font-style ms-1">{item.title}</span>
+          
         </NavLink>
         <div
           id={item.UID}

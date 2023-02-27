@@ -6,12 +6,16 @@ import Sidebar from "./Sidebar";
 import logo_sm from "../../../assets/logo/sm_logo.png";
 import "./Dashboard.css";
 import ScrollToTop from "react-scroll-to-top";
-import { BiHomeAlt } from "react-icons/bi";
+import { BiHomeAlt, BiSearchAlt2 } from "react-icons/bi";
 
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../features/authSlice";
 import { toast, ToastContainer } from "react-toastify";
 import profilePicture from "../../../assets/images/profile-picture.png"
+import { FaBars, FaDonate, FaExclamationTriangle } from "react-icons/fa";
+import { BsBoxArrowRight, BsFillBellFill, BsFillEnvelopeFill, BsFillPersonFill, BsGearFill, BsListCheck } from "react-icons/bs";
+import { AiFillFileText } from "react-icons/ai";
+
 
 const Layout = () => {
   const dispatch = useDispatch();
@@ -54,7 +58,7 @@ const Layout = () => {
         <ul className={style} id="accordionSidebar">
           {/*  <!-- Sidebar - Brand --> */}
           <Link
-            className="sidebar-brand d-flex align-items-center justify-content-center "
+            className="sidebar-brand  d-flex align-items-center justify-content-center "
             to="#"
           >
             <Link to="/" className="sidebar-brand-icon rotate-n-15">
@@ -136,10 +140,14 @@ const Layout = () => {
               {/*  <!-- Sidebar Toggle (Topbar) --> */}
               <button
                 id="sidebarToggleTop"
-                className="btn btn-link  d-md-none  rounded-circle mr-3 ml-2"
+                className="btn btn-link  d-md-none  rounded-circle mr-3  ml-2"
                 onClick={changeStyle1}
               >
-                <i className="fa fa-bars"></i>
+                {/* <i className="fa fa-bars"></i> */}
+               
+                   <FaBars value={{ style: { verticalAlign: 'middle' } }} />
+               
+               
               </button>
 
               {/*  <!-- Topbar Search --> */}
@@ -154,7 +162,9 @@ const Layout = () => {
                   />
                   <div className="input-group-append">
                     <button className="btn btn-primary" type="button">
-                      <i className="fas fa-search fa-sm"></i>
+                      {/* <i className="fas fa-search fa-sm"></i> */}
+                      <BiSearchAlt2 size={18} />
+                       
                     </button>
                   </div>
                 </div>
@@ -173,7 +183,8 @@ const Layout = () => {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <i className="fas fa-search fa-fw"></i>
+                    {/* <i className="fas fa-search fa-fw"></i> */}
+                    <BiSearchAlt2 size={18} />
                   </Link>
                   {/*   <!-- Dropdown - Messages --> */}
                   <div
@@ -191,7 +202,8 @@ const Layout = () => {
                         />
                         <div className="input-group-append">
                           <button className="btn btn-primary" type="button">
-                            <i className="fas fa-search fa-sm"></i>
+                            {/* <i className="fas fa-search fa-sm"></i> */}
+                            <BiSearchAlt2 size={18} />
                           </button>
                         </div>
                       </div>
@@ -210,7 +222,9 @@ const Layout = () => {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <i className="fas fa-bell fa-fw"></i>
+                    {/* <i className="fas fa-bell fa-fw"></i> */}
+                    <BsFillBellFill size={18} />
+
                     {/*  <!-- Counter - Alerts --> */}
                     <span className="badge badge-danger badge-counter">3+</span>
                   </Link>
@@ -226,7 +240,9 @@ const Layout = () => {
                     >
                       <div className="mr-3">
                         <div className="icon-circle bg-primary">
-                          <i className="fas fa-file-alt text-white"></i>
+                          {/* <i className="fas fa-file-alt text-white"></i> */}
+                          <AiFillFileText size={18} />
+
                         </div>
                       </div>
                       <div>
@@ -244,7 +260,10 @@ const Layout = () => {
                     >
                       <div className="mr-3">
                         <div className="icon-circle bg-success">
-                          <i className="fas fa-donate text-white"></i>
+                          {/* <i className="fas fa-donate text-white"></i> */}
+
+                          <FaDonate size={18} />
+
                         </div>
                       </div>
                       <div>
@@ -260,7 +279,11 @@ const Layout = () => {
                     >
                       <div className="mr-3">
                         <div className="icon-circle bg-warning">
-                          <i className="fas fa-exclamation-triangle text-white"></i>
+                          {/* <i className="fas fa-exclamation-triangle text-white"></i> */}
+
+                          <FaExclamationTriangle size={18} />
+
+
                         </div>
                       </div>
                       <div>
@@ -291,7 +314,9 @@ const Layout = () => {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <i className="fas fa-envelope fa-fw"></i>
+                    {/* <i className="fas fa-envelope fa-fw"></i> */}
+                    <BsFillEnvelopeFill size={18} />
+
                     {/*  <!-- Counter - Messages --> */}
                     <span className="badge badge-danger badge-counter">7</span>
                   </Link>
@@ -445,15 +470,22 @@ const Layout = () => {
                     aria-labelledby="userDropdown"
                   >
                     <Link className="dropdown-item" to="#">
-                      <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                      {/* <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> */}
+                      <BsFillPersonFill size={15}  className="mr-1" />
+
+
+                        
                       Profile
                     </Link>
                     <Link className="dropdown-item" to="#">
-                      <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                      {/* <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> */}
+                      <BsGearFill className="mr-1" />
                       Settings
                     </Link>
                     <Link className="dropdown-item" to="#">
-                      <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                      {/* <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> */}
+
+                      <BsListCheck size={14}  className="mr-1"/>
                       Activity Log
                     </Link>
                     <div className="dropdown-divider"></div>
@@ -462,7 +494,11 @@ const Layout = () => {
                       to="#"
                       onClick={() => handelLogout()}
                     >
-                      <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+
+                      {/* <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> */}
+                      <BsBoxArrowRight className="mr-1" />
+
+
                       Logout
                     </Link>
                   </div>

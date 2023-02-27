@@ -9650,11 +9650,11 @@ a:focus {
     vertical-align: 0;
     border: 0;
     font-weight: 900;
-    content: "\f107";
-    font-family: "Font Awesome 5 Free";
+    content: "\1F847" ;
+    /* font-family: "Font Awesome 5 Free"; */
   }
   .sidebar .nav-item .nav-link[data-toggle="collapse"].collapsed::after {
-    content: "\f105";
+    content: "\1F846";
   }
   .sidebar .sidebar-brand .sidebar-brand-icon i {
     font-size: 2rem;
@@ -10331,7 +10331,7 @@ body.sidebar-toggled footer.sticky-footer {
   color: white !important;
 }
 
-.sub-manu-bg{
+.sub-manu-bg {
   border-left: white solid 2px;
 }
 
@@ -10342,23 +10342,19 @@ body.sidebar-toggled footer.sticky-footer {
   display: flex;
   text-decoration: none;
   padding: 15px;
-
 }
 
-.sub-manu-style:hover{
+.sub-manu-style:hover {
   text-decoration: none;
   background-color: #0c63e4;
-  border-radius: 0px 50px 50px 0px ;
+  border-radius: 0px 50px 50px 0px;
 }
 
-.sidebar-dark .nav-item .nav-hover:hover{
-  background-color:#0c63e4 !important;
+.sidebar-dark .nav-item .nav-hover:hover {
+  background-color: #0c63e4 !important;
   border-radius: 0px 50px 50px 0px !important;
 }
 
-.cursor{
-  cursor: pointer;
-}
 .css-g2tram-MuiToolbar-root{
   z-index: 0 !important;
 }
@@ -10374,5 +10370,19 @@ body.sidebar-toggled footer.sticky-footer {
 .select-btn{
   margin-top: 37PX;
 }
+.css-1kpq11i {
+  z-index: 0 !important;
+}
+.css-1kpq11i-MuiToolbar-root{
+  z-index: 0 !important;
+}
+.css-qxov5u {
+  z-index: 0 !important;
+}
+.MuiToolbar-root MuiToolbar-gutters MuiToolbar-dense css-qxov5u{
+  z-index: 0 !important;
+}
 
-
+.cursor{
+  cursor: pointer;
+}
