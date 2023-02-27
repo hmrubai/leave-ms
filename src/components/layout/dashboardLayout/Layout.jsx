@@ -66,7 +66,8 @@ const Layout = () => {
             </Link>
             <div className="sidebar-brand-text mx-3">LMS</div>
             <div className="text-center d-none d-md-inline">
-              <i onClick={changeStyle} className="fas fa-bars ml-3"></i>
+              {/* <i onClick={changeStyle} className="fas fa-bars ml-3"></i> */}
+              <FaBars onClick={changeStyle} className="ml-3 " />
             </div>
           </Link>
 
