@@ -8,16 +8,9 @@ import { BsFillEyeFill, BsFillPlusCircleFill } from "react-icons/bs";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
 
-
-
 import { IoSyncCircle } from "react-icons/io5";
 import Select from "react-select";
 import Loader from "../../../common/Loader";
-
-import {
-  useGetCalenderListByYearQuery,
-  useGetYearListQuery,
-} from "../../../../services/calenderApi";
 import { useGetLeaveBalenceSettingsQuery } from "../../../../services/leaveBalanceSettingsApi";
 import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
 
@@ -29,7 +22,9 @@ const BalanceSettingsTable = () => {
 
   const { data, isSuccess, isFetching } =
     useGetLeaveBalenceSettingsQuery(employmentTypeId);
-  const get = useGetCalenderListByYearQuery(employmentTypeId);
+
+  const get = useGetLeaveBalenceSettingsQuery(employmentTypeId);
+
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
@@ -40,8 +35,11 @@ const BalanceSettingsTable = () => {
     setClickValue(value);
   }, []);
 
+  
+
   const refatchClick = () => {
     get.refetch();
+    setEmploymentTypeId(0);
   };
 
   const deleteHandel = async (deleteFunc, Did) => {
@@ -151,13 +149,13 @@ const BalanceSettingsTable = () => {
 
           <div className="col-md-2">
             <Select
-              // isClearable={true}
+              placeholder="Employment Type"
               classNamePrefix="Employment Type"
-              // backspaceRemovesValue={true}
               onChange={(e) => setEmploymentTypeId(e.id)}
               getOptionValue={(option) => `${option["id"]}`}
               getOptionLabel={(option) => `${option["type"]}`}
               options={employmentType?.data}
+              
             />
           </div>
           <div className="col-md-2">
@@ -184,6 +182,8 @@ const BalanceSettingsTable = () => {
         enableColumnActions
         enableRowNumbers
         positionActionsColumn="last"
+        rowsPerPageOptions={[5]}
+        
         renderTopToolbarCustomActions={({ table }) => (
           <Box
             sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}

@@ -1,4 +1,4 @@
-import React, {  useMemo } from "react";
+import React, { useMemo } from "react";
 import MaterialReactTable from "material-react-table";
 import { Link } from "react-router-dom";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
@@ -12,11 +12,7 @@ import Loader from "../../../common/Loader";
 import { useGetEmployeeListQuery } from "../../../../services/employeeApi";
 
 const EmployeeTable = () => {
- 
-
-  const { data, isSuccess,isFetching } = useGetEmployeeListQuery()
-
-
+  const { data, isSuccess, isFetching } = useGetEmployeeListQuery();
 
   const deleteHandel = async (deleteFunc, Did) => {
     Swal.fire({
@@ -37,12 +33,8 @@ const EmployeeTable = () => {
     });
   };
 
-
-
-
   const columns = useMemo(
     () => [
-   
       {
         accessorKey: "name", //access nested data with dot notation
         header: "Name",
@@ -59,9 +51,6 @@ const EmployeeTable = () => {
         accessorKey: "designation", //access nested data with dot notation
         header: "Designation",
       },
-
-      
-  
     ],
     []
   );
@@ -88,12 +77,12 @@ const EmployeeTable = () => {
 
   return (
     <>
-      { isFetching&& <Loader/> }
+      {isFetching && <Loader />}
       {/* <MaterialReactTable columns={columns} data={data} /> */}
       <MaterialReactTable
         enableRowSelection
         columns={columns}
-        data={isSuccess&&data?.data}
+        data={isSuccess && data?.data}
         enableRowActions
         enableColumnActions
         enableRowNumbers
@@ -127,17 +116,27 @@ const EmployeeTable = () => {
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>
-            <Link to={`/dashboard/admin/employee-details/${row?.row?.original?.id}`}>
-              {" "}
-              <BsFillEyeFill color="black" size={24} />
-            </Link>
-            <Link
-              to={`/dashboard/admin/edit-employee/${row?.row?.original?.id}`}
-              title=""
-              className="px-2"
-            >
-              <FaEdit size={22} />
-            </Link>
+            <div className="d-flex">
+              <div>
+                {" "}
+                <Link
+                  to={`/dashboard/admin/employee-details/${row?.row?.original?.id}`}
+                >
+                  {" "}
+                  <BsFillEyeFill color="black" size={24} />
+                </Link>
+              </div>
+              <div>
+                <Link
+                  to={`/dashboard/admin/edit-employee/${row?.row?.original?.id}`}
+                  title=""
+                  className="px-2"
+                >
+                  <FaEdit size={22} />
+                </Link>
+              </div>
+            </div>
+
             {/* <Link to="#" onClick={() => deleteHandel()}>
               <FaTrash size={20} color="red" />
             </Link>{" "} */}

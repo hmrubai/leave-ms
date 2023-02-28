@@ -7,16 +7,21 @@ import logo_sm from "../../../assets/logo/sm_logo.png";
 import "./Dashboard.css";
 import ScrollToTop from "react-scroll-to-top";
 import { BiHomeAlt, BiSearchAlt2 } from "react-icons/bi";
-
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../features/authSlice";
 import { toast, ToastContainer } from "react-toastify";
-import profilePicture from "../../../assets/images/profile-picture.png"
+import profilePicture from "../../../assets/images/profile-picture.png";
 import { FaBars, FaDonate, FaExclamationTriangle } from "react-icons/fa";
-import {  BsFillBellFill, BsFillEnvelopeFill, BsFillPersonFill, BsGearFill, BsListCheck } from "react-icons/bs";
-import { AiFillFileText } from "react-icons/ai";
-import { RiLogoutCircleRFill } from "react-icons/ri";
 
+import {
+  BsFillBellFill,
+  BsFillEnvelopeFill,
+  BsFillPersonFill,
+  BsGearFill,
+  BsListCheck,
+} from "react-icons/bs";
+import { AiFillFileText } from "react-icons/ai";
+import { RiLogoutCircleRFill, RiRefreshFill } from "react-icons/ri";
 
 const Layout = () => {
   const dispatch = useDispatch();
@@ -27,6 +32,10 @@ const Layout = () => {
     dispatch(logout());
     navigate("/login");
     toast.success("Logout Successfully");
+    window.location.reload(false);
+  };
+
+  const refresh = () => {
     window.location.reload(false);
   };
 
@@ -101,8 +110,6 @@ const Layout = () => {
                   <span className="d-none d-lg-inline text-light-600 small ml-2  ">
                     {authUser && authUser.user_type} 
                   </span> */}
-                 
-                  
                 </span>
               </div>
             </div>
@@ -146,10 +153,8 @@ const Layout = () => {
                 onClick={changeStyle1}
               >
                 {/* <i className="fa fa-bars"></i> */}
-               
-                   <FaBars value={{ style: { verticalAlign: 'middle' } }} />
-               
-               
+
+                <FaBars value={{ style: { verticalAlign: "middle" } }} />
               </button>
 
               {/*  <!-- Topbar Search --> */}
@@ -166,11 +171,12 @@ const Layout = () => {
                     <button className="btn btn-primary" type="button">
                       {/* <i className="fas fa-search fa-sm"></i> */}
                       <BiSearchAlt2 size={18} />
-                       
                     </button>
                   </div>
                 </div>
               </form>
+
+              <RiRefreshFill size={22} className=" cursor " onClick={refresh} />
 
               {/*  <!-- Topbar Navbar --> */}
               <ul className="navbar-nav ml-auto">
@@ -244,7 +250,6 @@ const Layout = () => {
                         <div className="icon-circle bg-primary">
                           {/* <i className="fas fa-file-alt text-white"></i> */}
                           <AiFillFileText size={18} />
-
                         </div>
                       </div>
                       <div>
@@ -265,7 +270,6 @@ const Layout = () => {
                           {/* <i className="fas fa-donate text-white"></i> */}
 
                           <FaDonate size={18} />
-
                         </div>
                       </div>
                       <div>
@@ -284,8 +288,6 @@ const Layout = () => {
                           {/* <i className="fas fa-exclamation-triangle text-white"></i> */}
 
                           <FaExclamationTriangle size={18} />
-
-
                         </div>
                       </div>
                       <div>
@@ -442,8 +444,6 @@ const Layout = () => {
                       <div className="text-end text-info fw-bold">
                         {authUser && authUser.user_type}
                       </div>
-                     
-                      
                     </div>
 
                     {authUser && authUser.image ? (
@@ -473,10 +473,7 @@ const Layout = () => {
                   >
                     <Link className="dropdown-item" to="#">
                       {/* <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> */}
-                      <BsFillPersonFill size={15}  className="mr-1" />
-
-
-                        
+                      <BsFillPersonFill size={15} className="mr-1" />
                       Profile
                     </Link>
                     <Link className="dropdown-item" to="#">
@@ -486,8 +483,7 @@ const Layout = () => {
                     </Link>
                     <Link className="dropdown-item" to="#">
                       {/* <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> */}
-
-                      <BsListCheck size={14}  className="mr-1"/>
+                      <BsListCheck size={14} className="mr-1" />
                       Activity Log
                     </Link>
                     <div className="dropdown-divider"></div>
@@ -496,12 +492,8 @@ const Layout = () => {
                       to="#"
                       onClick={() => handelLogout()}
                     >
-
                       {/* <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> */}
-           
-                      <RiLogoutCircleRFill size={16} className="mr-1 mb-1" />
-
-
+                      <RiLogoutCircleRFill size={15} className="mr-1 mb-1" />
                       Logout
                     </Link>
                   </div>
