@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../features/authSlice";
 import { toast, ToastContainer } from "react-toastify";
 import profilePicture from "../../../assets/images/profile-picture.png";
+import reset from "../../../assets/images/reset.png";
 import { FaBars, FaDonate, FaExclamationTriangle } from "react-icons/fa";
 
 import {
@@ -176,7 +177,11 @@ const Layout = () => {
                 </div>
               </form>
 
-              <RiRefreshFill size={22} className=" cursor " onClick={refresh} />
+              <span className="cursor reset " onClick={refresh}>
+                <img src={reset} alt="" width={22} />
+                {/* <RiRefreshFill size={22}  /> */}
+              </span>
+              <span className=" d-none d-md-block fw-bold">Refresh</span>
 
               {/*  <!-- Topbar Navbar --> */}
               <ul className="navbar-nav ml-auto">
