@@ -1,5 +1,12 @@
+// import external Css modules  start
+
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+
+// import external Css modules end
+
 
 import { Navigate } from 'react-router-dom'
 import {getPath} from './utils'
@@ -24,6 +31,7 @@ import DayTypeSetupList from './../components/dashboard/admin/calender/dayTypeSe
 import WorkingDayList from '../components/dashboard/admin/calender/workingDaySetup/WorkingDayList'
 import CalenderSetupList from '../components/dashboard/admin/calender/calenderSetup/CalenderSetupList'
 import BalanceSettingsList from '../components/dashboard/admin/balanceSettings/BalanceSettingsList'
+import ApplyForLeaveList from '../components/dashboard/admin/applyForLeave/ApplyForLeaveList';
 
 
 
@@ -147,6 +155,13 @@ export const privateRoute = [
         role: 'admin',
 
     },
+    
+    {
+        path: 'admin/apply-for-leave',
+        element: <ApplyForLeaveList/> ,
+        role: 'admin',
+
+    },
  
     // {
     //     path: 'about',
@@ -164,6 +179,14 @@ export const privateRoute = [
         path: 'approval-authority',
         element: <ApprovalAuthority />,
         role: 'approvalauthority'
+
+    },
+
+    {
+        path: 'admin/apply-for-leave',
+        element: <ApplyForLeaveList/> ,
+        role: 'approvalauthority',
+
     },
 
     //  <====================== Approval Authority Route End ====================>
@@ -174,6 +197,12 @@ export const privateRoute = [
         path: 'employee',
         element: <Employee />,
         role: 'employee'
+    },
+    {
+        path: 'admin/apply-for-leave',
+        element: <ApplyForLeaveList/> ,
+        role: 'employee',
+
     },
 
     // <====================== Employee Route End ====================>

@@ -8,13 +8,13 @@ const Error = () => {
 	}
   return (
     <>
-      <div class="container-fluid">
+      <div className="container-fluid">
         {/* <!-- 404 Error Text --> */}
-        <div class="text-center">
+        <div className="text-center">
           <img width="500px" src={error} alt="" />
         </div>
 
-        <div class="text-center">
+        <div className="text-center">
           <Link to="#" onClick={goBack}>&larr; Back to Dashboard</Link>
         </div>
       </div>

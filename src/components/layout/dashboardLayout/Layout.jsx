@@ -529,9 +529,8 @@ const Layout = () => {
       </div>
       {/*  <!-- End of Page Wrapper -->
 
-                              <!-- Scroll to Top Button--> */}
+     <!-- Scroll to Top Button--> */}
 
-      {/*  <!-- Logout Modal--> */}
 
       <ScrollToTop smooth />
     </div>

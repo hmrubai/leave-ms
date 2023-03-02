@@ -142,7 +142,7 @@ const Login = () => {
                       <div className="text-center mt-4 ">
                         <Link
                           className="small text-decoration-none"
-                          to="forgot-password.html "
+                          to="#"
                         >
                           Forgot Password?
                         </Link>
