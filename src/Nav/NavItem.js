@@ -6,11 +6,13 @@ import {
   BsCalendar2Check,
   BsCalendar2Day,
   BsCalendarCheck,
+  BsVinylFill,
 } from "react-icons/bs";
+import { GiAstronautHelmet } from "react-icons/gi";
 import { MdAppRegistration, MdOutlinePolicy,MdOutlineStopScreenShare } from "react-icons/md";
 import { HiOutlineOfficeBuilding, } from "react-icons/hi";
 import { TbGitBranch } from "react-icons/tb";
-import { FaSith, FaCodepen, FaUserInjured } from "react-icons/fa";
+import { FaSith, FaCodepen, FaUserInjured, FaRegUser } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import { AiOutlineCodeSandbox } from "react-icons/ai";
 import { MdWorkOutline } from "react-icons/md";
@@ -167,29 +169,24 @@ export const navItem = [
 
   // Admin Nav End
 
-  {
-    title: "Worker",
-    link: "worker",
-    role: "worker",
-    icon: "fas fa-yin-yang",
-  },
+
 
   {
     title: "Employee",
     link: "employee",
     role: "employee",
-    icon: "fas fa-yin-yang",
+    icon: <FaRegUser size={16} />,
   },
   {
     title: "Authority",
     link: "approval-authority",
     role: "approvalauthority",
-    icon: "fas fa-yin-yang",
+    icon: <GiAstronautHelmet size={16} />,
   },
   {
     title: "Others",
     link: "others",
     role: "others",
-    icon: "fas fa-yin-yang",
+    icon: <BsVinylFill size={16} />,
   },
 ];
