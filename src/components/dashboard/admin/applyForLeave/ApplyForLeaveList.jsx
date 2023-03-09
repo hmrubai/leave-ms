@@ -41,7 +41,7 @@ const ApplyForLeaveList = () => {
       <div className="card shadow mb-4">
         <div className="card-header py-3 n">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">Applyed Leave List</h6>
+            <h6 className="m-0 font-weight-bold text-primary">Applied Leave List</h6>
 
 
           </div>
@@ -68,7 +68,7 @@ const ApplyForLeaveList = () => {
                     handelClickValue("Apply Leave");
                   }}
                 >
-                  <BsFillPlusCircleFill className="mb-1 mr-1" /> Apply Leave
+                  <BsFillPlusCircleFill className="mb-1 mr-1" /> Apply For A Leave
                 </Link>
               </div>
             </div>

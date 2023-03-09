@@ -10,17 +10,17 @@ import Swal from "sweetalert2";
 import Loader from "../../../common/Loader";
 import BranchModal from "./ApplyForLeaveModal";
 import { useGetBranchListQuery } from "../../../../services/branchApi";
-
+import { useGetLeaveApplicationListQuery } from "../../../../services/leaveApplication";
 
 const ApplyForLeaveTable = () => {
-  const { data, isSuccess, isFetching } = useGetBranchListQuery();
+  const { data, isSuccess, isFetching } = useGetLeaveApplicationListQuery();
 
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
+
   const handelClickValue = useCallback((value) => {
     setClickValue(value);
   }, []);
@@ -46,30 +46,37 @@ const ApplyForLeaveTable = () => {
 
   const columns = useMemo(
     () => [
-   
       {
-        accessorKey: "name", //access nested data with dot notation
-        header: "Name",
+        accessorKey: "leave_title", //access nested data with dot notation
+        header: "Leave Title",
       },
 
       {
-        accessorKey: "address", //normal accessorKey
-        header: "Address",
+        accessorKey: "start_date", //normal accessorKey
+        header: "Start Date",
       },
       {
-        accessorKey: "contact_no", //normal accessorKey
-        header: "Contact No",
-        size: 10, 
+        accessorKey: "end_date", //normal accessorKey
+        header: "End Date",
       },
+      {
+        accessorKey: "total_applied_days", //normal accessorKey
+        header: "Applied For",
+      },
+      {
+        accessorKey: "half_day", //normal accessorKey
+        header: "Applied For",
+      },
+
       {
         accessorFn: (row) =>
-          row.is_active === true ? (
+          row.leave_status === true ? (
             <>
               <span className="badge badge-success">Active</span>
             </>
           ) : (
             <>
-              <span className="badge badge-danger">Inactive</span>
+              <span className="badge badge-warning ">Pending</span>
             </>
           ), //alternate way
         size: 10, //optional
@@ -106,8 +113,8 @@ const ApplyForLeaveTable = () => {
       {isFetching && <Loader />}
 
       <BranchModal
-    show={show}
-    handleClose={handleClose}
+        show={show}
+        handleClose={handleClose}
         clickValue={clickValue}
         paramId={paramId}
       />
@@ -120,7 +127,6 @@ const ApplyForLeaveTable = () => {
         enableColumnActions
         enableRowNumbers
         positionActionsColumn="last"
-        
         renderTopToolbarCustomActions={({ table }) => (
           <Box
             sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}
@@ -133,7 +139,7 @@ const ApplyForLeaveTable = () => {
               variant="contained"
             >
               Export
-            </Button> 
+            </Button>
             <Button
               disabled={
                 !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
@@ -149,43 +155,17 @@ const ApplyForLeaveTable = () => {
         )}
         // enablePagination="true"
         renderRowActions={(row, index) => (
-          
           <>
-         
             <div className="d-flex">
               <div>
                 <Link
-                  to="#"
-                  onClick={() => {
-                    handleShow();
-                    handelClickValue("Branch Information");
-                    setParamId(row?.row?.original)
-                  }}
+                  to={`/dashboard/approval-authority/leave-details/${row?.row?.original?.id}`}
+              
                 >
                   <BsFillEyeFill color="black" size={24} />
                 </Link>
               </div>
-              <div>
-                
-                <Link
-                  to={`#`}
-                  title=""
-                  className="px-2"
-                  onClick={() => {
-                    handleShow();
-                    handelClickValue("Edit Leave");
-                    setParamId(row?.row?.original)
-                  }}
-                >
-                  <FaEdit size={22} />
-                </Link>
-              </div>
-
-              {/* <div>
-                <Link to="#" onClick={() => deleteHandel()}>
-                  <FaTrash size={20} color="red" />
-                </Link>{" "}
-              </div> */}
+           
             </div>
           </>
         )}

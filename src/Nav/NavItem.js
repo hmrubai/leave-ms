@@ -7,10 +7,15 @@ import {
   BsCalendar2Day,
   BsCalendarCheck,
   BsVinylFill,
+  BsCalendarDay,
 } from "react-icons/bs";
 import { GiAstronautHelmet } from "react-icons/gi";
-import { MdAppRegistration, MdOutlinePolicy,MdOutlineStopScreenShare } from "react-icons/md";
-import { HiOutlineOfficeBuilding, } from "react-icons/hi";
+import {
+  MdAppRegistration,
+  MdOutlinePolicy,
+  MdOutlineStopScreenShare,
+} from "react-icons/md";
+import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import { TbGitBranch } from "react-icons/tb";
 import { FaSith, FaCodepen, FaUserInjured, FaRegUser } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
@@ -18,8 +23,6 @@ import { AiOutlineCodeSandbox } from "react-icons/ai";
 import { MdWorkOutline } from "react-icons/md";
 import { FcLeave } from "react-icons/fc";
 import { RiFileList3Line } from "react-icons/ri";
-
-
 
 export const navItem = [
   //UID Mustbe Uges String
@@ -74,7 +77,7 @@ export const navItem = [
         role: "admin",
         icon: <FaSith size={18} />,
       },
-   
+
       {
         title: "Employment",
         link: "admin/employment-list",
@@ -143,6 +146,12 @@ export const navItem = [
         role: "admin",
         icon: <BsCalendarCheck size={15} />,
       },
+      {
+        title: "Academic Calender",
+        link: "admin/calendar-setup",
+        role: "employee",
+        icon: <BsCalendarDay size={15} />,
+      },
     ],
   },
   {
@@ -155,7 +164,7 @@ export const navItem = [
         title: "Apply For Leave",
         link: "admin/apply-for-leave",
         role: "admin",
-        icon:<MdOutlineStopScreenShare size={18} />, 
+        icon: <MdOutlineStopScreenShare size={18} />,
       },
       {
         title: "Applied List",
@@ -163,30 +172,216 @@ export const navItem = [
         role: "admin",
         icon: <RiFileList3Line size={18} />,
       },
-    ]
+    ],
   },
-  
 
   // Admin Nav End
 
-
-
+  // Employee Nav Start
   {
-    title: "Employee",
-    link: "employee",
+    UID: "calendar",
+    title: "Calendar Settings",
     role: "employee",
-    icon: <FaRegUser size={16} />,
+    icon: <BsCalendar3 size={15} />,
+
+    children: [
+      {
+        title: "Academic Calender",
+        link: "employee/calendar-setup",
+        role: "employee",
+        icon: <BsCalendarDay size={15} />,
+      },
+    ],
+  },
+
+  {
+    UID: "blance",
+    title: "Balance Setup",
+    role: "employee",
+    icon: <BiWalletAlt size={18} />,
+
+    children: [
+      {
+        title: "My Balance",
+        link: "admin/balance-setup",
+        role: "employee",
+        icon: <AiOutlineCodeSandbox size={18} />,
+      },
+    ],
+  },
+
+    {
+    UID: "leave",
+    title: "Leave Application",
+    role: "employee",
+    icon: <FcLeave size={18} />,
+    children: [
+      {
+        title: "My leave Application",
+        link: "employee/apply-for-leave",
+        role: "employee",
+        icon: <MdOutlineStopScreenShare size={18} />,
+      },]
+  },
+  // Employee Nav End
+
+  // Approval Authority Nav Start
+  
+  {
+    UID: "settings",
+    title: "Master Settings",
+    role: "approvalauthority",
+    icon: <FiSettings />,
+    children: [
+      {
+        title: "Company Info",
+        link: "approval-authority/company-list",
+        role: "approvalauthority",
+        icon: <HiOutlineOfficeBuilding size={18} />,
+      },
+
+      {
+        title: "Fiscal Year",
+        link: "approval-authority/fiscal-year-list",
+        role: "approvalauthority",
+        icon: <BsCalendar2Check size={16} />,
+      },
+
+      {
+        title: "Employee",
+        link: "approval-authority/employee-list",
+        role: "approvalauthority",
+        icon: <FaUserInjured size={17} />,
+      },
+      {
+        title: "Branch",
+        link: "approval-authority/branch-list",
+        role: "approvalauthority",
+        icon: <TbGitBranch size={19} />,
+      },
+      {
+        title: "Department",
+        link: "approval-authority/department-list",
+        role: "approvalauthority",
+        icon: <FaCodepen size={18} />,
+      },
+      {
+        title: "Designation",
+        link: "approval-authority/designation-list",
+        role: "approvalauthority",
+        icon: <FaSith size={18} />,
+      },
+
+      {
+        title: "Employment",
+        link: "approval-authority/employment-list",
+        role: "approvalauthority",
+        icon: <BsBox size={16} />,
+      },
+      {
+        title: "Leave Policy",
+        link: "approval-authority/leave-type",
+        role: "approvalauthority",
+        icon: <MdOutlinePolicy size={18} />,
+      },
+
+      {
+        title: "Balance Settings",
+        link: "approval-authority/leave-balance",
+        role: "approvalauthority",
+        icon: <GoGraph size={17} />,
+      },
+
+    
+    ],
+  },
+
+  {
+    UID: "blance",
+    title: "Balance Setup",
+    role: "approvalauthority",
+    icon: <BiWalletAlt size={18} />,
+
+    children: [
+      {
+        title: "Balance Setup",
+        link: "approval-authority/balance-setup",
+        role: "approvalauthority",
+        icon: <AiOutlineCodeSandbox size={18} />,
+      },
+      {
+        title: "Approval Flow",
+        link: "approval-authority/approval-flow",
+        role: "approvalauthority",
+        icon: <MdAppRegistration size={20} />,
+      },
+    ],
+  },
+
+  {
+    UID: "calendar",
+    title: "Calendar Settings",
+    role: "approvalauthority",
+    icon: <BsCalendar3 size={15} />,
+
+    children: [
+      {
+        title: "Day Type Setup",
+        link: "approval-authority/day-type-setup",
+        role: "approvalauthority",
+        icon: <BsCalendar2Day size={15} />,
+      },
+      {
+        title: "Working Day Setup",
+        link: "approval-authority/working-day-setup",
+        role: "approvalauthority",
+        icon: <MdWorkOutline size={18} />,
+      },
+      {
+        title: "Calendar Setup",
+        link: "approval-authority/calendar-setup",
+        role: "approvalauthority",
+        icon: <BsCalendarCheck size={15} />,
+      },
+      {
+        title: "Academic Calender",
+        link: "approval-authority/calendar-setup",
+        role: "approvalauthority",
+        icon: <BsCalendarDay size={15} />,
+      },
+    ],
   },
   {
-    title: "Authority",
-    link: "approval-authority",
+    UID: "leave",
+    title: "Leave Application",
     role: "approvalauthority",
-    icon: <GiAstronautHelmet size={16} />,
+    icon: <FcLeave size={18} />,
+    children: [
+      {
+        title: "Apply For Leave",
+        link: "approval-authority/apply-for-leave",
+        role: "approvalauthority",
+        icon: <MdOutlineStopScreenShare size={18} />,
+      },
+      {
+        title: "Applied List",
+        link: "approval-authority/applied-list",
+        role: "approvalauthority",
+        icon: <RiFileList3Line size={18} />,
+      },
+    ],
   },
+
+
+  // Approval Authority Nav End
+
+  // Others Nav Start
   {
     title: "Others",
     link: "others",
     role: "others",
     icon: <BsVinylFill size={16} />,
   },
+
+  //
 ];
