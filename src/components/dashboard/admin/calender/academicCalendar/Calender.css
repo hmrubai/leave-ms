@@ -1,0 +1,4 @@
+.fc-daygrid-block-event .fc-event-time, .fc-daygrid-block-event .fc-event-title {
+    padding: 1px;
+    white-space: normal;
+}

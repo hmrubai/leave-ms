@@ -56,7 +56,7 @@ export const calenderApi = createApi({
       }),
       providesTags: ["Calender"],
     }),
-
+ 
 
     generateCalender: builder.mutation({
       query: (status) => {
@@ -90,6 +90,14 @@ export const calenderApi = createApi({
       }),
       providesTags: ["Calender"],
     }),
+   getAcadamicCalender: builder.query({
+      query: () => ({
+        url: `/dashboard-summary`,
+        method: "GET",
+        headers,
+      }),
+      providesTags: ["Calender"],
+    }),
 
 
   }),
@@ -103,5 +111,6 @@ export const {
   useGetYearListQuery,
   useGenerateCalenderMutation,
   useUpdateCalenderMutation,
-  useTestQuery
+  useTestQuery,
+  useGetAcadamicCalenderQuery,
 } = calenderApi;

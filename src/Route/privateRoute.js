@@ -30,8 +30,15 @@ import DayTypeSetupList from "./../components/dashboard/admin/calender/dayTypeSe
 import WorkingDayList from "../components/dashboard/admin/calender/workingDaySetup/WorkingDayList";
 import CalenderSetupList from "../components/dashboard/admin/calender/calenderSetup/CalenderSetupList";
 import BalanceSettingsList from "../components/dashboard/admin/balanceSettings/BalanceSettingsList";
-import ApplyForLeaveList from "../components/dashboard/admin/applyForLeave/ApplyForLeaveList";
-import LeaveDetails from './../components/dashboard/admin/applyForLeave/LeaveDetails';
+import ApplyForLeaveList from "../components/dashboard/admin/leave/applyForLeave/ApplyForLeaveList";
+import LeaveDetails from './../components/dashboard/admin/leave/applyForLeave/LeaveDetails';
+import PendingLeaveList from "../components/dashboard/admin/leave/pendingForLeaveApprovel/PendingLeaveList";
+import ApproveLeaveList from "../components/dashboard/admin/leave/approveLeaveList/ApproveLeaveList";
+import MyCalender from "../components/dashboard/admin/calender/academicCalendar/MyCalender";
+import LeaveBalance from "../components/dashboard/admin/leave/leaveBalance/LeaveBalance";
+
+
+
 
 // We can use this route for private route
 
@@ -153,7 +160,7 @@ export const privateRoute = [
 
   {
     path: "approval-authority",
-    element: <ApprovalAuthority />,
+    element: <AdminPage />,
     role: "approvalauthority",
   },
   {
@@ -217,6 +224,12 @@ export const privateRoute = [
     role: "approvalauthority",
   },
   {
+    path: "approval-authority/my-leave-balance",
+    element: <LeaveBalance />,
+    role: "approvalauthority",
+  },
+
+  {
     path: "approval-authority/balance-setup",
     element: <BalanceSetupList />,
     role: "approvalauthority",
@@ -236,6 +249,11 @@ export const privateRoute = [
     element: <CalenderSetupList />,
     role: "approvalauthority",
   },
+  {
+    path: "approval-authority/my-calendar",
+    element: <MyCalender />,
+    role: "approvalauthority",
+  },
 
   {
     path: "approval-authority/approval-flow",
@@ -244,13 +262,23 @@ export const privateRoute = [
   },
 
   {
-    path: "approval-authority/apply-for-leave",
+    path: "approval-authority/my-leave-application",
     element: <ApplyForLeaveList />,
     role: "approvalauthority",
   },
   {
     path: "approval-authority/leave-details/:id",
     element: <LeaveDetails />,
+    role: "approvalauthority",
+  },
+  {
+    path: "approval-authority/pending-leave-list",
+    element: <PendingLeaveList />,
+    role: "approvalauthority",
+  },
+  {
+    path: "approval-authority/approved-leave-list",
+    element: <ApproveLeaveList />,
     role: "approvalauthority",
   },
 
@@ -264,9 +292,26 @@ export const privateRoute = [
     element: <Employee />,
     role: "employee",
   },
+  
   {
-    path: "admin/apply-for-leave",
+    path: "employee/my-calendar",
+    element: <MyCalender />,
+    role: "employee",
+  },
+  {
+    path: "employee/my-leave-balance",
+    element: <LeaveBalance />,
+    role: "employee",
+  },
+
+  {
+    path: "employee/my-leave-application",
     element: <ApplyForLeaveList />,
+    role: "employee",
+  },
+  {
+    path: "employee/leave-details/:id",
+    element: <LeaveDetails />,
     role: "employee",
   },
 

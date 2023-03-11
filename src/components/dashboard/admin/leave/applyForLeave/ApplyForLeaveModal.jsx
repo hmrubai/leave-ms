@@ -1,9 +1,9 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import ApplyForLeaveDetails from './LeaveDetails';
-import CreateApplyForLeave from './CreateApplyForLeave';
-import EditApplyForLeave from './EditApplyForLeave';
+import CreateApplyForLeave from "./CreateApplyForLeave";
+import EditApplyForLeave from "./EditApplyForLeave";
+
+
 
 const ApplyForLeaveModal = ({ handleClose, show, clickValue,paramId }) => {
 

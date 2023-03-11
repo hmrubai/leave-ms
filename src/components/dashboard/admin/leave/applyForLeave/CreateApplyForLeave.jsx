@@ -2,17 +2,15 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
-import { useBranchSaveOrUpdateMutation } from "../../../../services/branchApi";
-import { useGetCompanyListQuery } from "../../../../services/companyApi";
-import { useGetLeavePolicyListQuery } from "../../../../services/leavepolicyApi";
 import { DateRange } from "react-date-range";
 import format from "date-fns/format";
 import {
   useGetLeaveUserPolicyListQuery,
   useLeaveCheckValidityMutation,
   useLeaveSubmitApplicationMutation,
-} from "../../../../services/leaveApplication";
-import Loader from "./../../../common/Loader";
+} from "../../../../../services/leaveApplication";
+import Loader from "../../../../common/Loader";
+
 const CreateApplyForLeave = ({ handleClose }) => {
   const { data } = useGetLeaveUserPolicyListQuery();
 
@@ -140,7 +138,9 @@ const CreateApplyForLeave = ({ handleClose }) => {
               }
             >
               <div className="form-group row">
-                <label className="col-sm-6 col-form-label">Half Day</label>
+                <label className="col-sm-6 col-form-label">
+                  Select Day Part
+                </label>
                 <div className="col-sm-6">
                   <select
                     className="form-control form-select"
@@ -148,7 +148,7 @@ const CreateApplyForLeave = ({ handleClose }) => {
                     onChange={formik.handleChange}
                     value={formik.values.half_day}
                   >
-                    <option>Not Applicable </option>
+                    <option selected>Not Applicable </option>
                     <option value="1st Half">First Half</option>
                     <option value="2nd Half">Second Half</option>
                   </select>
@@ -157,7 +157,7 @@ const CreateApplyForLeave = ({ handleClose }) => {
             </div>
             <div className="col-md-12">
               <div className="form-group row">
-                <label className="col-sm-6 col-form-label">leave Type</label>
+                <label className="col-sm-6 col-form-label">Leave Type</label>
                 <div className="col-sm-6">
                   <select
                     className="form-control form-select"
@@ -191,7 +191,9 @@ const CreateApplyForLeave = ({ handleClose }) => {
             </div>
             <div className="col-md-12">
               <div className="form-group row">
-                <label className="col-sm-6 col-form-label">Responsibility Carried By</label>
+                <label className="col-sm-6 col-form-label">
+                  Responsibility Carried By
+                </label>
                 <div className="col-sm-6">
                   <input
                     type="text"

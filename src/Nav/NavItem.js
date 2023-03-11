@@ -187,7 +187,7 @@ export const navItem = [
     children: [
       {
         title: "Academic Calender",
-        link: "employee/calendar-setup",
+        link: "employee/my-calendar",
         role: "employee",
         icon: <BsCalendarDay size={15} />,
       },
@@ -203,7 +203,7 @@ export const navItem = [
     children: [
       {
         title: "My Balance",
-        link: "admin/balance-setup",
+        link: "employee/my-leave-balance",
         role: "employee",
         icon: <AiOutlineCodeSandbox size={18} />,
       },
@@ -218,10 +218,11 @@ export const navItem = [
     children: [
       {
         title: "My leave Application",
-        link: "employee/apply-for-leave",
+        link: "employee/my-leave-application",
         role: "employee",
         icon: <MdOutlineStopScreenShare size={18} />,
-      },]
+      },
+    ]
   },
   // Employee Nav End
 
@@ -304,6 +305,13 @@ export const navItem = [
 
     children: [
       {
+        title: "My Leave Balance",
+        link: "approval-authority/my-leave-balance",
+        role: "approvalauthority",
+        icon: <AiOutlineCodeSandbox size={18} />,
+      },
+      
+      {
         title: "Balance Setup",
         link: "approval-authority/balance-setup",
         role: "approvalauthority",
@@ -345,7 +353,7 @@ export const navItem = [
       },
       {
         title: "Academic Calender",
-        link: "approval-authority/calendar-setup",
+        link: "approval-authority/my-calendar",
         role: "approvalauthority",
         icon: <BsCalendarDay size={15} />,
       },
@@ -358,14 +366,20 @@ export const navItem = [
     icon: <FcLeave size={18} />,
     children: [
       {
-        title: "Apply For Leave",
-        link: "approval-authority/apply-for-leave",
+        title: "My leave Application",
+        link: "approval-authority/my-leave-application",
         role: "approvalauthority",
         icon: <MdOutlineStopScreenShare size={18} />,
       },
       {
-        title: "Applied List",
-        link: "approval-authority/applied-list",
+        title: "Pending For Approval",
+        link: "approval-authority/pending-leave-list",
+        role: "approvalauthority",
+        icon: <RiFileList3Line size={18} />,
+      },
+      {
+        title: "Approved List",
+        link: "approval-authority/approved-leave-list",
         role: "approvalauthority",
         icon: <RiFileList3Line size={18} />,
       },

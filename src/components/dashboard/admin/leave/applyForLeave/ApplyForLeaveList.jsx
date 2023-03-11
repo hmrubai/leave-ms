@@ -6,11 +6,11 @@ import {
 import { Link } from "react-router-dom";
 import { IoSyncCircle } from "react-icons/io5";
 
-import { useGetBranchListQuery } from "../../../../services/branchApi";
-import PageTopHeader from "../../../common/PageTopHeader";
+
+// import { useSelector } from "react-redux";
+import PageTopHeader from './../../../../common/PageTopHeader';
 import ApplyForLeaveTable from "./ApplyForLeaveTable";
 import ApplyForLeaveModal from "./ApplyForLeaveModal";
-// import { useSelector } from "react-redux";
 
 
 const ApplyForLeaveList = () => {
@@ -19,7 +19,7 @@ const ApplyForLeaveList = () => {
 
 // console.log(user);
 
-  const get = useGetBranchListQuery();
+
   const [clickValue, setClickValue] = useState(null);
   const [show, setShow] = useState(false);
 
@@ -30,9 +30,7 @@ const ApplyForLeaveList = () => {
     setClickValue(value);
   }, []);
 
-  const refatchClick = () => {
-    get.refetch();
-  };
+
 
 
   return (
@@ -51,14 +49,8 @@ const ApplyForLeaveList = () => {
         <div className="card-body">
           <div className="py-2 text-right mr-1">
             <div className="d-flex justify-content-end">
-              <div className="mt-1">
-                <IoSyncCircle
-                  className="cursor "
-                  color="black"
-                  size={25}
-                  onClick={() => refatchClick()}
-                />
-              </div>
+        
+      
               <div>
                 <Link
                   to="#"

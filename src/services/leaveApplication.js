@@ -8,14 +8,14 @@ export const leaveApplicationApi = createApi({
   }),
   tagTypes: ["LeaveApplication"],
   endpoints: (builder) => ({
-    // getleaveSettingList: builder.query({
-    //   query: (id) => ({
-    //     url: `admin/leave-setting-list/${id}`,
-    //     method: "GET",
-    //     headers,
-    //   }),
-    //   providesTags: ["LeaveApplication"],
-    // }),
+    getApplicationDetailsByID: builder.query({
+      query: (id) => ({
+        url: `leave/application-details-by-id/${id}`,
+        method: "GET",
+        headers,
+      }),
+      providesTags: ["LeaveApplication"],
+    }),
 
     getLeaveUserPolicyList: builder.query({
       query: () => ({
@@ -29,6 +29,30 @@ export const leaveApplicationApi = createApi({
     getLeaveApplicationList: builder.query({
       query: () => ({
         url: `/leave/application-list`,
+        method: "GET",
+        headers,
+      }),
+      providesTags: ["LeaveApplication"],
+    }),
+    getApprovalPendingApplicationList: builder.query({
+      query: () => ({
+        url: `approval/pending/application-list`,
+        method: "GET",
+        headers,
+      }),
+      providesTags: ["LeaveApplication"],
+    }),
+    getApprovedApplicationList: builder.query({
+      query: () => ({
+        url: `approval/approved/application-list`,
+        method: "GET",
+        headers,
+      }),
+      providesTags: ["LeaveApplication"],
+    }),
+    myLeaveBalanceList: builder.query({
+      query: () => ({
+        url: `my/leave-balance-list`,
         method: "GET",
         headers,
       }),
@@ -57,6 +81,28 @@ export const leaveApplicationApi = createApi({
       },
       invalidatesTags: ["LeaveApplication"],
     }),
+    approveLeave: builder.mutation({
+      query: (leave) => {
+        return {
+          url: `leave/approve-leave`,
+          method: "POST",
+          body: leave,
+          headers,
+        };
+      },
+      invalidatesTags: ["LeaveApplication"],
+    }),
+    rejectLeave: builder.mutation({
+      query: (leave) => {
+        return {
+          url: `leave/reject-leave`,
+          method: "POST",
+          body: leave,
+          headers,
+        };
+      },
+      invalidatesTags: ["LeaveApplication"],
+    }),
   }),
 });
 
@@ -65,4 +111,10 @@ export const {
   useGetLeaveUserPolicyListQuery,
   useLeaveSubmitApplicationMutation,
   useGetLeaveApplicationListQuery,
+  useGetApplicationDetailsByIDQuery,
+  useGetApprovalPendingApplicationListQuery,
+  useGetApprovedApplicationListQuery,
+  useApproveLeaveMutation,
+  useRejectLeaveMutation,
+  useMyLeaveBalanceListQuery,
 } = leaveApplicationApi;

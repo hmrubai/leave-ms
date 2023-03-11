@@ -2,8 +2,9 @@ import { useFormik } from "formik";
 import React from "react";
 import { Form, Modal, Button } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
-import { useBranchSaveOrUpdateMutation } from "../../../../services/branchApi";
-import { useGetCompanyListQuery } from "../../../../services/companyApi";
+import { useGetCompanyListQuery } from "../../../../../services/companyApi";
+import { useBranchSaveOrUpdateMutation } from "../../../../../services/branchApi";
+
 
 const EditApplyForLeave = ({ item, handleClose }) => {
   const { data } = useGetCompanyListQuery();

@@ -7,10 +7,10 @@ import { Box, Button } from "@mui/material";
 import { BsFillEyeFill } from "react-icons/bs";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
-import Loader from "../../../common/Loader";
-import BranchModal from "./ApplyForLeaveModal";
-import { useGetBranchListQuery } from "../../../../services/branchApi";
-import { useGetLeaveApplicationListQuery } from "../../../../services/leaveApplication";
+import { useGetLeaveApplicationListQuery } from "../../../../../services/leaveApplication";
+import Loader from "../../../../common/Loader";
+import ApplyForLeaveModal from "./ApplyForLeaveModal";
+
 
 const ApplyForLeaveTable = () => {
   const { data, isSuccess, isFetching } = useGetLeaveApplicationListQuery();
@@ -59,13 +59,25 @@ const ApplyForLeaveTable = () => {
         accessorKey: "end_date", //normal accessorKey
         header: "End Date",
       },
+      // {
+      //   accessorKey: "total_applied_days", //normal accessorKey
+      //   header: "Applied For",
+      // },
       {
-        accessorKey: "total_applied_days", //normal accessorKey
-        header: "Applied For",
+        accessorFn: (row) =>
+          <>
+            <span className="badge badge-success">{row.total_applied_days} Dayes</span>
+          </>,
+         size: 10, //optional
+         id: "total_applied_days", //id required if you use accessorFn instead of accessorKey
+         header: "Applied For",
+         Header: <span className="table-header">Applied For</span>,
+          
       },
+
       {
         accessorKey: "half_day", //normal accessorKey
-        header: "Applied For",
+        header: "Is Half Day",
       },
 
       {
@@ -112,7 +124,7 @@ const ApplyForLeaveTable = () => {
     <>
       {isFetching && <Loader />}
 
-      <BranchModal
+      <ApplyForLeaveModal
         show={show}
         handleClose={handleClose}
         clickValue={clickValue}

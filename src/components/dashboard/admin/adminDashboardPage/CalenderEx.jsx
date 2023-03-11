@@ -2,7 +2,7 @@ import React from "react";
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import interactionPlugin from "@fullcalendar/interaction";
-const Calender = () => {
+const CalenderEx = () => {
   const handleDateClick = (arg) => {
     // bind with an arrow function
     console.log(arg);
@@ -59,4 +59,4 @@ function renderEventContent(eventInfo) {
   );
 }
 
-export default Calender;
+export default CalenderEx;
