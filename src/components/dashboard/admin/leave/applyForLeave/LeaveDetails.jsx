@@ -3,8 +3,9 @@ import React from "react";
 import avatar from "../../../../../assets/images/profile-picture.png";
 
 import { useParams } from "react-router-dom";
-
+import Swal from "sweetalert2";
 import Moment from "react-moment";
+import "./Leave.css";
 import {
   useApproveLeaveMutation,
   useGetApplicationDetailsByIDQuery,
@@ -13,25 +14,60 @@ import {
 import Loader from "../../../../common/Loader";
 import PageTopHeader from "../../../../common/PageTopHeader";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const LeaveDetails = () => {
   const authUser = useSelector((state) => state.auth.user);
   const { id } = useParams();
   const res = useGetApplicationDetailsByIDQuery(id);
-  const [approveLeave, approveRes] = useApproveLeaveMutation();
+  const [approveLeave] = useApproveLeaveMutation();
 
-  const [rejectLeave, rejectRes] = useRejectLeaveMutation();
+  const [rejectLeave] = useRejectLeaveMutation();
 
   const { data } = res;
 
-  // console.log(authUser.id);
+
 
   const handleApprove = async () => {
-    await approveLeave(id);
+    try {
+      const result = await approveLeave({
+        leave_application_id: id,
+      }).unwrap();
+      toast.success(result.message);
+    } catch (error) {
+      toast.error(error.data.message);
+    }
   };
 
   const handleReject = async () => {
-    await rejectLeave(id);
+    try {
+      const result = await rejectLeave({
+        leave_application_id: id,
+      }).unwrap();
+      toast.success(result.message);
+    } catch (error) {
+      toast.error(error.data.message);
+    }
+  };
+
+  const confirmHandel = async (icon, buttonTxt, ButtonClr, Did,funC) => {
+    Swal.fire({
+      title: "Are you sure?",
+      // text: "You won't be able to revert this!",
+      icon: icon,
+      confirmButtonColor: ButtonClr,
+      cancelButtonColor: "#4e4e4e",
+      confirmButtonText: "Yes," + buttonTxt + "!",
+      width: 200,
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        funC(Did);
+        // deleteFunc(Did);
+        Swal.fire("success");
+      }
+     
+    });
   };
 
   return (
@@ -179,6 +215,8 @@ const LeaveDetails = () => {
                         <td>{data?.data?.leave?.total_applied_days} Dayes</td>
                       </tr>
 
+
+
                       <tr>
                         <td>Is Half Day</td>
                         {data?.data?.leave?.is_half_day ? (
@@ -186,7 +224,7 @@ const LeaveDetails = () => {
                             Yes ({data?.data?.leave?.half_day})
                           </td>
                         ) : (
-                          <td className="badge rounded-pill bg-danger mt-1">
+                          <td className="badge rounded-pill bg-info mt-1">
                             No
                           </td>
                         )}
@@ -221,16 +259,20 @@ const LeaveDetails = () => {
                         <button
                           class="btn btn-success me-md-2"
                           type="button"
-                          onClick={handleApprove}
+                          onClick={() =>
+                            confirmHandel("info", "Approved", "#4BB543", id,handleApprove)
+                          }
                         >
-                          Approved
+                          Approv
                         </button>
                         <button
                           class="btn btn-danger"
                           type="button"
-                          onClick={handleReject}
+                          onClick={() =>
+                            confirmHandel("warning", "Rejected", "#FF0000", id,handleReject)
+                          }
                         >
-                          Rejected
+                          Reject
                         </button>
                       </div>
                     </div>
@@ -265,6 +307,13 @@ const LeaveDetails = () => {
                       </tr>
                     </thead>
                     <tbody>
+                      {data?.data?.length === 0 && (
+                        <tr>
+                          <td colSpan="7" className="text-center">
+                            No Data Found
+                          </td>
+                        </tr>
+                      )}
                       {data?.data?.leave_flow?.map((item, i) => (
                         <tr key={i}>
                           <td>{item.authority_name}</td>
@@ -335,6 +384,13 @@ const LeaveDetails = () => {
                       </tr>
                     </thead>
                     <tbody>
+                      {data?.data?.length === 0 && (
+                        <tr>
+                          <td colSpan="7" className="text-center">
+                            No Data Found
+                          </td>
+                        </tr>
+                      )}
                       {data?.data?.leave_balances?.map((item, i) => (
                         <tr key={i}>
                           <td>

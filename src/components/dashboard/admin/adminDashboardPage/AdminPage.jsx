@@ -5,15 +5,14 @@ import { GiSandsOfTime } from "react-icons/gi";
 import { FcApproval } from "react-icons/fc";
 import { ImCross } from "react-icons/im";
 import { BsStack } from "react-icons/bs";
-import Calender from "../calender/academicCalendar/Calender";
+import Calender from "./Calender";
 import { useGetAcadamicCalenderQuery } from "../../../../services/calenderApi";
 import Moment from "react-moment";
 import Loader from "../../../common/Loader";
 
 const AdminPage = () => {
   const res = useGetAcadamicCalenderQuery();
-  const { data, error, isLoading,isFetching } = res;
-
+  const { data, error, isLoading, isFetching } = res;
 
   return (
     <>
@@ -30,7 +29,7 @@ const AdminPage = () => {
       </div>
 
       {isFetching && <Loader />}
-      
+
       {/*  <!-- Content Row --> */}
       <div className="row">
         {/*  <!-- Earnings (Monthly) Card Example --> */}
@@ -80,6 +79,7 @@ const AdminPage = () => {
             </div>
             {/*  <!-- Card Body --> */}
             <div className="card-body table-responsive">
+              {isLoading && <Loader />}
               <table class="table table-striped">
                 <thead
                   className=" text-light"
@@ -97,14 +97,18 @@ const AdminPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {isLoading && <Loader />}
-                  {error && <h1>Something went wrong</h1>}
-                  {data?.data?.leave_list.length === 0 && (
-                    <h5>No Leave Application</h5>
+                  {error && <>Something went wrong</>}
+
+                  {data?.data?.leave_list?.length === 0 && (
+                    <tr>
+                      <td colSpan="7" className="text-center">
+                        <>No Leave Applied!</>
+                      </td>
+                    </tr>
                   )}
-                  {data?.data?.leave_list?.map((item) => {
+                  {data?.data?.leave_list?.map((item,i) => {
                     return (
-                      <tr>
+                      <tr key={i}>
                         <td>{item.leave_title}</td>
                         <td>
                           <Moment format="YYYY/MM/DD">{item.startDate}</Moment>
@@ -179,6 +183,7 @@ const AdminPage = () => {
               </h6>
             </div>
             <div className="card-body table-responsive">
+              {isLoading && <Loader />}
               <table class="table table-striped">
                 <thead
                   className=" text-light"
@@ -193,12 +198,15 @@ const AdminPage = () => {
                     <th scope="col">Remmaining</th>
                   </tr>
                 </thead>
-                {isLoading && <Loader />}
-                  {error && <h1>Something went wrong</h1>}
-                  {data?.data?.balance_list.length === 0 && (
-                  <h5>No Leave Balance
-                    </h5>
-                  )}
+
+                {error && <>Something went wrong</>}
+                {data?.data?.balance_list.length === 0 && (
+                  <tr>
+                    <td colSpan="7" className="text-center">
+                      No Leave Balance!
+                    </td>
+                  </tr>
+                )}
                 <tbody>
                   {data?.data?.balance_list?.map((item, i) => (
                     <tr key={i}>

@@ -3,7 +3,7 @@ import React from "react";
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import interactionPlugin from "@fullcalendar/interaction";
-import { useGetAcadamicCalenderQuery } from "../../../../../services/calenderApi";
+import { useGetAcadamicCalenderQuery } from "../../../../services/calenderApi";
 import "./Calender.css";
 const Calender = () => {
   const res = useGetAcadamicCalenderQuery();
@@ -33,7 +33,7 @@ const Calender = () => {
         selectable={true}
         height={500}
         eventTextColor="black"
-        whiteSpace="wrap"
+      
       />
     </>
   );

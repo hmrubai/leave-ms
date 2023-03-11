@@ -15,6 +15,7 @@ const LeaveBalance = () => {
           </div>
         </div>
         <div className="card-body">
+          {res.isFetching && <Loader />}
           <table class="table">
             <thead
               className=" text-light"
@@ -31,9 +32,14 @@ const LeaveBalance = () => {
             </thead>
             <tbody>
               {data?.data?.balance_list.length === 0 && (
-                <h5>No Leave Balance</h5>
+                <tr>
+                  <td colSpan="4" className="text-center">
+                    No Data Found
+                  </td>
+                </tr>
+                
               )}
-              {res.isFetching && <Loader />}
+             
 
               {data?.data?.balance_list?.map((item, i) => (
                 <tr key={i}>

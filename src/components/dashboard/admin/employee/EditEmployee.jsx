@@ -211,7 +211,7 @@ const EditEmployee = () => {
 
 
   if (empRes.isSuccess) {
-    navigate("/dashboard/admin/employee-list");
+    navigate("/dashboard/approval-authority/employee-list");
   }
 
   const focusHandelerOne = (name, id) => {

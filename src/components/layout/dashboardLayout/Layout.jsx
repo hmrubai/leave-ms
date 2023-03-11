@@ -106,7 +106,7 @@ const Layout = () => {
 
               <div className="mt-1 ">
                 <span className="d-none d-lg-inline text-light-600 small ml-2 font-weight-bold ">
-                  {authUser && authUser.name}
+                  {authUser && authUser.name.slice(0, 15)}
                   {/* <br />
                   <span className="d-none d-lg-inline text-light-600 small ml-2  ">
                     {authUser && authUser.user_type} 

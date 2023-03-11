@@ -289,6 +289,11 @@ export const privateRoute = [
 
   {
     path: "employee",
+    element: <AdminPage />,
+    role: "employee",
+  },
+  {
+    path: "employee",
     element: <Employee />,
     role: "employee",
   },

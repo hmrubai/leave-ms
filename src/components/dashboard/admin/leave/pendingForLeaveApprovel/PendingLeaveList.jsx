@@ -6,7 +6,7 @@ import Moment from "react-moment";
 import Loader from "../../../../common/Loader";
 import { useGetApprovalPendingApplicationListQuery } from "../../../../../services/leaveApplication";
 import PageTopHeader from "../../../../common/PageTopHeader";
-import { BsFillEyeFill } from 'react-icons/bs';
+import { BsFillEyeFill } from "react-icons/bs";
 
 const PendingLeaveList = () => {
   const res = useGetApprovalPendingApplicationListQuery();
@@ -41,11 +41,12 @@ const PendingLeaveList = () => {
                 <div className="card-header py-3 n">
                   <div>
                     <h6 className="m-0 font-weight-bold text-primary">
-                    Pending Leave List
+                      Pending Leave List
                     </h6>
                   </div>
                 </div>
                 <div className="card-body">
+                {res.isFetching && <Loader />}
                   <table class="table">
                     <thead>
                       <tr>
@@ -59,6 +60,20 @@ const PendingLeaveList = () => {
                       </tr>
                     </thead>
                     <tbody>
+                    
+                      {res.isError && <>{res.error.message}</>
+                      }
+                      {
+                        data?.data?.length === 0 && (
+                          <tr>
+                            <td colSpan="7" className="text-center">
+                              No Pending leave application found!
+                            </td>
+                            </tr>
+                      )}
+
+                    
+
                       {data?.data?.map((item, i) => (
                         <tr key={i}>
                           <td>{item.leave_title}</td>
@@ -73,25 +88,42 @@ const PendingLeaveList = () => {
                           <td>{item.total_applied_days} Dayes</td>
 
                           {item.is_half_day ? (
+                            <td>
+                              <span className="badge rounded-pill bg-success">
+                                Yes ({item.half_day})
+                              </span>
+                            </td>
+                          ) : (
+                            <td className=" mt-1">
+                              <span className="badge rounded-pill bg-info">
+                                No
+                              </span>
+                            </td>
+                          )}
+                        
+                          {item.leave_status === "Pending" ? (
+                            <td>
+                              <span className="badge rounded-pill bg-warning text-dark">
+                                {item.leave_status}
+                              </span>
+                            </td>
+                          ) : (
+                            <td>
+                              <span className="badge rounded-pill bg-success">
+                                {item.leave_status}
+                              </span>
+                            </td>
+                          )}
+                           
+                      
                           <td>
-                            <span className="badge rounded-pill bg-success">
-                              Yes ({item.half_day})
-                            </span>
+                            {" "}
+                            <Link
+                              to={`/dashboard/approval-authority/leave-details/${item.id}`}
+                            >
+                              <BsFillEyeFill color="black" size={24} />
+                            </Link>
                           </td>
-                        ) : (
-                          <td className=" mt-1">
-                            <span className="badge rounded-pill bg-info">
-                              No
-                            </span>
-                          </td>
-                        )}
-                          <td className="p-1 bg-warning">{item.leave_status}</td>
-                          <td> <Link
-                  to={`/dashboard/approval-authority/leave-details/${item.id}`}
-              
-                >
-                  <BsFillEyeFill color="black" size={24} />
-                </Link></td>
                         </tr>
                       ))}
                     </tbody>

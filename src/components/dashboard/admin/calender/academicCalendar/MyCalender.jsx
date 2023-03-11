@@ -1,6 +1,6 @@
 import React from "react";
 import PageTopHeader from "./../../../../common/PageTopHeader";
-import Calender from "./Calender";
+import Calender from "../../adminDashboardPage/Calender";
 
 const MyCalender = () => {
 

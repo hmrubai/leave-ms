@@ -39,7 +39,7 @@ const EmployeeList = () => {
               </div>
               <div>
                 <Link
-                  to={`/dashboard/admin/create-employee`}
+                  to={`/dashboard/approval-authority/create-employee`}
                   className="btn btn-primary"
                 >
                   <BsFillPlusCircleFill /> New

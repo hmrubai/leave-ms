@@ -120,7 +120,7 @@ const EmployeeTable = () => {
               <div>
                 {" "}
                 <Link
-                  to={`/dashboard/admin/employee-details/${row?.row?.original?.id}`}
+                  to={`/dashboard/approval-authority/employee-details/${row?.row?.original?.id}`}
                 >
                   {" "}
                   <BsFillEyeFill color="black" size={24} />
@@ -128,7 +128,7 @@ const EmployeeTable = () => {
               </div>
               <div>
                 <Link
-                  to={`/dashboard/admin/edit-employee/${row?.row?.original?.id}`}
+                  to={`/dashboard/approval-authority/edit-employee/${row?.row?.original?.id}`}
                   title=""
                   className="px-2"
                 >

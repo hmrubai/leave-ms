@@ -6,21 +6,20 @@ import Moment from "react-moment";
 import Loader from "../../../../common/Loader";
 import { useGetApprovedApplicationListQuery } from "../../../../../services/leaveApplication";
 import PageTopHeader from "../../../../common/PageTopHeader";
-import { BsFillEyeFill } from 'react-icons/bs';
+import { BsFillEyeFill } from "react-icons/bs";
 
 const ApproveLeaveList = () => {
   const res = useGetApprovedApplicationListQuery();
   const { data } = res;
 
-
   return (
     <>
-      <PageTopHeader title="Pending List" />
+      <PageTopHeader title="Approved List" />
       <div className="card shadow mb-4">
         <div className="card-header py-3 n">
           <div>
             <h6 className="m-0 font-weight-bold text-primary">
-              Pending Leave List
+              Approved Leave List
             </h6>
           </div>
         </div>
@@ -40,7 +39,7 @@ const ApproveLeaveList = () => {
                 <div className="card-header py-3 n">
                   <div>
                     <h6 className="m-0 font-weight-bold text-primary">
-                    Pending Leave List
+                      Pending Leave List
                     </h6>
                   </div>
                 </div>
@@ -58,6 +57,16 @@ const ApproveLeaveList = () => {
                       </tr>
                     </thead>
                     <tbody>
+                      {res.isFetching && <Loader />}
+                      {res.isError && <p>{res.error.message}</p>}
+                      {data?.data?.length === 0 && (
+                        <tr>
+                          <td colSpan="7" className="text-center">
+                            No Data Found
+                          </td>
+                        </tr>
+                      )}
+
                       {data?.data?.map((item, i) => (
                         <tr key={i}>
                           <td>{item.leave_title}</td>
@@ -72,21 +81,40 @@ const ApproveLeaveList = () => {
                           <td>{item.total_applied_days} Dayes</td>
 
                           {item.is_half_day ? (
-                            <td className="badge rounded-pill bg-success mt-1">
-                              Yes ({item.half_day})
+                            <td>
+                              <span className="badge rounded-pill bg-success mt-1 text-white">
+                                Yes ({item.half_day})
+                              </span>
                             </td>
                           ) : (
-                            <td className="badge rounded-pill bg-danger mt-1">
-                              No
+                            <td>
+                              <span className="text-white badge rounded-pill bg-info mt-1">
+                                No
+                              </span>
                             </td>
                           )}
-                          <td className="p-1 bg-warning">{item.leave_status}</td>
-                          <td> <Link
-                  to={`/dashboard/approval-authority/leave-details/${item.id}`}
-              
-                >
-                  <BsFillEyeFill color="black" size={24} />
-                </Link></td>
+                   
+                          {item.leave_status === "Pending" ? (
+                            <td>
+                              <span className="badge rounded-pill bg-warning text-dark">
+                                {item.leave_status}
+                              </span>
+                            </td>
+                          ) : (
+                            <td>
+                              <span className="badge rounded-pill bg-success">
+                                {item.leave_status}
+                              </span>
+                            </td>
+                          )}
+                          <td>
+                            {" "}
+                            <Link
+                              to={`/dashboard/approval-authority/leave-details/${item.id}`}
+                            >
+                              <BsFillEyeFill color="black" size={24} />
+                            </Link>
+                          </td>
                         </tr>
                       ))}
                     </tbody>

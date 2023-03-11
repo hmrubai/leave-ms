@@ -16,6 +16,8 @@ const CreateApplyForLeave = ({ handleClose }) => {
 
   const [leaveSubmitApplication, res] = useLeaveSubmitApplicationMutation();
 
+    console.log(res);
+
   const [leaveCheckValidity, checkValidityCheckRes] =
     useLeaveCheckValidityMutation();
 
@@ -181,6 +183,10 @@ const CreateApplyForLeave = ({ handleClose }) => {
                 <label className="col-sm-6 col-form-label">Resion</label>
                 <div className="col-sm-6">
                   <textarea
+                    Placeholder="
+                    Please write your reason for leave application.
+                    "
+                    required
                     className="form-control"
                     name="reason"
                     onChange={formik.handleChange}
