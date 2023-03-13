@@ -1,16 +1,13 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 
-import { BsFillPlusCircleFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import { IoSyncCircle } from "react-icons/io5";
-import { useGetdepartmentListQuery } from "../../../../services/departmentApi";
+
 import PageTopHeader from "../../../common/PageTopHeader";
 import LeaveBalanceModal from "./BalanceSettingsModal";
 import LeaveBalanceTable from "./BalanceSettingsTable";
-import { useGetLeaveBalenceSettingsQuery } from "../../../../services/leaveBalanceSettingsApi";
+
 
 const BalanceSettingsList = () => {
-  const get = useGetdepartmentListQuery();
+
 
 
 
@@ -20,13 +17,9 @@ const BalanceSettingsList = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handelClickValue = useCallback((value) => {
-    setClickValue(value);
-  }, []);
 
-  const refatchClick = () => {
-    get.refetch();
-  };
+
+
   return (
     <>
       <PageTopHeader title="Leave Balance" />
@@ -34,7 +27,7 @@ const BalanceSettingsList = () => {
         <div className="card-header py-3 ">
           <div>
             <h6 className="m-0 font-weight-bold text-primary">
-              All Leave Balance List
+            Leave Balance Settings
             </h6>
           </div>
         </div>

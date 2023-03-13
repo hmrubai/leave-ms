@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from "react";
 
 import {
-  BsFillArrowLeftCircleFill,
+ 
   BsFillPlusCircleFill,
 } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoSyncCircle } from "react-icons/io5";
 import LeaveTypeModal from "./LeaveTypeModal";
 import LeaveTypeTable from "./LeaveTypeTable";
@@ -28,13 +28,13 @@ const LeaveTypeList = () => {
   };
   return (
     <>
-      <PageTopHeader title="Leave Type" />
+      <PageTopHeader title="Leave Policy" />
 
       <div className="card shadow mb-4">
         <div className="card-header py-3 ">
           <div>
             <h6 className="m-0 font-weight-bold text-primary">
-              All Leave List
+            Leave Policy Setup
             </h6>
           </div>
      
@@ -54,13 +54,13 @@ const LeaveTypeList = () => {
               <div>
                 <Link
                   to="#"
-                  className="btn btn-primary "
+                  className="btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
                     handelClickValue("Add Leave Information");
                   }}
                 >
-                  <BsFillPlusCircleFill className="mb-1 mr-1" /> New
+                  <BsFillPlusCircleFill className="mb-1 mr-1" /> Add New Leave policy
                 </Link>
               </div>
             </div>

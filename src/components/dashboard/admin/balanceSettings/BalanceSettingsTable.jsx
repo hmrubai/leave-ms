@@ -42,24 +42,6 @@ const BalanceSettingsTable = () => {
     setEmploymentTypeId(0);
   };
 
-  const deleteHandel = async (deleteFunc, Did) => {
-    Swal.fire({
-      title: "Are you sure?",
-      // text: "You won't be able to revert this!",
-      icon: "error",
-      confirmButtonColor: "#d33 ",
-      cancelButtonColor: " #4e4e4e",
-      confirmButtonText: "Yes, delete it!",
-      width: 200,
-      showCancelButton: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // deleteFunc(Did);
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-      console.log(result);
-    });
-  };
 
   const columns = useMemo(
     () => [
@@ -161,14 +143,14 @@ const BalanceSettingsTable = () => {
           <div className="col-md-2">
             <Link
               to="#"
-              className="btn btn-primary "
+              className="btn btn-primary btn-sm"
               onClick={() => {
                 handleShow();
                 handelClickValue("Add Leave Balance Information");
               }}
             >
               <BsFillPlusCircleFill className="mb-1 mr-1" />
-              New Leave Settings
+             Add New Leave Settings
             </Link>
           </div>
         </div>

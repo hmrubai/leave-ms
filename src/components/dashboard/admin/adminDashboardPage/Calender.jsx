@@ -1,13 +1,9 @@
 import React from "react";
-
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import interactionPlugin from "@fullcalendar/interaction";
-import { useGetAcadamicCalenderQuery } from "../../../../services/calenderApi";
 import "./Calender.css";
-const Calender = () => {
-  const res = useGetAcadamicCalenderQuery();
-
+const Calender = ({ res }) => {
   const calender = res?.data?.data?.weekend_holiday?.map((item) => {
     let title;
     if (item.day_note) {
@@ -31,9 +27,8 @@ const Calender = () => {
         events={calender}
         editable={true}
         selectable={true}
-        height={500}
         eventTextColor="black"
-      
+        handleWindowResize={true}
       />
     </>
   );

@@ -4,19 +4,27 @@ import { Link } from "react-router-dom";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { ExportToCsv } from "export-to-csv"; //or use your library of choice here
 import { Box, Button } from "@mui/material";
-import { BsFillEyeFill } from "react-icons/bs";
+import { BsFillEyeFill, BsFillPlusCircleFill } from "react-icons/bs";
 import { FaTrash, FaEdit } from "react-icons/fa";
-import Swal from "sweetalert2";
+
 import Loader from "../../../common/Loader";
 import { useGetApprovalFlowListQuery } from "../../../../services/leaveApprovalFlowApi";
 import LeaveApprovalFlowModal from "./LeaveApprovalFlowModal";
+// import Select from './../calender/workingDaySetup/Select';
+import Select from "react-select";
+
+import { useGetEmployeeListQuery } from "../../../../services/employeeApi";
 
 const LeaveApprovalFlowTable = () => {
-  const { data, isSuccess, isFetching } = useGetApprovalFlowListQuery();
+  const [employeeId, setEmployeeId] = useState(0);
+  
+  const { data, isSuccess, isFetching } = useGetApprovalFlowListQuery(employeeId);
+  const { data: employeeList } = useGetEmployeeListQuery();
 
-
+  // console.log(employeeList)
 
   const [show, setShow] = useState(false);
+
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
   const handleClose = () => setShow(false);
@@ -26,11 +34,9 @@ const LeaveApprovalFlowTable = () => {
     setClickValue(value);
   }, []);
 
-
   const columns = useMemo(
     () => [
-
-   {
+      {
         accessorFn: (row) =>
           ` ${row.authority_name} - 
             ${row.authority_email}`,
@@ -50,13 +56,11 @@ const LeaveApprovalFlowTable = () => {
         header: "employee_name",
         Header: <span className="table-header">Employee</span>, //optional custom markup
       },
-   
-
 
       {
         accessorKey: "step", //normal accessorKey
         header: "Step",
-        size: 50, 
+        size: 50,
       },
     ],
     []
@@ -84,6 +88,36 @@ const LeaveApprovalFlowTable = () => {
 
   return (
     <>
+      <div className="d-flex justify-content-end py-1">
+        <div className="col-md-2">
+          <Select
+            placeholder="Select Employee"
+            // isClearable={true}
+
+            // backspaceRemovesValue={true}
+            onChange={(e) => setEmployeeId(e.id)}
+            getOptionValue={(option) => `${option["id"]}`}
+            getOptionLabel={(option) =>
+              `${option["name"]} (${option["employee_code"]})`
+            }
+            options={employeeList?.data}
+          />
+        </div>
+
+        <div>
+          <Link
+            to="#"
+            className="btn btn-primary btn-sm"
+            onClick={() => {
+              handleShow();
+              handelClickValue("Add approval");
+            }}
+          >
+            <BsFillPlusCircleFill className="mb-1 mr-1" /> Add Flow
+          </Link>
+        </div>
+      </div>
+
       {isFetching && <Loader />}
 
       <LeaveApprovalFlowModal
@@ -131,7 +165,6 @@ const LeaveApprovalFlowTable = () => {
         renderRowActions={(row, index) => (
           <>
             <div className="d-flex">
-    
               <div>
                 <Link
                   to={`#`}

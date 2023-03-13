@@ -16,7 +16,6 @@ const CreateApplyForLeave = ({ handleClose }) => {
 
   const [leaveSubmitApplication, res] = useLeaveSubmitApplicationMutation();
 
-    console.log(res);
 
   const [leaveCheckValidity, checkValidityCheckRes] =
     useLeaveCheckValidityMutation();
@@ -24,7 +23,7 @@ const CreateApplyForLeave = ({ handleClose }) => {
   const initialValues = {
     leave_policy_id: "",
     is_half_day: false,
-    half_day: "",
+    half_day: "Not Applicable",
     reason: "",
     responsibility_carried_by: "",
   };
@@ -73,6 +72,7 @@ const CreateApplyForLeave = ({ handleClose }) => {
 
         if (checkValidityCheckRes.data?.status === true) {
           const result = await leaveSubmitApplication(data).unwrap();
+          // console.log(data);
           toast.success(result.message);
           resetForm();
         } else {
@@ -168,7 +168,7 @@ const CreateApplyForLeave = ({ handleClose }) => {
                     value={formik.values.leave_policy_id}
                     onClick={validityCheckHandler}
                   >
-                    <option>Selact Policy</option>
+                    <option>Selact Leave Type</option>
                     {data?.data?.map((leave, i) => (
                       <option key={i} value={leave.id}>
                         {leave.leave_title}
@@ -180,7 +180,7 @@ const CreateApplyForLeave = ({ handleClose }) => {
             </div>
             <div className="col-md-12">
               <div className="form-group row">
-                <label className="col-sm-6 col-form-label">Resion</label>
+                <label className="col-sm-6 col-form-label">Reason</label>
                 <div className="col-sm-6">
                   <textarea
                     Placeholder="
@@ -263,7 +263,7 @@ const CreateApplyForLeave = ({ handleClose }) => {
             <div className=" d-flex">
               <div className="mr-5">
                 <Button type="submit" variant="success">
-                  Submit
+                  Apply
                 </Button>
               </div>
               <div>

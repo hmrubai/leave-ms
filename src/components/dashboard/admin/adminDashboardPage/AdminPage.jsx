@@ -6,17 +6,16 @@ import { FcApproval } from "react-icons/fc";
 import { ImCross } from "react-icons/im";
 import { BsStack } from "react-icons/bs";
 import Calender from "./Calender";
-import { useGetAcadamicCalenderQuery } from "../../../../services/calenderApi";
 import Moment from "react-moment";
 import Loader from "../../../common/Loader";
+import { useGetDashboardSummaryQuery } from "../../../../services/calenderApi";
 
 const AdminPage = () => {
-  const res = useGetAcadamicCalenderQuery();
+  const res = useGetDashboardSummaryQuery();
   const { data, error, isLoading, isFetching } = res;
 
   return (
     <>
-      {/*  <!-- Page Heading --> */}
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
         <Link
@@ -30,57 +29,61 @@ const AdminPage = () => {
 
       {isFetching && <Loader />}
 
-      {/*  <!-- Content Row --> */}
       <div className="row">
-        {/*  <!-- Earnings (Monthly) Card Example --> */}
         <TopBox
-          name="Pending Leave"
-          color="#FFCC00"
-          icon={<GiSandsOfTime color="#FFCC00" size={35} />}
-          item={40}
-        />
-
-        {/*  <!-- Earnings (Monthly) Card Example --> */}
-        <TopBox
-          name="Approved Leave"
-          color="green"
-          icon={<FcApproval size={35} />}
-          item={40}
-        />
-
-        {/*  <!-- Earnings (Monthly) Card Example --> */}
-        <TopBox
-          name="Rejected Leave"
-          color="red"
-          icon={<ImCross color="red" size={25} />}
-          item={40}
-        />
-
-        {/*  <!-- Pending Requests Card Example --> */}
-        <TopBox
-          name="Total Leave"
+          name="Total Applications"
           color="blue"
           icon={<BsStack color="blue" size={25} />}
-          item={40}
+          item={data?.data?.count_total}
+        />
+
+        <TopBox
+          name="Approved Applications"
+          color="green"
+          icon={<FcApproval size={35} />}
+          item={data?.data?.count_approved}
+        />
+
+        <TopBox
+          name="Pending Applications"
+          color="#FFCC00"
+          icon={<GiSandsOfTime color="#FFCC00" size={35} />}
+          item={data?.data?.count_pending}
+        />
+
+        <TopBox
+          name="Rejected Applications"
+          color="red"
+          icon={<ImCross color="red" size={25} />}
+          item={data?.data?.count_rejected}
         />
       </div>
 
-      {/*  <!-- Content Row --> */}
-
       <div className="row">
-        {/*   <!-- Area Chart --> */}
-        <div className=" ">
+        <div className="col-lg-6 mb-4">
+          <div className="card shadow mb-4 border-0">
+            <div className="card-header py-3">
+              <h6 className="m-0 font-weight-bold text-primary">
+                Academic Calendar
+              </h6>
+            </div>
+            <div className="card-body">
+              <Calender res={res} />
+            </div>
+          </div>
+        </div>
+
+        <div className="col-lg-6 mb-4">
           <div className="card border-0 shadow mb-4">
-            {/*  <!-- Card Header - Dropdown --> */}
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
               <h6 className="m-0 font-weight-bold text-primary">
                 Leave Application List
               </h6>
             </div>
-            {/*  <!-- Card Body --> */}
+
             <div className="card-body table-responsive">
               {isLoading && <Loader />}
-              <table class="table table-striped">
+              <table className="table table-striped">
                 <thead
                   className=" text-light"
                   style={{
@@ -106,7 +109,7 @@ const AdminPage = () => {
                       </td>
                     </tr>
                   )}
-                  {data?.data?.leave_list?.map((item,i) => {
+                  {data?.data?.leave_list?.map((item, i) => {
                     return (
                       <tr key={i}>
                         <td>{item.leave_title}</td>
@@ -152,29 +155,7 @@ const AdminPage = () => {
               </table>
             </div>
           </div>
-        </div>
 
-        {/*  <!-- Pie Chart --> */}
-      </div>
-
-      {/*   <!-- Content Row --> */}
-      <div className="row">
-        <div className="col-lg-6 mb-4">
-          {/* <!-- Illustrations --> */}
-          <div className="card shadow mb-4 border-0">
-            <div className="card-header py-3">
-              <h6 className="m-0 font-weight-bold text-primary">Calender</h6>
-            </div>
-            <div className="card-body">
-              <Calender />
-            </div>
-          </div>
-
-          {/* <!-- Approach --> */}
-        </div>
-        {/*   <!-- Content Column --> */}
-        <div className="col-lg-6 mb-4">
-          {/* <!-- Project Card Example --> */}
           <div className="card shadow mb-4 border-0">
             <div className="card-header py-3">
               <h6 className="m-0 font-weight-bold text-primary">
@@ -222,8 +203,6 @@ const AdminPage = () => {
               </table>
             </div>
           </div>
-
-          {/* <!-- Color System --> */}
         </div>
       </div>
     </>

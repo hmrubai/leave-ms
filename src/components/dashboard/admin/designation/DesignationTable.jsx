@@ -5,8 +5,8 @@ import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { ExportToCsv } from "export-to-csv"; //or use your library of choice here
 import { Box, Button } from "@mui/material";
 import { BsFillEyeFill } from "react-icons/bs";
-import { FaTrash, FaEdit } from "react-icons/fa";
-import Swal from "sweetalert2";
+import {FaEdit } from "react-icons/fa";
+
 
 import Loader from "../../../common/Loader";
 
@@ -28,24 +28,6 @@ const DesignationTable = () => {
     setClickValue(value);
   }, []);
 
-  const deleteHandel = async (deleteFunc, Did) => {
-    Swal.fire({
-      title: "Are you sure?",
-      // text: "You won't be able to revert this!",
-      icon: "error",
-      confirmButtonColor: "#d33 ",
-      cancelButtonColor: " #4e4e4e",
-      confirmButtonText: "Yes, delete it!",
-      width: 200,
-      showCancelButton: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // deleteFunc(Did);
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-      console.log(result);
-    });
-  };
 
   const columns = useMemo(
     () => [

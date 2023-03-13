@@ -40,9 +40,9 @@ const EmployeeList = () => {
               <div>
                 <Link
                   to={`/dashboard/approval-authority/create-employee`}
-                  className="btn btn-primary"
+                  className="btn btn-primary btn-sm"
                 >
-                  <BsFillPlusCircleFill /> New
+                  <BsFillPlusCircleFill /> Add New Employee
                 </Link>
               </div>
             </div>

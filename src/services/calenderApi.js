@@ -47,7 +47,7 @@ export const calenderApi = createApi({
       }),
       providesTags: ["Calender"],
     }),
- 
+
     getYearList: builder.query({
       query: () => ({
         url: `admin/year-list`,
@@ -56,7 +56,6 @@ export const calenderApi = createApi({
       }),
       providesTags: ["Calender"],
     }),
- 
 
     generateCalender: builder.mutation({
       query: (status) => {
@@ -81,8 +80,7 @@ export const calenderApi = createApi({
       invalidatesTags: ["Calender"],
     }),
 
-
-   test: builder.query({
+    test: builder.query({
       query: (id) => ({
         url: `admin/leave-setting-list/${id}}`,
         method: "GET",
@@ -90,7 +88,8 @@ export const calenderApi = createApi({
       }),
       providesTags: ["Calender"],
     }),
-   getAcadamicCalender: builder.query({
+
+    getDashboardSummary: builder.query({
       query: () => ({
         url: `/dashboard-summary`,
         method: "GET",
@@ -99,7 +98,14 @@ export const calenderApi = createApi({
       providesTags: ["Calender"],
     }),
 
-
+    myCalenderLsit: builder.query({
+      query: () => ({
+        url: `my/calendar-list`,
+        method: "GET",
+        headers,
+      }),
+      providesTags: ["Calender"],
+    }),
   }),
 });
 
@@ -113,4 +119,6 @@ export const {
   useUpdateCalenderMutation,
   useTestQuery,
   useGetAcadamicCalenderQuery,
+  useMyCalenderLsitQuery,
+  useGetDashboardSummaryQuery,
 } = calenderApi;

@@ -31,132 +31,31 @@ import WorkingDayList from "../components/dashboard/admin/calender/workingDaySet
 import CalenderSetupList from "../components/dashboard/admin/calender/calenderSetup/CalenderSetupList";
 import BalanceSettingsList from "../components/dashboard/admin/balanceSettings/BalanceSettingsList";
 import ApplyForLeaveList from "../components/dashboard/admin/leave/applyForLeave/ApplyForLeaveList";
-import LeaveDetails from './../components/dashboard/admin/leave/applyForLeave/LeaveDetails';
+import LeaveDetails from "./../components/dashboard/admin/leave/applyForLeave/LeaveDetails";
 import PendingLeaveList from "../components/dashboard/admin/leave/pendingForLeaveApprovel/PendingLeaveList";
 import ApproveLeaveList from "../components/dashboard/admin/leave/approveLeaveList/ApproveLeaveList";
 import MyCalender from "../components/dashboard/admin/calender/academicCalendar/MyCalender";
 import LeaveBalance from "../components/dashboard/admin/leave/leaveBalance/LeaveBalance";
 
-
-
-
 // We can use this route for private route
-
 export const privateRoute = [
-  //<====================== Admin Route start ====================>
+  //  <====================== Approval Authority Route Start ====================>
   {
     path: "/dashboard/",
     element: <Navigate replace to={getPath()} />,
     role: "all",
   },
+
+  //  <====================== Admin Route Start ====================>
   {
     path: "admin",
     element: <AdminPage />,
     role: "admin",
   },
-  {
-    path: "admin/employee-list",
-    element: <EmployeeList />,
-    role: "admin",
-  },
-  {
-    path: "admin/create-employee",
-    element: <CreateEmployee />,
-    role: "admin",
-  },
-  {
-    path: "admin/edit-employee/:id",
-    element: <EditEmployee />,
-    role: "admin",
-  },
-  {
-    path: "admin/employee-details/:id",
-    element: <EmployeeDetails />,
-    role: "admin",
-  },
-  {
-    path: "admin/company-list",
-    element: <CompanyList />,
-    role: "admin",
-  },
-  {
-    path: "admin/branch-list",
-    element: <BranchList />,
-    role: "admin",
-  },
-  {
-    path: "admin/designation-list",
-    element: <DesignationList />,
-    role: "admin",
-  },
-  {
-    path: "admin/department-list",
-    element: <DepartmentList />,
-    role: "admin",
-  },
-  {
-    path: "admin/leave-type",
-    element: <LeaveTypeList />,
-    role: "admin",
-  },
-  {
-    path: "admin/fiscal-year-list",
-    element: <FiscalYearList />,
-    role: "admin",
-  },
-  {
-    path: "admin/employment-list",
-    element: <EmploymentList />,
-    role: "admin",
-  },
-  {
-    path: "admin/leave-balance",
-    element: <BalanceSettingsList />,
-    role: "admin",
-  },
-  {
-    path: "admin/balance-setup",
-    element: <BalanceSetupList />,
-    role: "admin",
-  },
-  {
-    path: "admin/day-type-setup",
-    element: <DayTypeSetupList />,
-    role: "admin",
-  },
-  {
-    path: "admin/working-day-setup",
-    element: <WorkingDayList />,
-    role: "admin",
-  },
-  {
-    path: "admin/calendar-setup",
-    element: <CalenderSetupList />,
-    role: "admin",
-  },
-
-  {
-    path: "admin/approval-flow",
-    element: <LeaveApprovalFlowList />,
-    role: "admin",
-  },
-
-  {
-    path: "admin/apply-for-leave",
-    element: <ApplyForLeaveList />,
-    role: "admin",
-  },
-
-  // {
-  //     path: 'about',
-  //     element: <About />,
-  //     role: 'admin',
-
-  // },
-
-  //<====================== Admin Route End ====================>
+  //  <====================== Admin Route End ====================>
 
   //  <====================== Approval Authority Route Start ====================>
+
 
   {
     path: "approval-authority",
@@ -223,11 +122,6 @@ export const privateRoute = [
     element: <BalanceSettingsList />,
     role: "approvalauthority",
   },
-  {
-    path: "approval-authority/my-leave-balance",
-    element: <LeaveBalance />,
-    role: "approvalauthority",
-  },
 
   {
     path: "approval-authority/balance-setup",
@@ -249,15 +143,16 @@ export const privateRoute = [
     element: <CalenderSetupList />,
     role: "approvalauthority",
   },
-  {
-    path: "approval-authority/my-calendar",
-    element: <MyCalender />,
-    role: "approvalauthority",
-  },
 
   {
     path: "approval-authority/approval-flow",
     element: <LeaveApprovalFlowList />,
+    role: "approvalauthority",
+  },
+
+  {
+    path: "approval-authority/apply-for-leave",
+    element: <ApplyForLeaveList />,
     role: "approvalauthority",
   },
 
@@ -282,6 +177,34 @@ export const privateRoute = [
     role: "approvalauthority",
   },
 
+  {
+    path: "approval-authority/my-leave-balance",
+    element: <LeaveBalance />,
+    role: "approvalauthority",
+  },
+
+  {
+    path: "approval-authority/my-calendar",
+    element: <MyCalender />,
+    role: "approvalauthority",
+  },
+  {
+    path: "approval-authority/leave-type",
+    element: <LeaveTypeList />,
+    role: "approvalauthority",
+  },
+  {
+    path: "approval-authority/calendar-setup",
+    element: <CalenderSetupList />,
+    role: "approvalauthority",
+  },
+
+  // {
+  //     path: 'about',
+  //     element: <About />,
+  //     role: 'approval-authority',
+
+  // },
 
   //  <====================== Approval Authority Route End ====================>
 
@@ -297,7 +220,7 @@ export const privateRoute = [
     element: <Employee />,
     role: "employee",
   },
-  
+
   {
     path: "employee/my-calendar",
     element: <MyCalender />,

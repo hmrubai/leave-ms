@@ -40,7 +40,7 @@ const BranchList = () => {
       <div className="card shadow mb-4">
         <div className="card-header py-3 n">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">All Branch List</h6>
+            <h6 className="m-0 font-weight-bold text-primary">Branch Information</h6>
 
 
           </div>
@@ -61,13 +61,13 @@ const BranchList = () => {
               <div>
                 <Link
                   to="#"
-                  className="btn btn-primary "
+                  className="btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
                     handelClickValue("Add Branch Information");
                   }}
                 >
-                  <BsFillPlusCircleFill className="mb-1 mr-1" /> New
+                  <BsFillPlusCircleFill className="mb-1 mr-1" /> Add New Branch
                 </Link>
               </div>
             </div>

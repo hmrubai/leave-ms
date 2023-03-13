@@ -70,24 +70,14 @@ const CompanyTable = () => {
       },
 
       {
-        accessorKey: "address", //normal accessorKey
-        header: "Address",
+        accessorKey: "contact_no", //normal accessorKey
+        header: "Contact No",
       },
       {
-        accessorFn: (row) =>
-          row.is_active === true ? (
-            <>
-              <span className="badge badge-success">Active</span>
-            </>
-          ) : (
-            <>
-              <span className="badge badge-danger">Inactive</span>
-            </>
-          ), //alternate way
-        id: "is_active", //id required if you use accessorFn instead of accessorKey
-        header: "Status",
-        Header: <span className="table-header">Status</span>, //optional custom markup
+        accessorKey: "company_email", //normal accessorKey
+        header: "Company Email",
       },
+  
     ],
     []
   );

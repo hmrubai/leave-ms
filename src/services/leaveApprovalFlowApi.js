@@ -46,8 +46,8 @@ export const leaveApprovalFlowApi = createApi({
     }),
 
     getApprovalFlowList: builder.query({
-      query: () => ({
-        url: "admin/approval-flow-list",
+      query: (empId) => ({
+        url:`admin/approval-flow-list?employee_id=${empId}`,
         method: "GET",
         headers,
       }),

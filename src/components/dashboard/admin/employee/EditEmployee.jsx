@@ -20,12 +20,11 @@ import {
 } from "../../../../services/employeeApi";
 import { toast } from "react-toastify";
 import { editEmployeeSchema } from "./../../../../Validation/editEmployeeSchema";
-
+import avater from "../../../../assets/images/profile-picture.png";
 
 const EditEmployee = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  
 
   // <==============data request strat===================>
 
@@ -35,7 +34,7 @@ const EditEmployee = () => {
   const empDetailsRes = useEmployeeDetailsByIdQuery(id);
   const [updateEmployee, empRes] = useUpdateEmployeeMutation();
 
- // <==============data request end===================>
+  // <==============data request end===================>
 
   const [previewImage, setPreviewImage] = useState();
   const [divisions_id, setdivision_id] = useState();
@@ -135,8 +134,7 @@ const EditEmployee = () => {
     remarks: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.remarks,
     employment_type_id:
       empDetailsRes.isSuccess && empDetailsRes?.data?.data?.employment_type_id,
-      user_type:
-      empDetailsRes.isSuccess && empDetailsRes?.data?.data?.user_type,
+    user_type: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.user_type,
   };
 
   const formik = useFormik({
@@ -206,9 +204,7 @@ const EditEmployee = () => {
         toast.warn(error.data.message);
       }
     },
-
   });
-
 
   if (empRes.isSuccess) {
     navigate("/dashboard/approval-authority/employee-list");
@@ -231,20 +227,34 @@ const EditEmployee = () => {
 
   useEffect(() => {
     if (empDetailsRes.isSuccess) {
-      setKeySkillis(empDetailsRes.isSuccess&&empDetailsRes?.data?.data?.key_skills);
-      setdivision_id(empDetailsRes.isSuccess&&empDetailsRes?.data?.data?.division_id);
-      setdistrict_id(empDetailsRes.isSuccess&&empDetailsRes?.data?.data?.district_id);
-      setcity_id(empDetailsRes.isSuccess&&empDetailsRes?.data?.data?.city_id);
-      setCompany_id(empDetailsRes.isSuccess&&empDetailsRes?.data?.data?.company_id);
-      setBranch_id(empDetailsRes.isSuccess&&empDetailsRes?.data?.data?.branch_id);
-      setarea_id(empDetailsRes.isSuccess&&empDetailsRes?.data?.data?.area_id);
-      setdepartment_id(empDetailsRes.isSuccess&&empDetailsRes?.data?.data?.department_id);
-      setdesignation_id(empDetailsRes.isSuccess&&empDetailsRes?.data?.data?.designation_id);
+      setKeySkillis(
+        empDetailsRes.isSuccess && empDetailsRes?.data?.data?.key_skills
+      );
+      setdivision_id(
+        empDetailsRes.isSuccess && empDetailsRes?.data?.data?.division_id
+      );
+      setdistrict_id(
+        empDetailsRes.isSuccess && empDetailsRes?.data?.data?.district_id
+      );
+      setcity_id(empDetailsRes.isSuccess && empDetailsRes?.data?.data?.city_id);
+      setCompany_id(
+        empDetailsRes.isSuccess && empDetailsRes?.data?.data?.company_id
+      );
+      setBranch_id(
+        empDetailsRes.isSuccess && empDetailsRes?.data?.data?.branch_id
+      );
+      setarea_id(empDetailsRes.isSuccess && empDetailsRes?.data?.data?.area_id);
+      setdepartment_id(
+        empDetailsRes.isSuccess && empDetailsRes?.data?.data?.department_id
+      );
+      setdesignation_id(
+        empDetailsRes.isSuccess && empDetailsRes?.data?.data?.designation_id
+      );
     }
   }, [empDetailsRes]);
   const editor = useRef(null);
 
-   // <==============singal data request strat===================>
+  // <==============singal data request strat===================>
   const districtRes = useGetDistrictListByIdQuery(divisions_id);
   const upazilaRes = useGetUpazilaListByIdQuery(districts_id);
   const areaRes = useGetAreaListByIdQuery(city_id);
@@ -260,7 +270,7 @@ const EditEmployee = () => {
     braId: branch_id,
   });
 
-   // <==============singal request end===================>
+  // <==============singal request end===================>
 
   function handelImage(e) {
     setPreviewImage(URL.createObjectURL(e.target.files[0]));
@@ -305,7 +315,6 @@ const EditEmployee = () => {
                       onChange={formik.handleChange}
                       value={formik.values.name}
                       onBlur={formik.handleBlur}
-
                       className={
                         formik.errors.name && formik.touched.name
                           ? "form-control is-invalid"
@@ -678,7 +687,6 @@ const EditEmployee = () => {
                   </div>
                 </div>
               </div>
-        
 
               <div className="col-md-6">
                 <div className="form-group row">
@@ -1287,7 +1295,7 @@ const EditEmployee = () => {
                 </div>
               </div>
 
-              <div className="col-md-6">
+              <div className="col-md-6 pt-4">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Image</label>
                   <div className="col-sm-9">
@@ -1303,6 +1311,34 @@ const EditEmployee = () => {
                   </div>
                 </div>
               </div>
+
+              <div className="col-md-6 pt-1">
+              <div>
+              {previewImage ? (
+                <img
+                  className="py-2"
+                  src={previewImage}
+                  width="80px"
+                  height="80px"
+                  alt=""
+                />
+              ) : (
+                <img
+                  className="py-2"
+                  src={
+                    formik.values.image === null
+                      ? avater
+                      : `${process.env.REACT_APP_FILE_URL}${formik.values.image}`
+                  }
+                  width="80px"
+                  height="80px"
+                  alt=""
+                />
+              )}
+            </div>
+     
+                </div>
+
               <h5 className="card-description text-info mt-3  py-2">
                 Employee Role :
               </h5>
@@ -1311,16 +1347,17 @@ const EditEmployee = () => {
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">User Type</label>
                   <div className="col-sm-9">
-                  <select
+                    <select
                       name="user_type"
                       onChange={formik.handleChange}
                       value={formik.values.user_type}
                       className=" form-control form-select"
                     >
-                      <option value="">Select Type</option>
-                      <option value="Admin">Admin</option>
                       <option value="Employee">Employee</option>
-                      <option value="ApprovalAuthority">Approval Authority</option>
+                      <option value="ApprovalAuthority">
+                        Approval Authority
+                      </option>
+                      <option value="Admin">Admin</option>
                       <option value="Others">Others</option>
                     </select>
                   </div>
@@ -1329,7 +1366,9 @@ const EditEmployee = () => {
 
               <div className="col-md-12">
                 <div className="form-group row">
-                  <label className="col-sm-4 col-md-1 col-form-label">Is Active</label>
+                  <label className="col-sm-4 col-md-1 col-form-label">
+                    Is Active
+                  </label>
                   <div className="col-sm-8 ps-4 ">
                     <div class="form-check form-switch mt-2">
                       <Form.Check
@@ -1349,29 +1388,19 @@ const EditEmployee = () => {
             <div className="form-group row ">
               <div className="ml-3"></div>
             </div>
-            <div >
-              {previewImage ? (
-                <img
-                  className="py-2"
-                  src={previewImage}
-                  width="80px"
-                  height="80px"
-                  alt=""
-                />
-              ) : (
-                <img
-                  className="py-2"
-                  src={`${process.env.REACT_APP_FILE_URL}${formik.values.image}`}
-                  width="80px"
-                  height="80px"
-                  alt=""
-                />
-              )}
-            </div>
+     
 
             <div className=" py-5 ">
               <Button className="btn btn-success px-5" type="submit">
                 Submit
+              </Button>
+
+              <Button
+                onClick={() => navigate(-1)}
+                className="btn btn-dark px-5 ms-3"
+                type="button"
+              >
+                Cancel
               </Button>
             </div>
           </form>

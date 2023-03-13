@@ -8,6 +8,7 @@ import { BsFillEyeFill } from "react-icons/bs";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Loader from "../../../common/Loader";
+import avatar from "../../../../assets/images/profile-picture.png";
 
 import { useGetEmployeeListQuery } from "../../../../services/employeeApi";
 
@@ -35,6 +36,31 @@ const EmployeeTable = () => {
 
   const columns = useMemo(
     () => [
+      {
+        accessorFn: (row) =>
+          row.image ? (
+            <>
+              <img
+                className="img-fluid rounded-circle shadow"
+                style={{ width: "50px", height: "50px" }}
+                src={`${process.env.REACT_APP_FILE_URL}${row.image}`}
+                alt=""
+              ></img>
+            </>
+          ) : (
+            <>
+              <img
+                className="img-fluid rounded-circle shadow"
+                style={{ width: "50px", height: "50px" }}
+                src={avatar}
+                alt=""
+              ></img>
+            </>
+          ), //alternate way
+        id: "image", //id required if you use accessorFn instead of accessorKey
+        header: "image",
+        Header: <span className="table-header">Image</span>, //optional custom markup
+      },
       {
         accessorKey: "name", //access nested data with dot notation
         header: "Name",

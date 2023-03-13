@@ -31,4 +31,5 @@ export const employeeSchema = Yup.object().shape({
   division_id: Yup.number().required("This field is required"),
   district_id: Yup.number().required("This field is required"),
   city_id: Yup.number().required("This field is required"),
+  user_type: Yup.number().required("This field is required"),
 });

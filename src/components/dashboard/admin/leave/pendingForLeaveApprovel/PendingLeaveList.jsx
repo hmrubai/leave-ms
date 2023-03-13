@@ -29,26 +29,15 @@ const PendingLeaveList = () => {
         {res.isFetching && <Loader />}
 
         <div className="card-body">
-          <div className="py-2 text-right mr-1">
-            <div className="d-flex justify-content-end">
-              <div className="mt-1"></div>
-            </div>
-          </div>
-
-          <div className=" row ">
-            <div className="col-12">
-              <div className=" card card shadow mb-4">
-                <div className="card-header py-3 n">
-                  <div>
-                    <h6 className="m-0 font-weight-bold text-primary">
-                      Pending Leave List
-                    </h6>
-                  </div>
-                </div>
-                <div className="card-body">
-                {res.isFetching && <Loader />}
-                  <table class="table">
-                    <thead>
+          {res.isFetching && <Loader />}
+          <div className="table-responsive">
+              <table class="table">
+                    <thead
+                          className=" text-light"
+                          style={{
+                            backgroundColor: "#0D6EFD",
+                          }}
+                    >
                       <tr>
                         <th scope="col">Leave Type</th>
                         <th scope="col">Start Date</th>
@@ -128,11 +117,9 @@ const PendingLeaveList = () => {
                       ))}
                     </tbody>
                   </table>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
+                
+                </div>
       </div>
     </>
   );

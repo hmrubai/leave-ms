@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import avatar from "../../../../../assets/images/profile-picture.png";
 
@@ -21,12 +21,27 @@ const LeaveDetails = () => {
   const { id } = useParams();
   const res = useGetApplicationDetailsByIDQuery(id);
   const [approveLeave] = useApproveLeaveMutation();
-
   const [rejectLeave] = useRejectLeaveMutation();
-
   const { data } = res;
 
 
+
+  const permitHandaler = data?.data?.leave_flow?.map((item) => {
+    let isAppruvalPermits = false;
+
+    if (item.step_flag === "Active" && item.approval_user_id === authUser.id) {
+      isAppruvalPermits = true;
+    }
+    return isAppruvalPermits;
+  });
+
+  // useEffect(() => {
+  //   if (permitHandaler?.includes(true)) {
+  //     document.getElementById("permitBtn").style.display = "block";
+  //   } else {
+  //     document.getElementById("permitBtn").style.display = "none";
+  //   }
+  // }, [permitHandaler]);
 
   const handleApprove = async () => {
     try {
@@ -50,7 +65,7 @@ const LeaveDetails = () => {
     }
   };
 
-  const confirmHandel = async (icon, buttonTxt, ButtonClr, Did,funC) => {
+  const confirmHandel = async (icon, buttonTxt, ButtonClr, Did, funC) => {
     Swal.fire({
       title: "Are you sure?",
       // text: "You won't be able to revert this!",
@@ -66,7 +81,6 @@ const LeaveDetails = () => {
         // deleteFunc(Did);
         Swal.fire("success");
       }
-     
     });
   };
 
@@ -175,15 +189,15 @@ const LeaveDetails = () => {
                     </h6>
                   </div>
                   <div>
-                    <h6 className="m-0 p-1 bg-warning">
+                    <h6 className="m-0 p-1 bg-warning rounded">
                       {data?.data?.leave?.leave_status}
                     </h6>
                   </div>
                 </div>
-                <div className="col-12">
-                  <table class="table">
+                <div className="col-12 mt-3 ">
+                  <table class="table ">
                     <thead
-                      className=" text-light"
+                      className="text-light rounded"
                       style={{
                         backgroundColor: "#0D6EFD",
                       }}
@@ -214,8 +228,6 @@ const LeaveDetails = () => {
                         <td>Applied For</td>
                         <td>{data?.data?.leave?.total_applied_days} Dayes</td>
                       </tr>
-
-
 
                       <tr>
                         <td>Is Half Day</td>
@@ -250,34 +262,44 @@ const LeaveDetails = () => {
                 </div>
               </div>
 
-              {data?.data?.leave?.leave_status === "Pending" &&
-                data?.data?.employee.user_type === "ApprovalAuthority" &&
-                data?.data?.employee?.id !== authUser.id && (
-                  <div className=" card card shadow mb-4">
-                    <div className="card-body">
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                        <button
-                          class="btn btn-success me-md-2"
-                          type="button"
-                          onClick={() =>
-                            confirmHandel("info", "Approved", "#4BB543", id,handleApprove)
-                          }
-                        >
-                          Approv
-                        </button>
-                        <button
-                          class="btn btn-danger"
-                          type="button"
-                          onClick={() =>
-                            confirmHandel("warning", "Rejected", "#FF0000", id,handleReject)
-                          }
-                        >
-                          Reject
-                        </button>
-                      </div>
+              {permitHandaler?.includes(true) && (
+                <div id="permitBtn" className=" card card shadow mb-4">
+                  <div className="card-body">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                      <button
+                        class="btn btn-success me-md-2"
+                        type="button"
+                        onClick={() =>
+                          confirmHandel(
+                            "info",
+                            "Approved",
+                            "#4BB543",
+                            id,
+                            handleApprove
+                          )
+                        }
+                      >
+                        Approve
+                      </button>
+                      <button
+                        class="btn btn-danger"
+                        type="button"
+                        onClick={() =>
+                          confirmHandel(
+                            "warning",
+                            "Rejected",
+                            "#FF0000",
+                            id,
+                            handleReject
+                          )
+                        }
+                      >
+                        Reject
+                      </button>
                     </div>
                   </div>
-                )}
+                </div>
+              )}
             </div>
           </div>
           <div className=" row ">

@@ -24,24 +24,7 @@ const LeaveTypeTable = () => {
     setClickValue(value);
   }, []);
 
-  const deleteHandel = async (deleteFunc, Did) => {
-    Swal.fire({
-      title: "Are you sure?",
-      // text: "You won't be able to revert this!",
-      icon: "error",
-      confirmButtonColor: "#d33 ",
-      cancelButtonColor: " #4e4e4e",
-      confirmButtonText: "Yes, delete it!",
-      width: 200,
-      showCancelButton: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // deleteFunc(Did);
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-      console.log(result);
-    });
-  };
+ 
 
   const columns = useMemo(
     () => [
@@ -252,18 +235,7 @@ const LeaveTypeTable = () => {
         renderRowActions={(row, index) => (
           <>
             <div className="d-flex">
-              {/* <div>
-                <Link
-                  to="#"
-                  onClick={() => {
-                    handleShow();
-                    handelClickValue("Leave Information");
-                    setParamId(row?.row?.original);
-                  }}
-                >
-                  <BsFillEyeFill color="black" size={24} />
-                </Link>
-              </div> */}
+
               <div>
                 <Link
                   to={`#`}

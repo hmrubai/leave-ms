@@ -25,24 +25,7 @@ const DepartmentTable = () => {
     setClickValue(value);
   }, []);
 
-  const deleteHandel = async (deleteFunc, Did) => {
-    Swal.fire({
-      title: "Are you sure?",
-      // text: "You won't be able to revert this!",
-      icon: "error",
-      confirmButtonColor: "#d33 ",
-      cancelButtonColor: " #4e4e4e",
-      confirmButtonText: "Yes, delete it!",
-      width: 200,
-      showCancelButton: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // deleteFunc(Did);
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-      console.log(result);
-    });
-  };
+
 
   
 
@@ -54,12 +37,12 @@ const DepartmentTable = () => {
       },
       {
         accessorKey: "company_name", //access nested data with dot notation
-        header: "Company Name",
+        header: "Company",
       },
 
       {
         accessorKey: "branch_name", //normal accessorKey
-        header: "Branch Name",
+        header: "Branch",
       },
       {
         accessorFn: (row) =>

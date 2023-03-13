@@ -1,6 +1,5 @@
 import React from "react";
 
-
 import Loader from "./../../../../common/Loader";
 
 import { useGetDayTypeListQuery } from "../../../../../services/calenderApi";
@@ -8,16 +7,18 @@ import { useGetDayTypeListQuery } from "../../../../../services/calenderApi";
 const DayTypeSetupTable = () => {
   const { data, isSuccess, isFetching } = useGetDayTypeListQuery();
 
-
- 
-
   return (
     <>
       {isFetching && <Loader />}
 
       <div className="card-body table-responsive">
         <table class="table table-striped">
-          <thead className="table-dark">
+          <thead
+            className=" text-light"
+            style={{
+              backgroundColor: "#0D6EFD",
+            }}
+          >
             <tr>
               <th scope="col">Title</th>
               <th scope="col">Day Short Code</th>

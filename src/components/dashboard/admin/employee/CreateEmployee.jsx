@@ -20,7 +20,7 @@ import {
 } from "../../../../services/employeeApi";
 import { toast } from "react-toastify";
 import { employeeSchema } from "./../../../../Validation/employeeSchema";
-
+import avater from "../../../../assets/images/profile-picture.png";
 const CreateEmployee = () => {
   const navigate = useNavigate();
   const companyRes = useGetCompanyListQuery();
@@ -154,7 +154,7 @@ const CreateEmployee = () => {
   });
 
   if (empRes.isSuccess) {
-    navigate("/dashboard/admin/employee-list");
+    navigate("/dashboard/approval-authority/employee-list");
   }
 
   const focusHandelerOne = (name, id) => {
@@ -618,7 +618,6 @@ const CreateEmployee = () => {
                   </div>
                 </div>
               </div>
-          
 
               <div className="col-md-6">
                 <div className="form-group row">
@@ -1031,8 +1030,6 @@ const CreateEmployee = () => {
                 </div>
               </div>
 
-            
-
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Employment</label>
@@ -1104,7 +1101,6 @@ const CreateEmployee = () => {
                     Permanent Address
                   </label>
                   <div className="col-sm-9">
-
                     <textarea
                       type="text"
                       name="permanent_address"
@@ -1253,13 +1249,13 @@ const CreateEmployee = () => {
                 </div>
               </div>
 
-              <div className="col-md-6">
+              <div className="col-md-6 pt-4">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Image</label>
                   <div className="col-sm-9">
                     <input
                       type="file"
-                      className="form-control"
+                      className="form-control "
                       name="image"
                       onChange={(e) => {
                         formik.setFieldValue("file", e.currentTarget.files[0]);
@@ -1268,6 +1264,19 @@ const CreateEmployee = () => {
                     />
                   </div>
                 </div>
+              </div>
+
+              <div className="col-md-6 pt-1">
+                
+              <div>
+              <img
+                className="py-2 rounded-circle"
+                src={previewImage?previewImage:avater}
+                width="80px"
+                height="80px"
+                alt=""
+              />
+            </div>
               </div>
 
               <h5 className="card-description text-info mt-3  py-2">
@@ -1282,23 +1291,35 @@ const CreateEmployee = () => {
                       name="user_type"
                       onChange={formik.handleChange}
                       value={formik.values.user_type}
-                      className=" form-control form-select"
+                      className={
+                        formik.errors.user_type && formik.touched.user_type
+                          ? "form-control is-invalid"
+                          : "form-control form-select"
+                      }
+                      placeholder="Select User Type"
                     >
-                      <option value="">Select Type</option>
-                      <option value="Admin">Admin</option>
                       <option value="Employee">Employee</option>
+
                       <option value="ApprovalAuthority">
                         Approval Authority
                       </option>
+                      <option value="Admin">Admin</option>
                       <option value="Others">Others</option>
                     </select>
+                    {formik.errors.user_type && formik.touched.user_type ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.user_type}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               </div>
 
               <div className="col-md-12">
                 <div className="form-group row">
-                  <label className="col-sm-4 col-md-1 col-form-label">Is Active</label>
+                  <label className="col-sm-4 col-md-1 col-form-label">
+                    Is Active
+                  </label>
                   <div className="col-sm-8 ps-4 ">
                     <div class="form-check form-switch mt-2">
                       <Form.Check
@@ -1316,19 +1337,14 @@ const CreateEmployee = () => {
               </div>
             </div>
 
-            <div>
-              <img
-                className="py-2"
-                src={previewImage}
-                width="80px"
-                height="80px"
-                alt=""
-              />
-            </div>
+
 
             <div className=" py-5">
               <Button className="btn btn-success px-5" type="submit">
                 Submit
+              </Button>
+              <Button   onClick={() => navigate(-1)} className="btn btn-dark px-5 ms-3" type="button">
+                Cancel
               </Button>
             </div>
           </form>

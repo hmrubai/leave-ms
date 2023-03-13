@@ -36,7 +36,7 @@ const FiscalYearList = () => {
       <div className="card shadow mb-4">
         <div className="card-header py-3 ">
           <div>
-            <h6 className="m-0 font-weight-bold text-primary">All Fiscal Year List</h6>
+            <h6 className="m-0 font-weight-bold text-primary">Fiscal Year Information</h6>
           </div>
      
         </div>
@@ -55,13 +55,13 @@ const FiscalYearList = () => {
               <div >
                 <Link
                   to="#"
-                  className="btn btn-primary "
+                  className="btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
                     handelClickValue("Add Fiscal Year Information");
                   }}
                 >
-                  <BsFillPlusCircleFill className="mb-1 mr-1" /> New
+                  <BsFillPlusCircleFill className="mb-1 mr-1" />Add New Fiscal Year
                 </Link>
               </div>
             </div>

@@ -10,11 +10,11 @@ import Swal from "sweetalert2";
 import { useGetLeaveApplicationListQuery } from "../../../../../services/leaveApplication";
 import Loader from "../../../../common/Loader";
 import ApplyForLeaveModal from "./ApplyForLeaveModal";
-
+import { useSelector } from "react-redux";
 
 const ApplyForLeaveTable = () => {
   const { data, isSuccess, isFetching } = useGetLeaveApplicationListQuery();
-
+  const authRole = useSelector((state) => state.auth.role);
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
@@ -64,15 +64,17 @@ const ApplyForLeaveTable = () => {
       //   header: "Applied For",
       // },
       {
-        accessorFn: (row) =>
+        accessorFn: (row) => (
           <>
-            <span className="badge badge-success">{row.total_applied_days} Dayes</span>
-          </>,
-         size: 10, //optional
-         id: "total_applied_days", //id required if you use accessorFn instead of accessorKey
-         header: "Applied For",
-         Header: <span className="table-header">Applied For</span>,
-          
+            <span className="badge badge-success">
+              {row.total_applied_days} Dayes
+            </span>
+          </>
+        ),
+        size: 10, //optional
+        id: "total_applied_days", //id required if you use accessorFn instead of accessorKey
+        header: "Applied For",
+        Header: <span className="table-header">Applied For</span>,
       },
 
       {
@@ -170,14 +172,22 @@ const ApplyForLeaveTable = () => {
           <>
             <div className="d-flex">
               <div>
-                <Link
-                  to={`/dashboard/approval-authority/leave-details/${row?.row?.original?.id}`}
-              
-                >
-                  <BsFillEyeFill color="black" size={24} />
-                </Link>
+                {authRole === "ApprovalAuthority" && (
+                  <Link
+                    to={`/dashboard/approval-authority/leave-details/${row?.row?.original?.id}`}
+                  >
+                    <BsFillEyeFill color="black" size={24} />
+                  </Link>
+                )}
+
+                {authRole === "Employee" && (
+                  <Link
+                    to={`/dashboard/employee/leave-details/${row?.row?.original?.id}`}
+                  >
+                    <BsFillEyeFill color="black" size={24} />
+                  </Link>
+                )}
               </div>
-           
             </div>
           </>
         )}

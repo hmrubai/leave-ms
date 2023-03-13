@@ -1,14 +1,15 @@
 import React, { useState, useCallback } from "react";
 import WorkingDayModal from "./WorkingDayModal";
 import Loader from "./../../../../common/Loader";
-import { useGetWorkingDayStatusListQuery, useTestQuery } from "../../../../../services/calenderApi";
+import {
+  useGetWorkingDayStatusListQuery,
+  useTestQuery,
+} from "../../../../../services/calenderApi";
 import DayRow from "./DayRow";
 import { FaEdit } from "react-icons/fa";
 
-
 const WorkingDayTable = () => {
   const { data, isSuccess, isFetching } = useGetWorkingDayStatusListQuery();
-
 
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
@@ -32,7 +33,12 @@ const WorkingDayTable = () => {
 
       <div className="card-body table-responsive">
         <table class="table table-striped">
-          <thead className="table-dark">
+          <thead
+            className=" text-light"
+            style={{
+              backgroundColor: "#0D6EFD",
+            }}
+          >
             <tr>
               <th scope="col">Saturday</th>
               <th scope="col">Sunday</th>

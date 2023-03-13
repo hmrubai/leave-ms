@@ -1,9 +1,27 @@
 import React from "react";
 import PageTopHeader from "./../../../../common/PageTopHeader";
-import Calender from "../../adminDashboardPage/Calender";
-
+import FullCalendar from "@fullcalendar/react"; // must go before plugins
+import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
+import interactionPlugin from "@fullcalendar/interaction";
+import { useMyCalenderLsitQuery } from "../../../../../services/calenderApi";
+import Loader from './../../../../common/Loader';
 const MyCalender = () => {
+  const res = useMyCalenderLsitQuery();
 
+  const calender = res?.data?.data?.weekend_holiday?.map((item) => {
+    let title;
+    if (item.day_note) {
+      title = `${item.day_type_title} (${item.day_note})`;
+    } else {
+      title = item.day_type_title;
+    }
+
+    return {
+      title: title,
+      start: item.date,
+      color: item.day_type_title === "Weekend" ? "orange" : "info",
+    };
+  });
 
   return (
     <>
@@ -17,7 +35,7 @@ const MyCalender = () => {
           </div>
         </div>
 
-        {/* {res.isFetching && <Loader />} */}
+        {res.isFetching && <Loader />}
 
         <div className="card-body">
           <div className="py-2 text-right mr-1">
@@ -25,7 +43,16 @@ const MyCalender = () => {
               <div className="mt-1"></div>
             </div>
           </div>
-    <Calender />
+          <FullCalendar
+            plugins={[dayGridPlugin, interactionPlugin]}
+            initialView="dayGridMonth"
+            events={calender}
+            editable={true}
+            selectable={true}
+            height={500}
+            eventTextColor="black"
+            handleWindowResize={true}
+          />
         </div>
       </div>
     </>

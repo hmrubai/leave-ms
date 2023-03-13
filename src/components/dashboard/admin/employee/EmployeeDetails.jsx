@@ -9,6 +9,7 @@ import {
 } from "../../../../services/employeeApi";
 import Loader from "../../../common/Loader";
 import { FaEdit } from "react-icons/fa";
+import avatar from "../../../../assets/images/profile-picture.png";
 
 const EmployeeDetails = () => {
   const navigate = useNavigate();
@@ -43,7 +44,11 @@ const EmployeeDetails = () => {
                 <img
                   className="img-fluid rounded-circle shadow-lg"
                   style={{ width: "200px", height: "200px" }}
-                  src={`${process.env.REACT_APP_FILE_URL}${empDetailsRes?.data?.data?.image}`}
+                  src={
+                    empDetailsRes?.data?.data?.image === null
+                      ? avatar
+                      : `${process.env.REACT_APP_FILE_URL}${empDetailsRes?.data?.data?.image}`
+                  }
                   alt=""
                 />
               </div>
@@ -105,24 +110,22 @@ const EmployeeDetails = () => {
               </div>
             </div>
             <div className="col-md-8 p-5">
-            <div className="  d-flex justify-content-between">
-                  <div>
-                    {" "}
-                    <h4 className="py-2">Personal Details.</h4>
-                  </div>
-                  <div>
-                    <Link
-                      to={`/dashboard/admin/edit-employee/${empDetailsRes?.data?.data?.id}`}
-                      title=""
-                      className="px-2"
-                    >
-                      <FaEdit size={22} />
-                    </Link>
-                  </div>
+              <div className="  d-flex justify-content-between">
+                <div>
+                  {" "}
+                  <h4 className="py-2">Personal Details.</h4>
                 </div>
+                <div>
+                  <Link
+                    to={`/dashboard/approval-authority/edit-employee/${empDetailsRes?.data?.data?.id}`}
+                    title=""
+                    className="px-2"
+                  >
+                    <FaEdit size={22} />
+                  </Link>
+                </div>
+              </div>
               <div className="row">
-             
-
                 <div className="col-md-6">
                   <p>
                     Father Name:
@@ -269,10 +272,8 @@ const EmployeeDetails = () => {
                   </p>
                 </div>
               </div>
-                <h4 className="py-2 ">Company Details.</h4>
+              <h4 className="py-2 ">Company Details.</h4>
               <div className="row ">
-              
-
                 <div className="col-md-6">
                   <p>
                     Office ID Number:
@@ -348,7 +349,6 @@ const EmployeeDetails = () => {
               </div>
               <h4 className="py-2 ">Address Details.</h4>
               <div className="row ">
-                
                 <div className="col-md-6">
                   <p>
                     Present Address:

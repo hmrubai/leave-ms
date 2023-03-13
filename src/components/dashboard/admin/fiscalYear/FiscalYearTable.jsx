@@ -6,7 +6,7 @@ import { ExportToCsv } from "export-to-csv"; //or use your library of choice her
 import { Box, Button } from "@mui/material";
 import { BsFillEyeFill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
-import Swal from "sweetalert2";
+
 import Loader from "../../../common/Loader";
 import FiscalYearModal from "./FiscalYearModal";
 import { useGetFiscalYearListQuery } from "../../../../services/fiscalyearApi";
@@ -24,24 +24,7 @@ const FiscalYearTable = () => {
     setClickValue(value);
   }, []);
 
-  const deleteHandel = async (deleteFunc, Did) => {
-    Swal.fire({
-      title: "Are you sure?",
-      // text: "You won't be able to revert this!",
-      icon: "error",
-      confirmButtonColor: "#d33 ",
-      cancelButtonColor: " #4e4e4e",
-      confirmButtonText: "Yes, delete it!",
-      width: 200,
-      showCancelButton: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // deleteFunc(Did);
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-      console.log(result);
-    });
-  };
+
 
   const columns = useMemo(
     () => [
