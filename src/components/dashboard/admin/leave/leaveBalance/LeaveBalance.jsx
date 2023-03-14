@@ -6,7 +6,6 @@ import PageTopHeader from "./../../../../common/PageTopHeader";
 const LeaveBalance = () => {
   const res = useMyLeaveBalanceListQuery();
   const { data } = res;
-  console.log(data);
   return (
     <>
       <PageTopHeader title="Leave Balance" />

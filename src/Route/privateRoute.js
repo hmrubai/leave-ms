@@ -11,7 +11,6 @@ import { Navigate } from "react-router-dom";
 import { getPath } from "./utils";
 import AdminPage from "../components/dashboard/admin/adminDashboardPage/AdminPage";
 import Others from "../components/dashboard/views/Others";
-import ApprovalAuthority from "../components/dashboard/views/ApprovalAuthority";
 import EmployeeList from "./../components/dashboard/admin/employee/EmployeeList";
 import EmployeeDetails from "../components/dashboard/admin/employee/EmployeeDetails";
 import CreateEmployee from "./../components/dashboard/admin/employee/CreateEmployee";
@@ -35,7 +34,10 @@ import LeaveDetails from "./../components/dashboard/admin/leave/applyForLeave/Le
 import PendingLeaveList from "../components/dashboard/admin/leave/pendingForLeaveApprovel/PendingLeaveList";
 import ApproveLeaveList from "../components/dashboard/admin/leave/approveLeaveList/ApproveLeaveList";
 import MyCalender from "../components/dashboard/admin/calender/academicCalendar/MyCalender";
+import ChangePassword from './../components/pages/changePassword/ChangePassword';
 import LeaveBalance from "../components/dashboard/admin/leave/leaveBalance/LeaveBalance";
+
+
 
 // We can use this route for private route
 export const privateRoute = [
@@ -197,7 +199,12 @@ export const privateRoute = [
     path: "approval-authority/calendar-setup",
     element: <CalenderSetupList />,
     role: "approvalauthority",
+  }, {
+    path: "approval-authority/change-password",
+    element: <ChangePassword/>,
+    role: "approvalauthority",
   },
+
 
   // {
   //     path: 'about',
@@ -240,6 +247,11 @@ export const privateRoute = [
   {
     path: "employee/leave-details/:id",
     element: <LeaveDetails />,
+    role: "employee",
+  },
+  {
+    path: "employee/change-password",
+    element: <ChangePassword/>,
     role: "employee",
   },
 

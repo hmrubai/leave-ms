@@ -19,15 +19,20 @@ import {
   BsFillEnvelopeFill,
   BsFillPersonFill,
   BsGearFill,
-  BsListCheck,
+
 } from "react-icons/bs";
 import { AiFillFileText } from "react-icons/ai";
-import { RiLogoutCircleRFill, RiRefreshFill } from "react-icons/ri";
+import {
+  RiLockPasswordFill,
+  RiLogoutCircleRFill,
+
+} from "react-icons/ri";
 
 const Layout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const authUser = useSelector((state) => state.auth.user);
+  
 
   const handelLogout = () => {
     dispatch(logout());
@@ -486,11 +491,26 @@ const Layout = () => {
                       <BsGearFill className="mr-1" />
                       Settings
                     </Link>
-                    <Link className="dropdown-item" to="#">
-                      {/* <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> */}
-                      <BsListCheck size={14} className="mr-1" />
-                      Activity Log
-                    </Link>
+
+                    {authUser && authUser.user_type === "ApprovalAuthority" && (
+                      <Link
+                        className="dropdown-item"
+                        to="approval-authority/change-password"
+                      >
+                        <RiLockPasswordFill size={15} className="mr-1" />
+                        Change Password
+                      </Link>
+                    )}
+                    {authUser && authUser.user_type === "Employee" && (
+                      <Link
+                        className="dropdown-item"
+                        to="employee/change-password"
+                      >
+                        <RiLockPasswordFill size={15} className="mr-1" />
+                        Change Password
+                      </Link>
+                    )}
+
                     <div className="dropdown-divider"></div>
                     <Link
                       className="dropdown-item"
@@ -530,7 +550,6 @@ const Layout = () => {
       {/*  <!-- End of Page Wrapper -->
 
      <!-- Scroll to Top Button--> */}
-
 
       <ScrollToTop smooth />
     </div>
