@@ -83,6 +83,9 @@ const EditEmployee = () => {
     branch_id: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.branch_id,
     department_id:
       empDetailsRes.isSuccess && empDetailsRes?.data?.data?.department_id,
+    
+    wing: empDetailsRes.isSuccess && empDetailsRes?.data?.data?.wing,
+
     designation_id:
       empDetailsRes.isSuccess && empDetailsRes?.data?.data?.designation_id,
     division_id:
@@ -164,6 +167,8 @@ const EditEmployee = () => {
       formData.append("company_id", company_id);
       formData.append("branch_id", branch_id);
       formData.append("department_id", department_id);
+      
+      formData.append("wing", values.wing);
       formData.append("designation_id", designation_id);
       formData.append("division_id", divisions_id);
       formData.append("district_id", districts_id);
@@ -1039,6 +1044,36 @@ const EditEmployee = () => {
                   </div>
                 </div>
               </div>
+
+              <div className="col-md-6">
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label">
+                    Wing
+                  </label>
+                  <div className="col-sm-9">
+                    <input
+                      type="text"
+                      name="wing"
+                      onChange={formik.handleChange}
+                      value={formik.values.wing}
+                      // onBlur={formik.handleBlur}
+                      placeholder="Enter Wing"
+                      className="form-control"
+                      // className={
+                      //   formik.errors.name && formik.touched.wing
+                      //     ? "form-control is-invalid"
+                      //     : "form-control"
+                      // }
+                    />
+                    {/* {formik.errors.name && formik.touched.name ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.name}
+                      </div>
+                    ) : null} */}
+                  </div>
+                </div>
+              </div>
+
               <div className="col-md-6">
                 <div className="form-group row">
                   <label className="col-sm-3 col-form-label">Designation</label>

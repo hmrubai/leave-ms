@@ -58,6 +58,7 @@ const CreateEmployee = () => {
     company_id: "",
     branch_id: "",
     department_id: "",
+    wing:"",
     designation_id: "",
     division_id: "",
     gender: "",
@@ -111,6 +112,7 @@ const CreateEmployee = () => {
       formData.append("company_id", values.company_id);
       formData.append("branch_id", values.branch_id);
       formData.append("department_id", values.department_id);
+      formData.append("wing", values.wing);
       formData.append("designation_id", values.designation_id);
       formData.append("division_id", values.division_id);
       formData.append("gender", values.gender);
@@ -994,6 +996,34 @@ const CreateEmployee = () => {
                         {formik.errors.department_id}
                       </div>
                     ) : null}
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label">
+                    Wing
+                  </label>
+                  <div className="col-sm-9">
+                    <input
+                      type="text"
+                      name="wing"
+                      onChange={formik.handleChange}
+                      value={formik.values.wing}
+                      // onBlur={formik.handleBlur}
+                      placeholder="Enter Wing"
+                      className="form-control"
+                      // className={
+                      //   formik.errors.name && formik.touched.wing
+                      //     ? "form-control is-invalid"
+                      //     : "form-control"
+                      // }
+                    />
+                    {/* {formik.errors.name && formik.touched.name ? (
+                      <div className="invalid-feedback">
+                        {formik.errors.name}
+                      </div>
+                    ) : null} */}
                   </div>
                 </div>
               </div>

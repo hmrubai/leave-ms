@@ -8,6 +8,7 @@ import {
   BsCalendarCheck,
   BsVinylFill,
   BsCalendarDay,
+  BsHourglassSplit,
 } from "react-icons/bs";
 
 import {
@@ -25,6 +26,7 @@ import { MdWorkOutline } from "react-icons/md";
 import { FcLeave } from "react-icons/fc";
 import { RiFileList3Line } from "react-icons/ri";
 import { SlWallet } from "react-icons/sl";
+import{TfiWrite} from "react-icons/tfi";
 
 
 export const navItem = [
@@ -183,13 +185,13 @@ export const navItem = [
         title: "My leave Application",
         link: "approval-authority/my-leave-application",
         role: "approvalauthority",
-        icon: <MdOutlineStopScreenShare size={18} />,
+        icon: <TfiWrite size={15} />,
       },
       {
         title: "Pending For Approval",
         link: "approval-authority/pending-leave-list",
         role: "approvalauthority",
-        icon: <RiFileList3Line size={18} />,
+        icon: <BsHourglassSplit size={18} />,
       },
       {
         title: "Approved List",
@@ -223,7 +225,7 @@ export const navItem = [
     UID: "blance",
     title: "Balance Setup",
     role: "employee",
-    icon: <MdOutlinePolicy size={18} />,
+    icon: <BiWalletAlt size={18} />,
 
     children: [
       {

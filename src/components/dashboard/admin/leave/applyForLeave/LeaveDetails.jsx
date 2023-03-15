@@ -189,9 +189,23 @@ const LeaveDetails = () => {
                     </h6>
                   </div>
                   <div>
-                    <h6 className="m-0 p-1 bg-warning rounded">
-                      {data?.data?.leave?.leave_status}
-                    </h6>
+
+                  {data?.data?.leave?.leave_status === "Pending" ? (
+                            <td>
+                              <span className="badge rounded-pill bg-warning text-light">
+                                {data?.data?.leave?.leave_status}
+                              </span>
+                            </td>
+                          ) : (
+                            <td>
+                              <span className="badge rounded-pill bg-success">
+                                {data?.data?.leave?.leave_status}
+                              </span>
+                            </td>
+                          )}
+
+
+
                   </div>
                 </div>
                 <div className="col-12 mt-3 ">

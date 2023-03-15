@@ -1,19 +1,25 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
 import { Link } from "react-router-dom";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { ExportToCsv } from "export-to-csv"; //or use your library of choice here
 import { Box, Button } from "@mui/material";
-import { BsFillEyeFill } from "react-icons/bs";
+import { BsFillEyeFill, BsFillPlusCircleFill } from "react-icons/bs";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
 import Loader from "../../../common/Loader";
 import avatar from "../../../../assets/images/profile-picture.png";
 
 import { useGetEmployeeListQuery } from "../../../../services/employeeApi";
+import PasswordUpdateModal from "./PasswordUpdateModal";
 
 const EmployeeTable = () => {
   const { data, isSuccess, isFetching } = useGetEmployeeListQuery();
+  console.log(data);
+  const [show, setShow] = useState(false);
+  const [paramId, setParamId] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const deleteHandel = async (deleteFunc, Did) => {
     Swal.fire({
@@ -104,6 +110,14 @@ const EmployeeTable = () => {
   return (
     <>
       {isFetching && <Loader />}
+
+      <PasswordUpdateModal
+        handleClose={handleClose}
+        show={show}
+        clickValue="Update Password"
+        paramId={paramId}
+      />
+
       {/* <MaterialReactTable columns={columns} data={data} /> */}
       <MaterialReactTable
         enableRowSelection
@@ -144,11 +158,21 @@ const EmployeeTable = () => {
           <>
             <div className="d-flex">
               <div>
-                {" "}
+                <Link
+                  to="#"
+                  className="btn btn-warning btn-sm"
+                  onClick={() => {
+                    handleShow();
+                    setParamId(row?.row?.original?.id);
+                  }}
+                >
+                  <BsFillPlusCircleFill className="mb-1 mr-1" /> Update Password
+                </Link>
+              </div>
+              <div>
                 <Link
                   to={`/dashboard/approval-authority/employee-details/${row?.row?.original?.id}`}
                 >
-                  {" "}
                   <BsFillEyeFill color="black" size={24} />
                 </Link>
               </div>
