@@ -247,7 +247,7 @@ export const navItem = [
         title: "My leave Application",
         link: "employee/my-leave-application",
         role: "employee",
-        icon: <MdOutlineStopScreenShare size={18} />,
+        icon: <TfiWrite size={18} />,
       },
     ],
   },

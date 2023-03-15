@@ -43,8 +43,22 @@ export const authApi = createApi({
       }),
       invalidatesTags: ["Auth"],
     }),
+    updatePassword: builder.mutation({
+      query: (body) => ({
+        url: "auth/update-password",
+        method: "POST",
+        body,
+        headers,
+      }),
+      invalidatesTags: ["Auth"],
+    }),
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation,useChangePasswordMutation } =
-  authApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useLogoutMutation,
+  useChangePasswordMutation,
+  useUpdatePasswordMutation,
+} = authApi;

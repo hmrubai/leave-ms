@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { ExportToCsv } from "export-to-csv"; //or use your library of choice here
 import { Box, Button } from "@mui/material";
-import { BsFillEyeFill, BsFillPlusCircleFill } from "react-icons/bs";
-import { FaTrash, FaEdit } from "react-icons/fa";
-import Swal from "sweetalert2";
+import { BsFillEyeFill } from "react-icons/bs";
+
+import { FaEdit } from "react-icons/fa";
+import { FcUnlock } from "react-icons/fc";
 import Loader from "../../../common/Loader";
 import avatar from "../../../../assets/images/profile-picture.png";
 
@@ -15,30 +16,13 @@ import PasswordUpdateModal from "./PasswordUpdateModal";
 
 const EmployeeTable = () => {
   const { data, isSuccess, isFetching } = useGetEmployeeListQuery();
-  console.log(data);
+
   const [show, setShow] = useState(false);
   const [paramId, setParamId] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const deleteHandel = async (deleteFunc, Did) => {
-    Swal.fire({
-      title: "Are you sure?",
-      // text: "You won't be able to revert this!",
-      icon: "error",
-      confirmButtonColor: "#d33 ",
-      cancelButtonColor: " #4e4e4e",
-      confirmButtonText: "Yes, delete it!",
-      width: 200,
-      showCancelButton: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // deleteFunc(Did);
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-      console.log(result);
-    });
-  };
+ 
 
   const columns = useMemo(
     () => [
@@ -114,7 +98,7 @@ const EmployeeTable = () => {
       <PasswordUpdateModal
         handleClose={handleClose}
         show={show}
-        clickValue="Update Password"
+        clickValue="Password Reset"
         paramId={paramId}
       />
 
@@ -160,13 +144,13 @@ const EmployeeTable = () => {
               <div>
                 <Link
                   to="#"
-                  className="btn btn-warning btn-sm"
+                  // className="btn btn-warning btn-sm"
                   onClick={() => {
                     handleShow();
-                    setParamId(row?.row?.original?.id);
+                    setParamId(row?.row?.original?.user_id);
                   }}
                 >
-                  <BsFillPlusCircleFill className="mb-1 mr-1" /> Update Password
+                  <FcUnlock className="mb-1 mr-1" size={24}/> 
                 </Link>
               </div>
               <div>

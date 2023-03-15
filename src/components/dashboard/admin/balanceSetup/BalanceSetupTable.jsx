@@ -1,12 +1,9 @@
 import React, { useState, useMemo, useCallback } from "react";
 import MaterialReactTable from "material-react-table";
 import { Link } from "react-router-dom";
-import FileDownloadIcon from "@mui/icons-material/FileDownload";
-import { ExportToCsv } from "export-to-csv"; //or use your library of choice here
-import { Box, Button } from "@mui/material";
-import { BsFillEyeFill, BsFillPlusCircleFill } from "react-icons/bs";
-import { FaTrash, FaEdit } from "react-icons/fa";
-import Swal from "sweetalert2";
+
+import {  FaEdit } from "react-icons/fa";
+
 import Loader from "../../../common/Loader";
 import { IoSyncCircle } from "react-icons/io5";
 import Select from "react-select";
@@ -69,25 +66,7 @@ const BalanceSetupTable = () => {
     []
   );
 
-  const csvOptions = {
-    fieldSeparator: ",",
-    quoteStrings: '"',
-    decimalSeparator: ".",
-    showLabels: true,
-    useBom: true,
-    useKeysAsHeaders: false,
-    headers: columns.map((c) => c.header),
-  };
 
-  const csvExporter = new ExportToCsv(csvOptions);
-
-  const handleExportData = () => {
-    csvExporter.generateCsv();
-  };
-
-  const handleExportRows = (rows) => {
-    csvExporter.generateCsv(rows.map((row) => row.original));
-  };
 
   return (
     <>
@@ -126,18 +105,7 @@ const BalanceSetupTable = () => {
               options={employeeList?.data}
             />
           </div>
-          {/* <div className="col-md-2">
-            <Link
-              to="#"
-              className="btn btn-primary "
-              onClick={() => {
-                handleShow();
-                handelClickValue("Add Leave Balance Information");
-              }}
-            >
-              <BsFillPlusCircleFill className="mb-1 mr-1" /> New
-            </Link>
-          </div> */}
+  
         </div>
       </div>
 
@@ -149,47 +117,13 @@ const BalanceSetupTable = () => {
         enableColumnActions
         enableRowNumbers
         positionActionsColumn="last"
-        renderTopToolbarCustomActions={({ table }) => (
-          <Box
-            sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}
-          >
-            <Button
-              color="primary"
-              //export all data that is currently in the table (ignore pagination, sorting, filtering, etc.)
-              onClick={handleExportData}
-              startIcon={<FileDownloadIcon />}
-              variant="contained"
-            >
-              Export
-            </Button>
-            <Button
-              disabled={
-                !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
-              }
-              //only export selected rows
-              onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
-              startIcon={<FileDownloadIcon />}
-              variant="contained"
-            >
-              Selected Rows
-            </Button>
-          </Box>
-        )}
+
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>
             <div className="d-flex">
               <div>
-                {/* <Link
-                  to="#"
-                  onClick={() => {
-                    handleShow();
-                    handelClickValue("Leave Balance Information");
-                    setParamId(row?.row?.original);
-                  }}
-                >
-                  <BsFillEyeFill color="black" size={24} />
-                </Link> */}
+
               </div>
               <div>
                 <Link
@@ -206,11 +140,7 @@ const BalanceSetupTable = () => {
                 </Link>
               </div>
 
-              {/* <div>
-                <Link to="#" onClick={() => deleteHandel()}>
-                  <FaTrash size={20} color="red" />
-                </Link>{" "}
-              </div> */}
+
             </div>
           </>
         )}
