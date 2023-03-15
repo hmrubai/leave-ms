@@ -92,14 +92,29 @@ const FiscalYearTable = () => {
       />
       {/* <MaterialReactTable columns={columns} data={data} /> */}
       <MaterialReactTable
-        enableRowSelection
+        // enableRowSelection
         columns={columns}
         data={isSuccess && data?.data}
         enableRowActions
         enableColumnActions
-        enableRowNumbers
+        // enableRowNumbers
         positionActionsColumn="last"
- 
+        muiTopToolbarProps={
+          {
+            style: {
+              backgroundColor: "#0D6EFD",
+           
+            },
+
+          }}
+
+
+   
+   
+       
+  
+
+        
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>

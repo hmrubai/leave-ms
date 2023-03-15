@@ -130,14 +130,21 @@ const CalenderSetupTable = () => {
       </div>
 
       <MaterialReactTable
-        enableRowSelection
+
         columns={columns}
         data={isSuccess && data?.data}
         enableRowActions
         enableColumnActions
-        enableRowNumbers
+   
         positionActionsColumn="last"
+        muiTopToolbarProps={
+          {
+            style: {
+              backgroundColor: "#0D6EFD",
+           
+            },
 
+          }}
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>

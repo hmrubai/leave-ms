@@ -26,7 +26,7 @@ const PendingLeaveList = () => {
           </div>
         </div>
 
-        {res.isFetching && <Loader />}
+      
 
         <div className="card-body">
           {res.isFetching && <Loader />}

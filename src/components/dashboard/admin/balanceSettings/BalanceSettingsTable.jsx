@@ -136,15 +136,22 @@ const BalanceSettingsTable = () => {
       </div>
 
       <MaterialReactTable
-        enableRowSelection
+   
         columns={columns}
         data={isSuccess && data?.data}
         enableRowActions
         enableColumnActions
-        enableRowNumbers
+   
         positionActionsColumn="last"
         rowsPerPageOptions={[5]}
-        
+        muiTopToolbarProps={
+          {
+            style: {
+              backgroundColor: "#0D6EFD",
+           
+            },
+
+          }}
  
         // enablePagination="true"
         renderRowActions={(row, index) => (

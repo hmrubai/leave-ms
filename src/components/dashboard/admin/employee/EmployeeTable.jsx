@@ -22,8 +22,6 @@ const EmployeeTable = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
- 
-
   const columns = useMemo(
     () => [
       {
@@ -49,24 +47,49 @@ const EmployeeTable = () => {
           ), //alternate way
         id: "image", //id required if you use accessorFn instead of accessorKey
         header: "image",
+        size: "small",
+        
+       
+        
         Header: <span className="table-header">Image</span>, //optional custom markup
       },
       {
         accessorKey: "name", //access nested data with dot notation
         header: "Name",
+        size: "small",
       },
       {
         accessorKey: "employee_code", //access nested data with dot notation
         header: "Code",
+        size: "small",
       },
       {
         accessorKey: "email", //access nested data with dot notation
         header: "Email",
+        size: "small",
       },
       {
         accessorKey: "designation", //access nested data with dot notation
         header: "Designation",
+        size: "small",
       },
+      {
+        accessorFn: (row) =>
+          row.is_active === true ? (
+            <>
+              <span className="badge badge-success">Active</span>
+            </>
+          ) : (
+            <>
+              <span className="badge badge-danger">Inactive</span>
+            </>
+          ), //alternate way
+        id: "is_active", //id required if you use accessorFn instead of accessorKey
+        header: "Status",
+        size: "small",
+        Header: <span className="table-header">Status</span>, //optional custom markup
+      },
+
     ],
     []
   );
@@ -109,14 +132,19 @@ const EmployeeTable = () => {
         data={isSuccess && data?.data}
         enableRowActions
         enableColumnActions
-        enableRowNumbers
+        // enableRowNumbers
         positionActionsColumn="last"
+        muiTopToolbarProps={{
+          style: {
+            backgroundColor: "#0D6EFD",
+          },
+        }}
         renderTopToolbarCustomActions={({ table }) => (
           <Box
             sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}
           >
             <Button
-              color="primary"
+              color="secondary"
               //export all data that is currently in the table (ignore pagination, sorting, filtering, etc.)
               onClick={handleExportData}
               startIcon={<FileDownloadIcon />}
@@ -132,6 +160,7 @@ const EmployeeTable = () => {
               onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
               startIcon={<FileDownloadIcon />}
               variant="contained"
+              color="secondary"
             >
               Selected Rows
             </Button>
@@ -150,7 +179,7 @@ const EmployeeTable = () => {
                     setParamId(row?.row?.original?.user_id);
                   }}
                 >
-                  <FcUnlock className="mb-1 mr-1" size={24}/> 
+                  <FcUnlock className="mb-1 mr-1" size={24} />
                 </Link>
               </div>
               <div>
