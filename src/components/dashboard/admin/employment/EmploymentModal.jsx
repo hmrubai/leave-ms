@@ -11,7 +11,7 @@ const EmploymentModal = ({ handleClose, show, clickValue,paramId }) => {
   return (
     <>
       <Modal show={show} onHide={handleClose} size="sm">
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className=" bg-primary text-white">
           <Modal.Title className="fs-6">{clickValue}</Modal.Title>
         
         </Modal.Header>

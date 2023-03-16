@@ -9,7 +9,7 @@ import DayRow from "./DayRow";
 import { FaEdit } from "react-icons/fa";
 
 const WorkingDayTable = () => {
-  const { data, isSuccess, isFetching } = useGetWorkingDayStatusListQuery();
+  const { data, isSuccess, isFetching,isError } = useGetWorkingDayStatusListQuery();
 
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
@@ -51,6 +51,13 @@ const WorkingDayTable = () => {
             </tr>
           </thead>
           <tbody>
+            {
+               isError && <div>Something went wrong</div>
+            }
+            {isSuccess && data?.data?.length === 0 && (
+              <div className="text-center">No Data Found</div>
+            )}
+
             {isSuccess && (
               <tr>
                 <td>

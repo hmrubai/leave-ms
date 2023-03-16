@@ -6,33 +6,23 @@ import Sidebar from "./Sidebar";
 import logo_sm from "../../../assets/logo/sm_logo.png";
 import "./Dashboard.css";
 import ScrollToTop from "react-scroll-to-top";
-import { BiHomeAlt, BiSearchAlt2 } from "react-icons/bi";
+import { BiHomeAlt } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../features/authSlice";
 import { toast, ToastContainer } from "react-toastify";
 import profilePicture from "../../../assets/images/profile-picture.png";
 import reset from "../../../assets/images/reset.png";
-import { FaBars, FaDonate, FaExclamationTriangle } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
+import sm_logo from "../../../assets/logo/sm_logo.png";
 
-import {
-  BsFillBellFill,
-  BsFillEnvelopeFill,
-  BsFillPersonFill,
-  BsGearFill,
+import { BsFillPersonFill } from "react-icons/bs";
 
-} from "react-icons/bs";
-import { AiFillFileText } from "react-icons/ai";
-import {
-  RiLockPasswordFill,
-  RiLogoutCircleRFill,
-
-} from "react-icons/ri";
+import { RiLockPasswordFill, RiLogoutCircleRFill } from "react-icons/ri";
 
 const Layout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const authUser = useSelector((state) => state.auth.user);
-  
 
   const handelLogout = () => {
     dispatch(logout());
@@ -82,15 +72,10 @@ const Layout = () => {
             </Link>
             <div className="sidebar-brand-text mx-3">LMS</div>
             <div className="text-center d-none d-md-inline">
-              {/* <i onClick={changeStyle} className="fas fa-bars ml-3"></i> */}
               <FaBars onClick={changeStyle} className="ml-3 " />
             </div>
           </Link>
 
-          {/*   <!-- Divider --> */}
-          {/* <hr className="sidebar-divider my-0" /> */}
-
-          {/*  <!-- Nav Item - Dashboard --> */}
           <li className="nav-item active ">
             <div className="nav-link shadow-lg   d-flex flex-wrap justify-content-center">
               <div>
@@ -112,10 +97,6 @@ const Layout = () => {
               <div className="mt-1 ">
                 <span className="d-none d-lg-inline text-light-600 small ml-2 font-weight-bold ">
                   {authUser && authUser.name.slice(0, 15)}
-                  {/* <br />
-                  <span className="d-none d-lg-inline text-light-600 small ml-2  ">
-                    {authUser && authUser.user_type} 
-                  </span> */}
                 </span>
               </div>
             </div>
@@ -130,19 +111,9 @@ const Layout = () => {
                       </div> */}
           </li>
 
-          {/*  <!-- Divider --> */}
-          {/* <hr className="sidebar-divider" /> */}
-
           {navItem.map(
             (n, i) => n.role === user.role && <Sidebar item={n} key={i} />
           )}
-          {/* <!-- Divider --> */}
-          {/* <hr className="sidebar-divider d-none d-md-block" /> */}
-
-          {/* <!-- Sidebar Toggler (Sidebar) --> */}
-          {/* <div className="text-center d-none d-md-inline">
-                          <button className="rounded-circle border-0" id="sidebarToggle" onClick={changeStyle}></button>
-                      </div> */}
         </ul>
         {/*  <!-- End of Sidebar --> */}
 
@@ -152,33 +123,20 @@ const Layout = () => {
           <div id="content">
             {/*  <!-- Topbar --> */}
             <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-            
               <button
                 id="sidebarToggleTop"
                 className="btn btn-link  d-md-none  rounded-circle mr-3  ml-2"
                 onClick={changeStyle1}
               >
-                {/* <i className="fa fa-bars"></i> */}
-
                 <FaBars value={{ style: { verticalAlign: "middle" } }} />
               </button>
 
-    
-            
               <span className="cursor reset ms-auto" onClick={refresh}>
                 <img src={reset} alt="" width={22} />
-                {/* <RiRefreshFill size={22}  /> */}
               </span>
               <span className=" d-none d-md-block fw-bold">Refresh</span>
 
-              {/*  <!-- Topbar Navbar --> */}
-
               <ul className="navbar-nav ml-auto">
-                {/*  <!-- Nav Item - Search Dropdown (Visible Only XS) --> */}
-          
-
-  
-
                 <div className="topbar-divider d-none d-sm-block"></div>
 
                 {/* <!-- Nav Item - User Information --> */}
@@ -212,12 +170,6 @@ const Layout = () => {
                         alt=""
                       />
                     )}
-
-                    {/* <img
-                      className="img-profile rounded-circle"
-                      src="img/undraw_profile.svg"
-                      alt=""
-                    /> */}
                   </Link>
                   {/*  <!-- Dropdown - User Information --> */}
                   <div
@@ -225,14 +177,8 @@ const Layout = () => {
                     aria-labelledby="userDropdown"
                   >
                     <Link className="dropdown-item" to="#">
-                      {/* <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> */}
                       <BsFillPersonFill size={15} className="mr-1" />
                       Profile
-                    </Link>
-                    <Link className="dropdown-item" to="#">
-                      {/* <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> */}
-                      <BsGearFill className="mr-1" />
-                      Settings
                     </Link>
 
                     {authUser && authUser.user_type === "ApprovalAuthority" && (
@@ -260,14 +206,12 @@ const Layout = () => {
                       to="#"
                       onClick={() => handelLogout()}
                     >
-                      {/* <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> */}
                       <RiLogoutCircleRFill size={15} className="mr-1 mb-1" />
                       Logout
                     </Link>
                   </div>
                 </li>
               </ul>
-              
             </nav>
             {/*  <!-- End of Topbar --> */}
 
@@ -282,8 +226,26 @@ const Layout = () => {
                                       <!-- Footer --> */}
           <footer className="sticky-footer bg-white">
             <div className="container my-auto">
-              <div className="copyright text-center my-auto">
-                <span>Copyright &copy; BacBon Limited 2023</span>
+              <div className="copyright text-center my-auto d-flex justify-content-between">
+               
+                <div>
+                  <span className="text-info font-weight-bold">Developed by </span>
+                  <img src={sm_logo} width={12}  alt="" />
+                  <a
+                    className="text-info text-decoration-none"
+                    href="https://bacbonltd.com/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {" "}
+                    BacBon Limited.
+                  </a>
+                </div>
+                <div>
+                  <span className=" font-weight-bold">
+                    &copy; BacBon Limited {new Date().getFullYear()}
+                  </span>
+                </div>
               </div>
             </div>
           </footer>

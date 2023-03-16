@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 
 import avatar from "../../../../../assets/images/profile-picture.png";
 
@@ -9,22 +9,26 @@ import "./Leave.css";
 import {
   useApproveLeaveMutation,
   useGetApplicationDetailsByIDQuery,
-  useRejectLeaveMutation,
 } from "../../../../../services/leaveApplication";
 import Loader from "../../../../common/Loader";
 import PageTopHeader from "../../../../common/PageTopHeader";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import RejectionModal from "./RejectionModal";
 
 const LeaveDetails = () => {
   const authUser = useSelector((state) => state.auth.user);
   const { id } = useParams();
   const res = useGetApplicationDetailsByIDQuery(id);
   const [approveLeave] = useApproveLeaveMutation();
-  const [rejectLeave] = useRejectLeaveMutation();
+
   const { data } = res;
 
+  console.log(data);
 
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const permitHandaler = data?.data?.leave_flow?.map((item) => {
     let isAppruvalPermits = false;
@@ -35,13 +39,7 @@ const LeaveDetails = () => {
     return isAppruvalPermits;
   });
 
-  // useEffect(() => {
-  //   if (permitHandaler?.includes(true)) {
-  //     document.getElementById("permitBtn").style.display = "block";
-  //   } else {
-  //     document.getElementById("permitBtn").style.display = "none";
-  //   }
-  // }, [permitHandaler]);
+
 
   const handleApprove = async () => {
     try {
@@ -54,16 +52,7 @@ const LeaveDetails = () => {
     }
   };
 
-  const handleReject = async () => {
-    try {
-      const result = await rejectLeave({
-        leave_application_id: id,
-      }).unwrap();
-      toast.success(result.message);
-    } catch (error) {
-      toast.error(error.data.message);
-    }
-  };
+;
 
   const confirmHandel = async (icon, buttonTxt, ButtonClr, Did, funC) => {
     Swal.fire({
@@ -86,6 +75,12 @@ const LeaveDetails = () => {
 
   return (
     <>
+      <RejectionModal
+           handleClose={handleClose}
+           show={show}
+           clickValue="Do you want to reject?"
+           paramId={id}
+      />
       <PageTopHeader title="Applied Leave List" />
       <div className="card shadow mb-4">
         <div className="card-header py-3 n">
@@ -190,19 +185,27 @@ const LeaveDetails = () => {
                   </div>
                   <div>
 
-                  {data?.data?.leave?.leave_status === "Pending" ? (
+                  {data?.data?.leave?.leave_status === "Pending" && (
                             <td>
                               <span className="badge rounded-pill bg-warning text-light">
                                 {data?.data?.leave?.leave_status}
                               </span>
                             </td>
-                          ) : (
+                          ) }
+                  {data?.data?.leave?.leave_status === "Approved" && (
                             <td>
-                              <span className="badge rounded-pill bg-success">
+                              <span className="badge rounded-pill bg-success text-light">
                                 {data?.data?.leave?.leave_status}
                               </span>
                             </td>
-                          )}
+                          ) }
+                  {data?.data?.leave?.leave_status === "Rejected" && (
+                            <td>
+                              <span className="badge rounded-pill bg-danger text-light">
+                                {data?.data?.leave?.leave_status}
+                              </span>
+                            </td>
+                          ) }
 
 
 
@@ -259,6 +262,12 @@ const LeaveDetails = () => {
                         <td>Reason</td>
                         <td>{data?.data?.leave?.leave_reason}</td>
                       </tr>
+
+                   
+
+
+
+
                       <tr>
                         <td>Responsibility Carried By</td>
                         <td>{data?.data?.leave?.responsibility_carried_by}</td>
@@ -298,15 +307,10 @@ const LeaveDetails = () => {
                       <button
                         class="btn btn-danger"
                         type="button"
-                        onClick={() =>
-                          confirmHandel(
-                            "warning",
-                            "Rejected",
-                            "#FF0000",
-                            id,
-                            handleReject
-                          )
-                        }
+                        onClick={() => {
+                          handleShow();
+                          // setParamId(row?.row?.original?.user_id);
+                        }}
                       >
                         Reject
                       </button>
@@ -369,19 +373,30 @@ const LeaveDetails = () => {
 
                           <td>{item.step}</td>
 
-                          {item.step_flag === "Active" ? (
+                          {item.step_flag === "Active" && (
                             <td>
-                              <span className="badge rounded-pill bg-success text-light">
-                                {item.step_flag}
-                              </span>
-                            </td>
-                          ) : (
-                            <td>
-                              <span className="badge rounded-pill bg-warning">
+                              <span className="badge rounded-pill bg-info text-light">
                                 {item.step_flag}
                               </span>
                             </td>
                           )}
+                          
+                          {item.step_flag === "Pending" && (
+                            <td>
+                              <span className="badge rounded-pill bg-warning text-light">
+                                {item.step_flag}
+                              </span>
+                            </td>
+                          )}
+                          
+                          {item.step_flag === "Completed" &&  (
+                            <td>
+                              <span className="badge rounded-pill bg-success">
+                                {item.step_flag}
+                              </span>
+                            </td>
+                          )
+                          }
 
                           <td>
                             <Moment format="dddd, DD MMM, YYYY">

@@ -21,8 +21,6 @@ const FiscalYearTable = () => {
     setClickValue(value);
   }, []);
 
-
-
   const columns = useMemo(
     () => [
       {
@@ -55,8 +53,6 @@ const FiscalYearTable = () => {
         Header: <span className="table-header">End Date</span>, //optional custom markup
       },
 
-
-
       {
         accessorFn: (row) =>
           row.is_active === true ? (
@@ -75,10 +71,6 @@ const FiscalYearTable = () => {
     ],
     []
   );
-
-
-
-
 
   return (
     <>
@@ -99,22 +91,22 @@ const FiscalYearTable = () => {
         enableColumnActions
         // enableRowNumbers
         positionActionsColumn="last"
-        muiTopToolbarProps={
-          {
-            style: {
-              backgroundColor: "#0D6EFD",
-           
-            },
+        muiTopToolbarProps={{
+          style: {
+            backgroundColor: "#0D6EFD",
+          },
+        }}
+        // muiTableHeadRowProps={
 
-          }}
+        //   {
+        //     style: {
+        //       backgroundColor: "#0D6EFD",
+        //     },
+        //   }
+        // }
 
+      
 
-   
-   
-       
-  
-
-        
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>

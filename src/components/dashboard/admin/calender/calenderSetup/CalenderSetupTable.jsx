@@ -117,7 +117,7 @@ const CalenderSetupTable = () => {
           <div className="col-md-2">
             <Link
               to="#"
-              className="btn btn-primary "
+              className="btn btn-primary btn-sm"
               onClick={() => {
                 handleShow();
                 handelClickValue("Add New Year");

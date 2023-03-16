@@ -63,14 +63,20 @@ const ApplyForLeaveTable = () => {
 
       {
         accessorFn: (row) =>
-          row.leave_status === true ? (
+          row.leave_status && (
             <>
-              <span className="badge badge-success">Active</span>
+              {row.leave_status === "Pending" && (
+                <span className="badge badge-warning">{row.leave_status}</span>
+              )}
+          
+              {row.leave_status === "Approved" && (
+                <span className="badge badge-success">{row.leave_status}</span>
+              )}
+              {row.leave_status === "Rejected" && (
+                <span className="badge badge-danger">{row.leave_status}</span>
+              )}
             </>
-          ) : (
-            <>
-              <span className="badge badge-warning ">Pending</span>
-            </>
+          
           ), //alternate way
         size: 10, //optional
         id: "is_active", //id required if you use accessorFn instead of accessorKey

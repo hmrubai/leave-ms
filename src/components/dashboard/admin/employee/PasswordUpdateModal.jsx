@@ -11,7 +11,7 @@ const PasswordUpdateModal = ({ handleClose, show, clickValue, paramId }) => {
     initialValues: {
       new_password: "",
     },
-    onSubmit: async (values) => {
+    onSubmit: async (values,{resetForm}) => {
       try {
         const result = await updatePassword({
           user_id: paramId,
@@ -19,6 +19,7 @@ const PasswordUpdateModal = ({ handleClose, show, clickValue, paramId }) => {
         }).unwrap();
 
         if (result.status) {
+          resetForm();
           handleClose();
         }
 

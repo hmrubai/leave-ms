@@ -7,8 +7,9 @@ import {  FaEdit, FaCheck } from "react-icons/fa";
 
 
 import Loader from "../../../common/Loader";
-import CompanyModal from "./LeaveTypeModal";
+
 import { useGetLeavePolicyListQuery } from "../../../../services/leavepolicyApi";
+import LeaveTypeModal from "./LeaveTypeModal";
 
 const LeaveTypeTable = () => {
   const { data, isSuccess, isFetching } = useGetLeavePolicyListQuery();
@@ -33,11 +34,13 @@ const LeaveTypeTable = () => {
         id: "leave_title", //id required if you use accessorFn instead of accessorKey
         header: "leave_title",
         Header: <span className="table-header">Leave Type</span>, //optional custom markup
+        // size: "small",
       },
 
       {
         accessorKey: "total_days", //normal accessorKey
         header: "Total Days",
+        size: "small",
       },
 
       {
@@ -60,6 +63,7 @@ const LeaveTypeTable = () => {
         id: "is_applicable_for_all", //id required if you use accessorFn instead of accessorKey
         header: "is_applicable_for_all",
         Header: <span className="table-header"> For All</span>, //optional custom markup
+        size: "small",
       },
       {
         accessorFn: (row) =>
@@ -79,6 +83,7 @@ const LeaveTypeTable = () => {
         id: "is_leave_cut_applicable", //id required if you use accessorFn instead of accessorKey
         header: "is_leave_cut_applicable",
         Header: <span className="table-header">Cut Applicable</span>, //optional custom markup
+        size: "small",
       },
 
       {
@@ -101,6 +106,7 @@ const LeaveTypeTable = () => {
         id: "is_carry_forward", //id required if you use accessorFn instead of accessorKey
         header: "is_carry_forward",
         Header: <span className="table-header">Carry Forward</span>, //optional custom markup
+        size: "small",
       },
 
       {
@@ -123,6 +129,7 @@ const LeaveTypeTable = () => {
         id: "is_document_upload", //id required if you use accessorFn instead of accessorKey
         header: "is_document_upload",
         Header: <span className="table-header">Document Upload</span>, //optional custom markup
+        size: "small",
       },
 
       {
@@ -143,6 +150,7 @@ const LeaveTypeTable = () => {
         id: "is_holiday_deduct", //id required if you use accessorFn instead of accessorKey
         header: "is_holiday_deduct",
         Header: <span className="table-header">Holiday Deduct</span>, //optional custom markup
+        size: "small",
       },
 
       {
@@ -159,6 +167,7 @@ const LeaveTypeTable = () => {
         id: "is_active", //id required if you use accessorFn instead of accessorKey
         header: "Status",
         Header: <span className="table-header">Status</span>, //optional custom markup
+        size: "small",
       },
     ],
     []
@@ -169,7 +178,7 @@ const LeaveTypeTable = () => {
     <>
       {isFetching && <Loader />}
 
-      <CompanyModal
+      <LeaveTypeModal
         show={show}
         handleClose={handleClose}
         clickValue={clickValue}

@@ -1,7 +1,7 @@
 import React from "react";
 import { useMyLeaveBalanceListQuery } from "../../../../../services/leaveApplication";
 import Loader from "../../../../common/Loader";
-import PageTopHeader from "./../../../../common/PageTopHeader";
+import PageTopHeader from "../../../../common/PageTopHeader";
 
 const LeaveBalance = () => {
   const res = useMyLeaveBalanceListQuery();
@@ -20,8 +20,13 @@ const LeaveBalance = () => {
               </div>
             </div>
             <div className="card-body">
-              {res.isFetching && <Loader />}
-              <table class="table">
+            {res.isFetching && <Loader />}
+            
+        
+            <div className="table-responsive">
+
+           
+              <table class="table ">
                 <thead
                   className=" text-light"
                   style={{
@@ -36,13 +41,10 @@ const LeaveBalance = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.data?.balance_list.length === 0 && (
-                    <tr>
-                      <td colSpan="4" className="text-center">
-                        No Data Found
-                      </td>
-                    </tr>
-                  )}
+                {res.isError && <div>Something went wrong</div>}
+                {res.isSuccess && data?.data?.balance_list.length === 0 && (
+              <div className="text-center">No Data Found</div>
+            )}
 
                   {data?.data?.balance_list?.map((item, i) => (
                     <tr key={i}>
@@ -56,6 +58,7 @@ const LeaveBalance = () => {
                   ))}
                 </tbody>
               </table>
+              </div>
             </div>
           </div>
       

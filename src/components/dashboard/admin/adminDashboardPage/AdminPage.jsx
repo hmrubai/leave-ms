@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import TopBox from "./TopBox";
 import { GiSandsOfTime } from "react-icons/gi";
 import { FcApproval } from "react-icons/fc";
@@ -9,32 +8,34 @@ import Calender from "./Calender";
 import Moment from "react-moment";
 import Loader from "../../../common/Loader";
 import { useGetDashboardSummaryQuery } from "../../../../services/calenderApi";
+import { useSelector } from "react-redux";
 
 const AdminPage = () => {
+  const authUser = useSelector((state) => state.auth.user);
   const res = useGetDashboardSummaryQuery();
   const { data, error, isLoading, isFetching } = res;
 
-  let  day;
+  console.log(data);
+
+  let day;
   const today = new Date();
   const curHr = today.getHours();
 
   if (curHr < 12) {
-    day="Good Morning 🌄";
+    day = "Good Morning 🌄 ";
   } else if (curHr < 18) {
-    day ="Good Afternoon 🌇";
+    day = "Good Afternoon 🌇";
   } else {
-    day="Good Evening 🌃";
+    day = "Good Evening 🌃";
   }
 
   return (
     <>
       <div className="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-        <div
-   
-          className="d-none d-sm-inline-block p-1 rounded font-weight-bold shadow-sm"
-        >
+        <div className="d-none d-sm-inline-block p-1 rounded font-weight-bold shadow-sm">
           {day}
+          {authUser?.name.split(" ")[1]}
         </div>
       </div>
 
@@ -131,7 +132,6 @@ const AdminPage = () => {
                           <Moment format="YYYY/MM/DD">{item.endDate}</Moment>
                         </td>
                         <td>{item.total_applied_days} Dayes</td>
-
                         {item.is_half_day ? (
                           <td>
                             <span className="badge rounded-pill bg-success">
@@ -145,16 +145,24 @@ const AdminPage = () => {
                             </span>
                           </td>
                         )}
-
-                        {item.leave_status === "Pending" ? (
+                    
+                        {item.leave_status === "Pending" && (
                           <td>
                             <span className="badge rounded-pill bg-warning text-light">
                               {item.leave_status}
                             </span>
                           </td>
-                        ) : (
+                        )}
+                        {item.leave_status === "Rejected" && (
                           <td>
-                            <span className="badge rounded-pill bg-success">
+                            <span className="badge rounded-pill bg-danger text-light">
+                              {item.leave_status}
+                            </span>
+                          </td>
+                        )}
+                        {item.leave_status === "Approved" && (
+                          <td>
+                            <span className="badge rounded-pill bg-success text-light">
                               {item.leave_status}
                             </span>
                           </td>

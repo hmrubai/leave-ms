@@ -147,14 +147,14 @@ const Login = () => {
                           Forgot Password?
                         </Link>
                       </div>
-                      <div className="text-center ">
+                      {/* <div className="text-center ">
                         <Link
                           className="small text-decoration-none"
                           to="/signup"
                         >
                           Create an Account!
                         </Link>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

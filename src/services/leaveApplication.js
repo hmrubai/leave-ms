@@ -94,6 +94,7 @@ export const leaveApplicationApi = createApi({
     }),
     rejectLeave: builder.mutation({
       query: (leave) => {
+        
         return {
           url: `leave/reject-leave`,
           method: "POST",

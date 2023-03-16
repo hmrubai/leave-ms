@@ -19,7 +19,6 @@ const LeaveApprovalFlowTable = () => {
   const { data, isSuccess, isFetching } = useGetApprovalFlowListQuery(employeeId);
   const { data: employeeList } = useGetEmployeeListQuery();
 
-  // console.log(employeeList)
 
   const [show, setShow] = useState(false);
 

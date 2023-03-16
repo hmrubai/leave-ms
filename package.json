@@ -1,5 +1,6 @@
 {
   "name": "learning-management-system",
+  "author": "Arfin Foysal",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

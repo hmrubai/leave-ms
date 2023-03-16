@@ -10,9 +10,9 @@ import { BsFillEyeFill } from "react-icons/bs";
 
 const PendingLeaveList = () => {
   const res = useGetApprovalPendingApplicationListQuery();
-  const { data } = res;
+  const { data,isError,isFetching } = res;
 
-  console.log(data);
+
 
   return (
     <>
@@ -29,7 +29,7 @@ const PendingLeaveList = () => {
       
 
         <div className="card-body">
-          {res.isFetching && <Loader />}
+          {isFetching && <Loader />}
           <div className="table-responsive">
               <table class="table">
                     <thead
@@ -38,7 +38,8 @@ const PendingLeaveList = () => {
                             backgroundColor: "#0D6EFD",
                           }}
                     >
-                      <tr>
+                <tr>
+                        <th scope="col">Applicant</th>
                         <th scope="col">Leave Type</th>
                         <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
@@ -50,8 +51,8 @@ const PendingLeaveList = () => {
                     </thead>
                     <tbody>
                     
-                      {res.isError && <>{res.error.message}</>
-                      }
+                    {isError && <div>Something went wrong</div>}
+                      
                       {
                         data?.data?.length === 0 && (
                           <tr>
@@ -65,6 +66,7 @@ const PendingLeaveList = () => {
 
                       {data?.data?.map((item, i) => (
                         <tr key={i}>
+                          <td>{item.employee_name}</td>
                           <td>{item.leave_title}</td>
                           <td>
                             <Moment format="YYYY/MM/DD">

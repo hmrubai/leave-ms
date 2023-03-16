@@ -49,6 +49,7 @@ const CreateCalenderSetup = ({ handleClose }) => {
                     type="number"
                     className="form-control"
                     name="academic_year"
+                    placeholder="Enter Year"
                     onChange={formik.handleChange}
                     value={formik.values.academic_year}
                     required

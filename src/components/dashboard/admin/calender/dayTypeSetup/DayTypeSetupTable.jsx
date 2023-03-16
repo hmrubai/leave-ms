@@ -5,7 +5,7 @@ import Loader from "./../../../../common/Loader";
 import { useGetDayTypeListQuery } from "../../../../../services/calenderApi";
 
 const DayTypeSetupTable = () => {
-  const { data, isSuccess, isFetching } = useGetDayTypeListQuery();
+  const { data, isSuccess, isFetching, isError } = useGetDayTypeListQuery();
 
   return (
     <>
@@ -26,6 +26,11 @@ const DayTypeSetupTable = () => {
             </tr>
           </thead>
           <tbody>
+            {isError && <div>Something went wrong</div>}
+            {isSuccess && data?.data?.length === 0 && (
+              <div className="text-center">No Data Found</div>
+            )}
+
             {isSuccess && (
               <>
                 {data?.data?.map((item, i) => (
