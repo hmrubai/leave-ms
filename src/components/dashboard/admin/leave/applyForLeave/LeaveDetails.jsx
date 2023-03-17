@@ -263,7 +263,12 @@ const LeaveDetails = () => {
                         <td>{data?.data?.leave?.leave_reason}</td>
                       </tr>
 
-                   
+                      {data?.data?.leave?.rejection_cause && (
+                        <tr>
+                          <td>Rejection Cause</td>
+                          <td>{data?.data?.leave?.rejection_cause}</td>
+                        </tr>)
+                        }
 
 
 
@@ -357,19 +362,31 @@ const LeaveDetails = () => {
                       {data?.data?.leave_flow?.map((item, i) => (
                         <tr key={i}>
                           <td>{item.authority_name}</td>
-                          {item.approval_status === "Pending" ? (
+
+                          {item.approval_status === "Approved" && (
+                            
+                            <td>
+                            <span className="badge rounded-pill bg-success text-light">
+                              {item.approval_status}
+                            </span>
+                            </td>
+                          )}
+
+                          {item.approval_status === "Pending" && (
                             <td>
                               <span className="badge rounded-pill bg-warning text-light">
                                 {item.approval_status}
                               </span>
                             </td>
-                          ) : (
+                          )}
+                          {item.approval_status === "Rejected" && (
                             <td>
-                              <span className="badge rounded-pill bg-success">
+                              <span className="badge rounded-pill bg-danger text-light">
                                 {item.approval_status}
                               </span>
                             </td>
                           )}
+
 
                           <td>{item.step}</td>
 

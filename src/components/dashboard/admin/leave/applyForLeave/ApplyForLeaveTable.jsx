@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 import { BsFillEyeFill } from "react-icons/bs";
 
-
 import { useGetLeaveApplicationListQuery } from "../../../../../services/leaveApplication";
 import Loader from "../../../../common/Loader";
 import ApplyForLeaveModal from "./ApplyForLeaveModal";
@@ -18,10 +17,6 @@ const ApplyForLeaveTable = () => {
   const [paramId, setParamId] = useState(null);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-
-
-
 
   const columns = useMemo(
     () => [
@@ -55,10 +50,17 @@ const ApplyForLeaveTable = () => {
         header: "Applied For",
         Header: <span className="table-header">Applied For</span>,
       },
-
       {
-        accessorKey: "half_day", //normal accessorKey
+        accessorFn: (row) =>
+          row.half_day === "Not Applicable" ? (
+            <span className="badge badge-info">No</span>
+          ) : (
+              <span >{row.half_day}</span>
+          ),
+        size: "small", //optional
+        id: "half_day", //id required if you use accessorFn instead of accessorKey
         header: "Is Half Day",
+        Header: <span className="table-header">Is Half Day</span>,
       },
 
       {
@@ -68,7 +70,7 @@ const ApplyForLeaveTable = () => {
               {row.leave_status === "Pending" && (
                 <span className="badge badge-warning">{row.leave_status}</span>
               )}
-          
+
               {row.leave_status === "Approved" && (
                 <span className="badge badge-success">{row.leave_status}</span>
               )}
@@ -76,7 +78,6 @@ const ApplyForLeaveTable = () => {
                 <span className="badge badge-danger">{row.leave_status}</span>
               )}
             </>
-          
           ), //alternate way
         size: 10, //optional
         id: "is_active", //id required if you use accessorFn instead of accessorKey
@@ -86,7 +87,6 @@ const ApplyForLeaveTable = () => {
     ],
     []
   );
-
 
   return (
     <>
@@ -100,21 +100,16 @@ const ApplyForLeaveTable = () => {
       />
       {/* <MaterialReactTable columns={columns} data={data} /> */}
       <MaterialReactTable
-   
         columns={columns}
         data={isSuccess && data?.data}
         enableRowActions
         enableColumnActions
-    
         positionActionsColumn="last"
-        muiTopToolbarProps={
-          {
-            style: {
-              backgroundColor: "#0D6EFD",
-           
-            },
-
-          }}
+        muiTopToolbarProps={{
+          style: {
+            backgroundColor: "#0D6EFD",
+          },
+        }}
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>

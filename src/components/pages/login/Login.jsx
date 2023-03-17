@@ -9,9 +9,10 @@ import logo from "../../../assets/logo/logo.png";
 import LoginLoader from "../../common/LoginLoader";
 import { BsArrowRight } from "react-icons/bs";
 import { loginSchema } from "../../../Validation/loginSchema";
+import { MdSignalWifiConnectedNoInternet3 } from "react-icons/md";
 
 const Login = () => {
-  const [login, { data, isLoading, isSuccess }] = useLoginMutation();
+  const [login, { data, isLoading, isSuccess,isError }] = useLoginMutation();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,6 +56,11 @@ const Login = () => {
                   <div className="col">
                     <div className="m-5">
                       {isLoading && <LoginLoader />}
+                      {isError && <p className=" text-center">
+                        <span className="text-danger">
+                         Something went wrong  </span>
+                        <MdSignalWifiConnectedNoInternet3 size={20} />
+                      </p>}
 
                       <div className="text-center">
                         <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
