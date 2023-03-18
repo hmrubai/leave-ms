@@ -18,17 +18,13 @@ const EmployeeList = () => {
     <>
       <PageTopHeader title="Employee" />
       <div className="card shadow mb-4">
-        <div className="card-header py-3 ">
-          <div>
+        <div className="card-header d-flex justify-content-between">
+          <div className="mt-1">
             <h6 className="m-0 font-weight-bold text-primary">
               All Employee List{" "}
             </h6>
           </div>
-        </div>
-
-        <div className="card-body">
-          <div className="py-1 text-right mr-1">
-            <div className="d-flex justify-content-end">
+          <div className="d-flex justify-content-end">
               <div className="mt-1">
                 <IoSyncCircle
                   className="cursor "
@@ -46,10 +42,13 @@ const EmployeeList = () => {
                 </Link>
               </div>
             </div>
-          </div>
-          <div>
+        </div>
+
+        <div className="card-body">
+        
+      
             <EmployeeTable />
-          </div>
+      
         </div>
         <div></div>
       </div>

@@ -20,7 +20,7 @@ const ApproveLeaveList = () => {
     <>
       <PageTopHeader title="Approved List" />
       <div className="card shadow mb-4">
-        <div className="card-header py-3 n">
+        <div className="card-header ">
           <div>
             <h6 className="m-0 font-weight-bold text-primary">
               Approved Leave List
@@ -101,12 +101,16 @@ const ApproveLeaveList = () => {
                       </td>
                     )}
                     <td>
-                      {" "}
-                      <Link
+                    <Link
+                        className="btn btn-info btn-sm  text-white"
                         to={`/dashboard/approval-authority/leave-details/${item.id}`}
                       >
-                        <BsFillEyeFill color="black" size={24} />
+                        <div>
+                          <BsFillEyeFill color="white" size={16} />
+                          <span className="ms-1">Details</span>
+                        </div>
                       </Link>
+                    
                     </td>
                   </tr>
                 ))}

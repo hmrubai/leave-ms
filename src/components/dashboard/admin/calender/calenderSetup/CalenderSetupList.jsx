@@ -25,10 +25,10 @@ const CalenderSetupList = () => {
           </div>
         </div>
 
-        <div className="card-body">
-          <div>
+        <div className="card-body pt-0 ">
+    
             <CalenderSetupTable />
-          </div>
+    
         </div>
       </div>
       <CalenderSetupModal

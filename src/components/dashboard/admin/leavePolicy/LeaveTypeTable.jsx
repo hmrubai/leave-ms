@@ -49,7 +49,7 @@ const LeaveTypeTable = () => {
             <>
               <span className="">
                 <FaCheck color="green" />
-                {row.applicable_for}
+                {/* {row.applicable_for} */}
               </span>
             </>
           ) : (
@@ -99,7 +99,7 @@ const LeaveTypeTable = () => {
             <>
               <span className="">
                 <ImCross color="red" />
-                {row.max_carry_forward_days} Days
+                {/* {row.max_carry_forward_days} Days */}
               </span>
             </>
           ), //alternate way
@@ -122,7 +122,7 @@ const LeaveTypeTable = () => {
             <>
               <span className="">
                 <ImCross color="red" />
-                After {row.document_upload_after_days} Days
+                {/* After {row.document_upload_after_days} Days */}
               </span>
             </>
           ), //alternate way

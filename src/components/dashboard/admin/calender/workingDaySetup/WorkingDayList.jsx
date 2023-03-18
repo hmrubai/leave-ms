@@ -40,31 +40,8 @@ const WorkingDayList = () => {
           </div>
         </div>
 
-        <div className="card-body">
-          <div className="py-2 text-right mr-1">
-            <div className="d-flex justify-content-end">
-              <div className="mt-1">
-                {/* <IoSyncCircle
-                  className="cursor "
-                  color="black"
-                  size={25}
-                  onClick={() => refatchClick()}
-                /> */}
-              </div>
-              <div>
-                {/* <Link
-                  to="#"
-                  className="btn btn-primary "
-                  onClick={() => {
-                    handleShow();
-                    handelClickValue("Add Branch Information");
-                  }}
-                >
-                  <BsFillPlusCircleFill className="mb-1 mr-1" /> New
-                </Link> */}
-              </div>
-            </div>
-          </div>
+        <div className="card-body m-0 p-0">
+        
           <div>
             <WorkingDayTable />
           </div>

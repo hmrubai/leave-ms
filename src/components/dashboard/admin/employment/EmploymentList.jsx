@@ -34,16 +34,11 @@ const EmploymentList = () => {
     <>
       <PageTopHeader title="Employment Type" />
       <div className="card shadow mb-4">
-        <div className="card-header py-3 ">
-          <div>
+        <div className="card-header d-flex justify-content-between ">
+          <div className="mt1">
             <h6 className="m-0 font-weight-bold text-primary">Employment Type</h6>
           </div>
-     
-        </div>
-
-        <div className="card-body">
-          <div className="pb-3 text-right mr-1">
-            <div className="d-flex justify-content-end">
+          <div className="d-flex justify-content-end">
               <div className="mt-1">
                 <IoSyncCircle
                   className="cursor "
@@ -65,10 +60,14 @@ const EmploymentList = () => {
                 </Link>
               </div>
             </div>
-          </div>
-          <div>
+     
+        </div>
+
+        <div className="card-body">
+      
+       
             <EmploymentTable/>
-          </div>
+         
         </div>
       </div>
       <EmploymentModal

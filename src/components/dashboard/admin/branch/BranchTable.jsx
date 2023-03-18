@@ -9,7 +9,6 @@ import Loader from "../../../common/Loader";
 import BranchModal from "./BranchModal";
 import { useGetBranchListQuery } from "../../../../services/branchApi";
 
-
 const BranchTable = () => {
   const { data, isSuccess, isFetching } = useGetBranchListQuery();
 
@@ -18,15 +17,13 @@ const BranchTable = () => {
   const [paramId, setParamId] = useState(null);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
+
   const handelClickValue = useCallback((value) => {
     setClickValue(value);
   }, []);
 
-
   const columns = useMemo(
     () => [
-   
       {
         accessorKey: "name", //access nested data with dot notation
         header: "Name",
@@ -39,7 +36,7 @@ const BranchTable = () => {
       {
         accessorKey: "contact_no", //normal accessorKey
         header: "Contact No",
-        size: 10, 
+        size: 10,
       },
       {
         accessorFn: (row) =>
@@ -61,41 +58,32 @@ const BranchTable = () => {
     []
   );
 
-
-
   return (
     <>
       {isFetching && <Loader />}
 
       <BranchModal
-    show={show}
-    handleClose={handleClose}
+        show={show}
+        handleClose={handleClose}
         clickValue={clickValue}
         paramId={paramId}
       />
       {/* <MaterialReactTable columns={columns} data={data} /> */}
       <MaterialReactTable
-        enableRowSelection
         columns={columns}
         data={isSuccess && data?.data}
-      
+        enableRowActions
         enableColumnActions
-     
+      
         positionActionsColumn="last"
-        
-        muiTopToolbarProps={
-          {
-            style: {
-              backgroundColor: "#0D6EFD",
-           
-            },
-
-          }}
+        muiTopToolbarProps={{
+          style: {
+            backgroundColor: "#0D6EFD",
+          },
+        }}
         // enablePagination="true"
         renderRowActions={(row, index) => (
-          
           <>
-         
             <div className="d-flex">
               <div>
                 <Link
@@ -103,14 +91,13 @@ const BranchTable = () => {
                   onClick={() => {
                     handleShow();
                     handelClickValue("Branch Information");
-                    setParamId(row?.row?.original)
+                    setParamId(row?.row?.original);
                   }}
                 >
                   <BsFillEyeFill color="black" size={24} />
                 </Link>
               </div>
               <div>
-                
                 <Link
                   to={`#`}
                   title=""
@@ -118,7 +105,7 @@ const BranchTable = () => {
                   onClick={() => {
                     handleShow();
                     handelClickValue("Edit Branch Information");
-                    setParamId(row?.row?.original)
+                    setParamId(row?.row?.original);
                   }}
                 >
                   <FaEdit size={22} />

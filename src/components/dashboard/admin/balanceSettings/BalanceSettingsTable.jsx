@@ -97,7 +97,7 @@ const BalanceSettingsTable = () => {
       />
       {/* <MaterialReactTable columns={columns} data={data} /> */}
 
-      <div className="pb-3 text-right mr-1 ">
+      <div className="mb-1 text-right ">
         <div className=" d-flex justify-content-end  ">
           <div className="mt-1 col-md-8 ">
             <IoSyncCircle
@@ -108,9 +108,9 @@ const BalanceSettingsTable = () => {
             />
           </div>
 
-          <div className="col-md-2">
+          <div className="col-md-3 p-0">
             <Select
-              placeholder="Employment Type"
+              placeholder="Select Employment"
               classNamePrefix="Employment Type"
               onChange={(e) => setEmploymentTypeId(e.id)}
               getOptionValue={(option) => `${option["id"]}`}
@@ -119,7 +119,7 @@ const BalanceSettingsTable = () => {
               
             />
           </div>
-          <div className="col-md-2">
+          <div className="col-md-3 p-0 mt-1 ">
             <Link
               to="#"
               className="btn btn-primary btn-sm"

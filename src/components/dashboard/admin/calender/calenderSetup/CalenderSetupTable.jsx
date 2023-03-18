@@ -86,7 +86,7 @@ const CalenderSetupTable = () => {
       />
   
 
-      <div className="pb-3 text-right mr-1 ">
+      <div className=" text-right my-1 ">
         <div className=" d-flex justify-content-end  ">
           <div className="mt-1 col-md-8 ">
             <IoSyncCircle
@@ -122,7 +122,7 @@ const CalenderSetupTable = () => {
               
             />
           </div>
-          <div className="col-md-2">
+          <div className="col-md-2 p-0 mt-1">
             <Link
               to="#"
               className="btn btn-primary btn-sm"
@@ -149,6 +149,9 @@ const CalenderSetupTable = () => {
             backgroundColor: "#0D6EFD",
           },
         }}
+        initialState={{ pagination: { pageSize: 30, pageIndex: 2 } }}
+
+
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>

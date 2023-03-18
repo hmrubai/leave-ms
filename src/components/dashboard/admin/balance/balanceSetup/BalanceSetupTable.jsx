@@ -81,9 +81,9 @@ const BalanceSetupTable = () => {
       />
       {/* <MaterialReactTable columns={columns} data={data} /> */}
 
-      <div className="pb-3 text-right mr-1 ">
+      <div className=" text-right ">
         <div className=" d-flex justify-content-end  ">
-          <div className="mt-1 col-md-8 ">
+          <div className=" col-md-8 mt-1">
             <IoSyncCircle
               className="cursor "
               color="black"
@@ -92,7 +92,7 @@ const BalanceSetupTable = () => {
             />
           </div>
 
-          <div className="col-md-3">
+          <div className="col-md-3 mb-1">
             <Select
               placeholder="Select Employee"
               // isClearable={true}

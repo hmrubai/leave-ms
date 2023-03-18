@@ -32,7 +32,7 @@ const BalanceSettingsList = () => {
           </div>
         </div>
 
-        <div className="card-body">
+        <div className="card-body  pt-1">
           {/* <div className="pb-3 text-right mr-1">
             <div className="d-flex justify-content-end">
               <div className="mt-1">
@@ -57,9 +57,9 @@ const BalanceSettingsList = () => {
               </div>
             </div>
           </div> */}
-          <div>
+        
             <LeaveBalanceTable />
-          </div>
+      
         </div>
       </div>
       <LeaveBalanceModal

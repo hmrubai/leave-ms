@@ -30,7 +30,7 @@ const LeaveApprovalFlowList = () => {
           </div>
         </div>
 
-        <div className="card-body">
+        <div className="card-body  pt-0 ">
           <LeaveApprovalFlowTable />
         </div>
       </div>

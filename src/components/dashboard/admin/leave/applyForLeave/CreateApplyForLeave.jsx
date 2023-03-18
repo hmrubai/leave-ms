@@ -71,7 +71,7 @@ const CreateApplyForLeave = ({ handleClose }) => {
       formik.setFieldValue("leave_policy_id", "");
     }
 
-    console.log(key);
+ 
     
   };
 
@@ -126,11 +126,15 @@ const CreateApplyForLeave = ({ handleClose }) => {
                
                     name="leave_date"
                     showSelectionPreview={true}
-                    moveRangeOnFirstSelection={false}
+                    editableDateInputs={true}
                     months={1}
                     ranges={renge}
                     direction="horizontal"
                     className="PreviewArea"
+                   
+                  
+
+                   
                     
                     disabledDates={[
                       {

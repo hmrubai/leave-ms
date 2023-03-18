@@ -30,10 +30,10 @@ const BalanceSetupList = () => {
           </div>
         </div>
 
-        <div className="card-body">
-          <div>
+        <div className="card-body pt-1 ">
+      
             <BalanceSetupTable />
-          </div>
+      
         </div>
       </div>
       <BalanceSetupModal

@@ -31,18 +31,13 @@ const LeaveTypeList = () => {
       <PageTopHeader title="Leave Policy" />
 
       <div className="card shadow mb-4">
-        <div className="card-header py-3 ">
-          <div>
+        <div className="card-header  d-flex justify-content-between">
+          <div className="mt-1">
             <h6 className="m-0 font-weight-bold text-primary">
             Leave Policy Setup
             </h6>
           </div>
-     
-        </div>
-
-        <div className="card-body">
-          <div className="py-2 text-right mr-1">
-            <div className="d-flex justify-content-end">
+          <div className="d-flex justify-content-end">
               <div className="mt-1">
                 <IoSyncCircle
                   className="cursor "
@@ -64,10 +59,14 @@ const LeaveTypeList = () => {
                 </Link>
               </div>
             </div>
-          </div>
-          <div>
+     
+        </div>
+
+        <div className="card-body">
+      
+  
             <LeaveTypeTable />
-          </div>
+      
         </div>
       </div>
       <LeaveTypeModal

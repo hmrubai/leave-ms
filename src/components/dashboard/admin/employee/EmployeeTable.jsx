@@ -1,9 +1,7 @@
 import React, { useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
 import { Link } from "react-router-dom";
-import FileDownloadIcon from "@mui/icons-material/FileDownload";
-import { ExportToCsv } from "export-to-csv"; //or use your library of choice here
-import { Box, Button } from "@mui/material";
+
 import { BsFillEyeFill } from "react-icons/bs";
 
 import { FaEdit } from "react-icons/fa";
@@ -94,25 +92,7 @@ const EmployeeTable = () => {
     []
   );
 
-  const csvOptions = {
-    fieldSeparator: ",",
-    quoteStrings: '"',
-    decimalSeparator: ".",
-    showLabels: true,
-    useBom: true,
-    useKeysAsHeaders: false,
-    headers: columns.map((c) => c.header),
-  };
-
-  const csvExporter = new ExportToCsv(csvOptions);
-
-  const handleExportData = () => {
-    csvExporter.generateCsv(data?.data);
-  };
-
-  const handleExportRows = (rows) => {
-    csvExporter.generateCsv(rows.map((row) => row.original));
-  };
+  
 
   return (
     <>
@@ -127,12 +107,11 @@ const EmployeeTable = () => {
 
       {/* <MaterialReactTable columns={columns} data={data} /> */}
       <MaterialReactTable
-        enableRowSelection
+   
         columns={columns}
         data={isSuccess && data?.data}
         enableRowActions
         enableColumnActions
-        // enableRowNumbers
         positionActionsColumn="last"
         muiTopToolbarProps={{
           style: {
@@ -146,47 +125,24 @@ const EmployeeTable = () => {
            
           },
         }}
-        renderTopToolbarCustomActions={({ table }) => (
-          <Box
-            sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}
-          >
-            <Button
-              color="secondary"
-              //export all data that is currently in the table (ignore pagination, sorting, filtering, etc.)
-              onClick={handleExportData}
-              startIcon={<FileDownloadIcon />}
-              variant="contained"
-            >
-              Export
-            </Button>
-            <Button
-              disabled={
-                !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
-              }
-              //only export selected rows
-              onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
-              startIcon={<FileDownloadIcon />}
-              variant="contained"
-              color="secondary"
-            >
-              Selected Rows
-            </Button>
-          </Box>
-        )}
+
+   
+      
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>
             <div className="d-flex">
-              <div>
+              <div className="mr-2">
                 <Link
                   to="#"
-                  // className="btn btn-warning btn-sm"
+                  className="btn btn-warning btn-sm"
                   onClick={() => {
                     handleShow();
                     setParamId(row?.row?.original?.user_id);
                   }}
                 >
-                  <FcUnlock className="mb-1 mr-1" size={24} />
+                  <FcUnlock className="mb-1 mr-1"/>
+                  Reset 
                 </Link>
               </div>
               <div>
@@ -207,9 +163,7 @@ const EmployeeTable = () => {
               </div>
             </div>
 
-            {/* <Link to="#" onClick={() => deleteHandel()}>
-              <FaTrash size={20} color="red" />
-            </Link>{" "} */}
+       
           </>
         )}
       />

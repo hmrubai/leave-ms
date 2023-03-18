@@ -1,9 +1,7 @@
 import React, { useState, useMemo } from "react";
 import MaterialReactTable from "material-react-table";
 import { Link } from "react-router-dom";
-
 import { BsFillEyeFill } from "react-icons/bs";
-
 import { useGetLeaveApplicationListQuery } from "../../../../../services/leaveApplication";
 import Loader from "../../../../common/Loader";
 import ApplyForLeaveModal from "./ApplyForLeaveModal";
@@ -23,15 +21,18 @@ const ApplyForLeaveTable = () => {
       {
         accessorKey: "leave_title", //access nested data with dot notation
         header: "Leave Title",
+        size: "small",
       },
 
       {
         accessorKey: "start_date", //normal accessorKey
         header: "Start Date",
+        size: "small",
       },
       {
         accessorKey: "end_date", //normal accessorKey
         header: "End Date",
+        size: "small",
       },
 
       {
@@ -46,18 +47,20 @@ const ApplyForLeaveTable = () => {
         id: "total_applied_days", //id required if you use accessorFn instead of accessorKey
         header: "Applied For",
         Header: <span className="table-header">Applied For</span>,
+        size: "small",
       },
       {
         accessorFn: (row) =>
           row.half_day === "Not Applicable" ? (
             <span className="badge badge-info">No</span>
           ) : (
-              <span >{row.half_day}</span>
+            <span>{row.half_day}</span>
           ),
-      
+
         id: "half_day", //id required if you use accessorFn instead of accessorKey
         header: "Is Half Day",
         Header: <span className="table-header">Is Half Day</span>,
+        size: "small",
       },
 
       {
@@ -76,16 +79,16 @@ const ApplyForLeaveTable = () => {
               )}
             </>
           ), //alternate way
-  
+
         id: "is_active", //id required if you use accessorFn instead of accessorKey
         header: "Status",
-        Header: <span className="table-header">Status</span>, //optional custom markup
+        Header: <span className="table-header">Status</span>,
+        //optional custom markup
+        size: "small", //optional size
       },
     ],
     []
   );
-
-
 
   return (
     <>
@@ -116,17 +119,25 @@ const ApplyForLeaveTable = () => {
               <div>
                 {authRole === "ApprovalAuthority" && (
                   <Link
+                    className="btn btn-info btn-sm d-flex text-white"
                     to={`/dashboard/approval-authority/leave-details/${row?.row?.original?.id}`}
                   >
-                    <BsFillEyeFill color="black" size={24} />
+                    <div className="mr-1">
+                      <BsFillEyeFill color="white" size={16} />
+                    </div>
+                    <div>Details</div>
                   </Link>
                 )}
 
                 {authRole === "Employee" && (
                   <Link
+                    className="btn btn-info btn-sm d-flex text-white"
                     to={`/dashboard/employee/leave-details/${row?.row?.original?.id}`}
                   >
-                    <BsFillEyeFill color="black" size={24} />
+                    <div className="mr-1">
+                      <BsFillEyeFill color="white" size={16} />
+                    </div>
+                    <div>Details</div>
                   </Link>
                 )}
               </div>

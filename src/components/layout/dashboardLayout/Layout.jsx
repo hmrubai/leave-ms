@@ -14,6 +14,7 @@ import profilePicture from "../../../assets/images/profile-picture.png";
 import reset from "../../../assets/images/reset.png";
 import { FaBars } from "react-icons/fa";
 import sm_logo from "../../../assets/logo/sm_logo.png";
+import crop_logo from "../../../assets/logo/crop_logo.png";
 
 import { BsFillPersonFill } from "react-icons/bs";
 
@@ -70,7 +71,10 @@ const Layout = () => {
             <Link to="/" className="sidebar-brand-icon rotate-n-15">
               <img src={logo_sm} width="30" alt="" />
             </Link>
-            <div className="sidebar-brand-text mx-3">LMS</div>
+            <div className="sidebar-brand-text mx-3">
+              <img src={crop_logo} width={70} alt="" />
+            
+            </div>
             <div className="text-center d-none d-md-inline">
               <FaBars onClick={changeStyle} className="ml-3 " />
             </div>
@@ -95,8 +99,8 @@ const Layout = () => {
               </div>
 
               <div className="mt-1 ">
-                <span className="d-none d-lg-inline text-light-600 small ml-2 font-weight-bold ">
-                  {authUser && authUser.name.slice(0, 15)}
+                <span className=" name-font-size d-none d-lg-inline text-light-600 small ml-2 font-weight-bold ">
+                  {authUser && authUser.name}
                 </span>
               </div>
             </div>

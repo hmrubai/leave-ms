@@ -34,19 +34,15 @@ const BranchList = () => {
     <>
   <PageTopHeader title="Branch"/>
       <div className="card shadow mb-4">
-        <div className="card-header py-3 n">
-          <div>
+        <div className="card-header  d-flex justify-content-between">
+          <div className="mt-1">
             <h6 className="m-0 font-weight-bold text-primary">Branch Information</h6>
 
 
           </div>
-
-        </div>
-
-        <div className="card-body">
-          <div className="py-2 text-right mr-1">
+          <div className=" text-right mr-1">
             <div className="d-flex justify-content-end">
-              <div className="mt-1">
+              <div className="">
                 <IoSyncCircle
                   className="cursor "
                   color="black"
@@ -68,9 +64,14 @@ const BranchList = () => {
               </div>
             </div>
           </div>
-          <div>
+
+        </div>
+
+        <div className="card-body">
+        
+          
             <BranchTable />
-          </div>
+         
         </div>
       </div>
       <BranchModal

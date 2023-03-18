@@ -69,12 +69,8 @@ const MyCalender = () => {
 
         {res.isFetching && <Loader />}
 
-        <div className="card-body">
-          <div className="py-2 text-right mr-1">
-            <div className="d-flex justify-content-end">
-              <div className="mt-1"></div>
-            </div>
-          </div>
+        <div className="card-body ">
+    
           <FullCalendar
             plugins={[dayGridPlugin, interactionPlugin]}
             initialView="dayGridMonth"

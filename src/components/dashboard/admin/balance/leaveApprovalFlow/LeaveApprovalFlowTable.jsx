@@ -70,7 +70,7 @@ const LeaveApprovalFlowTable = () => {
   return (
     <>
       <div className="d-flex justify-content-end py-1">
-        <div className="col-md-2">
+        <div className="col-md-3">
           <Select
             placeholder="Select Employee"
             // isClearable={true}
@@ -88,7 +88,7 @@ const LeaveApprovalFlowTable = () => {
         <div>
           <Link
             to="#"
-            className="btn btn-primary btn-sm"
+            className="btn btn-primary btn-sm mt-1"
             onClick={() => {
               handleShow();
               handelClickValue("Add approval");

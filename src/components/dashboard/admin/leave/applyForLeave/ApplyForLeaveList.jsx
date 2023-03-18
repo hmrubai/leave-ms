@@ -38,45 +38,44 @@ const ApplyForLeaveList = () => {
     <>
   <PageTopHeader title="Apply Leave"/>
       <div className="card shadow mb-4">
-        <div className="card-header py-3 d-flex justify-content-between">
-          <div>
+        <div className="card-header  d-flex justify-content-between">
+          <div className="mt-1">
             <h6 className="m-0 font-weight-bold text-primary">Applied Leave List</h6>
 
 
           </div>
-          <div className="mt-1">
+         
+          <div className="d-flex justify-content-end">
+        
+       <div >
                 <IoSyncCircle
                   className="cursor "
                   color="black"
                   size={25}
                   onClick={() => refatchClick()}
                 />
-              </div>
+          </div>
+        <div>
+          <Link
+            to="#"
+            className="btn btn-primary btn-sm"
+            onClick={() => {
+              handleShow();
+              handelClickValue("Apply Leave");
+            }}
+          >
+            <BsFillPlusCircleFill className="mb-1 mr-1" /> Apply For A Leave
+          </Link>
+        </div>
+      </div>
 
         </div>
 
         <div className="card-body">
-          <div className="py-2 text-right mr-1">
-            <div className="d-flex justify-content-end">
-        
-      
-              <div>
-                <Link
-                  to="#"
-                  className="btn btn-primary btn-sm"
-                  onClick={() => {
-                    handleShow();
-                    handelClickValue("Apply Leave");
-                  }}
-                >
-                  <BsFillPlusCircleFill className="mb-1 mr-1" /> Apply For A Leave
-                </Link>
-              </div>
-            </div>
-          </div>
-          <div>
+  
+    
             <ApplyForLeaveTable />
-          </div>
+        
         </div>
       </div>
       <ApplyForLeaveModal

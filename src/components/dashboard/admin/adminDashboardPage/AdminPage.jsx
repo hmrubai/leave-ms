@@ -15,7 +15,6 @@ const AdminPage = () => {
   const res = useGetDashboardSummaryQuery();
   const { data, error, isLoading, isFetching } = res;
 
-  console.log(data);
 
   let day;
   const today = new Date();
