@@ -44,13 +44,13 @@ const RejectionModal = ({ handleClose, show, clickValue, paramId }) => {
           <div>
             <form onSubmit={formik.handleSubmit}>
               <div className="form-group text-center">
-                <label htmlFor="rejection_cause">Rejection Cause</label>
+                <label htmlFor="rejection_cause">Rejection Cause </label>
 
                 <textarea
                   type="text"
                   className="form-control"
                   id="rejection_cause"
-                  placeholder="Rejection Cause
+                  placeholder="Rejection Cause ...
                   "
                   name="rejection_cause"
                   onChange={formik.handleChange}

@@ -81,7 +81,7 @@ const MyCalender = () => {
             events={calenderSummary}
             editable={true}
             selectable={true}
-            height={500}
+     
             eventTextColor="white"
             handleWindowResize={true}
           />

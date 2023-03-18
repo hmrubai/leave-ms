@@ -2,7 +2,8 @@ import { useFormik } from "formik";
 import React from "react";
 import { Button, Modal } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
-import { useLeaveBalanceUpdateMutation } from "../../../../services/balanceSetupApi";
+import { useLeaveBalanceUpdateMutation } from "../../../../../services/balanceSetupApi";
+
 
 const EditBalanceSetup = ({ handleClose, item }) => {
   const [leaveBalanceUpdate, res] = useLeaveBalanceUpdateMutation();

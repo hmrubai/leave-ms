@@ -2,10 +2,16 @@ import { useFormik } from "formik";
 import React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
-import { useGetCompanyListQuery } from "../../../../services/companyApi";
-import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
-import { useLeaveSettingSaveOrUpdateMutation } from "../../../../services/leaveBalanceApi";
-import { useGetLeavePolicyListQuery } from "../../../../services/leavepolicyApi";
+
+import { useGetCompanyListQuery } from "../../../../../services/companyApi";
+import { useGetLeavePolicyListQuery } from "../../../../../services/leavepolicyApi";
+import { useGetEmploymentTypeListQuery } from "../../../../../services/employmentApi";
+
+;
+// import { useGetCompanyListQuery } from "../../../../services/companyApi";
+// import { useGetEmploymentTypeListQuery } from "../../../../services/employmentApi";
+// import { useLeaveSettingSaveOrUpdateMutation } from "../../../../services/leaveBalanceApi";
+// import { useGetLeavePolicyListQuery } from "../../../../services/leavepolicyApi";
 
 const CreateBalanceSetup
  = ({ handleClose }) => {
@@ -13,8 +19,7 @@ const CreateBalanceSetup
   const { data:LeavePolicy } = useGetLeavePolicyListQuery();
   const { data:EmploymentType } = useGetEmploymentTypeListQuery();
 
-  const [leaveSettingSaveOrUpdate, res] =
-    useLeaveSettingSaveOrUpdateMutation();
+
   
   const formik = useFormik({
     initialValues: {
@@ -27,8 +32,8 @@ const CreateBalanceSetup
 
     onSubmit: async (values, { resetForm }) => {
       try {
-        const result = await leaveSettingSaveOrUpdate(values).unwrap();
-        toast.success(result.message);
+        // const result = await leaveSettingSaveOrUpdate(values).unwrap();
+        // toast.success(result.message);
         resetForm();
       } catch (error) {
         toast.warn(error.data.message);
@@ -36,9 +41,9 @@ const CreateBalanceSetup
     },
   });
 
-  if (res.isSuccess) {
-    handleClose();
-  }
+  // if (res.isSuccess) {
+  //   handleClose();
+  // }
 
 
 

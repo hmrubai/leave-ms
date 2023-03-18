@@ -40,8 +40,8 @@ export const calenderApi = createApi({
     }),
 
     getCalenderListByYear: builder.query({
-      query: (year) => ({
-        url: `/admin/calender?year=${year}`,
+      query: ({year,month}) => ({
+        url: `/admin/calender?year=${year}&month_in_number=${month}`,
         method: "GET",
         headers,
       }),

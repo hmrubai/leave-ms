@@ -236,7 +236,7 @@ const LeaveDetails = () => {
                         </tr>
                         <tr>
                           <td>Applied For</td>
-                          <td>{data?.data?.leave?.total_applied_days} Dayes</td>
+                          <td>{data?.data?.leave?.total_applied_days} Days</td>
                         </tr>
 
                         <tr>

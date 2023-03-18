@@ -37,7 +37,7 @@ const LeaveBalance = () => {
                     <th scope="col">Leave Type</th>
                     <th scope="col">Total Days</th>
                     <th scope="col">Avail Days</th>
-                    <th scope="col">Remmaining</th>
+                    <th scope="col">Remaining</th>
                   </tr>
                 </thead>
                 <tbody>

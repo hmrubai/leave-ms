@@ -71,7 +71,7 @@ const ApproveLeaveList = () => {
                     <td>
                       <Moment format="YYYY/MM/DD">{item.end_date}</Moment>
                     </td>
-                    <td>{item.total_applied_days} Dayes</td>
+                    <td>{item.total_applied_days} Days</td>
 
                     {item.is_half_day ? (
                       <td>

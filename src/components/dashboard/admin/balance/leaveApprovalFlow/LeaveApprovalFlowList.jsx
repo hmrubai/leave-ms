@@ -1,11 +1,13 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 
-import PageTopHeader from "../../../common/PageTopHeader";
-import BalanceSetupModal from "./BalanceSetupModal";
-import BalanceSetupTable from "./BalanceSetupTable";
+import { IoSyncCircle } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import LeaveApprovalFlowTable from "./LeaveApprovalFlowTable";
+import { BsFillPlusCircleFill } from "react-icons/bs";
+import LeaveApprovalFlowModal from "./LeaveApprovalFlowModal";
+import PageTopHeader from "../../../../common/PageTopHeader";
 
-const BalanceSetupList = () => {
-
+const LeaveApprovalFlowList = () => {
   const [clickValue, setClickValue] = useState(null);
   const [show, setShow] = useState(false);
 
@@ -16,34 +18,24 @@ const BalanceSetupList = () => {
     setClickValue(value);
   }, []);
 
-
   return (
     <>
-      <PageTopHeader title="Leave Balance" />
+      <PageTopHeader title="Leave Workflow" />
       <div className="card shadow mb-4">
         <div className="card-header py-3 ">
           <div>
             <h6 className="m-0 font-weight-bold text-primary">
-            Leave Balance List
+              Leave Workflow Setup
             </h6>
           </div>
         </div>
 
         <div className="card-body">
-          <div>
-            <BalanceSetupTable />
-          </div>
+          <LeaveApprovalFlowTable />
         </div>
       </div>
-      <BalanceSetupModal
-        show={show}
-        handleClose={handleClose}
-        clickValue={clickValue}
-      />
     </>
   );
 };
 
-export default React.memo(BalanceSetupList
-);
-
+export default LeaveApprovalFlowList;

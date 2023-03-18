@@ -23,8 +23,8 @@ import Employee from "./../components/dashboard/views/Employee";
 import FiscalYearList from "../components/dashboard/admin/fiscalYear/FiscalYearList";
 import EmploymentList from "../components/dashboard/admin/employment/EmploymentList";
 import EditEmployee from "../components/dashboard/admin/employee/EditEmployee";
-import BalanceSetupList from "../components/dashboard/admin/balanceSetup/BalanceSetupList";
-import LeaveApprovalFlowList from "../components/dashboard/admin/leaveApprovalFlow/LeaveApprovalFlowList";
+import BalanceSetupList from "../components/dashboard/admin/balance/balanceSetup/BalanceSetupList";
+import LeaveApprovalFlowList from "../components/dashboard/admin/balance/leaveApprovalFlow/LeaveApprovalFlowList";
 import DayTypeSetupList from "./../components/dashboard/admin/calender/dayTypeSetup/DayTypeSetupList";
 import WorkingDayList from "../components/dashboard/admin/calender/workingDaySetup/WorkingDayList";
 import CalenderSetupList from "../components/dashboard/admin/calender/calenderSetup/CalenderSetupList";
@@ -37,7 +37,7 @@ import MyCalender from "../components/dashboard/admin/calender/academicCalendar/
 import ChangePassword from './../components/pages/changePassword/ChangePassword';
 
 import LeaveTypeList from "../components/dashboard/admin/leavePolicy/LeaveTypeList";
-import LeaveBalance from './../components/dashboard/admin/leave/leaveBalance/LeaveBalance';
+import LeaveBalance from '../components/dashboard/admin/leave/myLeaveBalance/LeaveBalance';
 
 
 

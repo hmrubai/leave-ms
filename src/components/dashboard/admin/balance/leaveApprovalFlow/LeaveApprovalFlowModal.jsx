@@ -1,8 +1,9 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import BranchDetails from '../branch/BranchDetails';
-import CreateLeaveApprovalFlow from './CreateLeaveApprovalFlow';
-import EditLeaveApprovalFlow from './EditLeaveApprovalFlow';
+// import BranchDetails from "../../branch/BranchDetails";
+import CreateLeaveApprovalFlow from "./CreateLeaveApprovalFlow";
+import EditLeaveApprovalFlow from "./EditLeaveApprovalFlow";
+
 const LeaveApprovalFlowModal = ({ handleClose, show, clickValue, paramId }) => {
   
  
@@ -16,7 +17,7 @@ const LeaveApprovalFlowModal = ({ handleClose, show, clickValue, paramId }) => {
         
         </Modal.Header>
         <Modal.Body >
-          {clickValue === "Branch Information" && <BranchDetails item={paramId} handleClose={handleClose}/>}
+          {/* {clickValue === "Branch Information" && <BranchDetails item={paramId} handleClose={handleClose}/>} */}
           {clickValue === "Add approval" && <CreateLeaveApprovalFlow handleClose={handleClose}/>}
           {clickValue === "Edit Step" && <EditLeaveApprovalFlow item={paramId} handleClose={handleClose} />}
         </Modal.Body>

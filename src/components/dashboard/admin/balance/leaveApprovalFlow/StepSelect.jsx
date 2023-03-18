@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetApprovalAuthorityListQuery } from "../../../../services/employeeApi";
+import { useGetApprovalAuthorityListQuery } from "../../../../../services/employeeApi";
 
 const StepSelect = ({ onChange, value, name,step }) => {
   const res = useGetApprovalAuthorityListQuery();

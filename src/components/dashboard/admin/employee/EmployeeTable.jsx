@@ -139,6 +139,13 @@ const EmployeeTable = () => {
             backgroundColor: "#0D6EFD",
           },
         }}
+        muiBottomToolbarProps={{
+          style: {
+            backgroundColor: "#0D6EFD",
+            
+           
+          },
+        }}
         renderTopToolbarCustomActions={({ table }) => (
           <Box
             sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}

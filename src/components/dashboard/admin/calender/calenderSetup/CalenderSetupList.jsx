@@ -5,20 +5,14 @@ import { useGetdepartmentListQuery } from "../../../../../services/departmentApi
 import PageTopHeader from './../../../../common/PageTopHeader';
 
 const CalenderSetupList = () => {
-  const get = useGetdepartmentListQuery();
+
   const [clickValue, setClickValue] = useState(null);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handelClickValue = useCallback((value) => {
-    setClickValue(value);
-  }, []);
 
-  const refatchClick = () => {
-    get.refetch();
-  };
   return (
     <>
       <PageTopHeader title="Leave Balance" />

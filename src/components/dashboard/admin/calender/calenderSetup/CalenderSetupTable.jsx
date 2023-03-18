@@ -2,9 +2,8 @@ import React, { useState, useMemo, useCallback } from "react";
 import MaterialReactTable from "material-react-table";
 import { Link } from "react-router-dom";
 
-import {  BsFillPlusCircleFill } from "react-icons/bs";
-import {FaEdit } from "react-icons/fa";
-
+import { BsFillPlusCircleFill } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
 
 import LeaveBalanceModal from "./CalenderSetupModal";
 
@@ -12,23 +11,24 @@ import { IoSyncCircle } from "react-icons/io5";
 import Select from "react-select";
 import Loader from "./../../../../common/Loader";
 
-
 import {
   useGetCalenderListByYearQuery,
   useGetYearListQuery,
 } from "../../../../../services/calenderApi";
+import { month } from "../../../../../utils/month";
 
 const CalenderSetupTable = () => {
-  
-
-
-
   const [yearId, setYearId] = useState(null);
+  const [monthId, setMonthId] = useState(null);
   const { data: yearList } = useGetYearListQuery();
 
-  const { data, isSuccess, isFetching } =
-    useGetCalenderListByYearQuery(yearId);
-  const get = useGetCalenderListByYearQuery(yearId);
+  const { data, isSuccess, isFetching } = useGetCalenderListByYearQuery({
+    year: yearId,
+    month: monthId,
+  });
+  const get = useGetCalenderListByYearQuery(
+    { year: yearId, month: monthId },
+  );
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
@@ -42,8 +42,6 @@ const CalenderSetupTable = () => {
   const refatchClick = () => {
     get.refetch();
   };
-
-
 
   const columns = useMemo(
     () => [
@@ -76,9 +74,6 @@ const CalenderSetupTable = () => {
     []
   );
 
-
-
-
   return (
     <>
       {isFetching && <Loader />}
@@ -89,7 +84,7 @@ const CalenderSetupTable = () => {
         clickValue={clickValue}
         paramId={paramId}
       />
-      {/* <MaterialReactTable columns={columns} data={data} /> */}
+  
 
       <div className="pb-3 text-right mr-1 ">
         <div className=" d-flex justify-content-end  ">
@@ -115,6 +110,19 @@ const CalenderSetupTable = () => {
             />
           </div>
           <div className="col-md-2">
+            <Select
+              placeholder="Select Month"
+              isClearable={true}
+              classNamePrefix="month"
+              // backspaceRemovesValue={true}
+              onChange={(e) => setMonthId(e.id)}
+              getOptionValue={(option) => `${option["id"]}`}
+              getOptionLabel={(option) => `${option["name"]}`}
+              options={month}
+              
+            />
+          </div>
+          <div className="col-md-2">
             <Link
               to="#"
               className="btn btn-primary btn-sm"
@@ -123,28 +131,24 @@ const CalenderSetupTable = () => {
                 handelClickValue("Add New Year");
               }}
             >
-              <BsFillPlusCircleFill className="mb-1 mr-1" />Generate Calendar
+              <BsFillPlusCircleFill className="mb-1 mr-1" />
+              Generate Calendar
             </Link>
           </div>
         </div>
       </div>
 
       <MaterialReactTable
-
         columns={columns}
         data={isSuccess && data?.data}
         enableRowActions
         enableColumnActions
-   
         positionActionsColumn="last"
-        muiTopToolbarProps={
-          {
-            style: {
-              backgroundColor: "#0D6EFD",
-           
-            },
-
-          }}
+        muiTopToolbarProps={{
+          style: {
+            backgroundColor: "#0D6EFD",
+          },
+        }}
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>

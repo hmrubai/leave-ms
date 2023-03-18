@@ -4,8 +4,8 @@ import { Button, Modal } from "react-bootstrap";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
-import { useUpdateApprovalFlowMutation } from "../../../../services/leaveApprovalFlowApi";
-import { useGetApprovalAuthorityListQuery } from "../../../../services/employeeApi";
+import { useUpdateApprovalFlowMutation } from "../../../../../services/leaveApprovalFlowApi";
+import { useGetApprovalAuthorityListQuery } from "../../../../../services/employeeApi";
 
 const EditLeaveApprovalFlow = ({ item, handleClose }) => {
   const [updateApprovalFlow, res] = useUpdateApprovalFlowMutation();

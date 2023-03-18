@@ -10379,3 +10379,7 @@ body.sidebar-toggled footer.sticky-footer {
 .cursor{
   cursor: pointer;
 }
+
+.css-i4bv87-MuiSvgIcon-root {
+  color: white !important;
+}

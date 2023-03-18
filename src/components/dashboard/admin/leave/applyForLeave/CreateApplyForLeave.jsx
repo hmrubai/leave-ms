@@ -13,9 +13,7 @@ import Loader from "../../../../common/Loader";
 
 const CreateApplyForLeave = ({ handleClose }) => {
   const { data } = useGetLeaveUserPolicyListQuery();
-
   const [leaveSubmitApplication, res] = useLeaveSubmitApplicationMutation();
-
 
   const [leaveCheckValidity, checkValidityCheckRes] =
     useLeaveCheckValidityMutation();
@@ -28,9 +26,11 @@ const CreateApplyForLeave = ({ handleClose }) => {
     responsibility_carried_by: "",
   };
 
+
+
   const [renge, setRenge] = useState([
     {
-      startDate: new Date(),
+      startDate: null,
       endDate: null,
       key: "selection",
     },
@@ -38,22 +38,41 @@ const CreateApplyForLeave = ({ handleClose }) => {
 
   // console.log(checkValidityCheckRes);
 
-  const validityCheckHandler = async () => {
+  const validityCheckHandler = async (e) => {
     const data = {
-      leave_policy_id: formik.values.leave_policy_id,
+      leave_policy_id: e.target.value,
       is_half_day: formik.values.is_half_day,
       half_day: formik.values.half_day,
       start_date: format(renge[0].startDate, "yyyy-MM-dd"),
       end_date: format(renge[0].endDate, "yyyy-MM-dd"),
     };
 
+
+
     try {
       if (data.leave_policy_id !== "") {
         const result = await leaveCheckValidity(data).unwrap();
+        toast.success(result.message);
       }
     } catch (error) {
       toast.warn(error.data.message);
     }
+  };
+
+
+  const handleLeaveTypeFous = (key) => {
+    if (key === "selection") {
+      formik.setFieldValue("leave_policy_id", "");
+    }
+    if (key === "is_half_day") {
+      formik.setFieldValue("leave_policy_id", "");
+    }
+    if (key === "half_day") {
+      formik.setFieldValue("leave_policy_id", "");
+    }
+
+    console.log(key);
+    
   };
 
   const formik = useFormik({
@@ -95,18 +114,24 @@ const CreateApplyForLeave = ({ handleClose }) => {
       <div className="card-body">
         <form className="form-sample" onSubmit={formik.handleSubmit}>
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-6">
               <div className="form-group row">
-                <label className="col-sm-6 col-form-label">Leave Date</label>
+                <label className=" col-form-label">Leave Date</label>
                 <div className="col-sm-6">
                   <DateRange
-                    onChange={(item) => setRenge([item.selection])}
+                    onChange={(item) => {
+                      setRenge([item.selection]);
+                      handleLeaveTypeFous(item.selection.key);
+                    }}
+               
+                    name="leave_date"
                     showSelectionPreview={true}
                     moveRangeOnFirstSelection={false}
                     months={1}
                     ranges={renge}
                     direction="horizontal"
                     className="PreviewArea"
+                    
                     disabledDates={[
                       {
                         before: new Date(),
@@ -116,99 +141,108 @@ const CreateApplyForLeave = ({ handleClose }) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-12">
-              <div className="form-group row">
-                <label className="col-sm-6 col-form-label">Is half day</label>
-                <div className="col-sm-6">
-                  <div class="form-check form-switch mt-2">
-                    <Form.Check
-                      type="switch"
-                      id="custom-switch"
-                      label="Is Half Day"
-                      name="is_half_day"
-                      onChange={formik.handleChange}
-                      value={formik.values.is_half_day}
-                      checked={formik.values.is_half_day}
-                    />
+            <div className="col-md-6">
+              <div className="col-md-12">
+                <div className="form-group row">
+                  <label className="col-sm-6 col-form-label">Is half day</label>
+                  <div className="col-sm-6">
+                    <div class="form-check form-switch mt-2">
+                      <Form.Check
+                        type="switch"
+                        key="is_half_day"
+                        id="custom-switch"
+                        label="Is Half Day"
+                        name="is_half_day"
+                        onChange={(e) => { formik.handleChange(e); handleLeaveTypeFous(e.target.name) }}
+                        value={formik.values.is_half_day}
+                        checked={formik.values.is_half_day}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div
-              className={
-                formik.values.is_half_day ? "d-block col-md-12" : "d-none"
-              }
-            >
-              <div className="form-group row">
-                <label className="col-sm-6 col-form-label">
-                  Select Day Part
-                </label>
-                <div className="col-sm-6">
-                  <select
-                    className="form-control form-select"
-                    name="half_day"
-                    onChange={formik.handleChange}
-                    value={formik.values.half_day}
-                  >
-                    <option selected>Not Applicable </option>
-                    <option value="1st Half">First Half</option>
-                    <option value="2nd Half">Second Half</option>
-                  </select>
+              <div
+                className={
+                  formik.values.is_half_day ? "d-block col-md-12" : "d-none"
+                }
+              >
+                <div className="form-group row">
+                  <label className=" col-form-label">Select Day Part</label>
+                  <div className="col-sm-12">
+                    <select
+                      className="form-control form-select"
+                      name="half_day"
+                      key="half_day"
+                      onChange={(e) => {
+                        formik.handleChange(e);
+                        handleLeaveTypeFous(e.target.name)
+                      }}
+                      value={formik.values.half_day}
+                    >
+                      <option selected>Not Applicable </option>
+                      <option value="1st Half">First Half</option>
+                      <option value="2nd Half">Second Half</option>
+                    </select>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-12">
-              <div className="form-group row">
-                <label className="col-sm-6 col-form-label">Leave Type</label>
-                <div className="col-sm-6">
-                  <select
-                    className="form-control form-select"
-                    name="leave_policy_id"
-                    onChange={formik.handleChange}
-                    value={formik.values.leave_policy_id}
-                    onClick={validityCheckHandler}
-                  >
-                    <option>Selact Leave Type</option>
-                    {data?.data?.map((leave, i) => (
-                      <option key={i} value={leave.id}>
-                        {leave.leave_title}
-                      </option>
-                    ))}
-                  </select>
+
+              <div className="col-md-12">
+                <div className="form-group row">
+                  <label className=" col-form-label">Leave Type</label>
+                  <div className="col-sm-12">
+                    <select
+                      className="form-control form-select"
+                      name="leave_policy_id"
+                      onChange={(e) => {
+                        formik.handleChange(e);
+                        validityCheckHandler(e);
+                        // setleavePolicyId(e.target.value);
+                      }}
+                      value={formik.values.leave_policy_id}
+                    >
+                      <option >Select Leave Type </option>
+                      {data?.data?.map((leave, i) => (
+                        <option key={i} value={leave.id}>
+                          {leave.leave_title}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-12">
-              <div className="form-group row">
-                <label className="col-sm-6 col-form-label">Reason</label>
-                <div className="col-sm-6">
-                  <textarea
-                    Placeholder="
-                    Please write your reason for leave application.
-                    "
-                    required
-                    className="form-control"
-                    name="reason"
-                    onChange={formik.handleChange}
-                    value={formik.values.resion}
-                  ></textarea>
+
+              <div className="col-md-12">
+                <div className="form-group row">
+                  <label className="col-form-label">Reason</label>
+                  <div className="col-sm-12">
+                    <textarea
+                      placeholder="Please write your reason for leave application."
+                 
+                      required
+                      className="form-control"
+                      name="reason"
+                      onChange={formik.handleChange}
+                      value={formik.values.resion}
+                    ></textarea>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-12">
-              <div className="form-group row">
-                <label className="col-sm-6 col-form-label">
-                  Responsibility Carried By
-                </label>
-                <div className="col-sm-6">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="responsibility_carried_by"
-                    onChange={formik.handleChange}
-                    value={formik.values.responsibility_carried_by}
-                    placeholder="Eg: Aminur Rahman"
-                  ></input>
+              <div className="col-md-12">
+                <div className="form-group row">
+                  <label className=" col-form-label">
+                    Responsibility Carried By
+                  </label>
+                  <div className="col-sm-12">
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="responsibility_carried_by"
+                      onChange={formik.handleChange}
+                      value={formik.values.responsibility_carried_by}
+                      placeholder="Eg: Aminur Rahman"
+                    ></input>
+                  </div>
                 </div>
               </div>
             </div>

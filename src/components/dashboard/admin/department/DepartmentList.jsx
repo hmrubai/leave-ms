@@ -4,8 +4,6 @@ import {
   BsFillPlusCircleFill,
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
-
-
 import { IoSyncCircle } from "react-icons/io5";
 import DepartmentTable from "./DepartmentTable";
 import DepartmentModal from "./DepartmentModal";

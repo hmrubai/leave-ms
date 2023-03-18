@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 
 import {  FaEdit } from "react-icons/fa";
 
-import Loader from "../../../common/Loader";
 import { IoSyncCircle } from "react-icons/io5";
 import Select from "react-select";
 import BalanceSetupModal from "./BalanceSetupModal";
-import { useGetBalanceSetupListQuery } from "../../../../services/balanceSetupApi";
-import { useGetEmployeeListQuery } from "../../../../services/employeeApi";
+import { useGetEmployeeListQuery } from "../../../../../services/employeeApi";
+import { useGetBalanceSetupListQuery } from "../../../../../services/balanceSetupApi";
+import Loader from "../../../../common/Loader";
+
 
 const BalanceSetupTable = () => {
   const [employeeId, setEmployeeId] = useState(1);

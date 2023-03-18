@@ -38,7 +38,7 @@ const ApplyForLeaveTable = () => {
         accessorFn: (row) => (
           <>
             <span className="badge badge-success">
-              {row.total_applied_days} Dayes
+              {row.total_applied_days} Days
             </span>
           </>
         ),
