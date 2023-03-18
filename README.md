@@ -6,6 +6,9 @@ This application will be use as a frontend application of Leave Management Syste
 
 - **[Arfin Foysal](https://github.com/arfin-foysal/)**
 
+## Technology
+-React Js FrontEnd Node Js
+-Lavavel BackEnd PhP
 ## Features
 
 - Master Settings
