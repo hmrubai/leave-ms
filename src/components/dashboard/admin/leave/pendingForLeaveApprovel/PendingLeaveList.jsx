@@ -1,29 +1,40 @@
 import React from "react";
 
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Moment from "react-moment";
 import Loader from "../../../../common/Loader";
 import { useGetApprovalPendingApplicationListQuery } from "../../../../../services/leaveApplication";
 import PageTopHeader from "../../../../common/PageTopHeader";
 import { BsFillEyeFill } from "react-icons/bs";
+import { IoSyncCircle } from 'react-icons/io5';
 
 const PendingLeaveList = () => {
   const res = useGetApprovalPendingApplicationListQuery();
   const { data,isError,isFetching } = res;
 
-
+  const refatchClick = () => {
+    res.refetch();
+  };
 
   return (
     <>
       <PageTopHeader title="Pending List" />
       <div className="card shadow mb-4">
-        <div className="card-header py-3 n">
+        <div className="card-header py-3 d-flex justify-content-between">
           <div>
             <h6 className="m-0 font-weight-bold text-primary">
               Pending Leave List
             </h6>
           </div>
+          <div className="mt-1">
+                <IoSyncCircle
+                  className="cursor "
+                  color="black"
+                  size={25}
+                  onClick={() => refatchClick()}
+                />
+              </div>
         </div>
 
       

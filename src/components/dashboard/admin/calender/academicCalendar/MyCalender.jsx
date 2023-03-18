@@ -22,7 +22,8 @@ const MyCalender = () => {
         title: title,
         start: item.date,
         end: item.date,
-        color: item.day_type_title === "Weekend" ? "orange" : "info",
+        // color: item.day_type_title === "Weekend" ? "orange" : "info",
+        color: item.day_note ? "info" : "orange",
       });
       return setCalenderSummary(arr);
     });
@@ -40,7 +41,7 @@ const MyCalender = () => {
       } else if (item.leave_status === "Rejected") {
         color = "red";
       } else {
-        color = "yellow";
+        color = "SaddleBrown";
       }
 
       arr.push({
@@ -81,7 +82,7 @@ const MyCalender = () => {
             editable={true}
             selectable={true}
             height={500}
-            eventTextColor="black"
+            eventTextColor="white"
             handleWindowResize={true}
           />
         </div>

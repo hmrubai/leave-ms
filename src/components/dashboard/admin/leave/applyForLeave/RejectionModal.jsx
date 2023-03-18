@@ -60,7 +60,7 @@ const RejectionModal = ({ handleClose, show, clickValue, paramId }) => {
               <Modal.Footer>
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-dark"
                   onClick={handleClose}
                 >
                   Close

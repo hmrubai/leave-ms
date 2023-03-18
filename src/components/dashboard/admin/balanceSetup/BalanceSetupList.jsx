@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from "react";
 
-import { useGetdepartmentListQuery } from "../../../../services/departmentApi";
 import PageTopHeader from "../../../common/PageTopHeader";
 import BalanceSetupModal from "./BalanceSetupModal";
 import BalanceSetupTable from "./BalanceSetupTable";

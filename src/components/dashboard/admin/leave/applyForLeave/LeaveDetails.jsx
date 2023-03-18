@@ -24,7 +24,7 @@ const LeaveDetails = () => {
 
   const { data } = res;
 
-  console.log(data);
+
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -39,8 +39,6 @@ const LeaveDetails = () => {
     return isAppruvalPermits;
   });
 
-
-
   const handleApprove = async () => {
     try {
       const result = await approveLeave({
@@ -51,8 +49,6 @@ const LeaveDetails = () => {
       toast.error(error.data.message);
     }
   };
-
-;
 
   const confirmHandel = async (icon, buttonTxt, ButtonClr, Did, funC) => {
     Swal.fire({
@@ -76,10 +72,10 @@ const LeaveDetails = () => {
   return (
     <>
       <RejectionModal
-           handleClose={handleClose}
-           show={show}
-           clickValue="Do you want to reject?"
-           paramId={id}
+        handleClose={handleClose}
+        show={show}
+        clickValue="Do you want to reject?"
+        paramId={id}
       />
       <PageTopHeader title="Applied Leave List" />
       <div className="card shadow mb-4">
@@ -184,109 +180,113 @@ const LeaveDetails = () => {
                     </h6>
                   </div>
                   <div>
-
-                  {data?.data?.leave?.leave_status === "Pending" && (
-                            <td>
-                              <span className="badge rounded-pill bg-warning text-light">
-                                {data?.data?.leave?.leave_status}
-                              </span>
-                            </td>
-                          ) }
-                  {data?.data?.leave?.leave_status === "Approved" && (
-                            <td>
-                              <span className="badge rounded-pill bg-success text-light">
-                                {data?.data?.leave?.leave_status}
-                              </span>
-                            </td>
-                          ) }
-                  {data?.data?.leave?.leave_status === "Rejected" && (
-                            <td>
-                              <span className="badge rounded-pill bg-danger text-light">
-                                {data?.data?.leave?.leave_status}
-                              </span>
-                            </td>
-                          ) }
-
-
-
+                    {data?.data?.leave?.leave_status === "Pending" && (
+                      <td>
+                        <span className="badge rounded-pill bg-warning text-light">
+                          {data?.data?.leave?.leave_status}
+                        </span>
+                      </td>
+                    )}
+                    {data?.data?.leave?.leave_status === "Approved" && (
+                      <td>
+                        <span className="badge rounded-pill bg-success text-light">
+                          {data?.data?.leave?.leave_status}
+                        </span>
+                      </td>
+                    )}
+                    {data?.data?.leave?.leave_status === "Rejected" && (
+                      <td>
+                        <span className="badge rounded-pill bg-danger text-light">
+                          {data?.data?.leave?.leave_status}
+                        </span>
+                      </td>
+                    )}
                   </div>
                 </div>
                 <div className="col-12 mt-3 ">
-                  <table class="table ">
-                    <thead
-                      className="text-light rounded"
-                      style={{
-                        backgroundColor: "#0D6EFD",
-                      }}
-                    >
-                      <tr>
-                        <th scope="col">Leave Type</th>
-                        <th scope="col">{data?.data?.leave?.leave_title}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Start Date</td>
-                        <td>
-                          <Moment format="dddd, DD MMM, YYYY">
-                            {data?.data?.leave?.start_date}
-                          </Moment>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>End Date</td>
-                        <td>
-                          <Moment format="dddd, DD MMM, YYYY">
-                            {data?.data?.leave?.end_date}
-                          </Moment>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Applied For</td>
-                        <td>{data?.data?.leave?.total_applied_days} Dayes</td>
-                      </tr>
-
-                      <tr>
-                        <td>Is Half Day</td>
-                        {data?.data?.leave?.is_half_day ? (
-                          <td className="badge rounded-pill bg-success mt-1">
-                            Yes ({data?.data?.leave?.half_day})
-                          </td>
-                        ) : (
-                          <td className="badge rounded-pill bg-info mt-1">
-                            No
-                          </td>
-                        )}
-                      </tr>
-                      <tr>
-                        <td>Reason</td>
-                        <td>{data?.data?.leave?.leave_reason}</td>
-                      </tr>
-
-                      {data?.data?.leave?.rejection_cause && (
+                  <div className="table-responsive">
+                    <table class="table ">
+                      <thead
+                        className="text-light rounded"
+                        style={{
+                          backgroundColor: "#0D6EFD",
+                        }}
+                      >
                         <tr>
-                          <td>Rejection Cause</td>
-                          <td>{data?.data?.leave?.rejection_cause}</td>
-                        </tr>)
-                        }
+                          <th scope="col">Leave Type</th>
+                          <th scope="col">{data?.data?.leave?.leave_title}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Start Date</td>
+                          <td>
+                            <Moment format="dddd, DD MMM, YYYY">
+                              {data?.data?.leave?.start_date}
+                            </Moment>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>End Date</td>
+                          <td>
+                            <Moment format="dddd, DD MMM, YYYY">
+                              {data?.data?.leave?.end_date}
+                            </Moment>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Applied For</td>
+                          <td>{data?.data?.leave?.total_applied_days} Dayes</td>
+                        </tr>
 
+                        <tr>
+                          <td>Is Half Day</td>
+                          {data?.data?.leave?.is_half_day ? (
+                            <td className="badge rounded-pill bg-success mt-1">
+                              Yes ({data?.data?.leave?.half_day})
+                            </td>
+                          ) : (
+                            <td className="badge rounded-pill bg-info mt-1">
+                              No
+                            </td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td>Reason</td>
+                          <td>{data?.data?.leave?.leave_reason}</td>
+                        </tr>
 
+                        {data?.data?.leave?.rejection_cause && (
+                          <tr>
+                            <td>Rejection Cause</td>
+                            <td>{data?.data?.leave?.rejection_cause}</td>
+                          </tr>
+                        )}
 
+                        <tr>
+                          <td>Responsibility Carried By</td>
 
-                      <tr>
-                        <td>Responsibility Carried By</td>
-                        <td>{data?.data?.leave?.responsibility_carried_by}</td>
-                      </tr>
-                      <tr>
-                        <td>Applied Date</td>
-                        <td>
-                          <Moment format="MMMM Do YYYY, h:mm:ss a">
-                            {data?.data?.leave?.applied_date}
-                          </Moment>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                          {data?.data?.leave?.responsibility_carried_by ==
+                            null && <td className=" mt-1">Self</td>}
+
+                          {data?.data?.leave?.responsibility_carried_by !==
+                            null && (
+                            <td className="badge rounded-pill bg-success mt-1">
+                              {data?.data?.leave?.responsibility_carried_by}
+                            </td>
+                          )}
+                        </tr>
+                        <tr>
+                          <td>Applied Date</td>
+                          <td>
+                            <Moment format="MMMM Do YYYY, h:mm:ss a">
+                              {data?.data?.leave?.applied_date}
+                            </Moment>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
 
@@ -336,94 +336,93 @@ const LeaveDetails = () => {
                   </div>
                 </div>
                 <div className="card-body">
-                  <table class="table">
-                    <thead
-                      className=" text-light"
-                      style={{
-                        backgroundColor: "#0D6EFD",
-                      }}
-                    >
-                      <tr>
-                        <th scope="col">Authority</th>
-                        <th scope="col">Approval Status</th>
-                        <th scope="col">Step</th>
-                        <th scope="col">Step Flag</th>
-                        <th scope="col">Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {data?.data?.length === 0 && (
+                  <div className=" table-responsive">
+                    <table class="table">
+                      <thead
+                        className=" text-light"
+                        style={{
+                          backgroundColor: "#0D6EFD",
+                        }}
+                      >
                         <tr>
-                          <td colSpan="7" className="text-center">
-                            No Data Found
-                          </td>
+                          <th scope="col">Authority</th>
+                          <th scope="col">Approval Status</th>
+                          <th scope="col">Step</th>
+                          <th scope="col">Step Flag</th>
+                          <th scope="col">Date</th>
                         </tr>
-                      )}
-                      {data?.data?.leave_flow?.map((item, i) => (
-                        <tr key={i}>
-                          <td>{item.authority_name}</td>
-
-                          {item.approval_status === "Approved" && (
-                            
-                            <td>
-                            <span className="badge rounded-pill bg-success text-light">
-                              {item.approval_status}
-                            </span>
+                      </thead>
+                      <tbody>
+                        {data?.data?.length === 0 && (
+                          <tr>
+                            <td colSpan="7" className="text-center">
+                              No Data Found
                             </td>
-                          )}
+                          </tr>
+                        )}
+                        {data?.data?.leave_flow?.map((item, i) => (
+                          <tr key={i}>
+                            <td>{item.authority_name}</td>
 
-                          {item.approval_status === "Pending" && (
-                            <td>
-                              <span className="badge rounded-pill bg-warning text-light">
-                                {item.approval_status}
-                              </span>
-                            </td>
-                          )}
-                          {item.approval_status === "Rejected" && (
-                            <td>
-                              <span className="badge rounded-pill bg-danger text-light">
-                                {item.approval_status}
-                              </span>
-                            </td>
-                          )}
+                            {item.approval_status === "Approved" && (
+                              <td>
+                                <span className="badge rounded-pill bg-success text-light">
+                                  {item.approval_status}
+                                </span>
+                              </td>
+                            )}
 
+                            {item.approval_status === "Pending" && (
+                              <td>
+                                <span className="badge rounded-pill bg-warning text-light">
+                                  {item.approval_status}
+                                </span>
+                              </td>
+                            )}
+                            {item.approval_status === "Rejected" && (
+                              <td>
+                                <span className="badge rounded-pill bg-danger text-light">
+                                  {item.approval_status}
+                                </span>
+                              </td>
+                            )}
 
-                          <td>{item.step}</td>
+                            <td>{item.step}</td>
 
-                          {item.step_flag === "Active" && (
-                            <td>
-                              <span className="badge rounded-pill bg-info text-light">
-                                {item.step_flag}
-                              </span>
-                            </td>
-                          )}
-                          
-                          {item.step_flag === "Pending" && (
-                            <td>
-                              <span className="badge rounded-pill bg-warning text-light">
-                                {item.step_flag}
-                              </span>
-                            </td>
-                          )}
-                          
-                          {item.step_flag === "Completed" &&  (
-                            <td>
-                              <span className="badge rounded-pill bg-success">
-                                {item.step_flag}
-                              </span>
-                            </td>
-                          )
-                          }
+                            {item.step_flag === "Active" && (
+                              <td>
+                                <span className="badge rounded-pill bg-info text-light">
+                                  {item.step_flag}
+                                </span>
+                              </td>
+                            )}
 
-                          <td>
-                            <Moment format="dddd, DD MMM, YYYY">
-                              {item.updated_at}
-                            </Moment>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                            {item.step_flag === "Pending" && (
+                              <td>
+                                <span className="badge rounded-pill bg-warning text-light">
+                                  {item.step_flag}
+                                </span>
+                              </td>
+                            )}
+
+                            {item.step_flag === "Completed" && (
+                              <td>
+                                <span className="badge rounded-pill bg-success">
+                                  {item.step_flag}
+                                </span>
+                              </td>
+                            )}
+
+                            <td>
+                              <Moment format="dddd, DD MMM, YYYY">
+                                {item.updated_at}
+                              </Moment>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
@@ -437,40 +436,42 @@ const LeaveDetails = () => {
                   </div>
                 </div>
                 <div className="card-body">
-                  <table class="table">
-                    <thead
-                      className=" text-light"
-                      style={{
-                        backgroundColor: "#0D6EFD",
-                      }}
-                    >
-                      <tr>
-                        <th scope="col">Leave Type</th>
-                        <th scope="col">Total Days</th>
-                        <th scope="col">Avail Days</th>
-                        <th scope="col">Remmaining</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {data?.data?.length === 0 && (
+                  <div className="table-responsive">
+                    <table class="table">
+                      <thead
+                        className=" text-light"
+                        style={{
+                          backgroundColor: "#0D6EFD",
+                        }}
+                      >
                         <tr>
-                          <td colSpan="7" className="text-center">
-                            No Data Found
-                          </td>
+                          <th scope="col">Leave Type</th>
+                          <th scope="col">Total Days</th>
+                          <th scope="col">Avail Days</th>
+                          <th scope="col">Remmaining</th>
                         </tr>
-                      )}
-                      {data?.data?.leave_balances?.map((item, i) => (
-                        <tr key={i}>
-                          <td>
-                            {item.leave_title} ({item.leave_short_code})
-                          </td>
-                          <td>{item.total_days}</td>
-                          <td>{item.availed_days}</td>
-                          <td>{item.remaining_days}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        {data?.data?.length === 0 && (
+                          <tr>
+                            <td colSpan="7" className="text-center">
+                              No Data Found
+                            </td>
+                          </tr>
+                        )}
+                        {data?.data?.leave_balances?.map((item, i) => (
+                          <tr key={i}>
+                            <td>
+                              {item.leave_title} ({item.leave_short_code})
+                            </td>
+                            <td>{item.total_days}</td>
+                            <td>{item.availed_days}</td>
+                            <td>{item.remaining_days}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>

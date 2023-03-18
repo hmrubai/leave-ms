@@ -33,10 +33,7 @@ const ApplyForLeaveTable = () => {
         accessorKey: "end_date", //normal accessorKey
         header: "End Date",
       },
-      // {
-      //   accessorKey: "total_applied_days", //normal accessorKey
-      //   header: "Applied For",
-      // },
+
       {
         accessorFn: (row) => (
           <>
@@ -45,7 +42,7 @@ const ApplyForLeaveTable = () => {
             </span>
           </>
         ),
-        size: 10, //optional
+
         id: "total_applied_days", //id required if you use accessorFn instead of accessorKey
         header: "Applied For",
         Header: <span className="table-header">Applied For</span>,
@@ -57,7 +54,7 @@ const ApplyForLeaveTable = () => {
           ) : (
               <span >{row.half_day}</span>
           ),
-        size: "small", //optional
+      
         id: "half_day", //id required if you use accessorFn instead of accessorKey
         header: "Is Half Day",
         Header: <span className="table-header">Is Half Day</span>,
@@ -79,7 +76,7 @@ const ApplyForLeaveTable = () => {
               )}
             </>
           ), //alternate way
-        size: 10, //optional
+  
         id: "is_active", //id required if you use accessorFn instead of accessorKey
         header: "Status",
         Header: <span className="table-header">Status</span>, //optional custom markup
@@ -87,6 +84,8 @@ const ApplyForLeaveTable = () => {
     ],
     []
   );
+
+
 
   return (
     <>

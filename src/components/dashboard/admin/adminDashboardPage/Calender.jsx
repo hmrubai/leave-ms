@@ -20,7 +20,8 @@ const Calender = ({ res }) => {
         title: title,
         start: item.date,
         end: item.date,
-        color: item.day_type_title === "Weekend" ? "orange" : "info",
+        color: item.day_note ? "info" : "orange",
+        // color: item.day_type_title === "Weekend" ? "orange" : "info",
       });
       return setCalenderSummary(arr);
     });
@@ -38,7 +39,7 @@ const Calender = ({ res }) => {
       } else if (item.leave_status === "Rejected") {
         color = "red";
       } else {
-        color = "yellow";
+        color = "SaddleBrown";
       }
 
       arr.push({

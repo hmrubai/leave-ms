@@ -11,13 +11,12 @@ import { IoSyncCircle } from "react-icons/io5";
 import PageTopHeader from './../../../../common/PageTopHeader';
 import ApplyForLeaveTable from "./ApplyForLeaveTable";
 import ApplyForLeaveModal from "./ApplyForLeaveModal";
+import { useGetLeaveApplicationListQuery } from "../../../../../services/leaveApplication";
 
 
 const ApplyForLeaveList = () => {
+  const res= useGetLeaveApplicationListQuery();
 
-//  const user= useSelector((state) => state.auth.role);
-
-// console.log(user);
 
 
   const [clickValue, setClickValue] = useState(null);
@@ -29,7 +28,9 @@ const ApplyForLeaveList = () => {
   const handelClickValue = useCallback((value) => {
     setClickValue(value);
   }, []);
-
+  const refatchClick = () => {
+    res.refetch();
+  };
 
 
 
@@ -37,12 +38,20 @@ const ApplyForLeaveList = () => {
     <>
   <PageTopHeader title="Apply Leave"/>
       <div className="card shadow mb-4">
-        <div className="card-header py-3 n">
+        <div className="card-header py-3 d-flex justify-content-between">
           <div>
             <h6 className="m-0 font-weight-bold text-primary">Applied Leave List</h6>
 
 
           </div>
+          <div className="mt-1">
+                <IoSyncCircle
+                  className="cursor "
+                  color="black"
+                  size={25}
+                  onClick={() => refatchClick()}
+                />
+              </div>
 
         </div>
 

@@ -14,10 +14,6 @@ import PageTopHeader from "../../../common/PageTopHeader";
 
 const BranchList = () => {
 
-//  const user= useSelector((state) => state.auth.role);
-
-// console.log(user);
-
   const get = useGetBranchListQuery();
   const [clickValue, setClickValue] = useState(null);
   const [show, setShow] = useState(false);
