@@ -33,6 +33,8 @@ const CalenderSetupTable = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  console.log("data", data);
+
   const handelClickValue = useCallback((value) => {
     setClickValue(value);
   }, []);
@@ -145,7 +147,7 @@ const CalenderSetupTable = () => {
             backgroundColor: "#0D6EFD",
           },
         }}
-        initialState={{ pagination: { pageSize: 30, pageIndex: 2 } }}
+        initialState={{ pagination: { pageSize: 30} }}
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>

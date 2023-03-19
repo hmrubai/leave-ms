@@ -10,6 +10,7 @@ import BalanceSetupModal from "./BalanceSetupModal";
 import { useGetEmployeeListQuery } from "../../../../../services/employeeApi";
 import { useGetBalanceSetupListQuery } from "../../../../../services/balanceSetupApi";
 import Loader from "../../../../common/Loader";
+import { BsFillPlusCircleFill } from 'react-icons/bs';
 
 const BalanceSetupTable = () => {
   const [employeeId, setEmployeeId] = useState(1);
@@ -101,6 +102,19 @@ const BalanceSetupTable = () => {
         
             />
           </div>
+          <div className="col-md-2 mb-1 px-0">
+          <Link
+            to="#"
+            className="btn btn-primary btn-sm mt-1"
+            onClick={() => {
+              handleShow();
+              handelClickValue("Add New Leave Balance");
+            }}
+          >
+            <BsFillPlusCircleFill className="mb-1 mr-1" /> Add Leave Balance
+          </Link>
+        </div>
+
         </div>
       </div>
 
@@ -126,7 +140,7 @@ const BalanceSetupTable = () => {
                 className="px-2 d-flex align-items-center btn btn-primary btn-sm"
                 onClick={() => {
                   handleShow();
-                  handelClickValue("Edit Balance Setup Information");
+                  handelClickValue("Edit Leave Balance");
                   setParamId(row?.row?.original);
                 }}
               >

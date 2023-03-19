@@ -12,14 +12,14 @@ const BalanceSetupModal
   return (
     <>
       <Modal show={show} onHide={handleClose} size="sm">
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className="bg-primary text-white">
           <Modal.Title className="fs-6">{clickValue}</Modal.Title>
         
         </Modal.Header>
         <Modal.Body>
           {clickValue === "Balance Setup Information" && <BalanceSetupDetails item={paramId} handleClose={handleClose}/>}
-          {clickValue === "Add Balance Setup Information" && <CreateBalanceSetup handleClose={handleClose}/>}
-          {clickValue === "Edit Balance Setup Information" && <EditBalanceSetup item={paramId} handleClose={handleClose} />}
+          {clickValue === "Add New Leave Balance" && <CreateBalanceSetup handleClose={handleClose}/>}
+          {clickValue === "Edit Leave Balance" && <EditBalanceSetup item={paramId} handleClose={handleClose} />}
         </Modal.Body>
      
       </Modal>

@@ -38,7 +38,8 @@ const Login = () => {
     dispatch(authUser(data?.data));
     dispatch(authToken(data?.data?.token));
     dispatch(userRole(data?.data?.user_type));
-    navigate("/dashboard");
+    // navigate("/dashboard");
+    window.location.reload(false);
   }
 
   return (

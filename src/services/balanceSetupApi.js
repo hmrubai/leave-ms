@@ -29,10 +29,23 @@ export const balanceSetupApi = createApi({
       },
       invalidatesTags: ["BalanceSetup"],
     }),
+    leaveSettingManually: builder.mutation({
+      query: (balance) => {
+        return {
+          url: `admin/leave-setting-manually`,
+          method: "POST",
+          body: balance,
+          headers,
+        };
+      },
+      invalidatesTags: ["BalanceSetup"],
+    }),
+
+
 
 
   }),
 });
 
-export const {useGetBalanceSetupListQuery ,useLeaveBalanceUpdateMutation} =
+export const {useGetBalanceSetupListQuery ,useLeaveBalanceUpdateMutation,useLeaveSettingManuallyMutation} =
 balanceSetupApi;

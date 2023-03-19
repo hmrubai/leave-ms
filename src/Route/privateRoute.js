@@ -3,8 +3,7 @@
 import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
-import "./Default.css";
+import "react-date-range/dist/theme/default.css"; //date-range theme css file
 
 // import external Css modules end
 

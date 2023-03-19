@@ -2,26 +2,22 @@ import React, { useState, useMemo, useCallback } from "react";
 import MaterialReactTable from "material-react-table";
 import { Link } from "react-router-dom";
 
-import {  BsFillPlusCircleFill } from "react-icons/bs";
-import {FaEdit } from "react-icons/fa";
-
-
+import { BsFillPlusCircleFill } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
 
 // import Select from './../calender/workingDaySetup/Select';
 import Select from "react-select";
 import { useGetApprovalFlowListQuery } from "../../../../../services/leaveApprovalFlowApi";
 import { useGetEmployeeListQuery } from "../../../../../services/employeeApi";
-import Loader from './../../../../common/Loader';
+import Loader from "./../../../../common/Loader";
 import LeaveApprovalFlowModal from "./LeaveApprovalFlowModal";
-
-
 
 const LeaveApprovalFlowTable = () => {
   const [employeeId, setEmployeeId] = useState(0);
-  
-  const { data, isSuccess, isFetching } = useGetApprovalFlowListQuery(employeeId);
-  const { data: employeeList } = useGetEmployeeListQuery();
 
+  const { data, isSuccess, isFetching } =
+    useGetApprovalFlowListQuery(employeeId);
+  const { data: employeeList } = useGetEmployeeListQuery();
 
   const [show, setShow] = useState(false);
 
@@ -66,7 +62,6 @@ const LeaveApprovalFlowTable = () => {
     []
   );
 
-
   return (
     <>
       <div className="d-flex justify-content-end py-1">
@@ -109,45 +104,37 @@ const LeaveApprovalFlowTable = () => {
       />
       {/* <MaterialReactTable columns={columns} data={data} /> */}
       <MaterialReactTable
-   
         columns={columns}
         data={isSuccess && data?.data}
         enableRowActions
         enableColumnActions
-  
         positionActionsColumn="last"
-        muiTopToolbarProps={
-          {
-            style: {
-              backgroundColor: "#0D6EFD",
-           
-            },
-
-          }}
+        muiTopToolbarProps={{
+          style: {
+            backgroundColor: "#0D6EFD",
+          },
+        }}
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>
-                 <div className="d-flex">
-                <Link
-                  to={`#`}
-                  title=""
-                  className="px-2 d-flex align-items-center btn btn-primary btn-sm"
-                  onClick={() => {
-                    handleShow();
-                    handelClickValue("Edit Step");
-                    setParamId(row?.row?.original);
-                  }}
-                >
-                  <div>
-                    {" "}
-                    <FaEdit size={16} />
-                  </div>
-                  <div> Edit</div>
-                </Link>
+            <div className="d-flex">
+              <Link
+                to={`#`}
+                title=""
+                className="px-2 d-flex align-items-center btn btn-primary btn-sm"
+                onClick={() => {
+                  handleShow();
+                  handelClickValue("Edit Step");
+                  setParamId(row?.row?.original);
+                }}
+              >
+                <div>
+                  {" "}
+                  <FaEdit size={16} />
+                </div>
+                <div> Edit</div>
+              </Link>
             </div>
-            
-
-    
           </>
         )}
       />

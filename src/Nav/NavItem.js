@@ -1,5 +1,7 @@
+
+// <----------------- Navbar icon start ------------------>
 import { FiSettings } from "react-icons/fi";
-import { BiWalletAlt ,BiWallet} from "react-icons/bi";
+import { BiWalletAlt, BiWallet } from "react-icons/bi";
 import {
   BsCalendar3,
   BsBox,
@@ -11,14 +13,9 @@ import {
   BsHourglassSplit,
 } from "react-icons/bs";
 
-import {
-  MdAppRegistration,
-  MdOutlinePolicy,
-  MdOutlineStopScreenShare,
+import { MdAppRegistration, MdOutlinePolicy } from "react-icons/md";
 
-} from "react-icons/md";
-import { HiOutlineWallet } from "react-icons/hi2";
-import { HiOutlineOfficeBuilding, } from "react-icons/hi";
+import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import { TbGitBranch } from "react-icons/tb";
 import { FaSith, FaCodepen, FaUserInjured } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
@@ -26,13 +23,13 @@ import { MdWorkOutline } from "react-icons/md";
 import { FcLeave } from "react-icons/fc";
 import { RiFileList3Line } from "react-icons/ri";
 import { SlWallet } from "react-icons/sl";
-import{TfiWrite} from "react-icons/tfi";
+import { TfiWrite } from "react-icons/tfi";
 
+// <----------------- Navbar icon end ------------------>
 
 export const navItem = [
   //UID Mustbe Uges String
-// <--------------admin Nav Start----------------->
-
+  // <--------------admin Nav Start----------------->
 
   // <-----------------admin Nav End------------->
 
@@ -65,7 +62,6 @@ export const navItem = [
         icon: <BsCalendar2Check size={16} />,
       },
 
- 
       {
         title: "Branch",
         link: "approval-authority/branch-list",
