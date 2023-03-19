@@ -36,9 +36,20 @@ export const designationApi = createApi({
       }),
       providesTags: ['Designation']
     }),
+    getDesignationtListByCompanyAndBranchId: builder.query({
+      query: ({ comId,braId }) => ({
+      
+        url: `admin/designation-list-by-id/${comId}/${braId}`,
+        method: 'GET',
+        headers
+      }),
+      providesTags: ['Designation']
+    }),
+
+
 
   }),
 });
 
-export const {useGetDesignationListQuery,useDesignationSaveOrUpdateMutation,useBranchListByCompanyIdQuery} =
+export const {useGetDesignationListQuery,useDesignationSaveOrUpdateMutation,useBranchListByCompanyIdQuery,useGetDesignationtListByCompanyAndBranchIdQuery} =
 designationApi;

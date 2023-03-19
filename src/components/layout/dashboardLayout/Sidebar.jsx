@@ -1,13 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {NavLink } from "react-router-dom";
 
 function Sidebar({ item }) {
-
+  let activeStyle = {
+    backgroundColor: "#4e73df",
+    color: "white",
+    borderRadius: "0px 50px 50px 0px",
+  };
 
   if (item.children) {
     return (
       <li className="nav-item">
-        <Link
+        <NavLink
           className="nav-link collapsed nav-hover"
           to="#"
           data-toggle="collapse"
@@ -15,9 +19,10 @@ function Sidebar({ item }) {
           aria-expanded="true"
           aria-controls="collapseTwo"
         >
-          <i className={item.icon}></i>
-          <span className="font-style">{item.title}</span>
-        </Link>
+          {item.icon}
+          <span className="font-style ms-1">{item.title}</span>
+          
+        </NavLink>
         <div
           id={item.UID}
           className="collapse"
@@ -26,15 +31,16 @@ function Sidebar({ item }) {
         >
           <div className=" bg-primary sub-manu-bg py-2 collapse-inner rounded">
             {item.children.map((c, i) => (
-              <Link
+              <NavLink
                 key={i}
                 className="sub-manu-style"
                 to={`${c.link}`}
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
-                <i className={`${c.icon} text-light mr-2 mt-1`}></i>
+                <span className="me-2">{c.icon}</span>
+
                 {c.title}
-              
-              </Link>
+              </NavLink>
             ))}
           </div>
         </div>
@@ -43,10 +49,10 @@ function Sidebar({ item }) {
   } else {
     return (
       <li className="nav-item">
-        <Link className="nav-link nav-hover" to={item.link}>
-          <i className={item.icon}></i>
+        <NavLink className="nav-link nav-hover" to={item.link}>
+          {item.icon}
           <span className="font-style">{item.title}</span>
-        </Link>
+        </NavLink>
       </li>
     );
   }

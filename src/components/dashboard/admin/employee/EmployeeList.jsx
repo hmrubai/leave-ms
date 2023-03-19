@@ -1,39 +1,30 @@
 import React from "react";
 
 import EmployeeTable from "./EmployeeTable";
-import {
-
-  BsFillPlusCircleFill,
-} from "react-icons/bs";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-
 import { IoSyncCircle } from "react-icons/io5";
-import { useGetCompanyListQuery } from "../../../../services/companyApi";
 import PageTopHeader from "../../../common/PageTopHeader";
+import { useGetEmployeeListQuery } from "../../../../services/employeeApi";
 
 const EmployeeList = () => {
-
-
-  const get = useGetCompanyListQuery();
+  const get = useGetEmployeeListQuery();
 
   const refatchClick = () => {
     get.refetch();
   };
   return (
     <>
-      <PageTopHeader title="Employee"/>
+      <PageTopHeader title="Employee" />
       <div className="card shadow mb-4">
-        <div className="card-header py-3 ">
-          <div>
-            <h6 className="m-0 font-weight-bold text-primary">All Employee List </h6>
+        <div className="card-header d-flex justify-content-between">
+          <div className="mt-1">
+            <h6 className="m-0 font-weight-bold text-primary">
+              All Employee List{" "}
+            </h6>
           </div>
-
-        </div>
-
-        <div className="card-body">
-          <div className="py-1 text-right mr-1">
-            <div className="d-flex justify-content-end">
+          <div className="d-flex justify-content-end">
               <div className="mt-1">
                 <IoSyncCircle
                   className="cursor "
@@ -44,17 +35,20 @@ const EmployeeList = () => {
               </div>
               <div>
                 <Link
-                  to={`/dashboard/admin/create-employee`}
-                  className="btn btn-success"
+                  to={`/dashboard/approval-authority/create-employee`}
+                  className="btn btn-primary btn-sm"
                 >
-                  <BsFillPlusCircleFill /> New
+                  <BsFillPlusCircleFill /> Add New Employee
                 </Link>
               </div>
             </div>
-          </div>
-          <div>
+        </div>
+
+        <div className="card-body">
+        
+      
             <EmployeeTable />
-          </div>
+      
         </div>
         <div></div>
       </div>

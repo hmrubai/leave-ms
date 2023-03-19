@@ -8,6 +8,8 @@ export const branchApi = createApi({
   }),
   tagTypes: ["Branch"],
   endpoints: (builder) => ({
+
+
     getBranchList: builder.query({
       query: () => ({
         url: "admin/branch-list",
@@ -16,6 +18,8 @@ export const branchApi = createApi({
       }),
       providesTags: ["Branch"],
     }),
+
+    
     branchSaveOrUpdate: builder.mutation({
       query: (branch) => {
         return {
@@ -27,8 +31,16 @@ export const branchApi = createApi({
       },
       invalidatesTags: ["Branch"],
     }),
+    getBranchListByCompanyId: builder.query({
+      query: (comId) => ({
+        url: `admin/branch-list-by-company-id/${comId}`,
+        method: 'GET',
+        headers
+      }),
+      providesTags: ['Employee']
+    }),
   }),
 });
 
-export const { useGetBranchListQuery, useBranchSaveOrUpdateMutation } =
+export const { useGetBranchListQuery, useBranchSaveOrUpdateMutation,useGetBranchListByCompanyIdQuery } =
   branchApi;

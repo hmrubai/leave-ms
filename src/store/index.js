@@ -13,6 +13,14 @@ import { departmentApi } from "../services/departmentApi";
 import { designationApi } from "../services/designationApi";
 import { leavepolicyApi } from "../services/leavepolicyApi";
 import { fiscalyearApi } from "../services/fiscalyearApi";
+import { employmentApi } from "../services/employmentApi";
+import { leaveBalanceApi } from "../services/leaveBalanceApi";
+import { employeeApi } from "../services/employeeApi";
+import { leaveApprovalFlowApi } from "../services/leaveApprovalFlowApi";
+import { calenderApi } from "../services/calenderApi";
+import { leaveBalanceSettingsApi } from "../services/leaveBalanceSettingsApi";
+import { balanceSetupApi } from "../services/balanceSetupApi";
+import { leaveApplicationApi } from './../services/leaveApplication';
 
 const store = configureStore({
   reducer: {
@@ -24,6 +32,16 @@ const store = configureStore({
     [designationApi.reducerPath]: designationApi.reducer,
     [leavepolicyApi.reducerPath]: leavepolicyApi.reducer,
     [fiscalyearApi.reducerPath]: fiscalyearApi.reducer,
+    [employmentApi.reducerPath]: employmentApi.reducer,
+    [leaveBalanceApi.reducerPath]: leaveBalanceApi.reducer,
+    [employeeApi.reducerPath]: employeeApi.reducer,
+    [leaveBalanceSettingsApi.reducerPath]: leaveBalanceSettingsApi.reducer,
+    [leaveApprovalFlowApi.reducerPath]: leaveApprovalFlowApi.reducer,
+    [calenderApi.reducerPath]: calenderApi.reducer,
+    [balanceSetupApi.reducerPath]: balanceSetupApi.reducer,
+    [leaveApplicationApi.reducerPath]: leaveApplicationApi.reducer,
+    
+
 
     devTools: true,
   },
@@ -36,6 +54,15 @@ const store = configureStore({
       designationApi.middleware,
       leavepolicyApi.middleware,
       fiscalyearApi.middleware,
+      employmentApi.middleware,
+      leaveBalanceApi.middleware,
+      employeeApi.middleware,
+      leaveBalanceSettingsApi.middleware,
+      leaveApprovalFlowApi.middleware,
+      calenderApi.middleware,
+      balanceSetupApi.middleware,
+      leaveApplicationApi.middleware
+   
     ]),
 });
 setupListeners(store.dispatch);

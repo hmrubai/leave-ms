@@ -12,15 +12,15 @@ const DesignationModal = ({ handleClose, show, clickValue,paramId }) => {
 
   return (
     <>
-    <Modal show={show} onHide={handleClose} size="lg">
-      <Modal.Header closeButton>
+    <Modal show={show} onHide={handleClose} size="md">
+      <Modal.Header closeButton className=" bg-primary text-white">
         <Modal.Title>{clickValue}</Modal.Title>
       
       </Modal.Header>
       <Modal.Body>
         {clickValue === "Designation Information" && <DesignationDetails item={paramId} handleClose={handleClose}/>}
-        {clickValue === "Add Designation Information" && <CreateDesignation handleClose={handleClose}/>}
-        {clickValue === "Edit Designation Information" && <EditDesignation item={paramId} handleClose={handleClose} />}
+        {clickValue === "Add New Designation" && <CreateDesignation handleClose={handleClose}/>}
+        {clickValue === "Edit Designation" && <EditDesignation item={paramId} handleClose={handleClose} />}
       </Modal.Body>
    
     </Modal>

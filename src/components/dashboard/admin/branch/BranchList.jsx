@@ -9,6 +9,7 @@ import BranchModal from "./BranchModal";
 import BranchTable from "./BranchTable";
 import { useGetBranchListQuery } from "../../../../services/branchApi";
 import PageTopHeader from "../../../common/PageTopHeader";
+// import { useSelector } from "react-redux";
 
 
 const BranchList = () => {
@@ -33,19 +34,15 @@ const BranchList = () => {
     <>
   <PageTopHeader title="Branch"/>
       <div className="card shadow mb-4">
-        <div className="card-header py-3 n">
-          <div>
-            <h6 className="m-0 font-weight-bold text-primary">All Branch List</h6>
+        <div className="card-header  d-flex justify-content-between">
+          <div className="mt-1">
+            <h6 className="m-0 font-weight-bold text-primary">Branch Information</h6>
 
 
           </div>
-
-        </div>
-
-        <div className="card-body">
-          <div className="py-2 text-right mr-1">
+          <div className=" text-right mr-1">
             <div className="d-flex justify-content-end">
-              <div className="mt-1">
+              <div className="">
                 <IoSyncCircle
                   className="cursor "
                   color="black"
@@ -56,20 +53,25 @@ const BranchList = () => {
               <div>
                 <Link
                   to="#"
-                  className="btn btn-primary "
+                  className="btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Add Branch Information");
+                    handelClickValue("Add New Branch");
                   }}
                 >
-                  <BsFillPlusCircleFill className="mb-1 mr-1" /> New
+                  <BsFillPlusCircleFill className="mb-1 mr-1" /> Add New Branch
                 </Link>
               </div>
             </div>
           </div>
-          <div>
+
+        </div>
+
+        <div className="card-body">
+        
+          
             <BranchTable />
-          </div>
+         
         </div>
       </div>
       <BranchModal

@@ -29,8 +29,19 @@ export const companyApi = createApi({
       },
       invalidatesTags: ["Company"],
     }),
+
+
+    text: builder.query({
+      query: (id) => ({
+        url:  `admin/leave-setting-list/${id}`,
+        method: "GET",
+
+        headers,
+      }),
+      providesTags: ["Leave Balance"],
+    }),
   }),
 });
 
-export const { useGetCompanyListQuery, useCompanySaveOrUpdateMutation } =
+export const { useGetCompanyListQuery, useCompanySaveOrUpdateMutation,useTextQuery } =
   companyApi;

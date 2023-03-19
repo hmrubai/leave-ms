@@ -31,16 +31,11 @@ const DesignationList = () => {
     <>
       <PageTopHeader title="Designation"/>
       <div className="card shadow mb-4">
-        <div className="card-header py-3 ">
-          <div>
-            <h6 className="m-0 font-weight-bold text-primary">All Designation List</h6>
+        <div className="card-header  d-flex justify-content-between">
+          <div className="mt-1">
+            <h6 className="m-0 font-weight-bold text-primary">Designation List</h6>
           </div>
-       
-        </div>
-
-        <div className="card-body">
-          <div className="py-2 text-right mr-1">
-            <div className="d-flex justify-content-end">
+          <div className="d-flex justify-content-end">
               <div className="mt-1">
                 <IoSyncCircle
                   className="cursor "
@@ -52,20 +47,24 @@ const DesignationList = () => {
               <div>
                 <Link
                   to="#"
-                  className="btn btn-primary "
+                  className="btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Add Designation Information");
+                    handelClickValue("Add New Designation");
                   }}
                 >
-                  <BsFillPlusCircleFill className="mb-1 mr-1" /> New
+                  <BsFillPlusCircleFill className="mb-1 mr-1" /> Add New Designation
                 </Link>
               </div>
             </div>
-          </div>
-          <div>
+       
+        </div>
+
+        <div className="card-body">
+     
+ 
             <DesignationTable />
-          </div>
+      
         </div>
       </div>
       <DesignationModal

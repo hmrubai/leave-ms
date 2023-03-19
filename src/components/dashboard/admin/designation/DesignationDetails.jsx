@@ -8,7 +8,7 @@ const DesignationDetails = ({ item, handleClose }) => {
     <>
     <div className="card-body">
       <div className="row">
-      <div className="col-6">
+      <div className="col-12">
           <p>
                 Title:
               <span className="font-weight-bold text-primary ">{ item.title}</span>
@@ -18,7 +18,7 @@ const DesignationDetails = ({ item, handleClose }) => {
               <span className="font-weight-bold text-primary ">{ item.company_name }</span>
               </p>
             </div>
-            <div className="col-6">
+            <div className="col-12">
             
               <p>
               Branch:

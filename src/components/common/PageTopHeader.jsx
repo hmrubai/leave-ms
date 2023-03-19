@@ -1,19 +1,30 @@
-import React from 'react'
-import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
-import {  useNavigate } from "react-router-dom";
-const PageTopHeader = ({title}) => {
+import React from "react";
+import { Breadcrumb } from "react-bootstrap";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import { BiHomeAlt } from "react-icons/bi";
+import { Link, useNavigate } from "react-router-dom";
+const PageTopHeader = ({ title }) => {
   const navigate = useNavigate();
   return (
     <div className="d-flex align-items-center justify-content-between mb-4 py-2 px-3">
-          <h1 className="h6 mb-0 text-gray-800">{title}</h1>
-    <BsFillArrowLeftCircleFill
-      onClick={() => navigate(-1)}
-      className="cursor "
-      color="black"
-      size={20}
-    />
-  </div>
-  )
-}
+      <Breadcrumb>
+        <Breadcrumb.Item>
+          <Link to="/dashboard/">
+            <BiHomeAlt className="mr-1 mb-1" />
+            Home
+          </Link>
+        </Breadcrumb.Item>
 
-export default PageTopHeader
+        <Breadcrumb.Item active>{title}</Breadcrumb.Item>
+      </Breadcrumb>
+      <BsFillArrowLeftCircleFill
+        onClick={() => navigate(-1)}
+        className="cursor "
+        color="black"
+        size={20}
+      />
+    </div>
+  );
+};
+
+export default PageTopHeader;

@@ -13,7 +13,7 @@ const CreateDesignation = ({ handleClose }) => {
   const formik = useFormik({
     initialValues: {
       title: "",
-      company_id:"",
+      company_id:0,
       branch_id: "",
       is_active: true,
     },
@@ -42,7 +42,7 @@ const CreateDesignation = ({ handleClose }) => {
       <div className="card-body">
         <form className="form-sample" onSubmit={formik.handleSubmit}>
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-3 col-form-label">Title</label>
                 <div className="col-sm-9">
@@ -50,6 +50,7 @@ const CreateDesignation = ({ handleClose }) => {
                     type="text"
                     className="form-control"
                     name="title"
+                    placeholder="enter designation name"
                     onChange={formik.handleChange}
                     value={formik.values.title}
                     required
@@ -57,12 +58,12 @@ const CreateDesignation = ({ handleClose }) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-3 col-form-label">Company</label>
                 <div className="col-sm-9">
                 <select
-                    className="form-control"
+                    className="form-control form-select"
                     name="company_id"
                     onChange={formik.handleChange}
                     value={formik.values.company_id}
@@ -77,12 +78,12 @@ const CreateDesignation = ({ handleClose }) => {
                 </div> 
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-3 col-form-label">Branch</label>
                 <div className="col-sm-9">
                 <select
-                    className="form-control"
+                    className="form-control form-select"
                     name="branch_id"
                     onChange={formik.handleChange}
                    value={formik.values.branch_id}
@@ -98,7 +99,7 @@ const CreateDesignation = ({ handleClose }) => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-4 col-form-label">Is Active</label>
                 <div className="col-sm-8">

@@ -15,7 +15,7 @@ const CreateBranch = ({ handleClose }) => {
       address: "",
       contact_no: "",
       company_id: "",
-      is_active: false,
+      is_active: true,
     },
 
     onSubmit: async (values, { resetForm }) => {
@@ -39,13 +39,14 @@ const CreateBranch = ({ handleClose }) => {
       <div className="card-body">
         <form className="form-sample" onSubmit={formik.handleSubmit}>
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-4 col-form-label">Name</label>
                 <div className="col-sm-8">
                   <input
                     type="text"
                     className="form-control"
+                    placeholder="enter branch name"
                     name="name"
                     onChange={formik.handleChange}
                     value={formik.values.name}
@@ -53,27 +54,30 @@ const CreateBranch = ({ handleClose }) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-4 col-form-label">Address</label>
                 <div className="col-sm-8">
-                  <input
+                  <textarea
                     type="text"
                     className="form-control"
                     name="address"
+                    placeholder="enter branch address"
                     onChange={formik.handleChange}
                     value={formik.values.address}
-                  />
+                  >
+                    </textarea>
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-4 col-form-label">Contact No:</label>
                 <div className="col-sm-8">
                   <input
                     type="number"
                     className="form-control"
+                    placeholder="enter contact no"
                     name="contact_no"
                     onChange={formik.handleChange}
                     value={formik.values.contact_no}
@@ -81,12 +85,12 @@ const CreateBranch = ({ handleClose }) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-4 col-form-label">Company</label>
                 <div className="col-sm-8">
                   <select
-                    className="form-control"
+                    className="form-control form-select"
                     name="company_id"
                     onChange={formik.handleChange}
                     value={formik.values.company_id}
@@ -102,7 +106,7 @@ const CreateBranch = ({ handleClose }) => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-4 col-form-label">Is Active</label>
                 <div className="col-sm-8">
@@ -114,6 +118,8 @@ const CreateBranch = ({ handleClose }) => {
                       name="is_active"
                       onChange={formik.handleChange}
                       value={formik.values.is_active}
+                      checked={formik.values.is_active}
+
                     />
                   </div>
                 </div>

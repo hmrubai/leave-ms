@@ -1,45 +1,64 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { headers } from "./../utils/ApiHeaders";
 
 export const authApi = createApi({
-  reducerPath: 'authApi',
+  reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_URL
+    baseUrl: process.env.REACT_APP_API_URL,
   }),
-  tagTypes: ['Auth'],
+  tagTypes: ["Auth"],
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (body) => ({
-        url: 'auth/login',
-        method: 'POST',
+        url: "auth/login",
+        method: "POST",
         body,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8'
-        }
+        headers,
       }),
-      invalidatesTags: ['Auth']
+      invalidatesTags: ["Auth"],
     }),
     register: builder.mutation({
       query: (body) => ({
-        url: 'auth/register',
-        method: 'POST',
+        url: "auth/register",
+        method: "POST",
         body,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8'
-        }
+        headers,
       }),
-      invalidatesTags: ['Auth']
+      invalidatesTags: ["Auth"],
     }),
     logout: builder.mutation({
       query: () => ({
-        url: 'logout',
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8'
-        }
+        url: "logout",
+        method: "POST",
+        headers,
       }),
-      invalidatesTags: ['Auth']
-    })
-  })
+      invalidatesTags: ["Auth"],
+    }),
+    changePassword: builder.mutation({
+      query: (body) => ({
+        url: "auth/change-password",
+        method: "POST",
+        body,
+        headers,
+      }),
+      invalidatesTags: ["Auth"],
+    }),
+    updatePassword: builder.mutation({
+      query: (body) => ({
+        url: "auth/update-password",
+        method: "POST",
+        body,
+        headers,
+      }),
+      invalidatesTags: ["Auth"],
+    }),
+  }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation } = authApi;
+export const {
+  useLoginMutation,
+  useRegisterMutation,
+  useLogoutMutation,
+  useChangePasswordMutation,
+  useUpdatePasswordMutation,
+} = authApi;

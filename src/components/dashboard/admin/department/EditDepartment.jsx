@@ -42,7 +42,7 @@ const EditDepartment = ({ item, handleClose }) => {
       <div className="card-body">
         <form className="form-sample" onSubmit={formik.handleSubmit}>
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-3 col-form-label">Name</label>
                 <div className="col-sm-9">
@@ -57,12 +57,12 @@ const EditDepartment = ({ item, handleClose }) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-3 col-form-label">Company</label>
                 <div className="col-sm-9">
                   <select
-                    className="form-control"
+                    className="form-control form-select"
                     name="company_id"
                     onChange={formik.handleChange}
                     value={formik.values.company_id}
@@ -77,12 +77,12 @@ const EditDepartment = ({ item, handleClose }) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-3 col-form-label">Branch</label>
                 <div className="col-sm-9">
                   <select
-                    className="form-control"
+                    className="form-control form-select"
                     name="branch_id"
                     onChange={formik.handleChange}
                     value={formik.values.branch_id}
@@ -98,7 +98,7 @@ const EditDepartment = ({ item, handleClose }) => {
               </div>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-12">
               <div className="form-group row">
                 <label className="col-sm-4 col-form-label">Is Active</label>
                 <div className="col-sm-8">

@@ -1,121 +1,261 @@
+
+// <----------------- Navbar icon start ------------------>
+import { FiSettings } from "react-icons/fi";
+import { BiWalletAlt, BiWallet } from "react-icons/bi";
+import {
+  BsCalendar3,
+  BsBox,
+  BsCalendar2Check,
+  BsCalendar2Day,
+  BsCalendarCheck,
+  BsVinylFill,
+  BsCalendarDay,
+  BsHourglassSplit,
+} from "react-icons/bs";
+
+import { MdAppRegistration, MdOutlinePolicy } from "react-icons/md";
+
+import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import { TbGitBranch } from "react-icons/tb";
+import { FaSith, FaCodepen, FaUserInjured } from "react-icons/fa";
+import { GoGraph } from "react-icons/go";
+import { MdWorkOutline } from "react-icons/md";
+import { FcLeave } from "react-icons/fc";
+import { RiFileList3Line } from "react-icons/ri";
+import { SlWallet } from "react-icons/sl";
+import { TfiWrite } from "react-icons/tfi";
+
+// <----------------- Navbar icon end ------------------>
+
 export const navItem = [
   //UID Mustbe Uges String
+  // <--------------admin Nav Start----------------->
 
+  // <-----------------admin Nav End------------->
 
- 
-  {
-    UID: "super-admin",
-    title: "Super Admin",
-    role: "admin",
-    icon: "fas fa-user-shield",
-    children: [
-      {
-        title: "About",
-        link: "about",
-        role: "admin",
-        icon: "fas fa-arrow-right",
-      },
+  // {
+  //   title: "About",
+  //   link: "about",
+  //   role: "admin",
+  //   icon: "fas fa-dice-d6",
+  // },
 
-      {
-        title: "Payment",
-        link: "payment",
-        role: "admin",
-        icon: "fas fa-arrow-right",
-      },
-    ],
-  },
+  //<----------------- Approval Authority Nav Start----------------->
 
-  {
-    title: "Admin",
-    link: "admin",
-    role: "admin",
-    icon: "fas fa-yin-yang",
-  },
   {
     UID: "settings",
-    title: "Settings",
-    role: "admin",
-    icon: "fas fa-cog",
+    title: "Master Settings",
+    role: "approvalauthority",
+    icon: <FiSettings />,
     children: [
       {
-        title: "Company",
-        link: "admin/company-list",
-        role: "admin",
-        icon: "fas fa-building",
+        title: "Company Info",
+        link: "approval-authority/company-list",
+        role: "approvalauthority",
+        icon: <HiOutlineOfficeBuilding size={18} />,
       },
-    
+
       {
-        title: "Employee",
-        link: "admin/employee-list",
-        role: "admin",
-        icon: "fas fa-user",
+        title: "Fiscal Year",
+        link: "approval-authority/fiscal-year-list",
+        role: "approvalauthority",
+        icon: <BsCalendar2Check size={16} />,
       },
+
       {
         title: "Branch",
-        link: "admin/branch-list",
-        role: "admin",
-        icon: "fas fa-industry",
-      },
-      {
-        title: "Designation",
-        link: "admin/designation-list",
-        role: "admin",
-        icon: "fas fa-dice-d6",
+        link: "approval-authority/branch-list",
+        role: "approvalauthority",
+        icon: <TbGitBranch size={19} />,
       },
       {
         title: "Department",
-        link: "admin/department-list",
-        role: "admin",
-        icon: "fas fa-box",
+        link: "approval-authority/department-list",
+        role: "approvalauthority",
+        icon: <FaCodepen size={18} />,
       },
       {
-        title: "Employment",
-        link: "admin/employment-list",
-        role: "admin",
-        icon: "fas  fa-user-tie",
+        title: "Designation",
+        link: "approval-authority/designation-list",
+        role: "approvalauthority",
+        icon: <FaSith size={18} />,
+      },
+
+      {
+        title: "Employment Type",
+        link: "approval-authority/employment-list",
+        role: "approvalauthority",
+        icon: <BsBox size={16} />,
       },
       {
-        title: "Leave Type",
-        link: "admin/leave-type",
-        role: "admin",
-        icon: "fas fa-sign-out-alt",
-    
+        title: "Employee",
+        link: "approval-authority/employee-list",
+        role: "approvalauthority",
+        icon: <FaUserInjured size={17} />,
       },
       {
-        title: "Fiscal Year",
-        link: "admin/fiscal-year-list",
-        role: "admin",
-        icon: "fas fa-vote-yea",
-     
+        title: "Leave Policy",
+        link: "approval-authority/leave-type",
+        role: "approvalauthority",
+        icon: <MdOutlinePolicy size={18} />,
+      },
+
+      {
+        title: "Balance Settings",
+        link: "approval-authority/leave-balance",
+        role: "approvalauthority",
+        icon: <GoGraph size={17} />,
+      },
+    ],
+  },
+  {
+    UID: "calendar",
+    title: "Calendar Settings",
+    role: "approvalauthority",
+    icon: <BsCalendar3 size={15} />,
+
+    children: [
+      {
+        title: "Day Type Setup",
+        link: "approval-authority/day-type-setup",
+        role: "approvalauthority",
+        icon: <BsCalendar2Day size={15} />,
+      },
+      {
+        title: "Working Day Setup",
+        link: "approval-authority/working-day-setup",
+        role: "approvalauthority",
+        icon: <MdWorkOutline size={18} />,
+      },
+      {
+        title: "Calendar Setup",
+        link: "approval-authority/calendar-setup",
+        role: "approvalauthority",
+        icon: <BsCalendarCheck size={15} />,
+      },
+      {
+        title: "Academic Calender",
+        link: "approval-authority/my-calendar",
+        role: "approvalauthority",
+        icon: <BsCalendarDay size={15} />,
       },
     ],
   },
 
-  // Admin Nav End
+  {
+    UID: "blance",
+    title: "Balance Setup",
+    role: "approvalauthority",
+    icon: <BiWalletAlt size={18} />,
+
+    children: [
+      {
+        title: "My Leave Balance",
+        link: "approval-authority/my-leave-balance",
+        role: "approvalauthority",
+        icon: <SlWallet size={16} />,
+      },
+
+      {
+        title: "Balance Setup",
+        link: "approval-authority/balance-setup",
+        role: "approvalauthority",
+        icon: <BiWallet size={18} />,
+      },
+      {
+        title: "Approval Flow",
+        link: "approval-authority/approval-flow",
+        role: "approvalauthority",
+        icon: <MdAppRegistration size={20} />,
+      },
+    ],
+  },
 
   {
-    title: "Worker",
-    link: "worker",
-    role: "worker",
-    icon: "fas fa-yin-yang",
-  },
-  
-  {
-    title: "Employee",
-    link: "employee",
-    role: "employee",
-    icon: "fas fa-yin-yang",
-  },
-  {
-    title: "Authority",
-    link: "approval-authority",
+    UID: "leave",
+    title: "Leave Application",
     role: "approvalauthority",
-    icon: "fas fa-yin-yang",
+    icon: <FcLeave size={18} />,
+    children: [
+      {
+        title: "My leave Application",
+        link: "approval-authority/my-leave-application",
+        role: "approvalauthority",
+        icon: <TfiWrite size={15} />,
+      },
+      {
+        title: "Pending For Approval",
+        link: "approval-authority/pending-leave-list",
+        role: "approvalauthority",
+        icon: <BsHourglassSplit size={18} />,
+      },
+      {
+        title: "Approved List",
+        link: "approval-authority/approved-leave-list",
+        role: "approvalauthority",
+        icon: <RiFileList3Line size={18} />,
+      },
+    ],
   },
+
+  //<----------------- Approval Authority Nav End --------------->
+
+  //<----------------- Employee Nav Start---------------------->
+  {
+    UID: "calendar",
+    title: "Calendar Settings",
+    role: "employee",
+    icon: <BsCalendar3 size={15} />,
+
+    children: [
+      {
+        title: "Academic Calender",
+        link: "employee/my-calendar",
+        role: "employee",
+        icon: <BsCalendarDay size={15} />,
+      },
+    ],
+  },
+
+  {
+    UID: "blance",
+    title: "Balance Setup",
+    role: "employee",
+    icon: <BiWalletAlt size={18} />,
+
+    children: [
+      {
+        title: "My Leave Balance",
+        link: "employee/my-leave-balance",
+        role: "employee",
+        icon: <SlWallet size={18} />,
+      },
+    ],
+  },
+
+  {
+    UID: "leave",
+    title: "Leave Application",
+    role: "employee",
+    icon: <FcLeave size={18} />,
+    children: [
+      {
+        title: "My leave Application",
+        link: "employee/my-leave-application",
+        role: "employee",
+        icon: <TfiWrite size={15} />,
+      },
+    ],
+  },
+  // Employee Nav End
+
+  // Others Nav Start
   {
     title: "Others",
     link: "others",
     role: "others",
-    icon: "fas fa-yin-yang",
+    icon: <BsVinylFill size={16} />,
   },
+
+  //<----------------- Employee Nav End---------------->
 ];

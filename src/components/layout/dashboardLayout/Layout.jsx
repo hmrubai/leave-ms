@@ -3,24 +3,38 @@ import { Outlet, NavLink, Link, useNavigate } from "react-router-dom";
 import { navItem } from "./../../../Nav/NavItem";
 import { user } from "../../../Route/utils";
 import Sidebar from "./Sidebar";
-import logo_sm from "../../../assets/logo/sm_logo.png";
+import sm_logo_white from "../../../assets/logo/sm_logo_white.png";
+import logo_white from "../../../assets/logo/logo_white.png";
 import "./Dashboard.css";
 import ScrollToTop from "react-scroll-to-top";
-// import { HiBars3BottomLeft } from "react-icons/hi2";
-// import { useSelector } from './../../../store/index';
-import { useDispatch } from "react-redux";
+import { BiHomeAlt } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../features/authSlice";
 import { toast, ToastContainer } from "react-toastify";
+import profilePicture from "../../../assets/images/profile-picture.png";
+import reset from "../../../assets/images/reset.png";
+import { FaBars } from "react-icons/fa";
+import sm_logo from "../../../assets/logo/sm_logo.png";
+
+
+import { BsFillPersonFill } from "react-icons/bs";
+
+import { RiLockPasswordFill, RiLogoutCircleRFill } from "react-icons/ri";
 
 const Layout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const authUser = useSelector((state) => state.auth.user);
+
   const handelLogout = () => {
     dispatch(logout());
     navigate("/login");
-    toast.success('Logout Successfully');
+    toast.success("Logout Successfully");
     window.location.reload(false);
+  };
 
+  const refresh = () => {
+    window.location.reload(false);
   };
 
   const [style, setStyle] = useState(
@@ -28,23 +42,15 @@ const Layout = () => {
   );
 
   const changeStyle = () => {
-    if (
-      style === "navbar-nav bg-primary sidebar sidebar-dark accordion"
-    ) {
-      setStyle(
-        "navbar-nav bg-primary sidebar sidebar-dark accordion toggled"
-      );
+    if (style === "navbar-nav bg-primary sidebar sidebar-dark accordion") {
+      setStyle("navbar-nav bg-primary sidebar sidebar-dark accordion toggled");
     } else {
       setStyle("navbar-nav bg-primary sidebar sidebar-dark accordion");
     }
   };
   const changeStyle1 = () => {
-    if (
-      style === "navbar-nav bg-primary sidebar sidebar-dark accordion"
-    ) {
-      setStyle(
-        "navbar-nav bg-primary sidebar sidebar-dark accordion toggled1"
-      );
+    if (style === "navbar-nav bg-primary sidebar sidebar-dark accordion") {
+      setStyle("navbar-nav bg-primary sidebar sidebar-dark accordion toggled1");
     } else {
       setStyle("navbar-nav bg-primary sidebar sidebar-dark accordion");
     }
@@ -52,7 +58,7 @@ const Layout = () => {
 
   return (
     <div>
-      <ToastContainer/>
+      <ToastContainer />
       {/*  <!-- Page Wrapper --> */}
       <div id="wrapper">
         {/*  <!-- Sidebar --> */}
@@ -60,62 +66,59 @@ const Layout = () => {
         <ul className={style} id="accordionSidebar">
           {/*  <!-- Sidebar - Brand --> */}
           <Link
-            className="sidebar-brand d-flex align-items-center justify-content-center "
-            href="#"
+            className="sidebar-brand  d-flex align-items-center justify-content-center "
+            to="#"
           >
             <Link to="/" className="sidebar-brand-icon rotate-n-15">
-              <img src={logo_sm} width="30" alt="" />
+              <img src={sm_logo_white} width="30" alt="" />
             </Link>
-            <div className="sidebar-brand-text mx-3">LMS</div>
+            <div className="sidebar-brand-text mx-3">
+              <img src={logo_white} width={70} alt="" />
+            
+            </div>
             <div className="text-center d-none d-md-inline">
-              <i onClick={changeStyle} className="fas fa-bars ml-3"></i>
+              <FaBars onClick={changeStyle} className="ml-3 " />
             </div>
           </Link>
 
-          {/*   <!-- Divider --> */}
-          {/* <hr className="sidebar-divider my-0" /> */}
-
-          {/*  <!-- Nav Item - Dashboard --> */}
           <li className="nav-item active ">
-            <div className="nav-link shadow-lg  d-flex flex-wrap justify-content-center">
+            <div className="nav-link shadow-lg   d-flex flex-wrap justify-content-center">
               <div>
-                <img
-                  className="img-profile rounded-circle "
-                  src="img/undraw_profile.svg"
-                  alt=""
-                />
+                {authUser && authUser.image ? (
+                  <img
+                    className="img-profile rounded-circle "
+                    src={`${process.env.REACT_APP_FILE_URL}${authUser.image}`}
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    className="img-profile rounded-circle "
+                    src={profilePicture}
+                    alt=""
+                  />
+                )}
               </div>
 
               <div className="mt-1 ">
-                <span className="d-none d-lg-inline text-light-600 small ml-2 font-weight-bold ">
-                  Arfin Foysal
+                <span className=" name-font-size d-none d-lg-inline text-light-600 small ml-2 font-weight-bold ">
+                  {authUser && authUser.name}
                 </span>
               </div>
             </div>
           </li>
           <li className="nav-item active mt-3">
             <NavLink className="nav-link nav-hover" to="/dashboard">
-              <i className="fas fa-fw fa-home"></i>
-              <span>Dashboard</span>
+              <BiHomeAlt size={18} />
+              <span className="ms-1">Dashboard</span>
             </NavLink>
             {/* <div className="text-center d-none d-md-inline">
                           <button className="rounded-circle border-0" id="sidebarToggle" onClick={changeStyle}></button>
                       </div> */}
           </li>
 
-          {/*  <!-- Divider --> */}
-          {/* <hr className="sidebar-divider" /> */}
-
           {navItem.map(
             (n, i) => n.role === user.role && <Sidebar item={n} key={i} />
           )}
-          {/* <!-- Divider --> */}
-          {/* <hr className="sidebar-divider d-none d-md-block" /> */}
-
-          {/* <!-- Sidebar Toggler (Sidebar) --> */}
-          {/* <div className="text-center d-none d-md-inline">
-                          <button className="rounded-circle border-0" id="sidebarToggle" onClick={changeStyle}></button>
-                      </div> */}
         </ul>
         {/*  <!-- End of Sidebar --> */}
 
@@ -125,319 +128,90 @@ const Layout = () => {
           <div id="content">
             {/*  <!-- Topbar --> */}
             <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-              {/*  <!-- Sidebar Toggle (Topbar) --> */}
               <button
                 id="sidebarToggleTop"
-                className="btn btn-link  d-md-none  rounded-circle mr-3 ml-2"
+                className="btn btn-link  d-md-none  rounded-circle mr-3  ml-2"
                 onClick={changeStyle1}
               >
-                <i className="fa fa-bars"></i>
+                <FaBars value={{ style: { verticalAlign: "middle" } }} />
               </button>
 
-              {/*  <!-- Topbar Search --> */}
-              <form className="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                <div className="input-group">
-                  <input
-                    type="text"
-                    className="form-control bg-light border-0 small"
-                    placeholder="Search for..."
-                    aria-label="Search"
-                    aria-describedby="basic-addon2"
-                  />
-                  <div className="input-group-append">
-                    <button className="btn btn-primary" type="button">
-                      <i className="fas fa-search fa-sm"></i>
-                    </button>
-                  </div>
-                </div>
-              </form>
+              <span className="cursor reset ms-auto" onClick={refresh}>
+                <img src={reset} alt="" width={22} />
+              </span>
+              <span className=" d-none d-md-block fw-bold">Refresh</span>
 
-              {/*  <!-- Topbar Navbar --> */}
               <ul className="navbar-nav ml-auto">
-                {/*  <!-- Nav Item - Search Dropdown (Visible Only XS) --> */}
-                <li className="nav-item dropdown no-arrow d-sm-none">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    href="#"
-                    id="searchDropdown"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <i className="fas fa-search fa-fw"></i>
-                  </Link>
-                  {/*   <!-- Dropdown - Messages --> */}
-                  <div
-                    className="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                    aria-labelledby="searchDropdown"
-                  >
-                    <form className="form-inline mr-auto w-100 navbar-search">
-                      <div className="input-group">
-                        <input
-                          type="text"
-                          className="form-control bg-light border-0 small"
-                          placeholder="Search for..."
-                          aria-label="Search"
-                          aria-describedby="basic-addon2"
-                        />
-                        <div className="input-group-append">
-                          <button className="btn btn-primary" type="button">
-                            <i className="fas fa-search fa-sm"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </li>
-
-                {/*  <!-- Nav Item - Alerts --> */}
-                <li className="nav-item dropdown no-arrow mx-1">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    href="#"
-                    id="alertsDropdown"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <i className="fas fa-bell fa-fw"></i>
-                    {/*  <!-- Counter - Alerts --> */}
-                    <span className="badge badge-danger badge-counter">3+</span>
-                  </Link>
-                  {/*   <!-- Dropdown - Alerts --> */}
-                  <div
-                    className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                    aria-labelledby="alertsDropdown"
-                  >
-                    <h6 className="dropdown-header">Alerts Center</h6>
-                    <Link
-                      className="dropdown-item d-flex align-items-center"
-                      href="#"
-                    >
-                      <div className="mr-3">
-                        <div className="icon-circle bg-primary">
-                          <i className="fas fa-file-alt text-white"></i>
-                        </div>
-                      </div>
-                      <div>
-                        <div className="small text-gray-500">
-                          December 12, 2019
-                        </div>
-                        <span className="font-weight-bold">
-                          A new monthly report is ready to download!
-                        </span>
-                      </div>
-                    </Link>
-                    <Link
-                      className="dropdown-item d-flex align-items-center"
-                      href="#"
-                    >
-                      <div className="mr-3">
-                        <div className="icon-circle bg-success">
-                          <i className="fas fa-donate text-white"></i>
-                        </div>
-                      </div>
-                      <div>
-                        <div className="small text-gray-500">
-                          December 7, 2019
-                        </div>
-                        $290.29 has been deposited into your account!
-                      </div>
-                    </Link>
-                    <Link
-                      className="dropdown-item d-flex align-items-center"
-                      href="#"
-                    >
-                      <div className="mr-3">
-                        <div className="icon-circle bg-warning">
-                          <i className="fas fa-exclamation-triangle text-white"></i>
-                        </div>
-                      </div>
-                      <div>
-                        <div className="small text-gray-500">
-                          December 2, 2019
-                        </div>
-                        Spending Alert: We've noticed unusually high spending
-                        for your account.
-                      </div>
-                    </Link>
-                    <Link
-                      className="dropdown-item text-center small text-gray-500"
-                      href="#"
-                    >
-                      Show All Alerts
-                    </Link>
-                  </div>
-                </li>
-
-                {/*  <!-- Nav Item - Messages --> */}
-                <li className="nav-item dropdown no-arrow mx-1">
-                  <Link
-                    className="nav-link dropdown-toggle"
-                    href="#"
-                    id="messagesDropdown"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    <i className="fas fa-envelope fa-fw"></i>
-                    {/*  <!-- Counter - Messages --> */}
-                    <span className="badge badge-danger badge-counter">7</span>
-                  </Link>
-                  {/*   <!-- Dropdown - Messages --> */}
-                  <div
-                    className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                    aria-labelledby="messagesDropdown"
-                  >
-                    <h6 className="dropdown-header">Message Center</h6>
-                    <Link
-                      className="dropdown-item d-flex align-items-center"
-                      href="#"
-                    >
-                      <div className="dropdown-list-image mr-3">
-                        <img
-                          className="rounded-circle"
-                          src="img/undraw_profile_1.svg"
-                          alt="..."
-                        />
-                        <div className="status-indicator bg-success"></div>
-                      </div>
-                      <div className="font-weight-bold">
-                        <div className="text-truncate">
-                          Hi there! I am wondering if you can help me with a
-                          problem I've been having.
-                        </div>
-                        <div className="small text-gray-500">
-                          Emily Fowler · 58m
-                        </div>
-                      </div>
-                    </Link>
-                    <Link
-                      className="dropdown-item d-flex align-items-center"
-                      href="#"
-                    >
-                      <div className="dropdown-list-image mr-3">
-                        <img
-                          className="rounded-circle"
-                          src="img/undraw_profile_2.svg"
-                          alt="..."
-                        />
-                        <div className="status-indicator"></div>
-                      </div>
-                      <div>
-                        <div className="text-truncate">
-                          I have the photos that you ordered last month, how
-                          would you like them sent to you?
-                        </div>
-                        <div className="small text-gray-500">Jae Chun · 1d</div>
-                      </div>
-                    </Link>
-                    <Link
-                      className="dropdown-item d-flex align-items-center"
-                      href="#"
-                    >
-                      <div className="dropdown-list-image mr-3">
-                        <img
-                          className="rounded-circle"
-                          src="img/undraw_profile_3.svg"
-                          alt="..."
-                        />
-                        <div className="status-indicator bg-warning"></div>
-                      </div>
-                      <div>
-                        <div className="text-truncate">
-                          Last month's report looks great, I am very happy with
-                          the progress so far, keep up the good work!
-                        </div>
-                        <div className="small text-gray-500">
-                          Morgan Alvarez · 2d
-                        </div>
-                      </div>
-                    </Link>
-                    <Link
-                      className="dropdown-item d-flex align-items-center"
-                      href="#"
-                    >
-                      <div className="dropdown-list-image mr-3">
-                        <img
-                          className="rounded-circle"
-                          src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                          alt="..."
-                        />
-                        <div className="status-indicator bg-success"></div>
-                      </div>
-                      <div>
-                        <div className="text-truncate">
-                          Am I a good boy? The reason I ask is because someone
-                          told me that people say this to all dogs, even if they
-                          aren't good...
-                        </div>
-                        <div className="small text-gray-500">
-                          Chicken the Dog · 2w
-                        </div>
-                      </div>
-                    </Link>
-                    <Link
-                      className="dropdown-item text-center small text-gray-500"
-                      href="#"
-                    >
-                      Read More Messages
-                    </Link>
-                  </div>
-                </li>
-
                 <div className="topbar-divider d-none d-sm-block"></div>
 
                 {/* <!-- Nav Item - User Information --> */}
                 <li className="nav-item dropdown no-arrow">
                   <Link
                     className="nav-link dropdown-toggle"
-                    href="#"
+                    to="#"
                     id="userDropdown"
                     role="button"
                     data-toggle="dropdown"
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                    <span className="mr-2 d-none d-lg-inline text-gray-600 small">
-                      Arfin Foysal
-                      {/* <div>
-                        Admin
-                      </div> */}
-                    </span>
-                    <img
-                      className="img-profile rounded-circle"
-                      src="img/undraw_profile.svg"
-                      alt=""
-                    />
+                    <div className="mr-2 d-none d-lg-inline text-gray-600 small">
+                      {authUser && authUser.name}
+                      <div className="text-end text-info fw-bold">
+                        {authUser && authUser.designation}
+                      </div>
+                    </div>
+
+                    {authUser && authUser.image ? (
+                      <img
+                        className="img-profile rounded-circle "
+                        src={`${process.env.REACT_APP_FILE_URL}${authUser.image}`}
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        className="img-profile rounded-circle "
+                        src={profilePicture}
+                        alt=""
+                      />
+                    )}
                   </Link>
                   {/*  <!-- Dropdown - User Information --> */}
                   <div
                     className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                     aria-labelledby="userDropdown"
                   >
-                    <Link className="dropdown-item" href="#">
-                      <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    <Link className="dropdown-item" to="#">
+                      <BsFillPersonFill size={15} className="mr-1" />
                       Profile
                     </Link>
-                    <Link className="dropdown-item" href="#">
-                      <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                      Settings
-                    </Link>
-                    <Link className="dropdown-item" href="#">
-                      <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                      Activity Log
-                    </Link>
+
+                    {authUser && authUser.user_type === "ApprovalAuthority" && (
+                      <Link
+                        className="dropdown-item"
+                        to="approval-authority/change-password"
+                      >
+                        <RiLockPasswordFill size={15} className="mr-1" />
+                        Change Password
+                      </Link>
+                    )}
+                    {authUser && authUser.user_type === "Employee" && (
+                      <Link
+                        className="dropdown-item"
+                        to="employee/change-password"
+                      >
+                        <RiLockPasswordFill size={15} className="mr-1" />
+                        Change Password
+                      </Link>
+                    )}
+
                     <div className="dropdown-divider"></div>
                     <Link
                       className="dropdown-item"
                       to="#"
                       onClick={() => handelLogout()}
                     >
-                      <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                      <RiLogoutCircleRFill size={15} className="mr-1 mb-1" />
                       Logout
                     </Link>
                   </div>
@@ -457,8 +231,26 @@ const Layout = () => {
                                       <!-- Footer --> */}
           <footer className="sticky-footer bg-white">
             <div className="container my-auto">
-              <div className="copyright text-center my-auto">
-                <span>Copyright &copy; Arfin Foysal 2023</span>
+              <div className="copyright text-center my-auto d-flex justify-content-between">
+               
+                <div>
+                  <span className="text-info font-weight-bold">Developed by </span>
+                  <img src={sm_logo} width={12}  alt="" />
+                  <a
+                    className="text-info text-decoration-none"
+                    href="https://bacbonltd.com/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {" "}
+                    BacBon Limited.
+                  </a>
+                </div>
+                <div>
+                  <span className=" font-weight-bold">
+                    &copy; BacBon Limited {new Date().getFullYear()}
+                  </span>
+                </div>
               </div>
             </div>
           </footer>
@@ -468,9 +260,7 @@ const Layout = () => {
       </div>
       {/*  <!-- End of Page Wrapper -->
 
-                              <!-- Scroll to Top Button--> */}
-
-      {/*  <!-- Logout Modal--> */}
+     <!-- Scroll to Top Button--> */}
 
       <ScrollToTop smooth />
     </div>

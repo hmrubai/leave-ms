@@ -1,139 +1,167 @@
-import React, {  useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import MaterialReactTable from "material-react-table";
 import { Link } from "react-router-dom";
-import FileDownloadIcon from "@mui/icons-material/FileDownload";
-import { ExportToCsv } from "export-to-csv"; //or use your library of choice here
-import { Box, Button } from "@mui/material";
 
 import { BsFillEyeFill } from "react-icons/bs";
-import { FaTrash, FaEdit } from "react-icons/fa";
-import Swal from "sweetalert2";
 
+import { FaEdit } from "react-icons/fa";
+
+import { AiFillUnlock } from "react-icons/ai";
 import Loader from "../../../common/Loader";
-import { useGetCompanyListQuery } from "../../../../services/companyApi";
+import avatar from "../../../../assets/images/profile-picture.png";
+
+import { useGetEmployeeListQuery } from "../../../../services/employeeApi";
+import PasswordUpdateModal from "./PasswordUpdateModal";
 
 const EmployeeTable = () => {
- 
+  const { data, isSuccess, isFetching } = useGetEmployeeListQuery();
 
-  const { data, isSuccess,isFetching } = useGetCompanyListQuery()
-
-
-
-  const deleteHandel = async (deleteFunc, Did) => {
-    Swal.fire({
-      title: "Are you sure?",
-      // text: "You won't be able to revert this!",
-      icon: "error",
-      confirmButtonColor: "#d33 ",
-      cancelButtonColor: " #4e4e4e",
-      confirmButtonText: "Yes, delete it!",
-      width: 200,
-      showCancelButton: true,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // deleteFunc(Did);
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-      console.log(result);
-    });
-  };
-
-
+  const [show, setShow] = useState(false);
+  const [paramId, setParamId] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const columns = useMemo(
     () => [
       {
-        accessorKey: "userId", //access nested data with dot notation
-        header: "Employee Code",
-      },
-      {
-        accessorKey: "id", //access nested data with dot notation
-        header: "Name",
-      },
+        accessorFn: (row) =>
+          row.image ? (
+            <>
+              <img
+                className="img-fluid rounded-circle shadow"
+                style={{ width: "50px", height: "50px" }}
+                src={`${process.env.REACT_APP_FILE_URL}${row.image}`}
+                alt=""
+              ></img>
+            </>
+          ) : (
+            <>
+              <img
+                className="img-fluid rounded-circle shadow"
+                style={{ width: "50px", height: "50px" }}
+                src={avatar}
+                alt=""
+              ></img>
+            </>
+          ), //alternate way
+        id: "image", //id required if you use accessorFn instead of accessorKey
+        header: "image",
+        size: "small",
 
+        Header: <span className="table-header">Image</span>, //optional custom markup
+      },
       {
-        accessorKey: "title", //normal accessorKey
-        header: "Title",
+        accessorKey: "name", //access nested data with dot notation
+        header: "Name",
+        size: "small",
+      },
+      {
+        accessorKey: "employee_code", //access nested data with dot notation
+        header: "Code",
+        size: "small",
+      },
+      {
+        accessorKey: "email", //access nested data with dot notation
+        header: "Email",
+        size: "small",
+      },
+      {
+        accessorKey: "designation", //access nested data with dot notation
+        header: "Designation",
+        size: "small",
+      },
+      {
+        accessorFn: (row) =>
+          row.is_active === true ? (
+            <>
+              <span className="badge badge-success">Active</span>
+            </>
+          ) : (
+            <>
+              <span className="badge badge-danger">Inactive</span>
+            </>
+          ), //alternate way
+        id: "is_active", //id required if you use accessorFn instead of accessorKey
+        header: "Status",
+        size: "small",
+        Header: <span className="table-header">Status</span>, //optional custom markup
       },
     ],
     []
   );
 
-  const csvOptions = {
-    fieldSeparator: ",",
-    quoteStrings: '"',
-    decimalSeparator: ".",
-    showLabels: true,
-    useBom: true,
-    useKeysAsHeaders: false,
-    headers: columns.map((c) => c.header),
-  };
-
-  const csvExporter = new ExportToCsv(csvOptions);
-
-  const handleExportData = () => {
-    csvExporter.generateCsv(data);
-  };
-
-  const handleExportRows = (rows) => {
-    csvExporter.generateCsv(rows.map((row) => row.original));
-  };
-
   return (
     <>
-      { isFetching&& <Loader/> }
+      {isFetching && <Loader />}
+
+      <PasswordUpdateModal
+        handleClose={handleClose}
+        show={show}
+        clickValue="Password Reset"
+        paramId={paramId}
+      />
+
       {/* <MaterialReactTable columns={columns} data={data} /> */}
       <MaterialReactTable
-        enableRowSelection
         columns={columns}
-        data={isSuccess&&data}
+        data={isSuccess && data?.data}
         enableRowActions
         enableColumnActions
-        enableRowNumbers
         positionActionsColumn="last"
-        renderTopToolbarCustomActions={({ table }) => (
-          <Box
-            sx={{ display: "flex", gap: "1rem", p: "0.5rem", flexWrap: "wrap" }}
-          >
-            <Button
-              color="primary"
-              //export all data that is currently in the table (ignore pagination, sorting, filtering, etc.)
-              onClick={handleExportData}
-              startIcon={<FileDownloadIcon />}
-              variant="contained"
-            >
-              Export
-            </Button>
-            <Button
-              disabled={
-                !table.getIsSomeRowsSelected() && !table.getIsAllRowsSelected()
-              }
-              //only export selected rows
-              onClick={() => handleExportRows(table.getSelectedRowModel().rows)}
-              startIcon={<FileDownloadIcon />}
-              variant="contained"
-            >
-              Selected Rows
-            </Button>
-          </Box>
-        )}
+        muiTopToolbarProps={{
+          style: {
+            backgroundColor: "#0D6EFD",
+          },
+        }}
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>
-            <Link to={`/dashboard/admin/employee-details/${1}`}>
-              {" "}
-              <BsFillEyeFill color="black" size={24} />
-            </Link>
-            <Link
-              to={`/dashboard/admin/edit-employee/${2}`}
-              title=""
-              className="px-2"
-            >
-              <FaEdit size={22} />
-            </Link>
-            <Link to="#" onClick={() => deleteHandel()}>
-              <FaTrash size={20} color="red" />
-            </Link>{" "}
+            <div className="d-flex">
+              <div>
+                <Link
+                  to="#"
+                  className="btn btn-warning btn-sm d-flex align-items-center"
+                  onClick={() => {
+                    handleShow();
+                    setParamId(row?.row?.original?.user_id);
+                  }}
+                >
+                  <div>
+                    <AiFillUnlock className="mb-1 mr-1" size={18} />
+                  </div>
+                  <div> Reset</div>
+                </Link>
+              </div>
+              <div className="mx-2">
+                <Link
+                  to={`/dashboard/approval-authority/employee-details/${row?.row?.original?.id}`}
+                  className="btn btn-info btn-sm d-flex align-items-center"
+                >
+                  <div>
+                    <BsFillEyeFill
+                      className="mb-1 mr-1"
+                      color="black"
+                      size={18}
+                    />
+                  </div>
+
+                  <div>Details</div>
+                </Link>
+              </div>
+
+              <div>
+                <Link
+                  to={`/dashboard/approval-authority/edit-employee/${row?.row?.original?.id}`}
+                  title=""
+                  className="px-2 btn btn-primary btn-sm d-flex align-items-center"
+                >
+                  <div>
+                    <FaEdit className="mb-1 mr-1" size={18} />
+                  </div>
+                  <div>Edit</div>
+                </Link>
+              </div>
+            </div>
           </>
         )}
       />

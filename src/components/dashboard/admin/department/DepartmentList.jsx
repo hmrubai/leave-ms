@@ -4,11 +4,9 @@ import {
   BsFillPlusCircleFill,
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
-
-
 import { IoSyncCircle } from "react-icons/io5";
-import CompanyTable from "./DepartmentTable";
-import CompanyModal from "./DepartmentModal";
+import DepartmentTable from "./DepartmentTable";
+import DepartmentModal from "./DepartmentModal";
 import { useGetdepartmentListQuery } from "../../../../services/departmentApi";
 import PageTopHeader from "../../../common/PageTopHeader";
 
@@ -32,17 +30,12 @@ const DepartmentList = () => {
     <>
       <PageTopHeader title="Department"/>
       <div className="card shadow mb-4">
-        <div className="card-header py-3 ">
-          <div>
-            <h6 className="m-0 font-weight-bold text-primary">All Department List</h6>
+        <div className="card-header  d-flex justify-content-between">
+          <div className="mt-1"> 
+            <h6 className="m-0 font-weight-bold text-primary">Department List</h6>
           </div>
-
-        </div>
-
-        <div className="card-body">
-          <div className="py-2 text-right mr-1">
-            <div className="d-flex justify-content-end">
-              <div className="mt-1">
+          <div className="d-flex justify-content-end">
+              <div>
                 <IoSyncCircle
                   className="cursor "
                   color="black"
@@ -53,23 +46,26 @@ const DepartmentList = () => {
               <div>
                 <Link
                   to="#"
-                  className="btn btn-primary "
+                  className="btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Add Department Information");
+                    handelClickValue("Add New Department");
                   }}
                 >
-                  <BsFillPlusCircleFill className="mb-1 mr-1" /> New
+                  <BsFillPlusCircleFill className="mb-1 mr-1" /> Add New Department
                 </Link>
               </div>
             </div>
-          </div>
-          <div>
-            <CompanyTable />
-          </div>
+
+        </div>
+
+        <div className="card-body">
+       
+            <DepartmentTable />
+       
         </div>
       </div>
-      <CompanyModal
+      <DepartmentModal
         show={show}
         handleClose={handleClose}
         clickValue={clickValue}

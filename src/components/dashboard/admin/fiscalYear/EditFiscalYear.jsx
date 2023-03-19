@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import { toast, ToastContainer } from "react-toastify";
 import { useGetCompanyListQuery } from "../../../../services/companyApi";
 import { useFascalYearSaveOrUpdateMutation } from "../../../../services/fiscalyearApi";
@@ -9,6 +9,8 @@ const EditFiscalYear = ({ handleClose, item }) => {
   const { data } = useGetCompanyListQuery();
   const [fascalYearSaveOrUpdate, res] = useFascalYearSaveOrUpdateMutation();
 
+
+
   const formik = useFormik({
     initialValues: {
       id: item.id,
@@ -16,6 +18,7 @@ const EditFiscalYear = ({ handleClose, item }) => {
       fiscal_year: item.fiscal_year,
       start_date: item.start_date,
       end_date: item.end_date,
+      is_active: item.is_active,
     },
 
     onSubmit: async (values, { resetForm }) => {
@@ -44,7 +47,7 @@ const EditFiscalYear = ({ handleClose, item }) => {
                 <label className="col-sm-3 col-form-label">Company</label>
                 <div className="col-sm-9">
                   <select
-                    className="form-control"
+                    className="form-control form-select"
                     name="company_id"
                     onChange={formik.handleChange}
                     value={formik.values.company_id}
@@ -103,6 +106,26 @@ const EditFiscalYear = ({ handleClose, item }) => {
                 </div>
               </div>
             </div>
+
+            <div className="col-md-12">
+              <div className="form-group row">
+                <label className="col-sm-4 col-form-label">Is Active</label>
+                <div className="col-sm-8">
+                  <div class="form-check form-switch mt-2">
+                    <Form.Check
+                      type="switch"
+                      id="custom-switch"
+                      label=""
+                      name="is_active"
+                      onChange={formik.handleChange}
+                      value={formik.values.is_active}
+                      checked={formik.values.is_active}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+                      
           </div>
           <Modal.Footer>
             <div className=" d-flex">

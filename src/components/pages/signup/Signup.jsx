@@ -56,7 +56,7 @@ const Signup = () => {
                         </form>
                         <hr/>
                         <div className="text-center">
-                            <Link className="small" to="forgot-password.html">Forgot Password?</Link>
+                            <Link className="small" to="#">Forgot Password?</Link>
                         </div>
                         <div className="text-center">
                             <Link className="small" to="/login">Already have an account? Login!</Link>
