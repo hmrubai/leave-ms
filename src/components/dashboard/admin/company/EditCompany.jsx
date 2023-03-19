@@ -13,6 +13,8 @@ const EditCompany = ({ item, handleClose }) => {
     setPreviewImage(URL.createObjectURL(e.target.files[0]));
   }
 
+
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -90,7 +92,6 @@ const EditCompany = ({ item, handleClose }) => {
                     name="address"
                     onChange={formik.handleChange}
                     value={formik.values.address}
-                    id=""
                     cols="1"
                     rows="2"
                   ></textarea>
@@ -103,6 +104,7 @@ const EditCompany = ({ item, handleClose }) => {
                 <label className="col-sm-5 col-form-label">Contact No:</label>
                 <div className="col-sm-7">
                   <input
+              
                     type="number"
                     className="form-control"
                     name="contact_no"

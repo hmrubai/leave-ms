@@ -107,7 +107,7 @@ const WorkingDayTable = () => {
                 </td>
                 <td>
                   <button
-                    className="btn btn-info btn-sm "
+                    className="btn btn-primary btn-sm "
                     onClick={() => {
                       handleShow();
                       handelClickValue("Update Day Status");

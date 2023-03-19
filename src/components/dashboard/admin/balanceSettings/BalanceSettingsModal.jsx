@@ -20,8 +20,8 @@ const BalanceSettingsModal = ({ handleClose, show, clickValue,paramId }) => {
         </Modal.Header>
         <Modal.Body>
           {clickValue === "Leave Balance Information" && <BalanceSettingsDetails item={paramId} handleClose={handleClose}/>}
-          {clickValue === "Add Leave Balance Information" && <CreatBalanceSettings handleClose={handleClose}/>}
-          {clickValue === "Edit Leave Balance Information" && <EditBalanceSettings item={paramId} handleClose={handleClose} />}
+          {clickValue === "Add New Leave Balance" && <CreatBalanceSettings handleClose={handleClose}/>}
+          {clickValue === "Edit Leave Balance" && <EditBalanceSettings item={paramId} handleClose={handleClose} />}
         </Modal.Body>
      
       </Modal>

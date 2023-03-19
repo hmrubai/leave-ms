@@ -77,12 +77,12 @@ const LeaveDetails = () => {
         clickValue="Do you want to reject?"
         paramId={id}
       />
-      <PageTopHeader title="Applied Leave List" />
+      <PageTopHeader title="Leave Information" />
       <div className="card shadow mb-4">
         <div className="card-header py-3 n">
           <div>
             <h6 className="m-0 font-weight-bold text-primary">
-              Applied Leave List
+            Leave Information
             </h6>
           </div>
         </div>

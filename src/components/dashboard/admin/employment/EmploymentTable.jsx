@@ -84,40 +84,46 @@ const EmploymentTable = () => {
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>
-            <div className="d-flex">
-              <div>
-                <Link
-                  to="#"
-                  onClick={() => {
-                    handleShow();
-                    handelClickValue("Employment Information");
+            
+            <div className="d-flex ">
+                <div className="mr-1">
+                  <Link
+                    to="#"
+                    className="btn btn-info btn-sm d-flex align-items-center"
+                    onClick={() => {
+                      handleShow();
+                    handelClickValue("Employment Type Information");
                     setParamId(row?.row?.original);
-                  }}
-                >
-                  <BsFillEyeFill color="black" size={24} />
-                </Link>
-              </div>
-              <div>
-                <Link
-                  to={`#`}
-                  title=""
-                  className="px-2"
-                  onClick={() => {
-                    handleShow();
-                    handelClickValue("Edit Employment Information");
-                    setParamId(row?.row?.original);
-                  }}
-                >
-                  <FaEdit size={22} />
-                </Link>
-              </div>
-
-              {/* <div>
-                <Link to="#" onClick={() => deleteHandel()}>
-                  <FaTrash size={20} color="red" />
-                </Link>{" "}
-              </div> */}
+                    }}
+                  >
+                    <div className="mr-1">
+                      <BsFillEyeFill color="black" size={18} />
+                    </div>
+                    <div>Details</div>
+                  </Link>
+                </div>
+                <div>
+                  <Link
+                    to={`#`}
+                    title=""
+                    className="px-2 d-flex align-items-center btn btn-primary btn-sm"
+                    onClick={() => {
+                      handleShow();
+                      handelClickValue("Edit Employment Type");
+                      setParamId(row?.row?.original);
+                    }}
+                  >
+                    <div>
+                      {" "}
+                      <FaEdit size={16} />
+                    </div>
+                    <div> Edit</div>
+                  </Link>
+                </div>
             </div>
+            
+
+ 
           </>
         )}
       />

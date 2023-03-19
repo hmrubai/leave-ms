@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import { BsFillEyeFill } from "react-icons/bs";
 
 import { FaEdit } from "react-icons/fa";
-import { FcUnlock } from "react-icons/fc";
+
+import { AiFillUnlock } from "react-icons/ai";
 import Loader from "../../../common/Loader";
 import avatar from "../../../../assets/images/profile-picture.png";
 
@@ -46,9 +47,7 @@ const EmployeeTable = () => {
         id: "image", //id required if you use accessorFn instead of accessorKey
         header: "image",
         size: "small",
-        
-       
-        
+
         Header: <span className="table-header">Image</span>, //optional custom markup
       },
       {
@@ -87,12 +86,9 @@ const EmployeeTable = () => {
         size: "small",
         Header: <span className="table-header">Status</span>, //optional custom markup
       },
-
     ],
     []
   );
-
-  
 
   return (
     <>
@@ -107,7 +103,6 @@ const EmployeeTable = () => {
 
       {/* <MaterialReactTable columns={columns} data={data} /> */}
       <MaterialReactTable
-   
         columns={columns}
         data={isSuccess && data?.data}
         enableRowActions
@@ -118,52 +113,55 @@ const EmployeeTable = () => {
             backgroundColor: "#0D6EFD",
           },
         }}
-        muiBottomToolbarProps={{
-          style: {
-            backgroundColor: "#0D6EFD",
-            
-           
-          },
-        }}
-
-   
-      
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>
             <div className="d-flex">
-              <div className="mr-2">
+              <div>
                 <Link
                   to="#"
-                  className="btn btn-warning btn-sm"
+                  className="btn btn-warning btn-sm d-flex align-items-center"
                   onClick={() => {
                     handleShow();
                     setParamId(row?.row?.original?.user_id);
                   }}
                 >
-                  <FcUnlock className="mb-1 mr-1"/>
-                  Reset 
+                  <div>
+                    <AiFillUnlock className="mb-1 mr-1" size={18} />
+                  </div>
+                  <div> Reset</div>
                 </Link>
               </div>
-              <div>
+              <div className="mx-2">
                 <Link
                   to={`/dashboard/approval-authority/employee-details/${row?.row?.original?.id}`}
+                  className="btn btn-info btn-sm d-flex align-items-center"
                 >
-                  <BsFillEyeFill color="black" size={24} />
+                  <div>
+                    <BsFillEyeFill
+                      className="mb-1 mr-1"
+                      color="black"
+                      size={18}
+                    />
+                  </div>
+
+                  <div>Details</div>
                 </Link>
               </div>
+
               <div>
                 <Link
                   to={`/dashboard/approval-authority/edit-employee/${row?.row?.original?.id}`}
                   title=""
-                  className="px-2"
+                  className="px-2 btn btn-primary btn-sm d-flex align-items-center"
                 >
-                  <FaEdit size={22} />
+                  <div>
+                    <FaEdit className="mb-1 mr-1" size={18} />
+                  </div>
+                  <div>Edit</div>
                 </Link>
               </div>
             </div>
-
-       
           </>
         )}
       />

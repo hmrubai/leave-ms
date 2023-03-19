@@ -50,7 +50,7 @@ const DesignationList = () => {
                   className="btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Add Designation Information");
+                    handelClickValue("Add New Designation");
                   }}
                 >
                   <BsFillPlusCircleFill className="mb-1 mr-1" /> Add New Designation

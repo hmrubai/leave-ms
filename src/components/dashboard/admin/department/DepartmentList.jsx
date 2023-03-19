@@ -49,7 +49,7 @@ const DepartmentList = () => {
                   className="btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Add Department Information");
+                    handelClickValue("Add New Department");
                   }}
                 >
                   <BsFillPlusCircleFill className="mb-1 mr-1" /> Add New Department

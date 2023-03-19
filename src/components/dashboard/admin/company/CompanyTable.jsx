@@ -99,36 +99,49 @@ const CompanyTable = () => {
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>
-            <div className="d-flex">
-              <div>
+            
+            <div className="d-flex ">
+              <div className="mr-1">
                 <Link
                   to="#"
+                    className="btn btn-info btn-sm d-flex align-items-center"
                   onClick={() => {
                     handleShow();
                     handelClickValue("Company Information");
                     setParamId(row?.row?.original);
+                  
                   }}
                 >
-                  <BsFillEyeFill color="black" size={24} />
+                  <div className="mr-1"><BsFillEyeFill color="black" size={18} /></div>
+                  <div>Details</div>
+                  
+                  
                 </Link>
               </div>
               <div>
                 <Link
                   to={`#`}
                   title=""
-                  className="px-2"
+                  className="px-2 d-flex align-items-center btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
                     handelClickValue("Edit Company Information");
                     setParamId(row?.row?.original);
                   }}
                 >
-                  <FaEdit size={22} />
+                  <div>   <FaEdit size={16} /></div>
+                  <div> Edit</div>
+               
                 </Link>
               </div>
 
-
+     
             </div>
+            
+
+
+
+    
           </>
         )}
       />

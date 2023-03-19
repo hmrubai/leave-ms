@@ -61,7 +61,7 @@ const ApplyForLeaveList = () => {
             className="btn btn-primary btn-sm"
             onClick={() => {
               handleShow();
-              handelClickValue("Apply Leave");
+              handelClickValue("Apply For a Leave");
             }}
           >
             <BsFillPlusCircleFill className="mb-1 mr-1" /> Apply For A Leave

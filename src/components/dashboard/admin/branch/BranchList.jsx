@@ -56,7 +56,7 @@ const BranchList = () => {
                   className="btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Add Branch Information");
+                    handelClickValue("Add New Branch");
                   }}
                 >
                   <BsFillPlusCircleFill className="mb-1 mr-1" /> Add New Branch

@@ -51,7 +51,7 @@ const FiscalYearList = () => {
               className="btn btn-primary btn-sm"
               onClick={() => {
                 handleShow();
-                handelClickValue("Add Fiscal Year Information");
+                handelClickValue("Add New Fiscal Year");
               }}
             >
               <BsFillPlusCircleFill className="mb-1 mr-1" />

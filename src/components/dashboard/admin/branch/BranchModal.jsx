@@ -16,8 +16,8 @@ const BranchModal = ({ handleClose, show, clickValue,paramId }) => {
         </Modal.Header>
         <Modal.Body>
           {clickValue === "Branch Information" && <BranchDetails item={paramId} handleClose={handleClose}/>}
-          {clickValue === "Add Branch Information" && <CreateBranch handleClose={handleClose}/>}
-          {clickValue === "Edit Branch Information" && <EditBranch item={paramId} handleClose={handleClose} />}
+          {clickValue === "Add New Branch" && <CreateBranch handleClose={handleClose}/>}
+          {clickValue === "Edit Branch" && <EditBranch item={paramId} handleClose={handleClose} />}
         </Modal.Body>
      
       </Modal>

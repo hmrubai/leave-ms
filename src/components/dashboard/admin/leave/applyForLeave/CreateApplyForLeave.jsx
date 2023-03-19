@@ -26,12 +26,10 @@ const CreateApplyForLeave = ({ handleClose }) => {
     responsibility_carried_by: "",
   };
 
-
-
   const [renge, setRenge] = useState([
     {
-      startDate: null,
-      endDate: null,
+      startDate: new Date(),
+      endDate: new Date(),
       key: "selection",
     },
   ]);
@@ -47,18 +45,15 @@ const CreateApplyForLeave = ({ handleClose }) => {
       end_date: format(renge[0].endDate, "yyyy-MM-dd"),
     };
 
-
-
     try {
       if (data.leave_policy_id !== "") {
-        const result = await leaveCheckValidity(data).unwrap();
-        toast.success(result.message);
+         await leaveCheckValidity(data).unwrap();
+    
       }
     } catch (error) {
       toast.warn(error.data.message);
     }
   };
-
 
   const handleLeaveTypeFous = (key) => {
     if (key === "selection") {
@@ -70,9 +65,6 @@ const CreateApplyForLeave = ({ handleClose }) => {
     if (key === "half_day") {
       formik.setFieldValue("leave_policy_id", "");
     }
-
- 
-    
   };
 
   const formik = useFormik({
@@ -123,7 +115,6 @@ const CreateApplyForLeave = ({ handleClose }) => {
                       setRenge([item.selection]);
                       handleLeaveTypeFous(item.selection.key);
                     }}
-               
                     name="leave_date"
                     showSelectionPreview={true}
                     editableDateInputs={true}
@@ -131,11 +122,6 @@ const CreateApplyForLeave = ({ handleClose }) => {
                     ranges={renge}
                     direction="horizontal"
                     className="PreviewArea"
-                   
-                  
-
-                   
-                    
                     disabledDates={[
                       {
                         before: new Date(),
@@ -155,9 +141,12 @@ const CreateApplyForLeave = ({ handleClose }) => {
                         type="switch"
                         key="is_half_day"
                         id="custom-switch"
-                        label="Is Half Day"
+                        label="Half Day"
                         name="is_half_day"
-                        onChange={(e) => { formik.handleChange(e); handleLeaveTypeFous(e.target.name) }}
+                        onChange={(e) => {
+                          formik.handleChange(e);
+                          handleLeaveTypeFous(e.target.name);
+                        }}
                         value={formik.values.is_half_day}
                         checked={formik.values.is_half_day}
                       />
@@ -179,7 +168,7 @@ const CreateApplyForLeave = ({ handleClose }) => {
                       key="half_day"
                       onChange={(e) => {
                         formik.handleChange(e);
-                        handleLeaveTypeFous(e.target.name)
+                        handleLeaveTypeFous(e.target.name);
                       }}
                       value={formik.values.half_day}
                     >
@@ -205,7 +194,7 @@ const CreateApplyForLeave = ({ handleClose }) => {
                       }}
                       value={formik.values.leave_policy_id}
                     >
-                      <option >Select Leave Type </option>
+                      <option>Select Leave Type </option>
                       {data?.data?.map((leave, i) => (
                         <option key={i} value={leave.id}>
                           {leave.leave_title}
@@ -222,7 +211,6 @@ const CreateApplyForLeave = ({ handleClose }) => {
                   <div className="col-sm-12">
                     <textarea
                       placeholder="Please write your reason for leave application."
-                 
                       required
                       className="form-control"
                       name="reason"

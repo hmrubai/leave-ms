@@ -3,7 +3,8 @@ import { Outlet, NavLink, Link, useNavigate } from "react-router-dom";
 import { navItem } from "./../../../Nav/NavItem";
 import { user } from "../../../Route/utils";
 import Sidebar from "./Sidebar";
-import logo_sm from "../../../assets/logo/sm_logo.png";
+import sm_logo_white from "../../../assets/logo/sm_logo_white.png";
+import logo_white from "../../../assets/logo/logo_white.png";
 import "./Dashboard.css";
 import ScrollToTop from "react-scroll-to-top";
 import { BiHomeAlt } from "react-icons/bi";
@@ -14,7 +15,7 @@ import profilePicture from "../../../assets/images/profile-picture.png";
 import reset from "../../../assets/images/reset.png";
 import { FaBars } from "react-icons/fa";
 import sm_logo from "../../../assets/logo/sm_logo.png";
-import crop_logo from "../../../assets/logo/crop_logo.png";
+
 
 import { BsFillPersonFill } from "react-icons/bs";
 
@@ -69,10 +70,10 @@ const Layout = () => {
             to="#"
           >
             <Link to="/" className="sidebar-brand-icon rotate-n-15">
-              <img src={logo_sm} width="30" alt="" />
+              <img src={sm_logo_white} width="30" alt="" />
             </Link>
             <div className="sidebar-brand-text mx-3">
-              <img src={crop_logo} width={70} alt="" />
+              <img src={logo_white} width={70} alt="" />
             
             </div>
             <div className="text-center d-none d-md-inline">
@@ -157,7 +158,7 @@ const Layout = () => {
                     <div className="mr-2 d-none d-lg-inline text-gray-600 small">
                       {authUser && authUser.name}
                       <div className="text-end text-info fw-bold">
-                        {authUser && authUser.user_type}
+                        {authUser && authUser.designation}
                       </div>
                     </div>
 

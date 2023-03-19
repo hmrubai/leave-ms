@@ -17,7 +17,7 @@ const ApplyForLeaveModal = ({ handleClose, show, clickValue,paramId }) => {
         </Modal.Header>
         <Modal.Body>
           {/* {clickValue === "Leave Information" && <ApplyForLeaveDetails item={paramId} handleClose={handleClose}/>} */}
-          {clickValue === "Apply Leave" && <CreateApplyForLeave handleClose={handleClose}/>}
+          {clickValue === "Apply For a Leave" && <CreateApplyForLeave handleClose={handleClose}/>}
           {clickValue === "Edit Leave" && <EditApplyForLeave item={paramId} handleClose={handleClose} />}
         </Modal.Body>
      

@@ -19,8 +19,8 @@ const DesignationModal = ({ handleClose, show, clickValue,paramId }) => {
       </Modal.Header>
       <Modal.Body>
         {clickValue === "Designation Information" && <DesignationDetails item={paramId} handleClose={handleClose}/>}
-        {clickValue === "Add Designation Information" && <CreateDesignation handleClose={handleClose}/>}
-        {clickValue === "Edit Designation Information" && <EditDesignation item={paramId} handleClose={handleClose} />}
+        {clickValue === "Add New Designation" && <CreateDesignation handleClose={handleClose}/>}
+        {clickValue === "Edit Designation" && <EditDesignation item={paramId} handleClose={handleClose} />}
       </Modal.Body>
    
     </Modal>

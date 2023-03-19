@@ -91,7 +91,7 @@ const LeaveApprovalFlowTable = () => {
             className="btn btn-primary btn-sm mt-1"
             onClick={() => {
               handleShow();
-              handelClickValue("Add approval");
+              handelClickValue("Add New Approval Flow");
             }}
           >
             <BsFillPlusCircleFill className="mb-1 mr-1" /> Add Flow
@@ -127,28 +127,27 @@ const LeaveApprovalFlowTable = () => {
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>
-            <div className="d-flex">
-              <div>
+                 <div className="d-flex">
                 <Link
                   to={`#`}
                   title=""
-                  className="px-2"
+                  className="px-2 d-flex align-items-center btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
                     handelClickValue("Edit Step");
                     setParamId(row?.row?.original);
                   }}
                 >
-                  <FaEdit size={22} />
+                  <div>
+                    {" "}
+                    <FaEdit size={16} />
+                  </div>
+                  <div> Edit</div>
                 </Link>
-              </div>
-
-              {/* <div>
-                <Link to="#" onClick={() => deleteHandel()}>
-                  <FaTrash size={20} color="red" />
-                </Link>{" "}
-              </div> */}
             </div>
+            
+
+    
           </>
         )}
       />

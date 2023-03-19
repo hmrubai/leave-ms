@@ -15,9 +15,9 @@ const LeaveTypeModal = ({ handleClose, show, clickValue,paramId }) => {
       
       </Modal.Header>
       <Modal.Body>
-        {clickValue === "Leave Information" && <LeaveTypeDetails item={paramId} handleClose={handleClose}/>}
-        {clickValue === "Add Leave Information" && <CreateLeaveType handleClose={handleClose}/>}
-        {clickValue === "Edit Leave Information" && <EditLeaveType item={paramId} handleClose={handleClose} />}
+        {clickValue === "Leave Policy Information" && <LeaveTypeDetails item={paramId} handleClose={handleClose}/>}
+        {clickValue === "Add New Leave Policy" && <CreateLeaveType handleClose={handleClose}/>}
+        {clickValue === "Edit Leave Policy" && <EditLeaveType item={paramId} handleClose={handleClose} />}
       </Modal.Body>
    
     </Modal>

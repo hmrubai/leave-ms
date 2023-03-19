@@ -26,9 +26,7 @@ const CalenderSetupTable = () => {
     year: yearId,
     month: monthId,
   });
-  const get = useGetCalenderListByYearQuery(
-    { year: yearId, month: monthId },
-  );
+  const get = useGetCalenderListByYearQuery({ year: yearId, month: monthId });
   const [show, setShow] = useState(false);
   const [clickValue, setClickValue] = useState(null);
   const [paramId, setParamId] = useState(null);
@@ -84,7 +82,6 @@ const CalenderSetupTable = () => {
         clickValue={clickValue}
         paramId={paramId}
       />
-  
 
       <div className=" text-right my-1 ">
         <div className=" d-flex justify-content-end  ">
@@ -119,7 +116,6 @@ const CalenderSetupTable = () => {
               getOptionValue={(option) => `${option["id"]}`}
               getOptionLabel={(option) => `${option["name"]}`}
               options={month}
-              
             />
           </div>
           <div className="col-md-2 p-0 mt-1">
@@ -150,45 +146,29 @@ const CalenderSetupTable = () => {
           },
         }}
         initialState={{ pagination: { pageSize: 30, pageIndex: 2 } }}
-
-
         // enablePagination="true"
         renderRowActions={(row, index) => (
           <>
-            <div className="d-flex">
-              <div>
-                {/* <Link
-                  to="#"
-                  onClick={() => {
-                    handleShow();
-                    handelClickValue("Leave Balance Information");
-                    setParamId(row?.row?.original);
-                  }}
-                >
-                  <BsFillEyeFill color="black" size={24} />
-                </Link> */}
-              </div>
-              <div>
+       
+              <div className="d-flex">
                 <Link
                   to={`#`}
                   title=""
-                  className="px-2"
+                  className="px-2 d-flex align-items-center btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
                     handelClickValue("Update Date Status");
                     setParamId(row?.row?.original);
                   }}
                 >
-                  <FaEdit size={22} />
+                  <div>
+                    {" "}
+                    <FaEdit size={16} />
+                  </div>
+                  <div> Edit</div>
                 </Link>
               </div>
-
-              {/* <div>
-                <Link to="#" onClick={() => deleteHandel()}>
-                  <FaTrash size={20} color="red" />
-                </Link>{" "}
-              </div> */}
-            </div>
+            
           </>
         )}
       />

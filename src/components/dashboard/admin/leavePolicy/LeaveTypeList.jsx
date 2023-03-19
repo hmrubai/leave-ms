@@ -52,7 +52,7 @@ const LeaveTypeList = () => {
                   className="btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Add Leave Information");
+                    handelClickValue("Add New Leave Policy");
                   }}
                 >
                   <BsFillPlusCircleFill className="mb-1 mr-1" /> Add New Leave policy

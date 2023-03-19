@@ -20,8 +20,8 @@ const DepartmentModal = ({ handleClose, show, clickValue,paramId }) => {
         </Modal.Header>
         <Modal.Body>
           {clickValue === "Department Information" && <DepartmentDetails item={paramId} handleClose={handleClose}/>}
-          {clickValue === "Add Department Information" && <CreateDepartment handleClose={handleClose}/>}
-          {clickValue === "Edit Department Information" && <EditDepartment item={paramId} handleClose={handleClose} />}
+          {clickValue === "Add New Department" && <CreateDepartment handleClose={handleClose}/>}
+          {clickValue === "Edit Department" && <EditDepartment item={paramId} handleClose={handleClose} />}
         </Modal.Body>
      
       </Modal>

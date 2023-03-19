@@ -16,9 +16,9 @@ const EmploymentModal = ({ handleClose, show, clickValue,paramId }) => {
         
         </Modal.Header>
         <Modal.Body>
-          {clickValue === "Employment Information" && <EmploymentDetails item={paramId} handleClose={handleClose}/>}
-          {clickValue === "Add Employment Information" && <CreateEmployment handleClose={handleClose}/>}
-          {clickValue === "Edit Employment Information" && <EditEmployment item={paramId} handleClose={handleClose} />}
+          {clickValue === "Employment Type Information" && <EmploymentDetails item={paramId} handleClose={handleClose}/>}
+          {clickValue === "Add New Employment Type" && <CreateEmployment handleClose={handleClose}/>}
+          {clickValue === "Edit Employment Type" && <EditEmployment item={paramId} handleClose={handleClose} />}
         </Modal.Body>
      
       </Modal>

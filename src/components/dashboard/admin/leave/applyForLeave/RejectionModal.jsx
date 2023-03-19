@@ -47,6 +47,7 @@ const RejectionModal = ({ handleClose, show, clickValue, paramId }) => {
                 <label htmlFor="rejection_cause">Rejection Cause </label>
 
                 <textarea
+                  required
                   type="text"
                   className="form-control"
                   id="rejection_cause"

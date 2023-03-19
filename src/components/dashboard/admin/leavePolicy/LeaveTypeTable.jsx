@@ -205,28 +205,28 @@ const LeaveTypeTable = () => {
         renderRowActions={(row, index) => (
           <>
             <div className="d-flex">
-
-              <div>
-                <Link
-                  to={`#`}
-                  title=""
-                  className="px-2"
-                  onClick={() => {
-                    handleShow();
-                    handelClickValue("Edit Leave Information");
-                    setParamId(row?.row?.original);
-                  }}
-                >
-                  <FaEdit size={22} />
-                </Link>
+         
+                  <Link
+                    to={`#`}
+                    title=""
+                    className="px-2 d-flex align-items-center btn btn-primary btn-sm"
+                    onClick={() => {
+                      handleShow();
+                      handelClickValue("Edit Leave Policy");
+                      setParamId(row?.row?.original);
+                    }}
+                  >
+                    <div>
+                      {" "}
+                      <FaEdit size={16} />
+                    </div>
+                    <div> Edit</div>
+                  </Link>
               </div>
+              
+     
 
-              {/* <div>
-                <Link to="#" onClick={() => deleteHandel()}>
-                  <FaTrash size={20} color="red" />
-                </Link>{" "}
-              </div> */}
-            </div>
+
           </>
         )}
       />

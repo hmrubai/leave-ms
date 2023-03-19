@@ -53,7 +53,7 @@ const EmploymentList = () => {
                   className="btn btn-primary btn-sm"
                   onClick={() => {
                     handleShow();
-                    handelClickValue("Add Employment Information");
+                    handelClickValue("Add New Employment Type");
                   }}
                 >
                   <BsFillPlusCircleFill className="mb-1 mr-1" /> Add New Employment

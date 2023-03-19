@@ -17,8 +17,8 @@ const FiscalYearModal = ({ handleClose, show, clickValue,paramId }) => {
         </Modal.Header>
         <Modal.Body>
           {clickValue === "Fiscal Year Information" && <FiscalYearDetails item={paramId} handleClose={handleClose}/>}
-          {clickValue === "Add Fiscal Year Information" && <CreateFiscalYear handleClose={handleClose}/>}
-          {clickValue === "Edit Fiscal Year Information" && <EditFiscalYear item={paramId} handleClose={handleClose} />}
+          {clickValue === "Add New Fiscal Year" && <CreateFiscalYear handleClose={handleClose}/>}
+          {clickValue === "Edit Fiscal Year" && <EditFiscalYear item={paramId} handleClose={handleClose} />}
         </Modal.Body>
      
       </Modal>
